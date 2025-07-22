@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockStock Stock Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="logo-squares">
+                        <div class="square"></div>
+                        <div class="square"></div>
+                        <div class="square"></div>
+                        <div class="square"></div>
+                    </div>
+                </div>
+                <div class="logo-text">
+                    <div class="brand-name">Stock</div>
+                    <div class="tagline">Stock Management</div>
+                </div>
+            </div>
+            <div class="header-info">
+                <div class="update-info">
+                    <i class="fas fa-clock"></i>
+                    <span id="last-update">N/A</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:E-MAIL.EMAIL.COM">Available upon request</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="page-title">
+                <h1>Stock Overview</h1>
+                <p>Explore our available Brazilian plywood inventory</p>
+            </section>
+
+            <section class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fas fa-box"></i></div>
+                    <div class="summary-content">
+                        <div class="summary-value" id="total-products">0</div>
+                        <div class="summary-label">Total Products</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fas fa-cubes"></i></div>
+                    <div class="summary-content">
+                        <div class="summary-value" id="total-crates">0</div>
+                        <div class="summary-label">Total Crates</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="summary-content">
+                        <div class="summary-value" id="price-range">$0-$0</div>
+                        <div class="summary-label">Price Range</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fas fa-layer-group"></i></div>
+                    <div class="summary-content">
+                        <div class="summary-value" id="material-count">0</div>
+                        <div class="summary-label">Materials</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fas fa-certificate"></i></div>
+                    <div class="summary-content">
+                        <div class="summary-value" id="certificate-count">0</div>
+                        <div class="summary-label">Certificates</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fas fa-star"></i></div>
+                    <div class="summary-content">
+                        <div class="summary-value" id="grade-count">0</div>
+                        <div class="summary-label">Grades</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="filters-section">
+                <div class="filters-header">
+                    <h2>Filters</h2>
+                    <button class="btn-clear" id="clear-filters">
+                        <i class="fas fa-times"></i> Clear All Filters
+                    </button>
+                </div>
+                <div class="filters-grid">
+                    <div class="filter-group primary">
+                        <label for="logs-filter">Material:</label>
+                        <select id="logs-filter" class="filter-select">
+                            <option value="">All Materials</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="certificate-filter">Certificate:</label>
+                        <select id="certificate-filter" class="filter-select">
+                            <option value="">All Certificates</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="grade-filter">Grade:</label>
+                        <select id="grade-filter" class="filter-select">
+                            <option value="">All Grades</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="size-filter">Size:</label>
+                        <select id="size-filter" class="filter-select">
+                            <option value="">All Sizes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filters-grid" id="advanced-filters">
+                    <div class="filter-group">
+                        <label for="thickness-filter">Thickness:</label>
+                        <select id="thickness-filter" class="filter-select">
+                            <option value="">All Thickness</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="ply-filter">Ply:</label>
+                        <select id="ply-filter" class="filter-select">
+                            <option value="">All Plies</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="price-min">Min Price (USD/m³):</label>
+                        <input type="number" id="price-min" class="filter-input" placeholder="Min">
+                    </div>
+                    <div class="filter-group">
+                        <label for="price-max">Max Price (USD/m³):</label>
+                        <input type="number" id="price-max" class="filter-input" placeholder="Max">
+                    </div>
+                    <div class="filter-group">
+                        <label for="crates-min">Min Crates:</label>
+                        <input type="number" id="crates-min" class="filter-input" placeholder="Min">
+                    </div>
+                </div>
+                <button class="btn-toggle" id="toggle-advanced">
+                    <i class="fas fa-filter"></i> Toggle Advanced Filters
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </section>
+
+            <section class="results-section">
+                <div class="results-header">
+                    <div class="results-info">
+                        <h3 id="results-count">Showing all 0 products</h3>
+                    </div>
+                    <div class="view-controls">
+                        <button class="view-btn active" id="view-grid">
+                            <i class="fas fa-th"></i> Grid
+                        </button>
+                        <button class="view-btn" id="view-list">
+                            <i class="fas fa-list"></i> List
+                        </button>
+                    </div>
+                </div>
+                <div id="loading" class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading products...</p>
+                </div>
+                <div id="empty-state" class="empty-state" style="display: none;">
+                    <i class="fas fa-box-open"></i>
+                    <h3>No products found</h3>
+                    <p>Try adjusting your filters to see more results</p>
+                </div>
+                <div id="products-grid" class="products-grid"></div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <div class="logo-squares">
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                        </div>
+                    </div>
+                    <div class="logo-text">
+                        <div class="brand-name">Stock</div>
+                        <div class="tagline">Stock Management</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-info">
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Brazil - Paraná - Guarapuava</p>
+                    <p><i class="fas fa-envelope"></i> 
+                        <a href="mailto:E-MAIL.EMAIL.COM">Contact Us</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <p>© 2024 Brazilian Plywood. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Built with ❤️ by T.Rogato Team</p>
+        </div>
+    </footer>
+
+    <a href="mailto:E-MAIL.EMAIL.COM" class="floating-contact" id="contact-btn" style="text-decoration:none; color:inherit;">
+        <i class="fas fa-envelope"></i><span> Contact Us</span>
+    </a>
+
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="modal-close-btn">Close</button>
+                <button class="btn-primary" id="modal-contact">
+                    <a href="mailto:E-MAIL.EMAIL.COM" style="color:inherit; text-decoration:none;">
+                        <i class="fas fa-envelope"></i> Contact Us
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="logistics.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
