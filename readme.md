@@ -39,34 +39,35 @@ Banco de Dados: SQLite (padrão)
 
 ## ⚙️ Como Executar o Projeto
 Clone o repositório
-
-bash
+```bash
 git clone https://github.com/TRogato/stock.git
 cd stock
 Crie e ative um ambiente virtual (opcional)
-
-bash
+````
+```bash
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate     # Windows
 Instale as dependências
-
-bash
+````
+```bash
 pip install -r requirements.txt
 Execute as migrações
-
-bash
+````
+```bash
 python manage.py migrate
 Crie um superusuário (opcional)
+````
+```bash
 
-bash
 python manage.py createsuperuser
 Inicie o servidor
-
-bash
+````
+```bash
 python manage.py runserver
 Acesse a aplicação
 Abra o navegador em: http://127.0.0.1:8000
+````
 
 ## 📝Licença
 
