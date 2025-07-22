@@ -5,6 +5,7 @@ Este é um projeto de sistema de gerenciamento de estoque desenvolvido com Pytho
 O Stock é uma aplicação web que permite gerenciar produtos, categorias, fornecedores e movimentações de estoque de forma simples e eficiente.
 
 ✨ Funcionalidades
+
 ✔ Produtos
 
 Cadastro, edição e exclusão de produtos
