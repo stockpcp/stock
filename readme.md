@@ -67,12 +67,11 @@ python manage.py runserver
 Acesse a aplicação
 Abra o navegador em: http://127.0.0.1:8000
 
-📝 Licença
-Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+📝Licença
+
+Este repositório está sob a licença [MIT](https://github.com/TRogato/Trogato/blob/main/LICENSE). Por favor, consulte o arquivo `LICENSE` para mais detalhes.
 
 🤝 Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
 
 Desenvolvido por Thiago Rogato
-
-Este README foi adaptado para português brasileiro.
