@@ -1,10 +1,10 @@
-Stock - Sistema de Gerenciamento de Estoque
+# Stock - Sistema de Gerenciamento de Estoque
 Este é um projeto de sistema de gerenciamento de estoque desenvolvido com Python e Django.
 
-📋 Visão Geral
+# 📋 Visão Geral
 O Stock é uma aplicação web que permite gerenciar produtos, categorias, fornecedores e movimentações de estoque de forma simples e eficiente.
 
-✨ Funcionalidades
+## ✨ Funcionalidades
 
 ✔ Produtos
 
@@ -30,14 +30,14 @@ Histórico completo das transações
 
 Geração de relatórios de estoque
 
-🛠 Tecnologias Utilizadas
+## 🛠 Tecnologias Utilizadas
 Backend: Python + Django
 
 Frontend: HTML, CSS, Bootstrap
 
 Banco de Dados: SQLite (padrão)
 
-⚙️ Como Executar o Projeto
+## ⚙️ Como Executar o Projeto
 Clone o repositório
 
 bash
@@ -68,11 +68,11 @@ python manage.py runserver
 Acesse a aplicação
 Abra o navegador em: http://127.0.0.1:8000
 
-📝Licença
+## 📝Licença
 
 Este repositório está sob a licença [MIT](https://github.com/TRogato/Trogato/blob/main/LICENSE). Por favor, consulte o arquivo `LICENSE` para mais detalhes.
 
-🤝 Contribuição
+## 🤝 Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
 
 Desenvolvido por Thiago Rogato
