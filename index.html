@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Availability - Repinho</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- CABEÇALHO (Header) -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="logo.png" alt="Repinho Logo" class="logo">
+            </div>
+            <div class="header-info">
+                <div class="info-item">
+                    <span class="info-icon">📅</span>
+                    <span class="info-text">Last updated: 01/08/2025</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🚢</span>
+                    <span class="info-text">FOB Ports: Paraná | Santa Catarina</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ÁREA HERO/TÍTULO PRINCIPAL -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Available Stock</h1>
+            <p class="hero-subtitle">Brazilian plywood for construction, packaging, and furniture industries</p>
+        </div>
+    </section>
+
+    <!-- ÁREA DE RESUMO/ESTATÍSTICAS (5 Cartões) -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon">📦</div>
+                <div class="stat-number" id="total-products">49</div>
+                <div class="stat-label">Products Available</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌲</div>
+                <div class="stat-number" id="raw-materials">5</div>
+                <div class="stat-label">Raw Materials</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📋</div>
+                <div class="stat-number" id="certificates">6</div>
+                <div class="stat-label">Certificates</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-number" id="grades">8</div>
+                <div class="stat-label">Grades</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-number" id="total-crates">1,007</div>
+                <div class="stat-label">Total Crates</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÁREA DE FILTROS (1 linha) -->
+    <section class="filters-section">
+        <div class="filters-container">
+            <div class="filters-header">
+                <h2 class="filters-title">🔍 Filter Products</h2>
+                <button class="clear-filters-btn" id="clear-filters">✖ Clear All Filters</button>
+            </div>
+            
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="wood-type-filter">Wood Type</label>
+                    <select id="wood-type-filter" class="filter-select">
+                        <option value="">All Types</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="certificate-filter">Certificate</label>
+                    <select id="certificate-filter" class="filter-select">
+                        <option value="">All Certificates</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="grade-filter">Grade</label>
+                    <select id="grade-filter" class="filter-select">
+                        <option value="">All Grades</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="thickness-filter">Thickness (mm)</label>
+                    <select id="thickness-filter" class="filter-select">
+                        <option value="">All Thicknesses</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÁREA DE RESULTADOS -->
+    <section class="results-section">
+        <div class="results-container">
+            <div class="results-header">
+                <div class="results-count">
+                    <span id="products-count">49</span> products found
+                </div>
+                <div class="view-controls">
+                    <button class="view-btn active" id="grid-view-btn">📱 Grid</button>
+                    <button class="view-btn" id="list-view-btn">📋 List</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÁREA DE PRODUTOS -->
+    <section class="products-section">
+        <div class="products-container" id="products-container">
+            <!-- Produtos serão inseridos aqui via JavaScript -->
+        </div>
+    </section>
+
+    <!-- MODAL DE DETALHES -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Product Details</h3>
+                <button class="modal-close" id="modal-close">✖</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Conteúdo do modal será inserido via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Product Information</h4>
+                <p>Brazilian plywood for construction, packaging, and furniture industries</p>
+                <p>High-quality wood products with international certifications</p>
+                <p>Sustainable forestry practices and environmental compliance</p>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Contact Information</h4>
+                <div class="contact-info">
+                    <p class="company-name">Repinho Reflorestadora Madeiras e Compensados Ltda</p>
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <span>+55 (42) 3629-8500</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <span>comercial01@repinho.ind.br</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <span>Rua Ver.Sebastião de Camargo Ribas, nº 950 - DIG<br>
+                              Guarapuava, PR - Brazil</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Repinho. All rights reserved.</p>
+            <p>developed by commercial export</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
