@@ -297,7 +297,7 @@ function showProductDetails(product) {
             </div>
             
             <div class="modal-section">
-                <h4>📦 Stock & Weight Information</h4>
+                <h4>📦 stock & weight Info</h4>
                 <div class="section-grid">
                     <div class="detail-item">
                         <div class="detail-label">Available Stock</div>
@@ -330,27 +330,27 @@ function showProductDetails(product) {
                 <h4>🚢 Shipping & Pricing</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Practical Capacity</div>
+                        <div class="detail-label">Practical capacity</div>
                         <div class="detail-value">${formatNumber(practicalCapacity)} crates</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Max Crates/Container</div>
+                        <div class="detail-label">Max Crates/HC/div>
                         <div class="detail-value">${maxCratesPerContainer}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">FOB Price per m³</div>
+                        <div class="detail-label">Price FOB/m³</div>
                         <div class="detail-value">$${formatCurrency(product.Price)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Price per Sheet</div>
+                        <div class="detail-label">Price/sheet</div>
                         <div class="detail-value">$${formatNumber(pricePerSheet)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Price per Crate</div>
+                        <div class="detail-label">Price/crate</div>
                         <div class="detail-value">$${formatNumber(pricePerCrate)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Container Value</div>
+                        <div class="detail-label">Container $</div>
                         <div class="detail-value">$${formatNumber(containerValue)}</div>
                     </div>
                 </div>
@@ -360,24 +360,24 @@ function showProductDetails(product) {
                 <h4>ℹ️ Additional Information</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Weight Data</div>
-                        <div class="detail-value">Based on real measurements from production</div>
+                        <div class="detail-label">weight data</div>
+                        <div class="detail-value">based on real measurements from production</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Delivery Port</div>
-                        <div class="detail-value">Estimated 10 days from order confirmation</div>
+                        <div class="detail-label">delivery port</div>
+                        <div class="detail-value">estimated 10 days from order confirmation</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Payment</div>
-                        <div class="detail-value">Cash against copy documents / Port Payment</div>
+                        <div class="detail-label">payment</div>
+                        <div class="detail-value">cash against copy documents / port payment</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Packaging</div>
-                        <div class="detail-value">Export packaging with 5 steel straps and over 3 wooden skids</div>
+                        <div class="detail-label">packaging</div>
+                        <div class="detail-value">export packaging with 5 or 7 straps and over 3 wooden skids</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Documentation</div>
-                        <div class="detail-value">BL / Invoice / PList / EUTR / CO / Others</div>
+                        <div class="detail-label">documentation</div>
+                        <div class="detail-value">BL / invoice / packing list</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label"></div>
