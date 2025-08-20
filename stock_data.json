@@ -1,19 +1,5 @@
 [
   {
-    "Logs": "Pine",
-    "Certificate": "CE2+ BFU100",
-    "Grade": "CP/C",
-    "Size": "2500x1250",
-    "Thickness": 21,
-    "Ply": 7,
-    "Crates": 2,
-    "Price": 290,
-    "WeightPerCrate": 1470,
-    "VolumePerCrate": 2.821,
-    "SheetsPerCrate": 43,
-    "PayloadLimit": 28500
-  },
-  {
     "Logs": "Combi",
     "Certificate": "CE4",
     "Grade": "BCX",
@@ -21,11 +7,11 @@
     "Thickness": 9,
     "Ply": 3,
     "Crates": 5,
-    "Price": 305,
-    "WeightPerCrate": 1670,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 100,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -35,11 +21,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 19,
-    "Price": 295,
-    "WeightPerCrate": 1450,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Euca",
@@ -49,11 +35,11 @@
     "Thickness": 6,
     "Ply": 3,
     "Crates": 9,
-    "Price": 365,
-    "WeightPerCrate": 1747,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 150,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -63,11 +49,11 @@
     "Thickness": 9,
     "Ply": 5,
     "Crates": 31,
-    "Price": 300,
-    "WeightPerCrate": 1547,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 100,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -77,11 +63,11 @@
     "Thickness": 9,
     "Ply": 5,
     "Crates": 23,
-    "Price": 300,
-    "WeightPerCrate": 1607,
-    "VolumePerCrate": 2.812,
-    "SheetsPerCrate": 100,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -91,11 +77,11 @@
     "Thickness": 10,
     "Ply": 5,
     "Crates": 18,
-    "Price": 295,
-    "WeightPerCrate": 1500,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 90,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Twin e",
@@ -105,11 +91,11 @@
     "Thickness": 10,
     "Ply": 5,
     "Crates": 5,
-    "Price": 305,
-    "WeightPerCrate": 1560,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 90,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Twin e",
@@ -119,11 +105,11 @@
     "Thickness": 10,
     "Ply": 5,
     "Crates": 3,
-    "Price": 305,
-    "WeightPerCrate": 1580,
-    "VolumePerCrate": 2.812,
-    "SheetsPerCrate": 90,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -133,11 +119,11 @@
     "Thickness": 12,
     "Ply": 5,
     "Crates": 36,
-    "Price": 285,
-    "WeightPerCrate": 1457,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 75,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -147,11 +133,11 @@
     "Thickness": 12,
     "Ply": 5,
     "Crates": 22,
-    "Price": 285,
-    "WeightPerCrate": 1527,
-    "VolumePerCrate": 2.812,
-    "SheetsPerCrate": 75,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -161,11 +147,11 @@
     "Thickness": 12,
     "Ply": 5,
     "Crates": 17,
-    "Price": 280,
-    "WeightPerCrate": 1583,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 75,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -175,11 +161,11 @@
     "Thickness": 12,
     "Ply": 5,
     "Crates": 17,
-    "Price": 285,
-    "WeightPerCrate": 1457,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 75,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -189,11 +175,11 @@
     "Thickness": 12,
     "Ply": 5,
     "Crates": 16,
-    "Price": 285,
-    "WeightPerCrate": 1457,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 75,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Twin e",
@@ -203,11 +189,11 @@
     "Thickness": 12,
     "Ply": 5,
     "Crates": 9,
-    "Price": 295,
-    "WeightPerCrate": 1538,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 75,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -217,11 +203,11 @@
     "Thickness": 15,
     "Ply": 5,
     "Crates": 34,
-    "Price": 275,
-    "WeightPerCrate": 1453,
-    "VolumePerCrate": 2.812,
-    "SheetsPerCrate": 60,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -231,11 +217,11 @@
     "Thickness": 15,
     "Ply": 5,
     "Crates": 27,
-    "Price": 275,
-    "WeightPerCrate": 1431,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 60,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -245,11 +231,11 @@
     "Thickness": 15,
     "Ply": 5,
     "Crates": 25,
-    "Price": 270,
-    "WeightPerCrate": 1568,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 60,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -259,11 +245,11 @@
     "Thickness": 15,
     "Ply": 5,
     "Crates": 23,
-    "Price": 275,
-    "WeightPerCrate": 1431,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 60,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Twin e",
@@ -273,11 +259,11 @@
     "Thickness": 15,
     "Ply": 5,
     "Crates": 21,
-    "Price": 285,
-    "WeightPerCrate": 1614,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 60,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi e",
@@ -287,11 +273,11 @@
     "Thickness": 17,
     "Ply": 7,
     "Crates": 17,
-    "Price": 265,
-    "WeightPerCrate": 1700,
-    "VolumePerCrate": 2.53,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -301,11 +287,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 21,
-    "Price": 270,
-    "WeightPerCrate": 1446,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -315,11 +301,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 21,
-    "Price": 270,
-    "WeightPerCrate": 1509,
-    "VolumePerCrate": 2.812,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -329,11 +315,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 20,
-    "Price": 265,
-    "WeightPerCrate": 1611,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -343,11 +329,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 19,
-    "Price": 260,
-    "WeightPerCrate": 1664,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Twin e",
@@ -357,11 +343,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 16,
-    "Price": 280,
-    "WeightPerCrate": 1498,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Twin e",
@@ -371,11 +357,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 11,
-    "Price": 280,
-    "WeightPerCrate": 1579,
-    "VolumePerCrate": 2.812,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi e",
@@ -385,11 +371,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 9,
-    "Price": 265,
-    "WeightPerCrate": 1620,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -399,11 +385,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 5,
-    "Price": 265,
-    "WeightPerCrate": 1520,
-    "VolumePerCrate": 2.178,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -413,11 +399,11 @@
     "Thickness": 20,
     "Ply": 7,
     "Crates": 30,
-    "Price": 270,
-    "WeightPerCrate": 1403,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 45,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -427,11 +413,11 @@
     "Thickness": 20,
     "Ply": 7,
     "Crates": 23,
-    "Price": 270,
-    "WeightPerCrate": 1465,
-    "VolumePerCrate": 2.812,
-    "SheetsPerCrate": 45,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Twin e",
@@ -441,11 +427,11 @@
     "Thickness": 20,
     "Ply": 7,
     "Crates": 17,
-    "Price": 280,
-    "WeightPerCrate": 1548,
-    "VolumePerCrate": 2.812,
-    "SheetsPerCrate": 45,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -455,11 +441,11 @@
     "Thickness": 21,
     "Ply": 7,
     "Crates": 3,
-    "Price": 270,
-    "WeightPerCrate": 1419,
-    "VolumePerCrate": 2.688,
-    "SheetsPerCrate": 43,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -469,11 +455,11 @@
     "Thickness": 22,
     "Ply": 7,
     "Crates": 4,
-    "Price": 270,
-    "WeightPerCrate": 1477,
-    "VolumePerCrate": 2.619,
-    "SheetsPerCrate": 41,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -483,11 +469,11 @@
     "Thickness": 24,
     "Ply": 9,
     "Crates": 16,
-    "Price": 285,
-    "WeightPerCrate": 1473,
-    "VolumePerCrate": 2.643,
-    "SheetsPerCrate": 37,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -497,11 +483,11 @@
     "Thickness": 27,
     "Ply": 9,
     "Crates": 4,
-    "Price": 285,
-    "WeightPerCrate": 1660,
-    "VolumePerCrate": 2.784,
-    "SheetsPerCrate": 33,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -511,11 +497,11 @@
     "Thickness": 27,
     "Ply": 9,
     "Crates": 3,
-    "Price": 290,
-    "WeightPerCrate": 1466,
-    "VolumePerCrate": 2.652,
-    "SheetsPerCrate": 33,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -525,11 +511,11 @@
     "Thickness": 30,
     "Ply": 11,
     "Crates": 12,
-    "Price": 300,
-    "WeightPerCrate": 1465,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 30,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -539,11 +525,11 @@
     "Thickness": 30,
     "Ply": 11,
     "Crates": 3,
-    "Price": 295,
-    "WeightPerCrate": 1700,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 30,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -553,11 +539,11 @@
     "Thickness": 9,
     "Ply": 3,
     "Crates": 16,
-    "Price": 270,
-    "WeightPerCrate": 1551,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 100,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -567,11 +553,11 @@
     "Thickness": 15,
     "Ply": 5,
     "Crates": 16,
-    "Price": 270,
-    "WeightPerCrate": 1366,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 60,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi e",
@@ -581,11 +567,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 10,
-    "Price": 315,
-    "WeightPerCrate": 1617,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Euca",
@@ -595,11 +581,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 5,
-    "Price": 315,
-    "WeightPerCrate": 1829,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Euca",
@@ -609,11 +595,11 @@
     "Thickness": 20,
     "Ply": 9,
     "Crates": 27,
-    "Price": 345,
-    "WeightPerCrate": 1900,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 45,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Euca",
@@ -623,11 +609,11 @@
     "Thickness": 22,
     "Ply": 9,
     "Crates": 22,
-    "Price": 350,
-    "WeightPerCrate": 1879,
-    "VolumePerCrate": 2.619,
-    "SheetsPerCrate": 41,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Euca",
@@ -637,11 +623,11 @@
     "Thickness": 22,
     "Ply": 7,
     "Crates": 4,
-    "Price": 315,
-    "WeightPerCrate": 1879,
-    "VolumePerCrate": 2.619,
-    "SheetsPerCrate": 41,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -651,11 +637,11 @@
     "Thickness": 31,
     "Ply": 13,
     "Crates": 16,
-    "Price": 335,
-    "WeightPerCrate": 1660,
-    "VolumePerCrate": 2.768,
-    "SheetsPerCrate": 30,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Euca",
@@ -665,11 +651,11 @@
     "Thickness": 6,
     "Ply": 3,
     "Crates": 12,
-    "Price": 210,
-    "WeightPerCrate": 1750,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 150,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -679,11 +665,11 @@
     "Thickness": 9,
     "Ply": 3,
     "Crates": 9,
-    "Price": 195,
-    "WeightPerCrate": 1600,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 100,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -693,11 +679,11 @@
     "Thickness": 12,
     "Ply": 5,
     "Crates": 29,
-    "Price": 195,
-    "WeightPerCrate": 1640,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 75,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Twin e",
@@ -707,11 +693,11 @@
     "Thickness": 12,
     "Ply": 5,
     "Crates": 10,
-    "Price": 195,
-    "WeightPerCrate": 1600,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 75,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -721,11 +707,11 @@
     "Thickness": 12,
     "Ply": 5,
     "Crates": 7,
-    "Price": 195,
-    "WeightPerCrate": 1521,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 75,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -735,11 +721,11 @@
     "Thickness": 15,
     "Ply": 5,
     "Crates": 4,
-    "Price": 195,
-    "WeightPerCrate": 1426,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 60,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Euca",
@@ -749,11 +735,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 4,
-    "Price": 195,
-    "WeightPerCrate": 1900,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -763,11 +749,11 @@
     "Thickness": 20,
     "Ply": 7,
     "Crates": 5,
-    "Price": 195,
-    "WeightPerCrate": 1441,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 45,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Twin e",
@@ -777,11 +763,11 @@
     "Thickness": 20,
     "Ply": 7,
     "Crates": 3,
-    "Price": 195,
-    "WeightPerCrate": 1450,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 45,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Euca",
@@ -791,11 +777,11 @@
     "Thickness": 21,
     "Ply": 9,
     "Crates": 22,
-    "Price": 195,
-    "WeightPerCrate": 1863,
-    "VolumePerCrate": 2.563,
-    "SheetsPerCrate": 43,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -805,11 +791,11 @@
     "Thickness": 24,
     "Ply": 9,
     "Crates": 25,
-    "Price": 195,
-    "WeightPerCrate": 1760,
-    "VolumePerCrate": 2.643,
-    "SheetsPerCrate": 37,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -819,11 +805,11 @@
     "Thickness": 24,
     "Ply": 9,
     "Crates": 7,
-    "Price": 195,
-    "WeightPerCrate": 1520,
-    "VolumePerCrate": 2.643,
-    "SheetsPerCrate": 37,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -833,11 +819,11 @@
     "Thickness": 9,
     "Ply": 3,
     "Crates": 6,
-    "Price": 180,
-    "WeightPerCrate": 1580,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 100,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Twin e",
@@ -847,11 +833,11 @@
     "Thickness": 9,
     "Ply": 5,
     "Crates": 5,
-    "Price": 180,
-    "WeightPerCrate": 1700,
-    "VolumePerCrate": 2.812,
-    "SheetsPerCrate": 100,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -861,11 +847,11 @@
     "Thickness": 9,
     "Ply": 5,
     "Crates": 3,
-    "Price": 180,
-    "WeightPerCrate": 1520,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 100,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -875,11 +861,11 @@
     "Thickness": 12,
     "Ply": 5,
     "Crates": 15,
-    "Price": 180,
-    "WeightPerCrate": 1522,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 75,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Twin e",
@@ -889,11 +875,11 @@
     "Thickness": 12,
     "Ply": 5,
     "Crates": 6,
-    "Price": 180,
-    "WeightPerCrate": 1580,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 75,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -903,11 +889,11 @@
     "Thickness": 12,
     "Ply": 5,
     "Crates": 3,
-    "Price": 180,
-    "WeightPerCrate": 1544,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 75,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -917,11 +903,11 @@
     "Thickness": 15,
     "Ply": 5,
     "Crates": 4,
-    "Price": 180,
-    "WeightPerCrate": 1439,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 60,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -931,11 +917,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 20,
-    "Price": 180,
-    "WeightPerCrate": 1556,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -945,11 +931,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 6,
-    "Price": 180,
-    "WeightPerCrate": 1533,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -959,11 +945,11 @@
     "Thickness": 20,
     "Ply": 7,
     "Crates": 15,
-    "Price": 180,
-    "WeightPerCrate": 1571,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 45,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Twin e",
@@ -973,11 +959,11 @@
     "Thickness": 20,
     "Ply": 7,
     "Crates": 12,
-    "Price": 180,
-    "WeightPerCrate": 1500,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 45,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Euca",
@@ -987,11 +973,11 @@
     "Thickness": 21,
     "Ply": 9,
     "Crates": 25,
-    "Price": 180,
-    "WeightPerCrate": 1800,
-    "VolumePerCrate": 2.563,
-    "SheetsPerCrate": 43,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -1001,11 +987,11 @@
     "Thickness": 24,
     "Ply": 9,
     "Crates": 10,
-    "Price": 180,
-    "WeightPerCrate": 1640,
-    "VolumePerCrate": 2.643,
-    "SheetsPerCrate": 37,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -1015,11 +1001,11 @@
     "Thickness": 24,
     "Ply": 9,
     "Crates": 3,
-    "Price": 180,
-    "WeightPerCrate": 1570,
-    "VolumePerCrate": 2.775,
-    "SheetsPerCrate": 37,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -1029,11 +1015,11 @@
     "Thickness": 27,
     "Ply": 9,
     "Crates": 9,
-    "Price": 180,
-    "WeightPerCrate": 1650,
-    "VolumePerCrate": 2.652,
-    "SheetsPerCrate": 33,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -1043,11 +1029,11 @@
     "Thickness": 27,
     "Ply": 9,
     "Crates": 3,
-    "Price": 180,
-    "WeightPerCrate": 1520,
-    "VolumePerCrate": 2.784,
-    "SheetsPerCrate": 33,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -1057,11 +1043,11 @@
     "Thickness": 30,
     "Ply": 11,
     "Crates": 5,
-    "Price": 180,
-    "WeightPerCrate": 1520,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 30,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Pine",
@@ -1071,11 +1057,11 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 17,
-    "Price": 305,
-    "WeightPerCrate": 1514,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   },
   {
     "Logs": "Combi",
@@ -1085,10 +1071,10 @@
     "Thickness": 18,
     "Ply": 7,
     "Crates": 29,
-    "Price": 280,
-    "WeightPerCrate": 1660,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
+    "Price": 0,
+    "WeightPerCrate": 0,
+    "VolumePerCrate": 0,
+    "SheetsPerCrate": 0,
+    "PayloadLimit": 0
   }
 ]
