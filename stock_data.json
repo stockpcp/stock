@@ -1022,20 +1022,6 @@
     "PayloadLimit": 0
   },
   {
-    "Logs": "Pine",
-    "Certificate": "non conform",
-    "Grade": "shop grade",
-    "Size": "2500x1250",
-    "Thickness": 27,
-    "Ply": 9,
-    "Crates": 3,
-    "Price": 0,
-    "WeightPerCrate": 0,
-    "VolumePerCrate": 0,
-    "SheetsPerCrate": 0,
-    "PayloadLimit": 0
-  },
-  {
     "Logs": "Combi",
     "Certificate": "non conform",
     "Grade": "shop grade",
