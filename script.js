@@ -188,7 +188,7 @@ function renderProducts() {
     const container = elements.productsContainer;
     
     if (filteredData.length === 0) {
-        container.innerHTML = '<div class="no-products">No products found matching your criteria.</div>';
+        container.innerHTML = '<div class="no-products">No products found matching criteria.</div>';
         return;
     }
     
@@ -256,18 +256,18 @@ function showProductDetails(product) {
     elements.modalTitle.textContent = `${product.Logs} ${formatGrade(product.Grade)} - ${product.Size}`;
     
     // Calculate values
-    const densityPerM3 = product.WeightPerCrate / product.VolumePerCrate;
-    const weightPerSheet = product.WeightPerCrate / product.SheetsPerCrate;
-    const pricePerSheet = (product.Price * product.VolumePerCrate) / product.SheetsPerCrate;
-    const pricePerCrate = product.Price * product.VolumePerCrate;
-    const practicalCapacity = product.PayloadLimit / product.WeightPerCrate;
-    const maxCratesPerContainer = Math.floor(practicalCapacity);
-    const containerValue = maxCratesPerContainer * pricePerCrate;
+    const density m³ = product.WeightPerCrate / product.VolumePerCrate;
+    const weight sheet = product.WeightPerCrate / product.SheetsPerCrate;
+    const price sheet = (product.Price * product.VolumePerCrate) / product.SheetsPerCrate;
+    const price crate = product.Price * product.VolumePerCrate;
+    const capacity = product.PayloadLimit / product.WeightPerCrate;
+    const maxcratesHC = Math.floor(capacity);
+    const containerValue = maxcratesHC * price crate;
     
     elements.modalBody.innerHTML = `
         <div class="modal-sections">
             <div class="modal-section">
-                <h4>📋 Product Specifications</h4>
+                <h4>📋 product specifications</h4>
                 <div class="section-grid">
                     <div class="detail-item">
                         <div class="detail-label">raw material</div>
@@ -297,83 +297,83 @@ function showProductDetails(product) {
             </div>
             
             <div class="modal-section">
-                <h4>📦 stock & weight Info</h4>
+                <h4>📦 stock & weight info</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Available Stock</div>
+                        <div class="detail-label">available stock</div>
                         <div class="detail-value">${product.Crates} crates</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Sheets per Crate</div>
+                        <div class="detail-label">sheets/crate</div>
                         <div class="detail-value">${product.SheetsPerCrate}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Weight per Crate</div>
+                        <div class="detail-label">weight/crate</div>
                         <div class="detail-value">${formatNumber(product.WeightPerCrate)} kg</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Density per m³</div>
+                        <div class="detail-label">density/m³</div>
                         <div class="detail-value">${formatNumber(densityPerM3)} kg/m³</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Weight per Sheet</div>
+                        <div class="detail-label">weight/sheet</div>
                         <div class="detail-value">${formatNumber(weightPerSheet)} kg</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Volume per Crate</div>
+                        <div class="detail-label">volume/crate</div>
                         <div class="detail-value">${product.VolumePerCrate.toFixed(3)} m³</div>
                     </div>
                 </div>
             </div>
             
             <div class="modal-section">
-                <h4>🚢 Shipping & Pricing</h4>
+                <h4>🚢 shipping & pricing</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Practical capacity</div>
-                        <div class="detail-value">${formatNumber(practicalCapacity)} crates</div>
+                        <div class="detail-label">capacity</div>
+                        <div class="detail-value">${formatNumber(capacity)} crates</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Max Crates/HC/div>
-                        <div class="detail-value">${maxCratesPerContainer}</div>
+                        <div class="detail-label">crates/HC/div>
+                        <div class="detail-value">${maxcratesHC}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Price FOB/m³</div>
+                        <div class="detail-label">price/m³</div>
                         <div class="detail-value">$${formatCurrency(product.Price)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Price/sheet</div>
+                        <div class="detail-label">price/sheet</div>
                         <div class="detail-value">$${formatNumber(pricePerSheet)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Price/crate</div>
+                        <div class="detail-label">price/crate</div>
                         <div class="detail-value">$${formatNumber(pricePerCrate)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Container $</div>
+                        <div class="detail-label">container $</div>
                         <div class="detail-value">$${formatNumber(containerValue)}</div>
                     </div>
                 </div>
             </div>
             
             <div class="modal-section">
-                <h4>ℹ️ Additional Information</h4>
+                <h4>ℹ️ additional information</h4>
                 <div class="section-grid">
                     <div class="detail-item">
                         <div class="detail-label">weight data</div>
-                        <div class="detail-value">based on real measurements from production</div>
+                        <div class="detail-value">based on avg measurements</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">delivery port</div>
-                        <div class="detail-value">estimated 10 days from order confirmation</div>
+                        <div class="detail-value">estimated 10days after confirmation</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">payment</div>
-                        <div class="detail-value">cash against copy documents / port payment</div>
+                        <div class="detail-value">cash against copy documents</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">packaging</div>
-                        <div class="detail-value">export packaging with 5 or 7 straps and over 3 wooden skids</div>
+                        <div class="detail-value">package 5-7 straps+3 wooden skids</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">documentation</div>
@@ -404,7 +404,7 @@ function closeModal() {
 function formatNumber(num) {
     return new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 0,
-        maximumFractionDigits: 2
+        maximumFractionDigits: 0
     }).format(num);
 }
 
