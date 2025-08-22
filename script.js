@@ -360,24 +360,24 @@ function showProductDetails(product) {
                 <h4>ℹ️ Additional Information</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Weight Data</div>
-                        <div class="detail-value">Based on real measurements from production</div>
+                        <div class="detail-label">weight data</div>
+                        <div class="detail-value">Based on real avg measurements</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Delivery Port</div>
-                        <div class="detail-value">Estimated 10 days from order confirmation</div>
+                        <div class="detail-label">delivery port</div>
+                        <div class="detail-value">Estimated 10 days</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Payment</div>
-                        <div class="detail-value">Cash against copy documents / Port Payment</div>
+                        <div class="detail-label">payment terms</div>
+                        <div class="detail-value">cash against copy documents</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Packaging</div>
-                        <div class="detail-value">Export packaging with 5 steel straps and over 3 wooden skids</div>
+                        <div class="detail-label">packaging</div>
+                        <div class="detail-value">5/7 straps + over 3 wooden skids</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Documentation</div>
-                        <div class="detail-value">BL / Invoice / PList / EUTR / CO / Others</div>
+                        <div class="detail-label">documentation</div>
+                        <div class="detail-value">BL / invoice / packing list / others</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label"></div>
