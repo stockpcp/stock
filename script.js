@@ -267,7 +267,7 @@ function showProductDetails(product) {
     elements.modalBody.innerHTML = `
         <div class="modal-sections">
             <div class="modal-section">
-                <h4>📋 Product Specifications</h4>
+                <h4>📋 specifications</h4>
                 <div class="section-grid">
                     <div class="detail-item">
                         <div class="detail-label">raw material</div>
@@ -297,30 +297,30 @@ function showProductDetails(product) {
             </div>
             
             <div class="modal-section">
-                <h4>📦 Stock & Weight Information</h4>
+                <h4>📦 stock & weight info</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Available Stock</div>
+                        <div class="detail-label">available crates</div>
                         <div class="detail-value">${product.Crates} crates</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Sheets per Crate</div>
+                        <div class="detail-label">sheets/crate</div>
                         <div class="detail-value">${product.SheetsPerCrate}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Weight per Crate</div>
+                        <div class="detail-label">weight/crate</div>
                         <div class="detail-value">${formatNumber(product.WeightPerCrate)} kg</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Density per m³</div>
+                        <div class="detail-label">density/m³</div>
                         <div class="detail-value">${formatNumber(densityPerM3)} kg/m³</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Weight per Sheet</div>
+                        <div class="detail-label">weight/sheet</div>
                         <div class="detail-value">${formatNumber(weightPerSheet)} kg</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Volume per Crate</div>
+                        <div class="detail-label">volume/crate</div>
                         <div class="detail-value">${product.VolumePerCrate.toFixed(3)} m³</div>
                     </div>
                 </div>
