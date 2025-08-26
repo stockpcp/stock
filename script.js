@@ -300,7 +300,7 @@ function showProductDetails(product) {
                 <h4>📦 Stock & Weight Info</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">available crates</div>
+                        <div class="detail-label">available</div>
                         <div class="detail-value">${product.Crates} crates</div>
                     </div>
                     <div class="detail-item">
@@ -373,7 +373,7 @@ function showProductDetails(product) {
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">packaging</div>
-                        <div class="detail-value">5/7 straps + 3 wooden skids</div>
+                        <div class="detail-value">5 straps + 3 wooden skids</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">documentation</div>
@@ -404,14 +404,14 @@ function closeModal() {
 function formatNumber(num) {
     return new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 0,
-        maximumFractionDigits: 1
+        maximumFractionDigits: 2
     }).format(num);
 }
 
 function formatCurrency(num) {
     return new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 0,
-        maximumFractionDigits: 0
+        maximumFractionDigits: 2
     }).format(num);
 }
 
