@@ -267,7 +267,7 @@ function showProductDetails(product) {
     elements.modalBody.innerHTML = `
         <div class="modal-sections">
             <div class="modal-section">
-                <h4>📋 specifications</h4>
+                <h4>📋 Specifications</h4>
                 <div class="section-grid">
                     <div class="detail-item">
                         <div class="detail-label">raw material</div>
@@ -297,7 +297,7 @@ function showProductDetails(product) {
             </div>
             
             <div class="modal-section">
-                <h4>📦 stock & weight info</h4>
+                <h4>📦 Stock & Weight Info</h4>
                 <div class="section-grid">
                     <div class="detail-item">
                         <div class="detail-label">available crates</div>
@@ -330,27 +330,27 @@ function showProductDetails(product) {
                 <h4>🚢 Shipping & Pricing</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Practical Capacity</div>
+                        <div class="detail-label">Payload</div>
                         <div class="detail-value">${formatNumber(practicalCapacity)} crates</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Max Crates/Container</div>
+                        <div class="detail-label">Max Crates/HC</div>
                         <div class="detail-value">${maxCratesPerContainer}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">FOB Price per m³</div>
+                        <div class="detail-label">Price/m³</div>
                         <div class="detail-value">$${formatCurrency(product.Price)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Price per Sheet</div>
+                        <div class="detail-label">Price/sheet</div>
                         <div class="detail-value">$${formatNumber(pricePerSheet)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Price per Crate</div>
+                        <div class="detail-label">Price/crate</div>
                         <div class="detail-value">$${formatNumber(pricePerCrate)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Container Value</div>
+                        <div class="detail-label">Container $</div>
                         <div class="detail-value">$${formatNumber(containerValue)}</div>
                     </div>
                 </div>
@@ -361,23 +361,23 @@ function showProductDetails(product) {
                 <div class="section-grid">
                     <div class="detail-item">
                         <div class="detail-label">weight data</div>
-                        <div class="detail-value">Based on real avg measurements</div>
+                        <div class="detail-value">current average</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">delivery port</div>
-                        <div class="detail-value">Estimated 10 days</div>
+                        <div class="detail-value">ETA 10/15 days</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">payment terms</div>
-                        <div class="detail-value">cash against copy documents</div>
+                        <div class="detail-value">cash against copy docs</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">packaging</div>
-                        <div class="detail-value">5/7 straps + over 3 wooden skids</div>
+                        <div class="detail-value">5/7 straps + 3 wooden skids</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">documentation</div>
-                        <div class="detail-value">BL / invoice / packing list / others</div>
+                        <div class="detail-value">export document set</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label"></div>
@@ -404,7 +404,7 @@ function closeModal() {
 function formatNumber(num) {
     return new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 0,
-        maximumFractionDigits: 2
+        maximumFractionDigits: 1
     }).format(num);
 }
 
