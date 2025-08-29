@@ -1,0 +1,636 @@
+// Global variables
+let stockData = [];
+let filteredData = [];
+let currentView = 'grid';
+let cart = [];
+
+// DOM elements
+const elements = {
+    // Filters
+    woodTypeFilter: document.getElementById('wood-type-filter'),
+    certificateFilter: document.getElementById('certificate-filter'),
+    gradeFilter: document.getElementById('grade-filter'),
+    thicknessFilter: document.getElementById('thickness-filter'),
+    clearFiltersBtn: document.getElementById('clear-filters'),
+    
+    // Results
+    productsCount: document.getElementById('products-count'),
+    productsContainer: document.getElementById('products-container'),
+    
+    // View controls
+    gridViewBtn: document.getElementById('grid-view-btn'),
+    listViewBtn: document.getElementById('list-view-btn'),
+    
+    // Modal
+    modal: document.getElementById('product-modal'),
+    modalTitle: document.getElementById('modal-title'),
+    modalBody: document.getElementById('modal-body'),
+    modalClose: document.getElementById('modal-close'),
+    
+    // Stats
+    totalProducts: document.getElementById('total-products'),
+    rawMaterials: document.getElementById('raw-materials'),
+    certificates: document.getElementById('certificates'),
+    grades: document.getElementById('grades'),
+    totalCrates: document.getElementById('total-crates'),
+    
+    // Cart
+    cartModal: document.getElementById('cart-modal'),
+    cartModalClose: document.getElementById('cart-modal-close'),
+    cartItemsList: document.getElementById('cart-items-list'),
+    cartSendForm: document.getElementById('cart-send-form'),
+    cartEmail: document.getElementById('cart-email'),
+    cartCount: document.getElementById('cart-count')
+};
+
+// Initialize application
+document.addEventListener('DOMContentLoaded', function() {
+    loadStockData();
+    setupEventListeners();
+    setupCartEvents();
+    updateCartCount();
+});
+
+// Load stock data
+async function loadStockData() {
+    try {
+    const response = await fetch('stock_data.json');
+        stockData = await response.json();
+        filteredData = [...stockData];
+        
+        initializeFilters();
+        updateStats();
+        renderProducts();
+    } catch (error) {
+        console.error('Error loading stock data:', error);
+    }
+}
+
+// Initialize filters with data
+function initializeFilters() {
+    if (!stockData || stockData.length === 0) return;
+    
+    // Get unique values for each filter
+    const woodTypes = [...new Set(stockData.map(item => item.Logs))].sort();
+    const certificates = [...new Set(stockData.map(item => item.Certificate))].sort();
+    const grades = [...new Set(stockData.map(item => item.Grade))].sort();
+    const thicknesses = [...new Set(stockData.map(item => item.Thickness))].sort((a, b) => a - b);
+    
+    // Populate filter dropdowns
+    populateSelect(elements.woodTypeFilter, woodTypes);
+    populateSelect(elements.certificateFilter, certificates);
+    populateSelect(elements.gradeFilter, grades, formatGrade);
+    populateSelect(elements.thicknessFilter, thicknesses, (value) => `${value}mm`);
+}
+
+// Populate select element with options
+function populateSelect(selectElement, values, formatter = null) {
+    // Keep the default option
+    const defaultOption = selectElement.querySelector('option[value=""]');
+    selectElement.innerHTML = '';
+    selectElement.appendChild(defaultOption);
+    
+    values.forEach(value => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = formatter ? formatter(value) : value;
+        selectElement.appendChild(option);
+    });
+}
+
+// Format grade display
+function formatGrade(grade) {
+    const upperGrade = grade.toUpperCase();
+    if (['BCX', 'CCX', 'CDX'].includes(upperGrade)) {
+        return upperGrade;
+    }
+    return grade;
+}
+
+// Setup event listeners
+function setupEventListeners() {
+    // Filter change events
+    [elements.woodTypeFilter, elements.certificateFilter, elements.gradeFilter, elements.thicknessFilter]
+        .forEach(filter => {
+            filter.addEventListener('change', applyFilters);
+        });
+    
+    // Clear filters
+    elements.clearFiltersBtn.addEventListener('click', clearAllFilters);
+    
+    // View controls
+    elements.gridViewBtn.addEventListener('click', () => setView('grid'));
+    elements.listViewBtn.addEventListener('click', () => setView('list'));
+    
+    // Modal events
+    elements.modalClose.addEventListener('click', closeModal);
+    elements.modal.addEventListener('click', (e) => {
+        if (e.target === elements.modal) closeModal();
+    });
+    
+    // ESC key to close modal
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (elements.modal.style.display === 'block') {
+                closeModal();
+            }
+            if (elements.cartModal.style.display === 'block') {
+                closeCartModal();
+            }
+        }
+    });
+}
+
+// Setup cart events
+function setupCartEvents() {
+    const openCartBtn = document.getElementById('open-cart-btn');
+    if (openCartBtn) {
+        openCartBtn.addEventListener('click', showCartModal);
+    }
+    
+    if (elements.cartModalClose) {
+        elements.cartModalClose.addEventListener('click', closeCartModal);
+    }
+    
+    if (elements.cartSendForm) {
+        elements.cartSendForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            sendCartEmail();
+        });
+    }
+    
+    // Expose functions globally for onclick handlers
+    window.removeFromCart = removeFromCart;
+    window.updateCartItemQuantity = updateCartItemQuantity;
+}
+
+// Apply filters
+function applyFilters() {
+    const filters = {
+        woodType: elements.woodTypeFilter.value,
+        certificate: elements.certificateFilter.value,
+        grade: elements.gradeFilter.value,
+        thickness: elements.thicknessFilter.value
+    };
+    
+    filteredData = stockData.filter(product => {
+        return (!filters.woodType || product.Logs === filters.woodType) &&
+               (!filters.certificate || product.Certificate === filters.certificate) &&
+               (!filters.grade || product.Grade === filters.grade) &&
+               (!filters.thickness || product.Thickness.toString() === filters.thickness);
+    });
+    
+    updateStats();
+    renderProducts();
+}
+
+// Clear all filters
+function clearAllFilters() {
+    elements.woodTypeFilter.value = '';
+    elements.certificateFilter.value = '';
+    elements.gradeFilter.value = '';
+    elements.thicknessFilter.value = '';
+    
+    filteredData = [...stockData];
+    updateStats();
+    renderProducts();
+}
+
+// Set view mode
+function setView(viewMode) {
+    currentView = viewMode;
+    
+    // Update button states
+    elements.gridViewBtn.classList.toggle('active', viewMode === 'grid');
+    elements.listViewBtn.classList.toggle('active', viewMode === 'list');
+    
+    renderProducts();
+}
+
+// Update statistics
+function updateStats() {
+    const uniqueWoodTypes = new Set(filteredData.map(item => item.Logs)).size;
+    const uniqueCertificates = new Set(filteredData.map(item => item.Certificate)).size;
+    const uniqueGrades = new Set(filteredData.map(item => item.Grade)).size;
+    const totalCrates = filteredData.reduce((sum, item) => sum + item.Crates, 0);
+    
+    elements.totalProducts.textContent = filteredData.length;
+    elements.rawMaterials.textContent = uniqueWoodTypes;
+    elements.certificates.textContent = uniqueCertificates;
+    elements.grades.textContent = uniqueGrades;
+    elements.totalCrates.textContent = formatNumber(totalCrates);
+    elements.productsCount.textContent = filteredData.length;
+}
+
+// Render products
+function renderProducts() {
+    const container = elements.productsContainer;
+    
+    if (filteredData.length === 0) {
+        container.innerHTML = '<div class="no-products">Nenhum produto encontrado com os critérios selecionados.</div>';
+        return;
+    }
+    
+    // Set container class based on view
+    container.className = currentView === 'grid' ? 'products-grid' : 'products-list';
+    
+    container.innerHTML = filteredData.map(product => createProductCard(product)).join('');
+    
+    // Add event listeners to details buttons
+    container.querySelectorAll('.details-btn').forEach((btn, index) => {
+        btn.addEventListener('click', () => showProductDetails(filteredData[index]));
+    });
+}
+
+// Create product card HTML
+function createProductCard(product) {
+    const isListView = currentView === 'list';
+    
+    if (isListView) {
+        return `
+            <div class="product-card">
+                <div class="product-info">
+                    <div class="product-badges">
+                        <span class="badge badge-material">${product.Logs}</span>
+                        <span class="badge badge-certificate">${product.Certificate}</span>
+                        <span class="badge badge-grade">${formatGrade(product.Grade)}</span>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-title">${product.Size}</div>
+                        <div class="product-specs">${product.Crates} caixas disponíveis • ${product.Thickness}mm • ${product.Ply} camadas</div>
+                    </div>
+                </div>
+                <div class="product-price">$${formatCurrency(product.Price)} por m³</div>
+                <div class="product-actions">
+                    <button class="details-btn">Ver Detalhes</button>
+                </div>
+            </div>
+        `;
+    } else {
+        return `
+            <div class="product-card">
+                <div class="product-badges">
+                    <span class="badge badge-material">${product.Logs}</span>
+                    <span class="badge badge-certificate">${product.Certificate}</span>
+                    <span class="badge badge-grade">${formatGrade(product.Grade)}</span>
+                </div>
+                <div class="product-details">
+                    <div class="product-title">${product.Size}</div>
+                    <div class="product-specs">${product.Thickness}mm • ${product.Ply} camadas</div>
+                    <div class="product-specs">${product.Crates} caixas disponíveis</div>
+                </div>
+                <div class="product-price">$${formatCurrency(product.Price)} por m³</div>
+                <div class="product-actions">
+                    <button class="details-btn">Ver Detalhes</button>
+                </div>
+            </div>
+        `;
+    }
+}
+
+// Show product details modal
+function showProductDetails(product) {
+    if (!elements.modal) return;
+    
+    elements.modalTitle.textContent = `${product.Logs} ${formatGrade(product.Grade)} - ${product.Size}`;
+    
+    // Calculate values
+    const densityPerM3 = product.WeightPerCrate / product.VolumePerCrate;
+    const weightPerSheet = product.WeightPerCrate / product.SheetsPerCrate;
+    const pricePerSheet = (product.Price * product.VolumePerCrate) / product.SheetsPerCrate;
+    const pricePerCrate = product.Price * product.VolumePerCrate;
+    const practicalCapacity = product.PayloadLimit / product.WeightPerCrate;
+    const maxCratesPerContainer = Math.floor(practicalCapacity);
+    const containerValue = maxCratesPerContainer * pricePerCrate;
+    
+    elements.modalBody.innerHTML = `
+        <div class="modal-sections">
+            <div class="modal-section">
+                <h4>📋 Especificações do Produto</h4>
+                <div class="section-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">Matéria-prima</div>
+                        <div class="detail-value">${product.Logs}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Certificado</div>
+                        <div class="detail-value">${product.Certificate}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Grade</div>
+                        <div class="detail-value">${formatGrade(product.Grade)}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Dimensões</div>
+                        <div class="detail-value">${product.Size}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Espessura</div>
+                        <div class="detail-value">${product.Thickness}mm</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Camadas</div>
+                        <div class="detail-value">${product.Ply}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h4>📦 Informações de Estoque e Peso</h4>
+                <div class="section-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">Estoque Disponível</div>
+                        <div class="detail-value">${product.Crates} caixas</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Folhas por Caixa</div>
+                        <div class="detail-value">${product.SheetsPerCrate}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Peso por Caixa</div>
+                        <div class="detail-value">${formatNumber(product.WeightPerCrate)} kg</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Densidade por m³</div>
+                        <div class="detail-value">${formatNumber(densityPerM3)} kg/m³</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Peso por Folha</div>
+                        <div class="detail-value">${formatNumber(weightPerSheet)} kg</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Volume por Caixa</div>
+                        <div class="detail-value">${product.VolumePerCrate.toFixed(3)} m³</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h4>🚢 Transporte e Preços</h4>
+                <div class="section-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">Capacidade Prática</div>
+                        <div class="detail-value">${formatNumber(practicalCapacity)} caixas</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Máx. Caixas/Container</div>
+                        <div class="detail-value">${maxCratesPerContainer}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Preço FOB por m³</div>
+                        <div class="detail-value">$${formatCurrency(product.Price)}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Preço por Folha</div>
+                        <div class="detail-value">$${formatNumber(pricePerSheet)}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Preço por Caixa</div>
+                        <div class="detail-value">$${formatNumber(pricePerCrate)}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Valor do Container</div>
+                        <div class="detail-value">$${formatNumber(containerValue)}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h4>🛒 Adicionar ao Carrinho</h4>
+                <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                    <label for="cart-qty" style="font-weight:600;">Quantidade (caixas):</label>
+                    <input type="number" id="cart-qty" min="1" max="${product.Crates}" value="1" class="cart-qty">
+                    <button id="add-to-cart-btn" class="cart-btn">Adicionar ao Carrinho</button>
+                </div>
+                <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">
+                    Máximo disponível: ${product.Crates} caixas
+                </div>
+            </div>
+        </div>
+    `;
+    
+    elements.modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    // Setup add to cart button
+    const addBtn = document.getElementById('add-to-cart-btn');
+    const qtyInput = document.getElementById('cart-qty');
+    if (addBtn && qtyInput) {
+        addBtn.addEventListener('click', () => {
+            const qty = Math.max(1, Math.min(product.Crates, parseInt(qtyInput.value) || 1));
+            addToCart(product, qty);
+            showValidationMessage('Item adicionado ao carrinho!');
+            setTimeout(() => {
+                closeModal();
+            }, 1000);
+        });
+    }
+}
+
+// Close modal
+function closeModal() {
+    if (elements.modal) {
+        elements.modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Cart functions
+function addToCart(product, qty) {
+    const productId = `${product.Logs}-${product.Grade}-${product.Size}-${product.Thickness}`;
+    const existingItem = cart.find(item => item.id === productId);
+    
+    if (existingItem) {
+        existingItem.qty += qty;
+        if (existingItem.qty > product.Crates) {
+            existingItem.qty = product.Crates;
+        }
+    } else {
+        cart.push({
+            id: productId,
+            desc: `${product.Logs} ${formatGrade(product.Grade)} - ${product.Size} (${product.Thickness}mm)`,
+            qty: Math.min(qty, product.Crates),
+            price: product.Price,
+            pricePerCrate: product.Price * product.VolumePerCrate,
+            product: product
+        });
+    }
+    
+    updateCartCount();
+    renderCartItems();
+}
+
+function removeFromCart(id) {
+    cart = cart.filter(item => item.id !== id);
+    updateCartCount();
+    renderCartItems();
+}
+
+function updateCartItemQuantity(id, newQty) {
+    const item = cart.find(item => item.id === id);
+    if (item) {
+        item.qty = Math.max(1, Math.min(item.product.Crates, newQty));
+        renderCartItems();
+    }
+}
+
+function updateCartCount() {
+    const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+    if (elements.cartCount) {
+        elements.cartCount.textContent = totalItems;
+    }
+}
+
+function renderCartItems() {
+    if (!elements.cartItemsList) return;
+    
+    if (cart.length === 0) {
+        elements.cartItemsList.innerHTML = `
+            <div style="text-align:center; color:#64748b; padding:2rem;">
+                <div style="font-size:3rem; margin-bottom:1rem;">🛒</div>
+                <div>Seu carrinho está vazio</div>
+                <div style="font-size:0.9rem; margin-top:0.5rem;">Adicione produtos para começar sua cotação</div>
+            </div>
+        `;
+        return;
+    }
+    
+    const total = cart.reduce((sum, item) => sum + (item.pricePerCrate * item.qty), 0);
+    
+    elements.cartItemsList.innerHTML = `
+        ${cart.map(item => `
+            <div class="cart-item">
+                <div class="cart-item-desc">
+                    <div style="font-weight:600;">${item.desc}</div>
+                    <div style="font-size:0.9rem; color:#64748b;">
+                        $${formatCurrency(item.pricePerCrate)} por caixa
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <input type="number" min="1" max="${item.product.Crates}" value="${item.qty}" 
+                           onchange="updateCartItemQuantity('${item.id}', parseInt(this.value))"
+                           style="width:60px; padding:0.3rem; border:1px solid #e2e8f0; border-radius:4px;">
+                    <div style="font-weight:600; min-width:80px;">$${formatCurrency(item.pricePerCrate * item.qty)}</div>
+                    <button onclick="removeFromCart('${item.id}')" 
+                            style="background:#ef4444; color:white; border:none; padding:0.3rem 0.8rem; border-radius:6px; cursor:pointer;">
+                        Remover
+                    </button>
+                </div>
+            </div>
+        `).join('')}
+        <div style="border-top:2px solid #e2e8f0; margin-top:1rem; padding-top:1rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size:1.2rem; font-weight:700;">
+                <span>Total:</span>
+                <span style="color:#00B04F;">$${formatCurrency(total)}</span>
+            </div>
+            <div style="font-size:0.9rem; color:#64748b; margin-top:0.5rem;">
+                ${cart.reduce((sum, item) => sum + item.qty, 0)} caixas no total
+            </div>
+        </div>
+    `;
+}
+
+function showCartModal() {
+    if (elements.cartModal) {
+        renderCartItems();
+        elements.cartModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeCartModal() {
+    if (elements.cartModal) {
+        elements.cartModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function sendCartEmail() {
+    const email = elements.cartEmail.value;
+    if (!email || cart.length === 0) {
+        alert('Preencha o e-mail e adicione itens ao carrinho.');
+        return;
+    }
+    
+    const total = cart.reduce((sum, item) => sum + (item.pricePerCrate * item.qty), 0);
+    const totalCrates = cart.reduce((sum, item) => sum + item.qty, 0);
+    
+    let msg = `Solicitação de Cotação\n\n`;
+    msg += `Cliente: ${email}\n\n`;
+    msg += `Itens solicitados:\n`;
+    cart.forEach(item => {
+        msg += `- ${item.desc}\n`;
+        msg += `  Quantidade: ${item.qty} caixas\n`;
+        msg += `  Preço unitário: $${formatCurrency(item.pricePerCrate)}\n`;
+        msg += `  Subtotal: $${formatCurrency(item.pricePerCrate * item.qty)}\n\n`;
+    });
+    msg += `Total de caixas: ${totalCrates}\n`;
+    msg += `Valor total estimado: $${formatCurrency(total)}\n\n`;
+    msg += `Observação: Esta é uma solicitação de cotação. Os preços podem variar conforme condições de mercado e quantidade final.`;
+    
+        // Envio via AJAX para PHP
+        fetch('send_email.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `nome=Cliente&email=${encodeURIComponent(email)}&mensagem=${encodeURIComponent(msg)}`
+        })
+        .then(response => response.text())
+        .then(data => {
+            showValidationMessage(data);
+            closeCartModal();
+            cart = [];
+            updateCartCount();
+            renderCartItems();
+        })
+        .catch(error => {
+            showValidationMessage('Erro ao enviar o e-mail. Tente novamente.');
+        });
+    
+    showValidationMessage('E-mail de cotação enviado com sucesso!');
+    closeCartModal();
+    cart = [];
+    updateCartCount();
+    renderCartItems();
+}
+
+function showValidationMessage(msg) {
+    let validationDiv = document.getElementById('cart-validation-msg');
+    if (!validationDiv) {
+        validationDiv = document.createElement('div');
+        validationDiv.id = 'cart-validation-msg';
+        validationDiv.style.cssText = `
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: #00B04F;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 4000;
+            font-weight: 600;
+            display: none;
+        `;
+        document.body.appendChild(validationDiv);
+    }
+    validationDiv.textContent = msg;
+    validationDiv.style.display = 'block';
+    setTimeout(() => {
+        validationDiv.style.display = 'none';
+    }, 3000);
+}
+
+// Utility functions
+function formatNumber(num) {
+    return new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+    }).format(num);
+}
+
+function formatCurrency(num) {
+    return new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(num);
+}
+
