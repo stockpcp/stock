@@ -1,208 +1,165 @@
-<!-- Formspree Formbutton integration -->
-<script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
-<script>
-    window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
-    formbutton("create", {
-        action: "https://formspree.io/f/xbladnvd",
-        title: "Solicitação de Cotação",
-        fields: [
-            { 
-                type: "email", 
-                label: "E-mail:", 
-                name: "email",
-                required: true,
-                placeholder: "seu@email.com"
-            },
-            {
-                type: "textarea",
-                label: "Mensagem:",
-                name: "message",
-                placeholder: "Itens do carrinho, quantidade, etc."
-            },
-            { type: "submit", label: "Enviar" }
-        ],
-        styles: {
-            title: {
-                backgroundColor: "#00B04F"
-            },
-            button: {
-                backgroundColor: "#00B04F"
-            }
-        }
-    });
-</script>
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock - Sistema de Gerenciamento de Estoque</title>
+    <title data-i18n="hero.title">stock availability</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="styles_improved.css">
+    <link rel="stylesheet" href="i18n-styles.css">
+    <link rel="stylesheet" href="modal_styles.css">
 </head>
-
 <body>
-    <!-- CABEÇALHO -->
+    <!-- CABEÇALHO (Header) -->
     <header class="header">
         <div class="header-content">
             <div class="logo-section">
-                <img src="logo.png" alt="Logo" class="logo">
-                <h1 class="company-name">Repinho</h1>
+                <img src="logo.png" alt="Repinho Logo" class="logo">
             </div>
             <div class="header-info">
                 <div class="info-item">
-                    <span class="info-icon">📧</span>
-                    <span>comercial01@repinho.ind.br</span>
-                </div>
-                 <div class="info-item">
-                    <span class="info-icon">🚢</span>
-                    <span class="info-text">FOB Port: Paraná</span>
+                    <span class="info-icon">📅</span>
+                    <span class="info-text">
+                        <span data-i18n="header.lastUpdated">Last updated</span>: 26/08/2025
+                    </span>
                 </div>
                 <div class="info-item">
-                    <button id="open-cart-btn" class="cart-btn">🛒 Carrinho (<span id="cart-count">0</span>)</button>
+                    <span class="info-icon">🚢</span>
+                    <span class="info-text">
+                        <span data-i18n="header.fobPort">FOB Port</span>: Paraná
+                    </span>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- ÁREA HERO -->
+    <!-- ÁREA HERO/TÍTULO PRINCIPAL -->
     <section class="hero-section">
         <div class="hero-content">
-            <h1 class="hero-title">Stock Management</h1>
-            <p class="hero-subtitle">Sistema completo de gerenciamento de estoque de compensados brasileiros</p>
+            <h1 class="hero-title" data-i18n="hero.title">stock availability</h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">Brazilian plywood for construction, packaging, and furniture industries</p>
         </div>
     </section>
 
-    <!-- ESTATÍSTICAS -->
+    <!-- ÁREA DE RESUMO/ESTATÍSTICAS (5 Cartões) -->
     <section class="stats-section">
         <div class="stats-container">
             <div class="stat-card">
                 <div class="stat-icon">📦</div>
-                <div class="stat-number" id="total-products">0</div>
-                <div class="stat-label">Produtos</div>
+                <div class="stat-number" id="total-products">49</div>
+                <div class="stat-label" data-i18n="stats.productsAvailable">products available</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">🌲</div>
-                <div class="stat-number" id="raw-materials">0</div>
-                <div class="stat-label">Matérias-primas</div>
+                <div class="stat-number" id="raw-materials">5</div>
+                <div class="stat-label" data-i18n="stats.woodSpecies">wood species</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">📋</div>
-                <div class="stat-number" id="certificates">0</div>
-                <div class="stat-label">Certificados</div>
+                <div class="stat-number" id="certificates">6</div>
+                <div class="stat-label" data-i18n="stats.certificate">certificate</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">⭐</div>
-                <div class="stat-number" id="grades">0</div>
-                <div class="stat-label">Grades</div>
+                <div class="stat-number" id="grades">8</div>
+                <div class="stat-label" data-i18n="stats.grade">grade</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">📊</div>
-                <div class="stat-number" id="total-crates">0</div>
-                <div class="stat-label">Caixas Totais</div>
+                <div class="stat-number" id="total-crates">1,007</div>
+                <div class="stat-label" data-i18n="stats.totalCrates">total crates</div>
             </div>
         </div>
     </section>
 
-    <!-- FILTROS -->
+    <!-- ÁREA DE FILTROS (1 linha) -->
     <section class="filters-section">
         <div class="filters-container">
             <div class="filters-header">
-                <h2 class="filters-title">Filtros</h2>
-                <button id="clear-filters" class="clear-filters-btn">Limpar Filtros</button>
+                <h2 class="filters-title">🔍 <span data-i18n="filters.title">filter products</span></h2>
+                <button class="clear-filters-btn" id="clear-filters">✖ <span data-i18n="filters.clearAll">clear all filters</span></button>
             </div>
+            
             <div class="filters-row">
                 <div class="filter-group">
-                    <label for="wood-type-filter">Tipo de Madeira</label>
+                    <label for="wood-type-filter" data-i18n="filters.woodType">wood type</label>
                     <select id="wood-type-filter" class="filter-select">
-                        <option value="">Todos</option>
+                        <option value="" data-i18n="filters.allTypes">All Types</option>
                     </select>
                 </div>
+                
                 <div class="filter-group">
-                    <label for="certificate-filter">Certificado</label>
+                    <label for="certificate-filter" data-i18n="filters.certificate">certificate</label>
                     <select id="certificate-filter" class="filter-select">
-                        <option value="">Todos</option>
+                        <option value="" data-i18n="filters.allCertificates">All Certificates</option>
                     </select>
                 </div>
+                
                 <div class="filter-group">
-                    <label for="grade-filter">Grade</label>
+                    <label for="grade-filter" data-i18n="filters.grade">grade</label>
                     <select id="grade-filter" class="filter-select">
-                        <option value="">Todos</option>
+                        <option value="" data-i18n="filters.allGrades">All Grades</option>
                     </select>
                 </div>
+                
                 <div class="filter-group">
-                    <label for="thickness-filter">Espessura</label>
+                    <label for="thickness-filter" data-i18n="filters.thickness">thickness(mm)</label>
                     <select id="thickness-filter" class="filter-select">
-                        <option value="">Todas</option>
+                        <option value="" data-i18n="filters.allThicknesses">All Thicknesses</option>
                     </select>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- RESULTADOS -->
+    <!-- ÁREA DE RESULTADOS -->
     <section class="results-section">
         <div class="results-container">
             <div class="results-header">
                 <div class="results-count">
-                    <span id="products-count">0</span> produtos encontrados
+                    <span id="products-count">49</span> <span data-i18n="results.productsFound">products found</span>
                 </div>
                 <div class="view-controls">
-                    <button id="grid-view-btn" class="view-btn active">Grade</button>
-                    <button id="list-view-btn" class="view-btn">Lista</button>
+                    <button class="view-btn active" id="grid-view-btn">📱 <span data-i18n="results.gridView">Grid</span></button>
+                    <button class="view-btn" id="list-view-btn">📋 <span data-i18n="results.listView">List</span></button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PRODUTOS -->
+    <!-- ÁREA DE PRODUTOS -->
     <section class="products-section">
-        <div id="products-container" class="products-container products-grid">
-            <!-- Produtos serão carregados aqui -->
+        <div class="products-container" id="products-container">
+            <!-- Produtos serão inseridos aqui via JavaScript -->
         </div>
     </section>
 
-    <!-- MODAL DE DETALHES DO PRODUTO -->
-    <div id="product-modal" class="modal" style="display: none;">
+    <!-- MODAL DE DETALHES -->
+    <div class="modal" id="product-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="modal-title">Detalhes do Produto</h3>
-                <button id="modal-close" class="modal-close">&times;</button>
+                <h3 class="modal-title" id="modal-title" data-i18n="modal.title">Product Details</h3>
+                <button class="modal-close" id="modal-close">✖</button>
             </div>
-            <div id="modal-body" class="modal-body">
-                <!-- Conteúdo será carregado dinamicamente -->
+            <div class="modal-body" id="modal-body">
+                <!-- Conteúdo do modal será inserido via JavaScript com traduções -->
             </div>
         </div>
     </div>
 
-    <!-- MODAL DO CARRINHO -->
-    <div id="cart-modal" class="cart-modal" style="display: none;">
-        <div class="cart-modal-content">
-            <div class="cart-modal-header">
-                <h3 class="cart-modal-title">Carrinho de Compras</h3>
-                <button id="cart-modal-close" class="cart-modal-close">&times;</button>
-            </div>
-            <div id="cart-items-list" class="cart-items-list">
-                <!-- Itens do carrinho serão carregados aqui -->
-            </div>
-           
-        </div>
-    </div>
     <!-- RODAPÉ -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-column">
-                <h4>Product Information</h4>
-                <p>Brazilian plywood for construction, packaging, and furniture industries</p>
-                <p>Quality wood products with international certifications</p>
-                <p>Sustainable forestry practices and environmental compliance</p>
+                <h4 data-i18n="footer.productInfo">Product Information</h4>
+                <p data-i18n="footer.productDescription">Brazilian plywood for construction, packaging, and furniture industries</p>
+                <p data-i18n="footer.qualityProducts">Quality wood products with international certifications</p>
+                <p data-i18n="footer.sustainablePractices">Sustainable forestry practices and environmental compliance</p>
             </div>
-
+            
             <div class="footer-column">
-                <h4>Contact information</h4>
+                <h4 data-i18n="footer.contactInfo">Contact information</h4>
                 <div class="contact-info">
-                    <p class="company-name">Repinho Reflorestadora Madeiras e Compensados Ltda.</p>
+                    <p class="company-name" data-i18n="footer.companyName">Repinho Reflorestadora Madeiras e Compensados Ltda.</p>
                     <div class="contact-item">
                         <span class="contact-icon">📞</span>
                         <span>+55 (42) 3629-8500</span>
@@ -213,20 +170,21 @@
                     </div>
                     <div class="contact-item">
                         <span class="contact-icon">📍</span>
-                        <span>Rua Ver.Sebastião de Camargo Ribas nº 950<br>
-                            Guarapuava, Paraná - Brazil</span>
+                        <span data-i18n-html="footer.address">Rua Ver.Sebastião de Camargo Ribas nº 950<br>Guarapuava, Paraná - Brazil</span>
                     </div>
                 </div>
             </div>
         </div>
-
+        
         <div class="footer-bottom">
-            <p>© 2025 Repinho. All rights reserved.</p>
-            <p>developed by commercial export</p>
+            <p data-i18n="footer.copyright">© 2025 Repinho. All rights reserved.</p>
+            <p data-i18n="footer.developedBy">developed by commercial export</p>
         </div>
     </footer>
-    <script src="logistics.js"></script>
-    <script src="script_improved.js"></script>
-</body>
 
+    <!-- Scripts -->
+    <script src="i18n.js"></script>
+    <script src="script.js"></script>
+</body>
 </html>
+
