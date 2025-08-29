@@ -1,3 +1,36 @@
+<!-- Formspree Formbutton integration -->
+<script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+<script>
+    window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+    formbutton("create", {
+        action: "https://formspree.io/f/xbladnvd",
+        title: "Solicitação de Cotação",
+        fields: [
+            { 
+                type: "email", 
+                label: "E-mail:", 
+                name: "email",
+                required: true,
+                placeholder: "seu@email.com"
+            },
+            {
+                type: "textarea",
+                label: "Mensagem:",
+                name: "message",
+                placeholder: "Itens do carrinho, quantidade, etc."
+            },
+            { type: "submit", label: "Enviar" }
+        ],
+        styles: {
+            title: {
+                backgroundColor: "#00B04F"
+            },
+            button: {
+                backgroundColor: "#00B04F"
+            }
+        }
+    });
+</script>
 <!DOCTYPE html>
 <html lang="pt-BR">
 

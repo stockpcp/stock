@@ -491,9 +491,23 @@ function renderCartItems() {
         `;
         return;
     }
-    
+
     const total = cart.reduce((sum, item) => sum + (item.pricePerCrate * item.qty), 0);
-    
+    const totalCrates = cart.reduce((sum, item) => sum + item.qty, 0);
+
+    // Monta o resumo dos itens para copiar
+    let resumo = `Solicitação de Cotação\n\n`;
+    resumo += `Itens selecionados:\n`;
+    cart.forEach(item => {
+        resumo += `- ${item.desc}\n`;
+        resumo += `  Quantidade: ${item.qty} caixas\n`;
+        resumo += `  Preço unitário: $${formatCurrency(item.pricePerCrate)}\n`;
+        resumo += `  Subtotal: $${formatCurrency(item.pricePerCrate * item.qty)}\n\n`;
+    });
+    resumo += `Total de caixas: ${totalCrates}\n`;
+    resumo += `Valor total estimado: $${formatCurrency(total)}\n\n`;
+    resumo += `Observação: Esta é uma solicitação de cotação. Os preços podem variar conforme condições de mercado e quantidade final.`;
+
     elements.cartItemsList.innerHTML = `
         ${cart.map(item => `
             <div class="cart-item">
@@ -524,6 +538,15 @@ function renderCartItems() {
                 ${cart.reduce((sum, item) => sum + item.qty, 0)} caixas no total
             </div>
         </div>
+        <form id="cart-formspree" action="https://formspree.io/f/xbladnvd" method="POST" style="margin-top:2rem; background:#f6f6f6; padding:1.5rem; border-radius:8px;">
+            <h4 style="color:#00B04F; margin-bottom:1rem;">Enviar intenção de compra</h4>
+            <label for="cart-email-form" style="font-weight:600;">Seu e-mail:</label>
+            <input type="email" id="cart-email-form" name="email" required style="width:100%; margin-bottom:1rem; padding:0.5rem; border-radius:6px; border:1px solid #e2e8f0;">
+            <label for="cart-message-form" style="font-weight:600;">Resumo dos itens:</label>
+            <textarea id="cart-message-form" name="message" readonly style="width:100%; min-height:120px; margin-bottom:1rem; padding:1rem; border-radius:8px; border:1px solid #e2e8f0; font-size:1rem;">${resumo}</textarea>
+            <button type="submit" style="background:#00B04F; color:white; border:none; padding:0.7rem 2rem; border-radius:6px; font-weight:600; font-size:1.1rem; cursor:pointer;">Enviar intenção de compra</button>
+            <div style="font-size:0.9rem; color:#64748b; margin-top:0.5rem;">Você receberá a confirmação por e-mail.</div>
+        </form>
     `;
 }
 
@@ -543,53 +566,7 @@ function closeCartModal() {
 }
 
 function sendCartEmail() {
-    const email = elements.cartEmail.value;
-    if (!email || cart.length === 0) {
-        alert('Preencha o e-mail e adicione itens ao carrinho.');
-        return;
-    }
-    
-    const total = cart.reduce((sum, item) => sum + (item.pricePerCrate * item.qty), 0);
-    const totalCrates = cart.reduce((sum, item) => sum + item.qty, 0);
-    
-    let msg = `Solicitação de Cotação\n\n`;
-    msg += `Cliente: ${email}\n\n`;
-    msg += `Itens solicitados:\n`;
-    cart.forEach(item => {
-        msg += `- ${item.desc}\n`;
-        msg += `  Quantidade: ${item.qty} caixas\n`;
-        msg += `  Preço unitário: $${formatCurrency(item.pricePerCrate)}\n`;
-        msg += `  Subtotal: $${formatCurrency(item.pricePerCrate * item.qty)}\n\n`;
-    });
-    msg += `Total de caixas: ${totalCrates}\n`;
-    msg += `Valor total estimado: $${formatCurrency(total)}\n\n`;
-    msg += `Observação: Esta é uma solicitação de cotação. Os preços podem variar conforme condições de mercado e quantidade final.`;
-    
-        // Envio via AJAX para PHP
-        fetch('send_email.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `nome=Cliente&email=${encodeURIComponent(email)}&mensagem=${encodeURIComponent(msg)}`
-        })
-        .then(response => response.text())
-        .then(data => {
-            showValidationMessage(data);
-            closeCartModal();
-            cart = [];
-            updateCartCount();
-            renderCartItems();
-        })
-        .catch(error => {
-            showValidationMessage('Erro ao enviar o e-mail. Tente novamente.');
-        });
-    
-    showValidationMessage('E-mail de cotação enviado com sucesso!');
-    closeCartModal();
-    cart = [];
-    updateCartCount();
-    renderCartItems();
+    alert('Para enviar a intenção de compra, clique no botão verde "Solicitação de Cotação" no canto da tela e preencha o formulário.');
 }
 
 function showValidationMessage(msg) {
