@@ -227,7 +227,7 @@ function renderProducts() {
     const container = elements.productsContainer;
     
     if (filteredData.length === 0) {
-        container.innerHTML = '<div class="no-products">Nenhum produto encontrado com os critérios selecionados.</div>';
+        container.innerHTML = '<div class="no-products">No products found with the selected criteria.</div>';
         return;
     }
     
@@ -257,12 +257,12 @@ function createProductCard(product) {
                     </div>
                     <div class="product-details">
                         <div class="product-title">${product.Size}</div>
-                        <div class="product-specs">${product.Crates} caixas disponíveis • ${product.Thickness}mm • ${product.Ply} camadas</div>
+                        <div class="product-specs">${product.Crates} crates available • ${product.Thickness}mm • ${product.Ply} ply</div>
                     </div>
                 </div>
-                <div class="product-price">$${formatCurrency(product.Price)} por m³</div>
+                <div class="product-price">$${formatCurrency(product.Price)} per m³</div>
                 <div class="product-actions">
-                    <button class="details-btn">Ver Detalhes</button>
+                    <button class="details-btn">View Details</button>
                 </div>
             </div>
         `;
@@ -276,12 +276,12 @@ function createProductCard(product) {
                 </div>
                 <div class="product-details">
                     <div class="product-title">${product.Size}</div>
-                    <div class="product-specs">${product.Thickness}mm • ${product.Ply} camadas</div>
-                    <div class="product-specs">${product.Crates} caixas disponíveis</div>
+                    <div class="product-specs">${product.Thickness}mm • ${product.Ply} ply</div>
+                    <div class="product-specs">${product.Crates} crates available</div>
                 </div>
-                <div class="product-price">$${formatCurrency(product.Price)} por m³</div>
+                <div class="product-price">$${formatCurrency(product.Price)} per m³</div>
                 <div class="product-actions">
-                    <button class="details-btn">Ver Detalhes</button>
+                    <button class="details-btn">View Details</button>
                 </div>
             </div>
         `;
@@ -306,14 +306,14 @@ function showProductDetails(product) {
     elements.modalBody.innerHTML = `
         <div class="modal-sections">
             <div class="modal-section">
-                <h4>📋 Especificações do Produto</h4>
+                <h4>📋 Product Specifications</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Matéria-prima</div>
+                        <div class="detail-label">Raw Material</div>
                         <div class="detail-value">${product.Logs}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Certificado</div>
+                        <div class="detail-label">Certificate</div>
                         <div class="detail-value">${product.Certificate}</div>
                     </div>
                     <div class="detail-item">
@@ -321,86 +321,86 @@ function showProductDetails(product) {
                         <div class="detail-value">${formatGrade(product.Grade)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Dimensões</div>
+                        <div class="detail-label">Dimensions</div>
                         <div class="detail-value">${product.Size}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Espessura</div>
+                        <div class="detail-label">Thickness</div>
                         <div class="detail-value">${product.Thickness}mm</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Camadas</div>
+                        <div class="detail-label">Ply</div>
                         <div class="detail-value">${product.Ply}</div>
                     </div>
                 </div>
             </div>
             <div class="modal-section">
-                <h4>📦 Informações de Estoque e Peso</h4>
+                <h4>📦 Stock & Weight Information</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Estoque Disponível</div>
-                        <div class="detail-value">${product.Crates} caixas</div>
+                        <div class="detail-label">Available Stock</div>
+                        <div class="detail-value">${product.Crates} crates</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Folhas por Caixa</div>
+                        <div class="detail-label">Sheets per Crate</div>
                         <div class="detail-value">${product.SheetsPerCrate}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Peso por Caixa</div>
+                        <div class="detail-label">Weight per Crate</div>
                         <div class="detail-value">${formatNumber(product.WeightPerCrate)} kg</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Densidade por m³</div>
+                        <div class="detail-label">Density per m³</div>
                         <div class="detail-value">${formatNumber(densityPerM3)} kg/m³</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Peso por Folha</div>
+                        <div class="detail-label">Weight per Sheet</div>
                         <div class="detail-value">${formatNumber(weightPerSheet)} kg</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Volume por Caixa</div>
+                        <div class="detail-label">Volume per Crate</div>
                         <div class="detail-value">${product.VolumePerCrate.toFixed(3)} m³</div>
                     </div>
                 </div>
             </div>
             <div class="modal-section">
-                <h4>🚢 Transporte e Preços</h4>
+                <h4>🚢 Shipping & Pricing</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Capacidade Prática</div>
-                        <div class="detail-value">${formatNumber(practicalCapacity)} caixas</div>
+                        <div class="detail-label">Practical Capacity</div>
+                        <div class="detail-value">${formatNumber(practicalCapacity)} crates</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Máx. Caixas/Container</div>
+                        <div class="detail-label">Max Crates/Container</div>
                         <div class="detail-value">${maxCratesPerContainer}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Preço FOB por m³</div>
+                        <div class="detail-label">FOB Price per m³</div>
                         <div class="detail-value">$${formatCurrency(product.Price)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Preço por Folha</div>
+                        <div class="detail-label">Price per Sheet</div>
                         <div class="detail-value">$${formatNumber(pricePerSheet)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Preço por Caixa</div>
+                        <div class="detail-label">Price per Crate</div>
                         <div class="detail-value">$${formatNumber(pricePerCrate)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Valor do Container</div>
+                        <div class="detail-label">Container Value</div>
                         <div class="detail-value">$${formatNumber(containerValue)}</div>
                     </div>
                 </div>
             </div>
             <div class="modal-section">
-                <h4>🛒 Adicionar ao Carrinho</h4>
+                <h4>🛒 Add to Cart</h4>
                 <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
-                    <label for="cart-qty" style="font-weight:600;">Quantidade (caixas):</label>
+                    <label for="cart-qty" style="font-weight:600;">Quantity (crates):</label>
                     <input type="number" id="cart-qty" min="1" max="${product.Crates}" value="1" class="cart-qty">
-                    <button id="add-to-cart-btn" class="cart-btn">Adicionar ao Carrinho</button>
+                    <button id="add-to-cart-btn" class="cart-btn">Add to Cart</button>
                 </div>
                 <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">
-                    Máximo disponível: ${product.Crates} caixas
+                    Maximum available: ${product.Crates} crates
                 </div>
             </div>
         </div>
@@ -416,7 +416,7 @@ function showProductDetails(product) {
         addBtn.addEventListener('click', () => {
             const qty = Math.max(1, Math.min(product.Crates, parseInt(qtyInput.value) || 1));
             addToCart(product, qty);
-            showValidationMessage('Item adicionado ao carrinho!');
+            showValidationMessage('Item added to cart!');
             setTimeout(() => {
                 closeModal();
             }, 1000);
@@ -485,8 +485,8 @@ function renderCartItems() {
         elements.cartItemsList.innerHTML = `
             <div style="text-align:center; color:#64748b; padding:2rem;">
                 <div style="font-size:3rem; margin-bottom:1rem;">🛒</div>
-                <div>Seu carrinho está vazio</div>
-                <div style="font-size:0.9rem; margin-top:0.5rem;">Adicione produtos para começar sua cotação</div>
+                <div>Your cart is empty</div>
+                <div style="font-size:0.9rem; margin-top:0.5rem;">Add products to start your quote</div>
             </div>
         `;
         return;
@@ -495,18 +495,18 @@ function renderCartItems() {
     const total = cart.reduce((sum, item) => sum + (item.pricePerCrate * item.qty), 0);
     const totalCrates = cart.reduce((sum, item) => sum + item.qty, 0);
 
-    // Monta o resumo dos itens para copiar
-    let resumo = `Solicitação de Cotação\n\n`;
-    resumo += `Itens selecionados:\n`;
+    // Build the summary of items for the quote
+    let resumo = `Quote Request\n\n`;
+    resumo += `Selected items:\n`;
     cart.forEach(item => {
         resumo += `- ${item.desc}\n`;
-        resumo += `  Quantidade: ${item.qty} caixas\n`;
-        resumo += `  Preço unitário: $${formatCurrency(item.pricePerCrate)}\n`;
+        resumo += `  Quantity: ${item.qty} crates\n`;
+        resumo += `  Unit price: $${formatCurrency(item.pricePerCrate)}\n`;
         resumo += `  Subtotal: $${formatCurrency(item.pricePerCrate * item.qty)}\n\n`;
     });
-    resumo += `Total de caixas: ${totalCrates}\n`;
-    resumo += `Valor total estimado: $${formatCurrency(total)}\n\n`;
-    resumo += `Observação: Esta é uma solicitação de cotação. Os preços podem variar conforme condições de mercado e quantidade final.`;
+    resumo += `Total crates: ${totalCrates}\n`;
+    resumo += `Estimated total value: $${formatCurrency(total)}\n\n`;
+    resumo += `Note: This is a quote request. Prices may vary according to market conditions and final quantity.`;
 
     elements.cartItemsList.innerHTML = `
         ${cart.map(item => `
@@ -514,7 +514,7 @@ function renderCartItems() {
                 <div class="cart-item-desc">
                     <div style="font-weight:600;">${item.desc}</div>
                     <div style="font-size:0.9rem; color:#64748b;">
-                        $${formatCurrency(item.pricePerCrate)} por caixa
+                        $${formatCurrency(item.pricePerCrate)} per crate
                     </div>
                 </div>
                 <div style="display:flex; align-items:center; gap:0.5rem;">
@@ -524,7 +524,7 @@ function renderCartItems() {
                     <div style="font-weight:600; min-width:80px;">$${formatCurrency(item.pricePerCrate * item.qty)}</div>
                     <button onclick="removeFromCart('${item.id}')" 
                             style="background:#ef4444; color:white; border:none; padding:0.3rem 0.8rem; border-radius:6px; cursor:pointer;">
-                        Remover
+                        Remove
                     </button>
                 </div>
             </div>
@@ -535,17 +535,17 @@ function renderCartItems() {
                 <span style="color:#00B04F;">$${formatCurrency(total)}</span>
             </div>
             <div style="font-size:0.9rem; color:#64748b; margin-top:0.5rem;">
-                ${cart.reduce((sum, item) => sum + item.qty, 0)} caixas no total
+                ${cart.reduce((sum, item) => sum + item.qty, 0)} crates in total
             </div>
         </div>
         <form id="cart-formspree" action="https://formspree.io/f/xbladnvd" method="POST" style="margin-top:2rem; background:#f6f6f6; padding:1.5rem; border-radius:8px;">
-            <h4 style="color:#00B04F; margin-bottom:1rem;">Enviar intenção de compra</h4>
-            <label for="cart-email-form" style="font-weight:600;">Seu e-mail:</label>
+            <h4 style="color:#00B04F; margin-bottom:1rem;">Send purchase intent</h4>
+            <label for="cart-email-form" style="font-weight:600;">Your email:</label>
             <input type="email" id="cart-email-form" name="email" required style="width:100%; margin-bottom:1rem; padding:0.5rem; border-radius:6px; border:1px solid #e2e8f0;">
-            <label for="cart-message-form" style="font-weight:600;">Resumo dos itens:</label>
+            <label for="cart-message-form" style="font-weight:600;">Items summary:</label>
             <textarea id="cart-message-form" name="message" readonly style="width:100%; min-height:120px; margin-bottom:1rem; padding:1rem; border-radius:8px; border:1px solid #e2e8f0; font-size:1rem;">${resumo}</textarea>
-            <button type="submit" style="background:#00B04F; color:white; border:none; padding:0.7rem 2rem; border-radius:6px; font-weight:600; font-size:1.1rem; cursor:pointer;">Enviar intenção de compra</button>
-            <div style="font-size:0.9rem; color:#64748b; margin-top:0.5rem;">Você receberá a confirmação por e-mail.</div>
+            <button type="submit" style="background:#00B04F; color:white; border:none; padding:0.7rem 2rem; border-radius:6px; font-weight:600; font-size:1.1rem; cursor:pointer;">Send purchase intent</button>
+            <div style="font-size:0.9rem; color:#64748b; margin-top:0.5rem;">You will receive confirmation by email.</div>
         </form>
     `;
 }
@@ -566,7 +566,7 @@ function closeCartModal() {
 }
 
 function sendCartEmail() {
-    alert('Para enviar a intenção de compra, clique no botão verde "Solicitação de Cotação" no canto da tela e preencha o formulário.');
+    alert('To send your purchase intent, click the green "Quote Request" button on the screen and fill out the form.');
 }
 
 function showValidationMessage(msg) {

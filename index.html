@@ -4,22 +4,22 @@
     window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
     formbutton("create", {
         action: "https://formspree.io/f/xbladnvd",
-        title: "Solicitação de Cotação",
+        title: "Quotation Request",
         fields: [
             { 
                 type: "email", 
-                label: "E-mail:", 
+                label: "Email:", 
                 name: "email",
                 required: true,
-                placeholder: "seu@email.com"
+                placeholder: "your@email.com"
             },
             {
                 type: "textarea",
-                label: "Mensagem:",
+                label: "Message:",
                 name: "message",
-                placeholder: "Itens do carrinho, quantidade, etc."
+                placeholder: "Cart items, quantity, etc."
             },
-            { type: "submit", label: "Enviar" }
+            { type: "submit", label: "Send" }
         ],
         styles: {
             title: {
@@ -32,18 +32,18 @@
     });
 </script>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>stock available</title>
+    <title>Stock - Stock Management System</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles_improved.css">
 </head>
 
 <body>
-    <!-- CABEÇALHO -->
+    <!-- HEADER -->
     <header class="header">
         <div class="header-content">
             <div class="logo-section">
@@ -60,37 +60,37 @@
                     <span class="info-text">FOB Port: Paraná</span>
                 </div>
                 <div class="info-item">
-                    <button id="open-cart-btn" class="cart-btn">🛒 Carrinho (<span id="cart-count">0</span>)</button>
+                    <button id="open-cart-btn" class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- ÁREA HERO -->
+    <!-- HERO AREA -->
     <section class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title">Stock Management</h1>
-            <p class="hero-subtitle">Sistema completo de gerenciamento de estoque de compensados brasileiros</p>
+            <p class="hero-subtitle">Complete management system for Brazilian plywood stock</p>
         </div>
     </section>
 
-    <!-- ESTATÍSTICAS -->
+    <!-- STATISTICS -->
     <section class="stats-section">
         <div class="stats-container">
             <div class="stat-card">
                 <div class="stat-icon">📦</div>
                 <div class="stat-number" id="total-products">0</div>
-                <div class="stat-label">Produtos</div>
+                <div class="stat-label">Products</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">🌲</div>
                 <div class="stat-number" id="raw-materials">0</div>
-                <div class="stat-label">Matérias-primas</div>
+                <div class="stat-label">Raw Materials</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">📋</div>
                 <div class="stat-number" id="certificates">0</div>
-                <div class="stat-label">Certificados</div>
+                <div class="stat-label">Certificates</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">⭐</div>
@@ -100,107 +100,106 @@
             <div class="stat-card">
                 <div class="stat-icon">📊</div>
                 <div class="stat-number" id="total-crates">0</div>
-                <div class="stat-label">Caixas Totais</div>
+                <div class="stat-label">Total Crates</div>
             </div>
         </div>
     </section>
 
-    <!-- FILTROS -->
+    <!-- FILTERS -->
     <section class="filters-section">
         <div class="filters-container">
             <div class="filters-header">
-                <h2 class="filters-title">Filtros</h2>
-                <button id="clear-filters" class="clear-filters-btn">Limpar Filtros</button>
+                <h2 class="filters-title">Filters</h2>
+                <button id="clear-filters" class="clear-filters-btn">Clear Filters</button>
             </div>
             <div class="filters-row">
                 <div class="filter-group">
-                    <label for="wood-type-filter">Tipo de Madeira</label>
+                    <label for="wood-type-filter">Wood Type</label>
                     <select id="wood-type-filter" class="filter-select">
-                        <option value="">Todos</option>
+                        <option value="">All</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="certificate-filter">Certificado</label>
+                    <label for="certificate-filter">Certificate</label>
                     <select id="certificate-filter" class="filter-select">
-                        <option value="">Todos</option>
+                        <option value="">All</option>
                     </select>
                 </div>
                 <div class="filter-group">
                     <label for="grade-filter">Grade</label>
                     <select id="grade-filter" class="filter-select">
-                        <option value="">Todos</option>
+                        <option value="">All</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="thickness-filter">Espessura</label>
+                    <label for="thickness-filter">Thickness</label>
                     <select id="thickness-filter" class="filter-select">
-                        <option value="">Todas</option>
+                        <option value="">All</option>
                     </select>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- RESULTADOS -->
+    <!-- RESULTS -->
     <section class="results-section">
         <div class="results-container">
             <div class="results-header">
                 <div class="results-count">
-                    <span id="products-count">0</span> produtos encontrados
+                    <span id="products-count">0</span> products found
                 </div>
                 <div class="view-controls">
-                    <button id="grid-view-btn" class="view-btn active">Grade</button>
-                    <button id="list-view-btn" class="view-btn">Lista</button>
+                    <button id="grid-view-btn" class="view-btn active">Grid</button>
+                    <button id="list-view-btn" class="view-btn">List</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PRODUTOS -->
+    <!-- PRODUCTS -->
     <section class="products-section">
         <div id="products-container" class="products-container products-grid">
-            <!-- Produtos serão carregados aqui -->
+            <!-- Products will be loaded here -->
         </div>
     </section>
 
-    <!-- MODAL DE DETALHES DO PRODUTO -->
+    <!-- PRODUCT DETAILS MODAL -->
     <div id="product-modal" class="modal" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="modal-title">Detalhes do Produto</h3>
+                <h3 id="modal-title">Product Details</h3>
                 <button id="modal-close" class="modal-close">&times;</button>
             </div>
             <div id="modal-body" class="modal-body">
-                <!-- Conteúdo será carregado dinamicamente -->
+                <!-- Content will be loaded dynamically -->
             </div>
         </div>
     </div>
 
-    <!-- MODAL DO CARRINHO -->
+    <!-- CART MODAL -->
     <div id="cart-modal" class="cart-modal" style="display: none;">
         <div class="cart-modal-content">
             <div class="cart-modal-header">
-                <h3 class="cart-modal-title">Carrinho de Compras</h3>
+                <h3 class="cart-modal-title">Shopping Cart</h3>
                 <button id="cart-modal-close" class="cart-modal-close">&times;</button>
             </div>
             <div id="cart-items-list" class="cart-items-list">
-                <!-- Itens do carrinho serão carregados aqui -->
+                <!-- Cart items will be loaded here -->
             </div>
-           
         </div>
     </div>
-    <!-- RODAPÉ -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-column">
-                <h4>Information</h4>
+                <h4>Product Information</h4>
                 <p>Brazilian plywood for construction, packaging, and furniture industries</p>
                 <p>Quality wood products with international certifications</p>
                 <p>Sustainable forestry practices and environmental compliance</p>
             </div>
 
             <div class="footer-column">
-                <h4>Contact</h4>
+                <h4>Contact Information</h4>
                 <div class="contact-info">
                     <p class="company-name">Repinho Reflorestadora Madeiras e Compensados Ltda.</p>
                     <div class="contact-item">
