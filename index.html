@@ -1,6 +1,6 @@
 <!-- Formspree Formbutton integration -->
 <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
-<script>
+<!--<script>
     window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
     formbutton("create", {
         action: "https://formspree.io/f/xbladnvd",
@@ -30,7 +30,7 @@
             }
         }
     });
-</script>
+</script>-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,9 +59,16 @@
                     <span class="info-icon">🚢</span>
                     <span class="info-text">FOB Port: Paraná</span>
                 </div>
-                <div class="info-item">
-                    <button id="open-cart-btn" class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</button>
-                </div>
+            </div>
+            <div class="lang-switch">
+                <label for="lang-select" style="font-weight:600; margin-right:0.5rem;">Language:</label>
+                <select id="lang-select" style="padding:0.3rem 0.7rem; border-radius:6px;">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                </select>
+                <button id="open-cart-btn" class="cart-btn" style="margin-left:1rem; padding:0.3rem 0.7rem; border-radius:6px; font-size:1.1rem; background:#00B04F; color:#fff; border:none; cursor:pointer;">
+                    🛒 Cart <span id="cart-count">0</span>
+                </button>
             </div>
         </div>
     </header>
@@ -167,7 +174,7 @@
     <div id="product-modal" class="modal" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="modal-title">Product Details</h3>
+                <h2 id="modal-title">Product Details</h2>
                 <button id="modal-close" class="modal-close">&times;</button>
             </div>
             <div id="modal-body" class="modal-body">
@@ -225,6 +232,7 @@
         </div>
     </footer>
     <script src="logistics.js"></script>
+    <script src="lang.js"></script>
     <script src="script_improved.js"></script>
 </body>
 

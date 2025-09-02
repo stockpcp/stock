@@ -393,14 +393,14 @@ function showProductDetails(product) {
                 </div>
             </div>
             <div class="modal-section">
-                <h4>🛒 Add to Cart</h4>
+                <h4>🛒 ${t('addToCart')}</h4>
                 <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
                     <label for="cart-qty" style="font-weight:600;">Quantity (crates):</label>
                     <input type="number" id="cart-qty" min="1" max="${product.Crates}" value="1" class="cart-qty">
-                    <button id="add-to-cart-btn" class="cart-btn">Add to Cart</button>
+                    <button id="add-to-cart-btn" class="cart-btn">${t('addToCart')}</button>
                 </div>
                 <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">
-                    Maximum available: ${product.Crates} crates
+                    ${t('maxAvailable', {qty: product.Crates})}
                 </div>
             </div>
         </div>
@@ -416,7 +416,7 @@ function showProductDetails(product) {
         addBtn.addEventListener('click', () => {
             const qty = Math.max(1, Math.min(product.Crates, parseInt(qtyInput.value) || 1));
             addToCart(product, qty);
-            showValidationMessage('Item added to cart!');
+            showValidationMessage(t('cartAdded'));
             setTimeout(() => {
                 closeModal();
             }, 1000);
@@ -485,8 +485,8 @@ function renderCartItems() {
         elements.cartItemsList.innerHTML = `
             <div style="text-align:center; color:#64748b; padding:2rem;">
                 <div style="font-size:3rem; margin-bottom:1rem;">🛒</div>
-                <div>Your cart is empty</div>
-                <div style="font-size:0.9rem; margin-top:0.5rem;">Add products to start your quote</div>
+                <div>${t('cartEmptyTitle')}</div>
+                <div style="font-size:0.9rem; margin-top:0.5rem;">${t('cartEmptySubtitle')}</div>
             </div>
         `;
         return;
@@ -496,17 +496,17 @@ function renderCartItems() {
     const totalCrates = cart.reduce((sum, item) => sum + item.qty, 0);
 
     // Build the summary of items for the quote
-    let resumo = `Quote Request\n\n`;
-    resumo += `Selected items:\n`;
+    let resumo = `${t('cartQuoteRequest')}\n\n`;
+    resumo += `${t('cartSelectedItems')}\n`;
     cart.forEach(item => {
         resumo += `- ${item.desc}\n`;
         resumo += `  Quantity: ${item.qty} crates\n`;
-        resumo += `  Unit price: $${formatCurrency(item.pricePerCrate)}\n`;
-        resumo += `  Subtotal: $${formatCurrency(item.pricePerCrate * item.qty)}\n\n`;
+        resumo += `  ${t('cartUnitPrice')} $${formatCurrency(item.pricePerCrate)}\n`;
+        resumo += `  ${t('cartSubtotal')} $${formatCurrency(item.pricePerCrate * item.qty)}\n\n`;
     });
-    resumo += `Total crates: ${totalCrates}\n`;
-    resumo += `Estimated total value: $${formatCurrency(total)}\n\n`;
-    resumo += `Note: This is a quote request. Prices may vary according to market conditions and final quantity.`;
+    resumo += `${t('cartTotalCrates')} ${totalCrates}\n`;
+    resumo += `${t('cartEstimatedTotal')} $${formatCurrency(total)}\n\n`;
+    resumo += `${t('cartNote')}`;
 
     elements.cartItemsList.innerHTML = `
         ${cart.map(item => `
@@ -524,28 +524,28 @@ function renderCartItems() {
                     <div style="font-weight:600; min-width:80px;">$${formatCurrency(item.pricePerCrate * item.qty)}</div>
                     <button onclick="removeFromCart('${item.id}')" 
                             style="background:#ef4444; color:white; border:none; padding:0.3rem 0.8rem; border-radius:6px; cursor:pointer;">
-                        Remove
+                        ${t('cartRemove')}
                     </button>
                 </div>
             </div>
         `).join('')}
         <div style="border-top:2px solid #e2e8f0; margin-top:1rem; padding-top:1rem;">
             <div style="display:flex; justify-content:space-between; align-items:center; font-size:1.2rem; font-weight:700;">
-                <span>Total:</span>
+                <span>${t('cartTotal')}</span>
                 <span style="color:#00B04F;">$${formatCurrency(total)}</span>
             </div>
             <div style="font-size:0.9rem; color:#64748b; margin-top:0.5rem;">
-                ${cart.reduce((sum, item) => sum + item.qty, 0)} crates in total
+                ${t('cartCratesTotal', {qty: cart.reduce((sum, item) => sum + item.qty, 0)})}
             </div>
         </div>
         <form id="cart-formspree" action="https://formspree.io/f/xbladnvd" method="POST" style="margin-top:2rem; background:#f6f6f6; padding:1.5rem; border-radius:8px;">
-            <h4 style="color:#00B04F; margin-bottom:1rem;">Send purchase intent</h4>
-            <label for="cart-email-form" style="font-weight:600;">Your email:</label>
+            <h4 style="color:#00B04F; margin-bottom:1rem;">${t('cartSendTitle')}</h4>
+            <label for="cart-email-form" style="font-weight:600;">${t('cartEmail')}</label>
             <input type="email" id="cart-email-form" name="email" required style="width:100%; margin-bottom:1rem; padding:0.5rem; border-radius:6px; border:1px solid #e2e8f0;">
-            <label for="cart-message-form" style="font-weight:600;">Items summary:</label>
+            <label for="cart-message-form" style="font-weight:600;">${t('cartSummary')}</label>
             <textarea id="cart-message-form" name="message" readonly style="width:100%; min-height:120px; margin-bottom:1rem; padding:1rem; border-radius:8px; border:1px solid #e2e8f0; font-size:1rem;">${resumo}</textarea>
-            <button type="submit" style="background:#00B04F; color:white; border:none; padding:0.7rem 2rem; border-radius:6px; font-weight:600; font-size:1.1rem; cursor:pointer;">Send purchase intent</button>
-            <div style="font-size:0.9rem; color:#64748b; margin-top:0.5rem;">You will receive confirmation by email.</div>
+            <button type="submit" style="background:#00B04F; color:white; border:none; padding:0.7rem 2rem; border-radius:6px; font-weight:600; font-size:1.1rem; cursor:pointer;">${t('cartSendBtn')}</button>
+            <div style="font-size:0.9rem; color:#64748b; margin-top:0.5rem;">${t('cartSendInfo')}</div>
         </form>
     `;
 }
@@ -566,7 +566,7 @@ function closeCartModal() {
 }
 
 function sendCartEmail() {
-    alert('To send your purchase intent, click the green "Quote Request" button on the screen and fill out the form.');
+    alert(t('cartFormAlert'));
 }
 
 function showValidationMessage(msg) {

@@ -225,7 +225,7 @@ body {
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: 1.5rem;
     color: #64748b;
     font-weight: 500;
 }
@@ -406,7 +406,7 @@ body {
 .product-info {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
     flex: 1;
 }
 
@@ -453,7 +453,7 @@ body {
 }
 
 .product-title {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: #1e293b;
     margin-bottom: 0.5rem;
@@ -461,7 +461,7 @@ body {
 
 .product-specs {
     color: #64748b;
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-bottom: 0.5rem;
     font-weight: 500;
 }
@@ -565,9 +565,9 @@ body {
 
 .modal-section {
     background: #f8fafc;
-    padding: 1.5rem;
+    padding: 0rem;
     border-radius: 8px;
-    border-left: 4px solid #00B04F;
+   
 }
 
 .modal-section h4 {
