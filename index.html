@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock - Stock Management System</title>
+    <title>inventory available</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles_improved.css">
 </head>
@@ -17,19 +17,11 @@
         <div class="header-content">
             <div class="logo-section">
                 <img src="logo.png" alt="Logo" class="logo">
-                <h1 class="company-name">Repinho</h1>
-            </div>
+                </div>
             <div class="header-info">
                 <div class="info-item">
-                    <span class="info-icon">📧</span>
-                    <span>comercial01@repinho.ind.br</span>
                 </div>
-                <div class="info-item">
-                    <span class="info-icon">🚢</span>
-                    <span class="info-text">FOB Port: Paraná</span>
-                </div>
-            </div>
-            <div class="lang-switch">
+                <div class="lang-switch">
                 <label for="lang-select" style="font-weight:600; margin-right:0.5rem;">Language:</label>
                 <select id="lang-select" style="padding:0.3rem 0.7rem; border-radius:6px;">
                     <option value="en">English</option>
@@ -46,8 +38,8 @@
     <!-- HERO AREA -->
     <section class="hero-section">
         <div class="hero-content">
-            <h1 class="hero-title">Stock Management</h1>
-            <p class="hero-subtitle">Complete management system for Brazilian plywood stock</p>
+            <h1 class="hero-title">inventory available</h1>
+            <p class="hero-subtitle">plywood</p>
         </div>
     </section>
 
@@ -57,27 +49,27 @@
             <div class="stat-card">
                 <div class="stat-icon">📦</div>
                 <div class="stat-number" id="total-products">0</div>
-                <div class="stat-label">Products</div>
+                <div class="stat-label">products</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">🌲</div>
                 <div class="stat-number" id="raw-materials">0</div>
-                <div class="stat-label">Raw Materials</div>
+                <div class="stat-label">raw materials</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">📋</div>
                 <div class="stat-number" id="certificates">0</div>
-                <div class="stat-label">Certificates</div>
+                <div class="stat-label">certificates</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">⭐</div>
                 <div class="stat-number" id="grades">0</div>
-                <div class="stat-label">Grades</div>
+                <div class="stat-label">grades</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">📊</div>
                 <div class="stat-number" id="total-crates">0</div>
-                <div class="stat-label">Total Crates</div>
+                <div class="stat-label">crates</div>
             </div>
         </div>
     </section>
@@ -86,30 +78,30 @@
     <section class="filters-section">
         <div class="filters-container">
             <div class="filters-header">
-                <h2 class="filters-title">Filters</h2>
+                <h2 class="filters-title">filters</h2>
                 <button id="clear-filters" class="clear-filters-btn">Clear Filters</button>
             </div>
             <div class="filters-row">
                 <div class="filter-group">
-                    <label for="wood-type-filter">Wood Type</label>
+                    <label for="wood-type-filter">wood specie</label>
                     <select id="wood-type-filter" class="filter-select">
                         <option value="">All</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="certificate-filter">Certificate</label>
+                    <label for="certificate-filter">certificate</label>
                     <select id="certificate-filter" class="filter-select">
                         <option value="">All</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="grade-filter">Grade</label>
+                    <label for="grade-filter">grade</label>
                     <select id="grade-filter" class="filter-select">
                         <option value="">All</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="thickness-filter">Thickness</label>
+                    <label for="thickness-filter">thickness</label>
                     <select id="thickness-filter" class="filter-select">
                         <option value="">All</option>
                     </select>
@@ -144,7 +136,7 @@
     <div id="product-modal" class="modal" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modal-title">Product Details</h2>
+                <h2 id="modal-title">product details</h2>
                 <button id="modal-close" class="modal-close">&times;</button>
             </div>
             <div id="modal-body" class="modal-body">
@@ -157,7 +149,7 @@
     <div id="cart-modal" class="cart-modal" style="display: none;">
         <div class="cart-modal-content">
             <div class="cart-modal-header">
-                <h3 class="cart-modal-title">Shopping Cart</h3>
+                <h3 class="cart-modal-title">interest list</h3>
                 <button id="cart-modal-close" class="cart-modal-close">&times;</button>
             </div>
             <div id="cart-items-list" class="cart-items-list">
