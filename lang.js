@@ -24,7 +24,7 @@ const LANGUAGES = {
     footerProductDesc2: "Quality wood products with international certifications",
     footerProductDesc3: "Sustainable forestry practices and environmental compliance",
     footerContactInfo: "Contact Information",
-    footerCompanyName: "Repinho Reflorestadora Madeiras e Compensados Ltda.",
+    footerCompanyName: "Repinho",
     footerPhone: "+55 (42) 3629-8500",
     footerEmail: "comercial01@repinho.ind.br",
     footerAddress: "Rua Ver.Sebastião de Camargo Ribas nº 950<br>Guarapuava, Paraná - Brazil",
@@ -78,7 +78,7 @@ const LANGUAGES = {
     footerProductDesc2: "Productos de madera de calidad con certificaciones internacionales",
     footerProductDesc3: "Prácticas forestales sostenibles y cumplimiento ambiental",
     footerContactInfo: "Información de contacto",
-    footerCompanyName: "Repinho Reflorestadora Madeiras e Compensados Ltda.",
+    footerCompanyName: "Repinho",
     footerPhone: "+55 (42) 3629-8500",
     footerEmail: "comercial01@repinho.ind.br",
     footerAddress: "Rua Ver.Sebastião de Camargo Ribas nº 950<br>Guarapuava, Paraná - Brasil",
@@ -142,8 +142,8 @@ window.updateStaticTexts = function() {
     const infoText = document.querySelector('.info-text');
     if (infoText) infoText.textContent = t('headerPort');
     // Cart button
-    const cartBtn = document.getElementById('open-cart-btn');
-    if (cartBtn) cartBtn.childNodes[1].textContent = ' ' + t('cartBtn') + ' ';
+    const cartBtnText = document.getElementById('cart-btn-text');
+    if (cartBtnText) cartBtnText.textContent = t('cartBtn');
     // Hero
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) heroTitle.textContent = t('heroTitle');

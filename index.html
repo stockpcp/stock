@@ -1,36 +1,5 @@
 <!-- Formspree Formbutton integration -->
 <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
-<!--<script>
-    window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
-    formbutton("create", {
-        action: "https://formspree.io/f/xbladnvd",
-        title: "Quotation Request",
-        fields: [
-            { 
-                type: "email", 
-                label: "Email:", 
-                name: "email",
-                required: true,
-                placeholder: "your@email.com"
-            },
-            {
-                type: "textarea",
-                label: "Message:",
-                name: "message",
-                placeholder: "Cart items, quantity, etc."
-            },
-            { type: "submit", label: "Send" }
-        ],
-        styles: {
-            title: {
-                backgroundColor: "#00B04F"
-            },
-            button: {
-                backgroundColor: "#00B04F"
-            }
-        }
-    });
-</script>-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,7 +24,7 @@
                     <span class="info-icon">📧</span>
                     <span>comercial01@repinho.ind.br</span>
                 </div>
-                 <div class="info-item">
+                <div class="info-item">
                     <span class="info-icon">🚢</span>
                     <span class="info-text">FOB Port: Paraná</span>
                 </div>
@@ -66,8 +35,9 @@
                     <option value="en">English</option>
                     <option value="es">Español</option>
                 </select>
-                <button id="open-cart-btn" class="cart-btn" style="margin-left:1rem; padding:0.3rem 0.7rem; border-radius:6px; font-size:1.1rem; background:#00B04F; color:#fff; border:none; cursor:pointer;">
-                    🛒 Cart <span id="cart-count">0</span>
+                <button id="open-cart-btn" class="cart-btn"
+                    style="margin-left:1rem; padding:0.3rem 0.7rem; border-radius:6px; font-size:1.1rem; background:#00B04F; color:#fff; border:none; cursor:pointer;">
+                    🛒 <span id="cart-btn-text">Cart</span> <span id="cart-count">0</span>
                 </button>
             </div>
         </div>
@@ -208,7 +178,7 @@
             <div class="footer-column">
                 <h4>Contact Information</h4>
                 <div class="contact-info">
-                    <p class="company-name">Repinho Reflorestadora Madeiras e Compensados Ltda.</p>
+                    <p class="company-name">Repinho</p>
                     <div class="contact-item">
                         <span class="contact-icon">📞</span>
                         <span>+55 (42) 3629-8500</span>
