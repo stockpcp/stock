@@ -306,26 +306,26 @@ function showProductDetails(product) {
     elements.modalBody.innerHTML = `
         <div class="modal-sections">
             <div class="modal-section">
-                <h4>📋 Product Specifications</h4>
+                <h4>📋 Product specifications</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Raw Material</div>
+                        <div class="detail-label">wood specie</div>
                         <div class="detail-value">${product.Logs}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Certificate</div>
+                        <div class="detail-label">certificate</div>
                         <div class="detail-value">${product.Certificate}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Grade</div>
+                        <div class="detail-label">grade</div>
                         <div class="detail-value">${formatGrade(product.Grade)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Dimensions</div>
+                        <div class="detail-label">dimensions</div>
                         <div class="detail-value">${product.Size}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Thickness</div>
+                        <div class="detail-label">thickness</div>
                         <div class="detail-value">${product.Thickness}mm</div>
                     </div>
                     <div class="detail-item">
@@ -335,59 +335,55 @@ function showProductDetails(product) {
                 </div>
             </div>
             <div class="modal-section">
-                <h4>📦 Stock & Weight Information</h4>
+                <h4>📦 Stock & weight info</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Available Stock</div>
+                        <div class="detail-label">available</div>
                         <div class="detail-value">${product.Crates} crates</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Sheets per Crate</div>
+                        <div class="detail-label">sheets per crate</div>
                         <div class="detail-value">${product.SheetsPerCrate}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Weight per Crate</div>
+                        <div class="detail-label">weight per crate</div>
                         <div class="detail-value">${formatNumber(product.WeightPerCrate)} kg</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Density per m³</div>
+                        <div class="detail-label">density per m³</div>
                         <div class="detail-value">${formatNumber(densityPerM3)} kg/m³</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Weight per Sheet</div>
+                        <div class="detail-label">weight per sheet</div>
                         <div class="detail-value">${formatNumber(weightPerSheet)} kg</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Volume per Crate</div>
+                        <div class="detail-label">volume per crate</div>
                         <div class="detail-value">${product.VolumePerCrate.toFixed(3)} m³</div>
                     </div>
                 </div>
             </div>
             <div class="modal-section">
-                <h4>🚢 Shipping & Pricing</h4>
+                <h4>🚢 Shipping & pricing</h4>
                 <div class="section-grid">
-                    <div class="detail-item">
-                        <div class="detail-label">Practical Capacity</div>
-                        <div class="detail-value">${formatNumber(practicalCapacity)} crates</div>
-                    </div>
-                    <div class="detail-item">
+                     <div class="detail-item">
                         <div class="detail-label">Max Crates/Container</div>
                         <div class="detail-value">${maxCratesPerContainer}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">FOB Price per m³</div>
+                        <div class="detail-label">Price per m³</div>
                         <div class="detail-value">$${formatCurrency(product.Price)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Price per Sheet</div>
+                        <div class="detail-label">Price per sheet</div>
                         <div class="detail-value">$${formatNumber(pricePerSheet)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Price per Crate</div>
+                        <div class="detail-label">Price per crate</div>
                         <div class="detail-value">$${formatNumber(pricePerCrate)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Container Value</div>
+                        <div class="detail-label">Value per HC$</div>
                         <div class="detail-value">$${formatNumber(containerValue)}</div>
                     </div>
                 </div>
