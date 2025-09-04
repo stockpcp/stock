@@ -78,7 +78,7 @@ const LANGUAGES = {
     footerProductDesc2: "Productos de madera de calidad con certificaciones internacionales",
     footerProductDesc3: "Prácticas forestales sostenibles y cumplimiento ambiental",
     footerContactInfo: "contacto",
-    footerCompanyName: "Repinho",
+    footerCompanyName: "Repinho Reflorestadora Madeiras e Compensados Ltda",
     footerPhone: "+55 (42) 3629-8500",
     footerEmail: "comercial01@repinho.ind.br",
     footerAddress: "Rua Ver.Sebastião de Camargo Ribas nº 950<br>Guarapuava, Paraná - Brasil",
@@ -205,4 +205,5 @@ window.updateStaticTexts = function() {
     const footerDev = document.querySelectorAll('.footer-bottom p')[1];
     if (footerDev) footerDev.textContent = t('footerDev');
 }
+
 
