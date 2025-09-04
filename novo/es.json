@@ -1,0 +1,94 @@
+{
+  "header": {
+    "lastUpdated": "Última actualización",
+    "fobPort": "Puerto FOB"
+  },
+  "hero": {
+    "title": "disponibilidad de stock",
+    "subtitle": "Contrachapado brasileño para industrias de construcción, embalaje y muebles"
+  },
+  "stats": {
+    "productsAvailable": "productos disponibles",
+    "woodSpecies": "especies de madera",
+    "certificate": "certificado",
+    "grade": "grado",
+    "totalCrates": "cajas totales"
+  },
+  "filters": {
+    "title": "filtrar productos",
+    "clearAll": "limpiar todos los filtros",
+    "woodType": "tipo de madera",
+    "certificate": "certificado",
+    "grade": "grado",
+    "thickness": "espesor(mm)",
+    "allTypes": "Todos los Tipos",
+    "allCertificates": "Todos los Certificados",
+    "allGrades": "Todos los Grados",
+    "allThicknesses": "Todos los Espesores"
+  },
+  "results": {
+    "productsFound": "productos encontrados",
+    "gridView": "Cuadrícula",
+    "listView": "Lista",
+    "noProductsFound": "No se encontraron productos que coincidan con sus criterios."
+  },
+  "product": {
+    "viewDetails": "Ver Detalles",
+    "cratesAvailable": "cajas disponibles",
+    "layers": "capas",
+    "perM3": "por m³",
+    "crates": "cajas"
+  },
+  "modal": {
+    "title": "Detalles del Producto",
+    "specifications": "Especificaciones",
+    "stockWeight": "Info de Stock y Peso",
+    "shippingPricing": "Envío y Precios",
+    "additionalInfo": "Información Adicional",
+    "rawMaterial": "materia prima",
+    "certificate": "certificado",
+    "grade": "grado",
+    "dimensions": "dimensiones",
+    "thickness": "espesor",
+    "plies": "capas",
+    "available": "disponible",
+    "sheetsPerCrate": "hojas/caja",
+    "weightPerCrate": "peso/caja",
+    "densityPerM3": "densidad/m³",
+    "weightPerSheet": "peso/hoja",
+    "volumePerCrate": "volumen/caja",
+    "payload": "Carga útil",
+    "maxCratesHC": "Máx Cajas/HC",
+    "pricePerM3": "Precio/m³",
+    "pricePerSheet": "Precio/hoja",
+    "pricePerCrate": "Precio/caja",
+    "containerValue": "Valor Contenedor $",
+    "weightData": "datos de peso",
+    "currentAverage": "promedio actual",
+    "deliveryPort": "puerto de entrega",
+    "eta": "ETA 14 días",
+    "paymentTerms": "términos de pago",
+    "cashAgainstDocs": "efectivo contra copia de documentos",
+    "packaging": "embalaje",
+    "packagingDetails": "5 correas + 3 patines de madera",
+    "documentation": "documentación",
+    "exportDocs": "conjunto de documentos de exportación"
+  },
+  "footer": {
+    "productInfo": "más info",
+    "productDescription": "Contrachapado brasileño para industrias de construcción, embalaje y muebles",
+    "qualityProducts": "Productos de madera de calidad con certificaciones internacionales",
+    "sustainablePractices": "Prácticas forestales sostenibles y cumplimiento ambiental",
+    "contactInfo": "contacto",
+    "companyName": "Repinho",
+    "address": "Rua Ver.Sebastião de Camargo Ribas nº 950<br>Guarapuava, Paraná - Brasil",
+    "copyright": "© 2025 Repinho. Todos los derechos reservados.",
+    "developedBy": "desarrollado por exportación comercial"
+  },
+  "language": {
+    "selector": "Idioma",
+    "english": "English",
+    "spanish": "Español"
+  }
+}
+
