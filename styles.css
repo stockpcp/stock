@@ -99,7 +99,7 @@
 }
 
 body {
-    font-family: Inter Tight, Roboto, Tahoma, Helvetica Neue, Arial;
+    font-family: Roboto, Inter Tight, Arial, Tahoma, Helvetica Neue;
     line-height: 1.5;
     color: #333;
     background-color: #f8fafc;
@@ -136,7 +136,7 @@ body {
 
 .company-name {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 650;
 }
 
 .header-info {
