@@ -3,9 +3,8 @@
 }
 /* Garante que as colunas do footer mantenham largura e alinhamento consistentes em todos os idiomas */
 .footer-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 3rem;
 }
 
@@ -649,10 +648,10 @@ body {
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .footer-column h4 {
@@ -673,6 +672,20 @@ body {
     color: white;
     margin-bottom: 1rem;
     font-size: inherit;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: initial;
+        word-break: break-word;
+        font-size: 1.05rem;
+}
+
+@media (max-width: 600px) {
+    .contact-info .company-name {
+        font-size: 0.95rem;
+        word-break: break-word;
+        text-align: center;
+        padding: 0 0.5rem;
+    }
 }
 
 .contact-item {
@@ -689,9 +702,9 @@ body {
 }
 
 .footer-bottom {
-    max-width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 2rem 0 2rem;
+    padding: 0rem 3rem 0px 1rem;
     border-top: 1px solid #374151;
     text-align: center;
     color: #94a3b8;
@@ -770,11 +783,18 @@ body {
     
     .footer-content {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
+        padding: 0 0.5rem;
+        justify-items: center;
     }
 }
 
 @media (max-width: 480px) {
+
+    .footer-content {
+        padding: 0 0.2rem;
+        gap: 1rem;
+    }
     .stats-container {
         grid-template-columns: 1fr;
     }

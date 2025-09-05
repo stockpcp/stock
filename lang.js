@@ -20,7 +20,7 @@ const LANGUAGES = {
     footerProductDesc2: "Quality wood products with international certifications",
     footerProductDesc3: "Sustainable forestry practices and environmental compliance",
     // footerContactInfo removido
-    footerCompanyName: "Repinho",
+    footerCompanyName: "Repinho Reflorestadora Madeiras & Compensados",
     footerPhone: "+55 (42) 3629-8500",
     footerEmail: "comercial01@repinho.ind.br",
     footerAddress: "Rua Ver.Sebastião de Camargo Ribas nº 950<br>Guarapuava, Paraná - Brazil",
@@ -70,7 +70,7 @@ const LANGUAGES = {
     footerProductDesc2: "Productos de madera de calidad con certificaciones internacionales",
     footerProductDesc3: "Prácticas forestales sostenibles y cumplimiento ambiental",
     // footerContactInfo removido
-    footerCompanyName: "Repinho Reflorestadora Madeiras & Compensados.LTDA",
+    footerCompanyName: "Repinho Reflorestadora Madeiras & Compensados",
     footerPhone: "+55 (42) 3629-8500",
     footerEmail: "comercial01@repinho.ind.br",
     footerAddress: "Rua Ver.Sebastião de Camargo Ribas nº 950<br>Guarapuava, Paraná - Brasil",

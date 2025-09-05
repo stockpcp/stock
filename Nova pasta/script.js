@@ -33,14 +33,11 @@ const elements = {
     certificates: document.getElementById('certificates'),
     grades: document.getElementById('grades'),
     totalCrates: document.getElementById('total-crates'),
-    
-    // Cart
     cartModal: document.getElementById('cart-modal'),
     cartModalClose: document.getElementById('cart-modal-close'),
     cartItemsList: document.getElementById('cart-items-list'),
     cartSendForm: document.getElementById('cart-send-form'),
-    cartEmail: document.getElementById('cart-email'),
-    cartCount: document.getElementById('cart-count')
+    cartEmail: document.getElementById('cart-email')
 };
 
 // Initialize application
@@ -48,13 +45,58 @@ document.addEventListener('DOMContentLoaded', function() {
     loadStockData();
     setupEventListeners();
     setupCartEvents();
-    updateCartCount();
+    const openCartBtn = document.getElementById('open-cart-btn');
+    if (openCartBtn) {
+        openCartBtn.onclick = showCartModal;
+    }
+    // Adicionar evento ao botão de adicionar ao carrinho
+    setTimeout(() => {
+        const addBtn = document.getElementById('add-to-cart-btn');
+        const qtyInput = document.getElementById('cart-qty');
+        if (addBtn && qtyInput) {
+            addBtn.onclick = () => {
+                const qty = Math.max(1, Math.min(1000, parseInt(qtyInput.value)));
+                addToCart(product, qty);
+                // Exibe mensagem de validação
+                showValidationMessage('Item adicionado ao carrinho!');
+                setTimeout(() => {
+                    closeModal();
+                    showCartModal();
+                }, 900);
+            };
+        }
+
+    // Função para exibir mensagem de validação
+    function showValidationMessage(msg) {
+        let validationDiv = document.getElementById('cart-validation-msg');
+        if (!validationDiv) {
+            validationDiv = document.createElement('div');
+            validationDiv.id = 'cart-validation-msg';
+            validationDiv.style.position = 'fixed';
+            validationDiv.style.top = '24px';
+            validationDiv.style.right = '24px';
+            validationDiv.style.background = '#00B04F';
+            validationDiv.style.color = 'white';
+            validationDiv.style.padding = '1rem 2rem';
+            validationDiv.style.borderRadius = '8px';
+            validationDiv.style.boxShadow = '0 2px 8px rgba(0,0,0,0.12)';
+            validationDiv.style.zIndex = '4000';
+            validationDiv.style.fontWeight = '600';
+            document.body.appendChild(validationDiv);
+        }
+        validationDiv.textContent = msg;
+        validationDiv.style.display = 'block';
+        setTimeout(() => {
+            validationDiv.style.display = 'none';
+        }, 1200);
+    }
+    }, 100);
 });
 
 // Load stock data
 async function loadStockData() {
     try {
-    const response = await fetch('stock_data.json');
+        const response = await fetch('stock_data.json');
         stockData = await response.json();
         filteredData = [...stockData];
         
@@ -130,38 +172,10 @@ function setupEventListeners() {
     
     // ESC key to close modal
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            if (elements.modal.style.display === 'block') {
-                closeModal();
-            }
-            if (elements.cartModal.style.display === 'block') {
-                closeCartModal();
-            }
+        if (e.key === 'Escape' && elements.modal.style.display === 'block') {
+            closeModal();
         }
     });
-}
-
-// Setup cart events
-function setupCartEvents() {
-    const openCartBtn = document.getElementById('open-cart-btn');
-    if (openCartBtn) {
-        openCartBtn.addEventListener('click', showCartModal);
-    }
-    
-    if (elements.cartModalClose) {
-        elements.cartModalClose.addEventListener('click', closeCartModal);
-    }
-    
-    if (elements.cartSendForm) {
-        elements.cartSendForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            sendCartEmail();
-        });
-    }
-    
-    // Expose functions globally for onclick handlers
-    window.removeFromCart = removeFromCart;
-    window.updateCartItemQuantity = updateCartItemQuantity;
 }
 
 // Apply filters
@@ -227,7 +241,7 @@ function renderProducts() {
     const container = elements.productsContainer;
     
     if (filteredData.length === 0) {
-        container.innerHTML = '<div class="no-products">No products found with the selected criteria.</div>';
+        container.innerHTML = '<div class="no-products">No products found matching your criteria.</div>';
         return;
     }
     
@@ -236,7 +250,7 @@ function renderProducts() {
     
     container.innerHTML = filteredData.map(product => createProductCard(product)).join('');
     
-    // Add event listeners to details buttons
+    // Add event listeners to details buttons only
     container.querySelectorAll('.details-btn').forEach((btn, index) => {
         btn.addEventListener('click', () => showProductDetails(filteredData[index]));
     });
@@ -257,10 +271,10 @@ function createProductCard(product) {
                     </div>
                     <div class="product-details">
                         <div class="product-title">${product.Size}</div>
-                        <div class="product-specs">${product.Crates} crates available • ${product.Thickness}mm • ${product.Ply} ply</div>
+                        <div class="product-specs">${product.Crates} crates available • ${product.Thickness}mm • ${product.Ply} layers</div>
                     </div>
                 </div>
-                <div class="product-price">$${formatCurrency(product.Price)} / m³ FOB</div>
+                <div class="product-price">$${formatCurrency(product.Price)} per m³</div>
                 <div class="product-actions">
                     <button class="details-btn">View Details</button>
                 </div>
@@ -276,10 +290,10 @@ function createProductCard(product) {
                 </div>
                 <div class="product-details">
                     <div class="product-title">${product.Size}</div>
-                    <div class="product-specs">${product.Thickness}mm • ${product.Ply} ply</div>
+                    <div class="product-specs">${product.Thickness}mm • ${product.Ply} layers</div>
                     <div class="product-specs">${product.Crates} crates available</div>
                 </div>
-                <div class="product-price">$${formatCurrency(product.Price)} / m³ FOB</div>
+                <div class="product-price">$${formatCurrency(product.Price)} per m³</div>
                 <div class="product-actions">
                     <button class="details-btn">View Details</button>
                 </div>
@@ -309,27 +323,27 @@ function showProductDetails(product) {
                 <h4>📋 Product Specifications</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Wood Species</div>
+                        <div class="detail-label">wood species</div>
                         <div class="detail-value">${product.Logs}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Certificate</div>
+                        <div class="detail-label">certificate</div>
                         <div class="detail-value">${product.Certificate}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Grade</div>
+                        <div class="detail-label">grade</div>
                         <div class="detail-value">${formatGrade(product.Grade)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Dimensions</div>
+                        <div class="detail-label">dimensions</div>
                         <div class="detail-value">${product.Size}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Thickness</div>
+                        <div class="detail-label">thickness</div>
                         <div class="detail-value">${product.Thickness}mm</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Ply</div>
+                        <div class="detail-label">plies</div>
                         <div class="detail-value">${product.Ply}</div>
                     </div>
                 </div>
@@ -338,7 +352,7 @@ function showProductDetails(product) {
                 <h4>📦 Stock & Weight Information</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Wood Species</div>
+                        <div class="detail-label">Available Stock</div>
                         <div class="detail-value">${product.Crates} crates</div>
                     </div>
                     <div class="detail-item">
@@ -366,7 +380,10 @@ function showProductDetails(product) {
             <div class="modal-section">
                 <h4>🚢 Shipping & Pricing</h4>
                 <div class="section-grid">
-                  
+                    <div class="detail-item">
+                        <div class="detail-label">Practical Capacity</div>
+                        <div class="detail-value">${formatNumber(practicalCapacity)} crates</div>
+                    </div>
                     <div class="detail-item">
                         <div class="detail-label">Max Crates/HC</div>
                         <div class="detail-value">${maxCratesPerContainer}</div>
@@ -377,234 +394,5 @@ function showProductDetails(product) {
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">Price per Sheet</div>
-                        <div class="detail-value">$${formatNumber(pricePerSheet)}</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Price per Crate</div>
-                        <div class="detail-value">$${formatNumber(pricePerCrate)}</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Container Value</div>
-                        <div class="detail-value">$${formatNumber(containerValue)}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-section">
-                <h4>🛒 ${t('addToCart')}</h4>
-                <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
-                    <label for="cart-qty" style="font-weight:600;">Quantity (crates):</label>
-                    <input type="number" id="cart-qty" min="1" max="${product.Crates}" value="1" class="cart-qty">
-                    <button id="add-to-cart-btn" class="cart-btn">${t('addToCart')}</button>
-                </div>
-                <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">
-                    ${t('maxAvailable', {qty: product.Crates})}
-                </div>
-            </div>
-        </div>
-    `;
-    
-    elements.modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    
-    // Setup add to cart button
-    const addBtn = document.getElementById('add-to-cart-btn');
-    const qtyInput = document.getElementById('cart-qty');
-    if (addBtn && qtyInput) {
-        addBtn.addEventListener('click', () => {
-            const qty = Math.max(1, Math.min(product.Crates, parseInt(qtyInput.value) || 1));
-            addToCart(product, qty);
-            showValidationMessage(t('cartAdded'));
-            setTimeout(() => {
-                closeModal();
-            }, 1000);
-        });
-    }
-}
-
-// Close modal
-function closeModal() {
-    if (elements.modal) {
-        elements.modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-}
-
-// Cart functions
-function addToCart(product, qty) {
-    const productId = `${product.Logs}-${product.Grade}-${product.Size}-${product.Thickness}`;
-    const existingItem = cart.find(item => item.id === productId);
-    
-    if (existingItem) {
-        existingItem.qty += qty;
-        if (existingItem.qty > product.Crates) {
-            existingItem.qty = product.Crates;
-        }
-    } else {
-        cart.push({
-            id: productId,
-            desc: `${product.Logs} ${formatGrade(product.Grade)} - ${product.Size} (${product.Thickness}mm)`,
-            qty: Math.min(qty, product.Crates),
-            price: product.Price,
-            pricePerCrate: product.Price * product.VolumePerCrate,
-            product: product
-        });
-    }
-    
-    updateCartCount();
-    renderCartItems();
-}
-
-function removeFromCart(id) {
-    cart = cart.filter(item => item.id !== id);
-    updateCartCount();
-    renderCartItems();
-}
-
-function updateCartItemQuantity(id, newQty) {
-    const item = cart.find(item => item.id === id);
-    if (item) {
-        item.qty = Math.max(1, Math.min(item.product.Crates, newQty));
-        renderCartItems();
-    }
-}
-
-function updateCartCount() {
-    const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-    if (elements.cartCount) {
-        elements.cartCount.textContent = totalItems;
-    }
-}
-
-function renderCartItems() {
-    if (!elements.cartItemsList) return;
-    
-    if (cart.length === 0) {
-        elements.cartItemsList.innerHTML = `
-            <div style="text-align:center; color:#64748b; padding:2rem;">
-                <div style="font-size:3rem; margin-bottom:1rem;">🛒</div>
-                <div>${t('cartEmptyTitle')}</div>
-                <div style="font-size:0.9rem; margin-top:0.5rem;">${t('cartEmptySubtitle')}</div>
-            </div>
-        `;
-        return;
-    }
-
-    const total = cart.reduce((sum, item) => sum + (item.pricePerCrate * item.qty), 0);
-    const totalCrates = cart.reduce((sum, item) => sum + item.qty, 0);
-
-    // Build the summary of items for the quote
-    let resumo = `${t('cartQuoteRequest')}\n\n`;
-    resumo += `${t('cartSelectedItems')}\n`;
-    cart.forEach(item => {
-        resumo += `- ${item.desc}\n`;
-        resumo += `  Quantity: ${item.qty} crates\n`;
-        resumo += `  ${t('cartUnitPrice')} $${formatCurrency(item.pricePerCrate)}\n`;
-        resumo += `  ${t('cartSubtotal')} $${formatCurrency(item.pricePerCrate * item.qty)}\n\n`;
-    });
-    resumo += `${t('cartTotalCrates')} ${totalCrates}\n`;
-    resumo += `${t('cartEstimatedTotal')} $${formatCurrency(total)}\n\n`;
-    resumo += `${t('cartNote')}`;
-
-    elements.cartItemsList.innerHTML = `
-        ${cart.map(item => `
-            <div class="cart-item">
-                <div class="cart-item-desc">
-                    <div style="font-weight:600;">${item.desc}</div>
-                    <div style="font-size:0.9rem; color:#64748b;">
-                        $${formatCurrency(item.pricePerCrate)} per crate
-                    </div>
-                </div>
-                <div style="display:flex; align-items:center; gap:0.5rem;">
-                    <input type="number" min="1" max="${item.product.Crates}" value="${item.qty}" 
-                           onchange="updateCartItemQuantity('${item.id}', parseInt(this.value))"
-                           style="width:60px; padding:0.3rem; border:1px solid #e2e8f0; border-radius:4px;">
-                    <div style="font-weight:600; min-width:80px;">$${formatCurrency(item.pricePerCrate * item.qty)}</div>
-                    <button onclick="removeFromCart('${item.id}')" 
-                            style="background:#ef4444; color:white; border:none; padding:0.3rem 0.8rem; border-radius:6px; cursor:pointer;">
-                        ${t('cartRemove')}
-                    </button>
-                </div>
-            </div>
-        `).join('')}
-        <div style="border-top:2px solid #e2e8f0; margin-top:1rem; padding-top:1rem;">
-            <div style="display:flex; justify-content:space-between; align-items:center; font-size:1.2rem; font-weight:700;">
-                <span>${t('cartTotal')}</span>
-                <span style="color:#00B04F;">$${formatCurrency(total)}</span>
-            </div>
-            <div style="font-size:0.9rem; color:#64748b; margin-top:0.5rem;">
-                ${t('cartCratesTotal', {qty: cart.reduce((sum, item) => sum + item.qty, 0)})}
-            </div>
-        </div>
-        <form id="cart-formspree" action="https://formspree.io/f/xbladnvd" method="POST" style="margin-top:2rem; background:#f6f6f6; padding:1.5rem; border-radius:8px;">
-            <h4 style="color:#00B04F; margin-bottom:1rem;">${t('cartSendTitle')}</h4>
-            <label for="cart-email-form" style="font-weight:600;">${t('cartEmail')}</label>
-            <input type="email" id="cart-email-form" name="email" required style="width:100%; margin-bottom:1rem; padding:0.5rem; border-radius:6px; border:1px solid #e2e8f0;">
-            <label for="cart-message-form" style="font-weight:600;">${t('cartSummary')}</label>
-            <textarea id="cart-message-form" name="message" readonly style="width:100%; min-height:120px; margin-bottom:1rem; padding:1rem; border-radius:8px; border:1px solid #e2e8f0; font-size:1rem;">${resumo}</textarea>
-            <button type="submit" style="background:#00B04F; color:white; border:none; padding:0.7rem 2rem; border-radius:6px; font-weight:600; font-size:1.1rem; cursor:pointer;">${t('cartSendBtn')}</button>
-            <div style="font-size:0.9rem; color:#64748b; margin-top:0.5rem;">${t('cartSendInfo')}</div>
-        </form>
-    `;
-}
-
-function showCartModal() {
-    if (elements.cartModal) {
-        renderCartItems();
-        elements.cartModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function closeCartModal() {
-    if (elements.cartModal) {
-        elements.cartModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-}
-
-function sendCartEmail() {
-    alert(t('cartFormAlert'));
-}
-
-function showValidationMessage(msg) {
-    let validationDiv = document.getElementById('cart-validation-msg');
-    if (!validationDiv) {
-        validationDiv = document.createElement('div');
-        validationDiv.id = 'cart-validation-msg';
-        validationDiv.style.cssText = `
-            position: fixed;
-            top: 24px;
-            right: 24px;
-            background: #00B04F;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-            z-index: 4000;
-            font-weight: 600;
-            display: none;
-        `;
-        document.body.appendChild(validationDiv);
-    }
-    validationDiv.textContent = msg;
-    validationDiv.style.display = 'block';
-    setTimeout(() => {
-        validationDiv.style.display = 'none';
-    }, 3000);
-}
-
-// Utility functions
-function formatNumber(num) {
-    return new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2
-    }).format(num);
-}
-
-function formatCurrency(num) {
-    return new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-    }).format(num);
-}
-
+                        <div 
+(Content truncated due to size limit. Use page ranges or line ranges to read remaining content)
