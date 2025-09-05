@@ -2,9 +2,9 @@
 const LANGUAGES = {
     en: {
     cartBtn: "List",
-    heroTitle: "Stock Management",
+    heroTitle: "Stock Available",
     statsProducts: "Products",
-    statsRawMaterials: "Raw Materials",
+    statsRawMaterials: "Wood Species",
     statsCertificates: "Certificates",
     statsGrades: "Grades",
     statsTotalCrates: "Total Crates",
@@ -15,11 +15,11 @@ const LANGUAGES = {
     list: "List",
     modalTitle: "Product Details",
     cartModalTitle: "Shopping List",
-    footerProductInfo: "Product Information",
+    // footerProductInfo removido
     footerProductDesc1: "Brazilian plywood for construction, packaging, and furniture industries",
     footerProductDesc2: "Quality wood products with international certifications",
     footerProductDesc3: "Sustainable forestry practices and environmental compliance",
-    footerContactInfo: "Contact Information",
+    // footerContactInfo removido
     footerCompanyName: "Repinho",
     footerPhone: "+55 (42) 3629-8500",
     footerEmail: "comercial01@repinho.ind.br",
@@ -52,9 +52,9 @@ const LANGUAGES = {
     },
     es: {
     cartBtn: "Lista",
-    heroTitle: "Gestión de Stock",
+    heroTitle: "Stock Disponible",
     statsProducts: "Productos",
-    statsRawMaterials: "Materias primas",
+    statsRawMaterials: "Especies madera",
     statsCertificates: "Certificados",
     statsGrades: "Calidades",
     statsTotalCrates: "Total de cajas",
@@ -65,12 +65,12 @@ const LANGUAGES = {
     list: "Lista",
     modalTitle: "Detalles del producto",
     cartModalTitle: "Lista de compras",
-    footerProductInfo: "Información del producto",
+    // footerProductInfo removido
     footerProductDesc1: "Madera contrachapada brasileña para construcción, embalaje y muebles",
     footerProductDesc2: "Productos de madera de calidad con certificaciones internacionales",
     footerProductDesc3: "Prácticas forestales sostenibles y cumplimiento ambiental",
-    footerContactInfo: "Información de contacto",
-    footerCompanyName: "Repinho",
+    // footerContactInfo removido
+    footerCompanyName: "Repinho Reflorestadora Madeiras & Compensados.LTDA",
     footerPhone: "+55 (42) 3629-8500",
     footerEmail: "comercial01@repinho.ind.br",
     footerAddress: "Rua Ver.Sebastião de Camargo Ribas nº 950<br>Guarapuava, Paraná - Brasil",
@@ -171,8 +171,7 @@ window.updateStaticTexts = function() {
     if (cartModalTitle) cartModalTitle.textContent = t('cartModalTitle');
     // Footer
     // Atualiza coluna de informações do produto
-    const footerProductInfo = document.querySelectorAll('.footer-column h4')[0];
-    if (footerProductInfo) footerProductInfo.textContent = t('footerProductInfo');
+    // Removido: não atualiza mais o título do produto no footer
     const footerProductDesc = document.querySelectorAll('.footer-column')[0]?.querySelectorAll('p');
     if (footerProductDesc && footerProductDesc.length >= 3) {
         footerProductDesc[0].textContent = t('footerProductDesc1');
@@ -180,8 +179,7 @@ window.updateStaticTexts = function() {
         footerProductDesc[2].textContent = t('footerProductDesc3');
     }
     // Atualiza coluna de contato sem sobrescrever estrutura da contact-info
-    const footerContactInfo = document.querySelectorAll('.footer-column h4')[1];
-    if (footerContactInfo) footerContactInfo.textContent = t('footerContactInfo');
+    // Removido: não atualiza mais o título de contato no footer
     const contactInfo = document.querySelector('.contact-info');
     if (contactInfo) {
         const companyName = contactInfo.querySelector('.company-name');

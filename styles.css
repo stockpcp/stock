@@ -1,3 +1,6 @@
+.footer-content, .footer-content * {
+    color: #00B04F !important;
+}
 /* Garante que as colunas do footer mantenham largura e alinhamento consistentes em todos os idiomas */
 .footer-content {
     display: flex;
@@ -208,7 +211,7 @@ body {
 
 .stat-card {
     background: white;
-    padding: 1.5rem;
+    padding: 1.1rem;
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -222,7 +225,7 @@ body {
 }
 
 .stat-icon {
-    font-size: 2rem;
+    font-size: 1.7rem;
     margin-bottom: 0.5rem;
 }
 
@@ -234,7 +237,7 @@ body {
 }
 
 .stat-label {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #64748b;
     font-weight: 500;
 }
@@ -296,7 +299,7 @@ body {
 .filter-group label {
     font-weight: 600;
     color: #374151;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .filter-select {
@@ -317,7 +320,7 @@ body {
 /* ÁREA DE RESULTADOS */
 .results-section {
     background: white;
-    padding: 1rem 0;
+    padding: 1.1rem 0;
     border-bottom: 1px solid #e2e8f0;
 }
 
@@ -463,7 +466,7 @@ body {
 }
 
 .product-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 600;
     color: #1e293b;
     margin-bottom: 0.5rem;
@@ -471,7 +474,7 @@ body {
 
 .product-specs {
     color: #64748b;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-bottom: 0.5rem;
     font-weight: 500;
 }
@@ -639,7 +642,7 @@ body {
 .footer {
     background: #1e293b;
     color: white;
-    padding: 3rem 0 1rem 0;
+    padding: 0rem 0 1rem 0;
     margin-top: 3rem;
 }
 
@@ -686,17 +689,25 @@ body {
 }
 
 .footer-bottom {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 2rem 2rem 0 2rem;
+    padding: 1rem 2rem 0 2rem;
     border-top: 1px solid #374151;
     text-align: center;
     color: #94a3b8;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
 }
 
 .footer-bottom p {
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+    margin: 0;
+    font-size: 0.95rem;
+    color: #94a3b8;
+    display: inline;
 }
 
 /* Responsividade */

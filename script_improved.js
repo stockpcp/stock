@@ -260,7 +260,7 @@ function createProductCard(product) {
                         <div class="product-specs">${product.Crates} crates available • ${product.Thickness}mm • ${product.Ply} ply</div>
                     </div>
                 </div>
-                <div class="product-price">$${formatCurrency(product.Price)} per m³</div>
+                <div class="product-price">$${formatCurrency(product.Price)} / m³ FOB</div>
                 <div class="product-actions">
                     <button class="details-btn">View Details</button>
                 </div>
@@ -279,7 +279,7 @@ function createProductCard(product) {
                     <div class="product-specs">${product.Thickness}mm • ${product.Ply} ply</div>
                     <div class="product-specs">${product.Crates} crates available</div>
                 </div>
-                <div class="product-price">$${formatCurrency(product.Price)} per m³</div>
+                <div class="product-price">$${formatCurrency(product.Price)} / m³ FOB</div>
                 <div class="product-actions">
                     <button class="details-btn">View Details</button>
                 </div>
@@ -368,7 +368,7 @@ function showProductDetails(product) {
                 <div class="section-grid">
                   
                     <div class="detail-item">
-                        <div class="detail-label">Max Crates/Container</div>
+                        <div class="detail-label">Max Crates/HC</div>
                         <div class="detail-value">${maxCratesPerContainer}</div>
                     </div>
                     <div class="detail-item">
