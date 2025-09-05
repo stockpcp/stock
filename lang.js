@@ -7,7 +7,7 @@ const LANGUAGES = {
     statsRawMaterials: "Wood Species",
     statsCertificates: "Certificates",
     statsGrades: "Grades",
-    statsTotalCrates: "Total Crates",
+    statsTotalCrates: "Crates",
     filtersTitle: "Filters",
     clearFilters: "Clear Filters",
     resultsFound: "products found",
@@ -57,7 +57,7 @@ const LANGUAGES = {
     statsRawMaterials: "Especies madera",
     statsCertificates: "Certificados",
     statsGrades: "Calidades",
-    statsTotalCrates: "Total de cajas",
+    statsTotalCrates: "Cajas",
     filtersTitle: "Filtros",
     clearFilters: "Limpiar filtros",
     resultsFound: "productos encontrados",
@@ -202,3 +202,4 @@ window.updateStaticTexts = function() {
     const footerDev = document.querySelectorAll('.footer-bottom p')[1];
     if (footerDev) footerDev.textContent = t('footerDev');
 }
+
