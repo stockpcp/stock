@@ -1,12 +1,45 @@
 <!-- Formspree Formbutton integration -->
 <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+<!--<script>
+    window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+    formbutton("create", {
+        action: "https://formspree.io/f/xbladnvd",
+        title: "Quotation Request",
+        fields: [
+            { 
+                type: "email", 
+                label: "Email:", 
+                name: "email",
+                required: true,
+                placeholder: "your@email.com"
+            },
+            {
+                type: "textarea",
+                label: "Message:",
+                name: "message",
+                placeholder: "Questions Items, quantity, etc."
+            },
+            { type: "submit", label: "Send" }
+        ],
+        styles: {
+            title: {
+                backgroundColor: "#00B04F"
+            },
+            button: {
+                backgroundColor: "#00B04F"
+            }
+        }
+    });
+</script>-->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <link rel="icon" type="image/png" href="icon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Available</title>
+    <title>Stock - Stock Management System</title>
+    <link rel="stylesheet" href="inter-tight-font.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles_improved.css">
 </head>
@@ -17,18 +50,26 @@
         <div class="header-content">
             <div class="logo-section">
                 <img src="logo.png" alt="Logo" class="logo">
-                </div>
+                <h1 class="company-name"></h1>
+            </div>
             <div class="header-info">
                 <div class="info-item">
+                    <span class="info-icon"></span>
+                    <span></span>
                 </div>
-                <div class="lang-switch">
+                <div class="info-item">
+                    <span class="info-icon"></span>
+                    <span class="info-text"></span>
+                </div>
+            </div>
+            <div class="lang-switch">
                 <label for="lang-select" style="font-weight:600; margin-right:0.5rem;">Language:</label>
                 <select id="lang-select" style="padding:0.3rem 0.7rem; border-radius:6px;">
-                    <option value="en">english</option>
-                    <option value="es">español</option>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
                 </select>
                 <button id="open-cart-btn" class="cart-btn"
-                    style="margin-left:1rem; padding:0.3rem 0.7rem; border-radius:6px; font-size:1.0rem; background:#00B04F; color:#fff; border:none; cursor:pointer;">
+                    style="margin-left:1rem; padding:0.3rem 0.7rem; border-radius:6px; font-size:1.1rem; background:#00B04F; color:#fff; border:none; cursor:pointer;">
                     🛒 <span id="cart-btn-text">List</span> <span id="cart-count">0</span>
                 </button>
             </div>
@@ -38,8 +79,7 @@
     <!-- HERO AREA -->
     <section class="hero-section">
         <div class="hero-content">
-            <h1 class="hero-title">Stock Available</h1>
-            <p class="hero-subtitle">Brazilian plywood for construction, packaging, and furniture industries</p>
+            <h1 class="hero-title">Stock Management</h1>
         </div>
     </section>
 
@@ -49,27 +89,27 @@
             <div class="stat-card">
                 <div class="stat-icon">📦</div>
                 <div class="stat-number" id="total-products">0</div>
-                <div class="stat-label">products</div>
+                <div class="stat-label">Products</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">🌲</div>
                 <div class="stat-number" id="raw-materials">0</div>
-                <div class="stat-label">wood species</div>
+                <div class="stat-label">Raw Materials</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">📋</div>
                 <div class="stat-number" id="certificates">0</div>
-                <div class="stat-label">certificates</div>
+                <div class="stat-label">Certificates</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">⭐</div>
                 <div class="stat-number" id="grades">0</div>
-                <div class="stat-label">grades</div>
+                <div class="stat-label">Grades</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">📊</div>
                 <div class="stat-number" id="total-crates">0</div>
-                <div class="stat-label">crates</div>
+                <div class="stat-label">Total Crates</div>
             </div>
         </div>
     </section>
@@ -78,30 +118,30 @@
     <section class="filters-section">
         <div class="filters-container">
             <div class="filters-header">
-                <h2 class="filters-title">filters</h2>
+                <h2 class="filters-title">Filters</h2>
                 <button id="clear-filters" class="clear-filters-btn">Clear Filters</button>
             </div>
             <div class="filters-row">
                 <div class="filter-group">
-                    <label for="wood-type-filter">wood species</label>
+                    <label for="wood-type-filter">Wood Type</label>
                     <select id="wood-type-filter" class="filter-select">
                         <option value="">All</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="certificate-filter">certificate</label>
+                    <label for="certificate-filter">Certificate</label>
                     <select id="certificate-filter" class="filter-select">
                         <option value="">All</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="grade-filter">grade</label>
+                    <label for="grade-filter">Grade</label>
                     <select id="grade-filter" class="filter-select">
                         <option value="">All</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="thickness-filter">thickness</label>
+                    <label for="thickness-filter">Thickness</label>
                     <select id="thickness-filter" class="filter-select">
                         <option value="">All</option>
                     </select>
@@ -136,7 +176,7 @@
     <div id="product-modal" class="modal" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modal-title">product details</h2>
+                <h2 id="modal-title">Product Details</h2>
                 <button id="modal-close" class="modal-close">&times;</button>
             </div>
             <div id="modal-body" class="modal-body">
@@ -145,15 +185,15 @@
         </div>
     </div>
 
-    <!-- CART MODAL -->
+    <!-- LIST MODAL -->
     <div id="cart-modal" class="cart-modal" style="display: none;">
-        <div class="cart-modal-content">
+    <div class="cart-modal-content">
             <div class="cart-modal-header">
-                <h3 class="cart-modal-title">interest list</h3>
+                <h3 class="cart-modal-title">Shopping List</h3>
                 <button id="cart-modal-close" class="cart-modal-close">&times;</button>
             </div>
             <div id="cart-items-list" class="cart-items-list">
-                <!-- Cart items will be loaded here -->
+                <!-- List items will be loaded here -->
             </div>
         </div>
     </div>
@@ -161,16 +201,16 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-column">
-                <h4>more info</h4>
+                <h4>Product Information</h4>
                 <p>Brazilian plywood for construction, packaging, and furniture industries</p>
                 <p>Quality wood products with international certifications</p>
                 <p>Sustainable forestry practices and environmental compliance</p>
             </div>
 
             <div class="footer-column">
-                <h4>contact</h4>
+                <h4>Contact Information</h4>
                 <div class="contact-info">
-                    <p class="company-name">Repinho Reflorestadora Madeiras e Compensados Ltda.</p>
+                    <p class="company-name">Repinho Reflorestadora Madeiras & Compensados.LTDA</p>
                     <div class="contact-item">
                         <span class="contact-icon">📞</span>
                         <span>+55 (42) 3629-8500</span>
@@ -185,6 +225,9 @@
                             Guarapuava, Paraná - Brazil</span>
                     </div>
                 </div>
+            </div>
+        </div>
+
         <div class="footer-bottom">
             <p>© 2025 Repinho. All rights reserved.</p>
             <p>developed by commercial export</p>

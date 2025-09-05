@@ -51,7 +51,7 @@
       "order": 2
     },
     "NCP": {
-      "description": "non conform product (fall/shop)",
+  "description": "NC product (fall/shop)",
       "order": 2
     }
   },

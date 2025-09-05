@@ -1,3 +1,19 @@
+/* Garante que as colunas do footer mantenham largura e alinhamento consistentes em todos os idiomas */
+.footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.footer-column {
+    flex: 1 1 0;
+    min-width: 220px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
 /* Carrinho de compras */
 .cart-btn {
     background: #00B04F;
@@ -99,8 +115,7 @@
 }
 
 body {
-    font-family: Roboto, Inter Tight, Arial, Tahoma, Helvetica Neue;
-    line-height: 1.5;
+    line-height: 1.6;
     color: #333;
     background-color: #f8fafc;
 }
@@ -136,7 +151,7 @@ body {
 
 .company-name {
     font-size: 1.5rem;
-    font-weight: 650;
+    font-weight: 700;
 }
 
 .header-info {
@@ -175,12 +190,6 @@ body {
     margin-bottom: 1rem;
 }
 
-.hero-subtitle {
-    font-size: 1.2rem;
-    color: #64748b;
-    max-width: 600px;
-    margin: 0 auto;
-}
 
 /* ÁREA DE RESUMO/ESTATÍSTICAS (5 Cartões) */
 .stats-section {
@@ -189,12 +198,12 @@ body {
 }
 
 .stats-container {
-    max-width: 1180px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 1.4rem;
+    gap: 1.5rem;
 }
 
 .stat-card {
@@ -227,7 +236,7 @@ body {
 .stat-label {
     font-size: 1.5rem;
     color: #64748b;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 /* ÁREA DE FILTROS (1 linha) */
@@ -235,6 +244,7 @@ body {
     background: white;
     padding: 2rem 0;
     border-bottom: 1px solid #e2e8f0;
+    font-size: 1.5rem;
 }
 
 .filters-container {
@@ -286,14 +296,14 @@ body {
 .filter-group label {
     font-weight: 600;
     color: #374151;
-    font-size: 0.9rem;
+    font-size: 1.5rem;
 }
 
 .filter-select {
     padding: 0.75rem;
     border: 2px solid #e5e7eb;
     border-radius: 6px;
-    font-size: 0.9rem;
+    font-size: 1.0rem;
     background: white;
     cursor: pointer;
     transition: border-color 0.2s;
@@ -324,7 +334,7 @@ body {
 }
 
 .results-count {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: #374151;
 }
@@ -480,7 +490,7 @@ body {
 
 .product-actions {
     display: flex;
-    justify-content: center;
+    justify-content: right;
 }
 
 .details-btn {
@@ -490,7 +500,7 @@ body {
     padding: 0.75rem 1.5rem;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 600;
     transition: background 0.2s;
 }
@@ -590,7 +600,7 @@ body {
 
 /* Quando o texto for grande, exibir em linhas */
 .detail-item {
-    min-width: 250px;
+    min-width: 100%;
     flex: 1 1 100%;
     word-break: break-word;
 }
@@ -628,7 +638,7 @@ body {
 /* RODAPÉ */
 .footer {
     background: #1e293b;
-    color: #00B04F;
+    color: white;
     padding: 3rem 0 1rem 0;
     margin-top: 3rem;
 }
