@@ -366,10 +366,7 @@ function showProductDetails(product) {
             <div class="modal-section">
                 <h4>🚢 Shipping & Pricing</h4>
                 <div class="section-grid">
-                    <div class="detail-item">
-                        <div class="detail-label">Practical Capacity</div>
-                        <div class="detail-value">${formatNumber(practicalCapacity)} crates</div>
-                    </div>
+                  
                     <div class="detail-item">
                         <div class="detail-label">Max Crates/Container</div>
                         <div class="detail-value">${maxCratesPerContainer}</div>

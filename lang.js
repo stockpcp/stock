@@ -117,14 +117,15 @@ function t(key, params = {}) {
 }
 
 // Detect troca de idioma
-const langSelect = document.getElementById('lang-select');
-if (langSelect) {
-    langSelect.addEventListener('change', (e) => {
-        setLang(e.target.value);
+
+// Troca de idioma por clique nas bandeiras
+document.querySelectorAll('.lang-flag').forEach(btn => {
+    btn.addEventListener('click', function() {
+        setLang(this.getAttribute('data-lang'));
         if (window.updateStaticTexts) window.updateStaticTexts();
         if (window.updateDynamicTexts) window.updateDynamicTexts();
     });
-}
+});
 
 // Atualiza textos estáticos do HTML
 window.updateStaticTexts = function() {
