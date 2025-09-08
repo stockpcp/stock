@@ -52,7 +52,7 @@ const LANGUAGES = {
     },
     es: {
     cartBtn: "listado",
-    heroTitle: "estock disponible",
+    heroTitle: "stock disponible",
     statsProducts: "productos",
     statsRawMaterials: "especies de madera",
     statsCertificates: "certificados",
@@ -202,5 +202,6 @@ window.updateStaticTexts = function() {
     const footerDev = document.querySelectorAll('.footer-bottom p')[1];
     if (footerDev) footerDev.textContent = t('footerDev');
 }
+
 
 
