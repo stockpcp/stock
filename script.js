@@ -323,7 +323,7 @@ function showProductDetails(product) {
                 <h4>📋 Product Specifications</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">raw material</div>
+                        <div class="detail-label">wood specie</div>
                         <div class="detail-value">${product.Logs}</div>
                     </div>
                     <div class="detail-item">
@@ -352,27 +352,27 @@ function showProductDetails(product) {
                 <h4>📦 Stock & Weight Information</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">Available Stock</div>
+                        <div class="detail-label">available</div>
                         <div class="detail-value">${product.Crates} crates</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Sheets per Crate</div>
+                        <div class="detail-label">sheets/crate</div>
                         <div class="detail-value">${product.SheetsPerCrate}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Weight per Crate</div>
+                        <div class="detail-label">weight/crate</div>
                         <div class="detail-value">${formatNumber(product.WeightPerCrate)} kg</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Density per m³</div>
+                        <div class="detail-label">density/m³</div>
                         <div class="detail-value">${formatNumber(densityPerM3)} kg/m³</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Weight per Sheet</div>
+                        <div class="detail-label">weight/sheet</div>
                         <div class="detail-value">${formatNumber(weightPerSheet)} kg</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Volume per Crate</div>
+                        <div class="detail-label">volume/crate</div>
                         <div class="detail-value">${product.VolumePerCrate.toFixed(3)} m³</div>
                     </div>
                 </div>
@@ -385,14 +385,14 @@ function showProductDetails(product) {
                         <div class="detail-value">${formatNumber(practicalCapacity)} crates</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Max Crates/Container</div>
+                        <div class="detail-label">max crates/hc</div>
                         <div class="detail-value">${maxCratesPerContainer}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">FOB Price per m³</div>
+                        <div class="detail-label">price/m³ fob</div>
                         <div class="detail-value">$${formatCurrency(product.Price)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Price per Sheet</div>
+                        <div class="detail-label">price/sheet</div>
                         <div 
 (Content truncated due to size limit. Use page ranges or line ranges to read remaining content)
