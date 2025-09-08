@@ -729,7 +729,7 @@
   },
   {
     "Logs": "Euca",
-    "Certificate": "frame",
+    "Certificate": "frameply",
     "Grade": "C+/C",
     "Size": "2440x1220",
     "Thickness": 22,
@@ -757,7 +757,7 @@
   },
   {
     "Logs": "Euca",
-    "Certificate": "non conform",
+    "Certificate": "NC",
     "Grade": "falldown",
     "Size": "2440x1220",
     "Thickness": 6,
