@@ -349,10 +349,10 @@ function showProductDetails(product) {
                 </div>
             </div>
             <div class="modal-section">
-                <h4>📦 Stock & Weight Information</h4>
+                <h4>📦 Stock & Weight Info</h4>
                 <div class="section-grid">
                     <div class="detail-item">
-                        <div class="detail-label">available</div>
+                        <div class="detail-label">Crates available</div>
                         <div class="detail-value">${product.Crates} crates</div>
                     </div>
                     <div class="detail-item">
