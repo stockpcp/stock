@@ -342,23 +342,23 @@ function showProductDetails(product) {
                         <div class="detail-value">${product.Crates} crates</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Sheets per Crate</div>
+                        <div class="detail-label">Sheets/Crate</div>
                         <div class="detail-value">${product.SheetsPerCrate}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Weight per Crate</div>
+                        <div class="detail-label">Weight/Crate</div>
                         <div class="detail-value">${formatNumber(product.WeightPerCrate)} kg</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Density per m³</div>
+                        <div class="detail-label">Density/m³</div>
                         <div class="detail-value">${formatNumber(densityPerM3)} kg/m³</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Weight per Sheet</div>
+                        <div class="detail-label">Weight/Sheet</div>
                         <div class="detail-value">${formatNumber(weightPerSheet)} kg</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Volume per Crate</div>
+                        <div class="detail-label">Volume/Crate</div>
                         <div class="detail-value">${product.VolumePerCrate.toFixed(3)} m³</div>
                     </div>
                 </div>
@@ -368,23 +368,23 @@ function showProductDetails(product) {
                 <div class="section-grid">
                   
                     <div class="detail-item">
-                        <div class="detail-label">Max Crates/HC</div>
+                        <div class="detail-label">Max Crates/ctnr</div>
                         <div class="detail-value">${maxCratesPerContainer}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">FOB Price per m³</div>
+                        <div class="detail-label">Price/m³ fob</div>
                         <div class="detail-value">$${formatCurrency(product.Price)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Price per Sheet</div>
+                        <div class="detail-label">Price/Sheet</div>
                         <div class="detail-value">$${formatNumber(pricePerSheet)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Price per Crate</div>
+                        <div class="detail-label">Price/Crate</div>
                         <div class="detail-value">$${formatNumber(pricePerCrate)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Container Value</div>
+                        <div class="detail-label">Container $</div>
                         <div class="detail-value">$${formatNumber(containerValue)}</div>
                     </div>
                 </div>
