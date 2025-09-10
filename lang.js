@@ -35,10 +35,10 @@ const LANGUAGES = {
         cartRemove: "remove",
         cartTotal: "total:",
         cartCratesTotal: "{qty} crates in total",
-        cartSendTitle: "send list intent",
+        cartSendTitle: "",
         cartEmail: "your email:",
         cartSummary: "items summary:",
-        cartSendBtn: " ",
+        cartSendBtn: "send list intent",
         cartSendInfo: "you will receive confirmation by email.",
     cartAdded: "item added to list!",
         cartQuoteRequest: "list request",
@@ -202,6 +202,7 @@ window.updateStaticTexts = function() {
     const footerDev = document.querySelectorAll('.footer-bottom p')[1];
     if (footerDev) footerDev.textContent = t('footerDev');
 }
+
 
 
 
