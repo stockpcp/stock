@@ -38,7 +38,7 @@ const LANGUAGES = {
         cartSendTitle: "send list intent",
         cartEmail: "your email:",
         cartSummary: "items summary:",
-        cartSendBtn: "send interest list",
+        cartSendBtn: " ",
         cartSendInfo: "you will receive confirmation by email.",
     cartAdded: "item added to list!",
         cartQuoteRequest: "list request",
@@ -85,7 +85,7 @@ const LANGUAGES = {
         cartRemove: "eliminar",
         cartTotal: "total:",
         cartCratesTotal: "{qty} cajas en total",
-        cartSendTitle: "enviar listado",
+        cartSendTitle: "",
         cartEmail: "tu correo electrónico:",
         cartSummary: "resumen de artículos:",
         cartSendBtn: "enviar listado",
@@ -202,6 +202,7 @@ window.updateStaticTexts = function() {
     const footerDev = document.querySelectorAll('.footer-bottom p')[1];
     if (footerDev) footerDev.textContent = t('footerDev');
 }
+
 
 
 
