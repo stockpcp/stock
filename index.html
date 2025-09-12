@@ -1,3 +1,36 @@
+<!-- Formspree Formbutton integration -->
+<script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+<!--<script>
+    window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+    formbutton("create", {
+        action: "https://formspree.io/f/xbladnvd",
+        title: "Quotation Request",
+        fields: [
+            { 
+                type: "email", 
+                label: "Email:", 
+                name: "email",
+                required: true,
+                placeholder: "your@email.com"
+            },
+            {
+                type: "textarea",
+                label: "Message:",
+                name: "message",
+                placeholder: "Questions Items, quantity, etc."
+            },
+            { type: "submit", label: "Send" }
+        ],
+        styles: {
+            title: {
+                backgroundColor: "#00B04F"
+            },
+            button: {
+                backgroundColor: "#00B04F"
+            }
+        }
+    });
+</script>-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,43 +39,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Available System</title>
-    
-    <!-- Meta tags para SEO -->
-    <meta name="description" content="Brazilian plywood stock available - Quality wood products with international certifications for construction, packaging, and furniture industries">
-    <meta name="keywords" content="plywood, brazilian wood, stock, construction materials, furniture, packaging">
-    <meta name="author" content="Repinho Reflorestadora">
-    
-    <!-- Open Graph tags para redes sociais -->
-    <meta property="og:title" content="Stock Available System - Repinho">
-    <meta property="og:description" content="Brazilian plywood stock available with international certifications">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://stock.repinho.ind.br/">
-    
-    <!-- Preload de recursos críticos -->
-    <link rel="preload" href="inter-tight-font.css" as="style">
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="stock_data.json" as="fetch" crossorigin>
-    
-    <!-- CSS crítico (carregamento síncrono) -->
     <link rel="stylesheet" href="inter-tight-font.css">
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- CSS não crítico (carregamento assíncrono) -->
-    <link rel="preload" href="styles_improved.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="styles_improved.css"></noscript>
-    
-    <!-- Cache headers via meta tags -->
-    <meta http-equiv="Cache-Control" content="public, max-age=31536000">
-    
-    <!-- Inline CSS crítico para evitar FOUC -->
-    <style>
-        /* CSS crítico inline para renderização inicial */
-        body{margin:0;padding:0;font-family:Inter,sans-serif;background:#f8fafc}
-        .header{background:#1e293b;color:#fff;padding:1rem 0}
-        .hero-section{background:linear-gradient(135deg,#f1f5f9,#e2e8f0);padding:3rem 0;text-align:center}
-        .hero-title{font-size:3rem;font-weight:700;color:#00B04F;margin-bottom:1rem}
-        .loading{display:flex;justify-content:center;align-items:center;height:200px;font-size:1.2rem;color:#64748b}
-    </style>
+    <link rel="stylesheet" href="styles_improved.css">
 </head>
 
 <body>
@@ -50,7 +49,7 @@
     <header class="header">
         <div class="header-content">
             <div class="logo-section">
-                <img src="logo.png" alt="Repinho Logo" class="logo" loading="lazy">
+                <img src="logo.png" alt="Logo" class="logo">
                 <h1 class="company-name"></h1>
             </div>
             <div class="header-info">
@@ -65,10 +64,10 @@
             </div>
             <div class="lang-switch">
                 <button class="lang-flag" data-lang="en" title="English" style="background:none; border:none; cursor:pointer; margin-right:0.5rem;">
-                    <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/us.svg" alt="EN" style="width:47px; height:30px; border-radius:6px; box-shadow:0 1px 2px #0002; object-fit:cover; vertical-align:middle;" loading="lazy">
+                    <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/us.svg" alt="EN" style="width:47px; height:30px; border-radius:6px; box-shadow:0 1px 2px #0002; object-fit:cover; vertical-align:middle;">
                 </button>
                 <button class="lang-flag" data-lang="es" title="Español" style="background:none; border:none; cursor:pointer;">
-                    <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/es.svg" alt="ES" style="width:47px; height:30px; border-radius:6px; box-shadow:0 1px 2px #0002; object-fit:cover; vertical-align:middle;" loading="lazy">
+                    <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/es.svg" alt="ES" style="width:47px; height:30px; border-radius:6px; box-shadow:0 1px 2px #0002; object-fit:cover; vertical-align:middle;">
                 </button>
                 <button id="open-cart-btn" class="cart-btn"
                     style="margin-left:1rem; padding:0.6rem 1rem; border-radius:8px; font-size:1rem; background:#00B04F; color:#fff; border:none; cursor:pointer;">
@@ -82,7 +81,6 @@
     <section class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title">Stock Available</h1>
-            <!-- Data de upload será injetada aqui pelo addon -->
         </div>
     </section>
 
@@ -171,10 +169,7 @@
     <!-- PRODUCTS -->
     <section class="products-section">
         <div id="products-container" class="products-container products-grid">
-            <!-- Loading placeholder -->
-            <div class="loading" id="loading-placeholder">
-                <div>Loading products...</div>
-            </div>
+            <!-- Products will be loaded here -->
         </div>
     </section>
 
@@ -193,7 +188,7 @@
 
     <!-- LIST MODAL -->
     <div id="cart-modal" class="cart-modal" style="display: none;">
-        <div class="cart-modal-content">
+    <div class="cart-modal-content">
             <div class="cart-modal-header">
                 <h3 class="cart-modal-title">Interest List</h3>
                 <button id="cart-modal-close" class="cart-modal-close">&times;</button>
@@ -203,7 +198,6 @@
             </div>
         </div>
     </div>
-
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-content">
@@ -240,28 +234,10 @@
             <p>developed by commercial export</p>
         </div>
     </footer>
-
-    <!-- Scripts com carregamento otimizado - REFERÊNCIAS CORRIGIDAS -->
-    <script src="logistics.js" defer></script>
-    <script src="lang.js" defer></script>
-    <script src="script_improved.js" defer></script>
+    <script src="logistics.js"></script>
+    <script src="lang.js"></script>
+    <script src="script_improved.js"></script>
     <script src="stock-date-addon.min.js" defer></script>
-    
-    <!-- Service Worker para cache (opcional) -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(function(registrationError) {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
-    </script>
 </body>
 
 </html>
-
