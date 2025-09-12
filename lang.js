@@ -10,6 +10,11 @@ const LANGUAGES = {
     statsTotalCrates: "crates",
     filtersTitle: "filters",
     clearFilters: "clear filters",
+    // NOVOS: Labels dos filtros
+    filterWoodSpecies: "Wood Species",
+    filterCertificate: "Certificate",
+    filterGrade: "Grade",
+    filterThickness: "Thickness",
     resultsFound: "products found",
     grid: "grid",
     list: "list",
@@ -60,6 +65,11 @@ const LANGUAGES = {
     statsTotalCrates: "cajas",
     filtersTitle: "filtros",
     clearFilters: "limpiar filtros",
+    // NOVOS: Labels dos filtros em espanhol
+    filterWoodSpecies: "Especies de Madera",
+    filterCertificate: "Certificado",
+    filterGrade: "Calidad",
+    filterThickness: "Espesor",
     resultsFound: "productos encontrados",
     grid: "cuadrícula",
     list: "listado",
@@ -151,6 +161,20 @@ window.updateStaticTexts = function() {
     if (filtersTitle) filtersTitle.textContent = t('filtersTitle');
     const clearFiltersBtn = document.getElementById('clear-filters');
     if (clearFiltersBtn) clearFiltersBtn.textContent = t('clearFilters');
+    
+    // NOVO: Labels dos filtros
+    const woodSpeciesLabel = document.querySelector('label[for="wood-type-filter"]');
+    if (woodSpeciesLabel) woodSpeciesLabel.textContent = t('filterWoodSpecies');
+    
+    const certificateLabel = document.querySelector('label[for="certificate-filter"]');
+    if (certificateLabel) certificateLabel.textContent = t('filterCertificate');
+    
+    const gradeLabel = document.querySelector('label[for="grade-filter"]');
+    if (gradeLabel) gradeLabel.textContent = t('filterGrade');
+    
+    const thicknessLabel = document.querySelector('label[for="thickness-filter"]');
+    if (thicknessLabel) thicknessLabel.textContent = t('filterThickness');
+    
     // Results
     const productsCount = document.getElementById('products-count');
     if (productsCount) {
@@ -202,9 +226,4 @@ window.updateStaticTexts = function() {
     const footerDev = document.querySelectorAll('.footer-bottom p')[1];
     if (footerDev) footerDev.textContent = t('footerDev');
 }
-
-
-
-
-
 
