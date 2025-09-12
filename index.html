@@ -20,16 +20,16 @@
     
     <!-- Preload de recursos críticos -->
     <link rel="preload" href="inter-tight-font.css" as="style">
-    <link rel="preload" href="styles.min.css" as="style">
+    <link rel="preload" href="styles.css" as="style">
     <link rel="preload" href="stock_data.json" as="fetch" crossorigin>
     
     <!-- CSS crítico (carregamento síncrono) -->
     <link rel="stylesheet" href="inter-tight-font.css">
-    <link rel="stylesheet" href="styles.min.css">
+    <link rel="stylesheet" href="styles.css">
     
     <!-- CSS não crítico (carregamento assíncrono) -->
-    <link rel="preload" href="styles_improved.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="styles_improved.min.css"></noscript>
+    <link rel="preload" href="styles_improved.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles_improved.css"></noscript>
     
     <!-- Cache headers via meta tags -->
     <meta http-equiv="Cache-Control" content="public, max-age=31536000">
@@ -241,10 +241,10 @@
         </div>
     </footer>
 
-    <!-- Scripts com carregamento otimizado -->
-    <script src="logistics.min.js" defer></script>
-    <script src="lang_fixed.min.js" defer></script>
-    <script src="script_improved.min.js" defer></script>
+    <!-- Scripts com carregamento otimizado - REFERÊNCIAS CORRIGIDAS -->
+    <script src="logistics.js" defer></script>
+    <script src="lang.js" defer></script>
+    <script src="script_improved.js" defer></script>
     <script src="stock-date-addon.min.js" defer></script>
     
     <!-- Service Worker para cache (opcional) -->
