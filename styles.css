@@ -707,19 +707,19 @@ body {
     padding: 0rem 3rem 0px 1rem;
     border-top: 1px solid #374151;
     text-align: center;
-    color: #d9ead3;
+    color: #8ccfac;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.4rem;
     flex-wrap: wrap;
 }
 
 .footer-bottom p {
     margin: 0;
-    font-size: 0.90rem;
-    color: #d9ead3;
+    font-size: 0.99rem;
+    color: #8ccfac;
     display: inline;
 }
 
