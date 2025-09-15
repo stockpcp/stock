@@ -498,7 +498,7 @@ function renderCartItems() {
     cart.forEach(item => {
         resumo += `- ${item.desc}\n`;
         resumo += `  Quantity: ${item.qty} crates\n`;
-        resumo += `  ${t('cartUnitPrice')} $${formatCurrency(item.pricePerCrate)}\n`;
+        resumo += `  ${t('cartUnitPrice')} $${formatCurrency(item.product.Price)}\n`;
         resumo += `  ${t('cartSubtotal')} $${formatCurrency(item.pricePerCrate * item.qty)}\n\n`;
     });
     resumo += `${t('cartTotalCrates')} ${totalCrates}\n`;
@@ -511,7 +511,7 @@ function renderCartItems() {
                 <div class="cart-item-desc">
                     <div style="font-weight:600;">${item.desc}</div>
                     <div style="font-size:0.9rem; color:#64748b;">
-                        $${formatCurrency(item.pricePerCrate)} per crate
+                        $${formatCurrency(item.product.Price)} per m³
                     </div>
                 </div>
                 <div style="display:flex; align-items:center; gap:0.5rem;">
