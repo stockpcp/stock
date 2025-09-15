@@ -707,7 +707,7 @@ body {
     padding: 0rem 3rem 0px 1rem;
     border-top: 1px solid #374151;
     text-align: center;
-    color: #00B04F;
+    color: #d9ead3;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -718,8 +718,8 @@ body {
 
 .footer-bottom p {
     margin: 0;
-    font-size: 0.95rem;
-    color: #00B04F;
+    font-size: 0.90rem;
+    color: #d9ead3;
     display: inline;
 }
 
