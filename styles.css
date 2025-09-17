@@ -702,9 +702,9 @@ body {
 }
 
 .footer-bottom {
-    max-width: 1300px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 1rem 1px 1rem;
+    padding: 2rem 1rem 1px 2rem;
     border-top: 1px solid #374151;
     text-align: center;
     color: #8ccfac;
