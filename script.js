@@ -285,10 +285,6 @@ function createProductCard(product, index) {
                     <span class="spec-label">Crates:</span>
                     <span class="spec-value">${product.Crates}</span>
                 </div>
-                <div class="spec-item">
-                    <span class="spec-label">Size:</span>
-                    <span class="spec-value">${product.Size}</span>
-                </div>
             </div>
             
             <div class="product-actions">
