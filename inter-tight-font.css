@@ -1,0 +1,6 @@
+/* Import Inter Tight font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
+html, body, * {
+    font-family: 'Inter Tight', Arial, Helvetica, sans-serif !important;
+}
