@@ -1,17 +1,49 @@
+<!-- Formspree Formbutton integration -->
+<script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+<!--<script>
+    window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+    formbutton("create", {
+        action: "https://formspree.io/f/xbladnvd",
+        title: "Quotation Request",
+        fields: [
+            { 
+                type: "email", 
+                label: "Email:", 
+                name: "email",
+                required: true,
+                placeholder: "your@email.com"
+            },
+            {
+                type: "textarea",
+                label: "Message:",
+                name: "message",
+                placeholder: "Questions Items, quantity, etc."
+            },
+            { type: "submit", label: "Send" }
+        ],
+        styles: {
+            title: {
+                backgroundColor: "#00B04F"
+            },
+            button: {
+                backgroundColor: "#00B04F"
+            }
+        }
+    });
+</script>-->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <link rel="icon" type="image/png" href="icon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Available</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="inter-tight-font.css" rel="stylesheet">
+    <link rel="stylesheet" href="inter-tight-font.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles_improved.css">
-    <link rel="stylesheet" href="user-guide-addon.css">
-    <script src="https://formspree.io/js/formbutton-v1.min.js" defer=""></script>
 </head>
+
 <body>
     <!-- HEADER -->
     <header class="header">
@@ -31,187 +63,122 @@
                 </div>
             </div>
             <div class="lang-switch">
-                <!-- BOTÃO DO GUIA DO USUÁRIO -->
-                <button id="user-guide-btn" class="user-guide-btn" title="User Guide" onclick="openUserGuide()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                        <path d="M12 17h.01"></path>
-                    </svg>
-                    <span>User Guide</span>
-                </button>
-                
                 <button class="lang-flag" data-lang="en" title="English" style="background:none; border:none; cursor:pointer; margin-right:0.5rem;">
                     <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/us.svg" alt="EN" style="width:47px; height:30px; border-radius:6px; box-shadow:0 1px 2px #0002; object-fit:cover; vertical-align:middle;">
                 </button>
                 <button class="lang-flag" data-lang="es" title="Español" style="background:none; border:none; cursor:pointer;">
                     <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/es.svg" alt="ES" style="width:47px; height:30px; border-radius:6px; box-shadow:0 1px 2px #0002; object-fit:cover; vertical-align:middle;">
                 </button>
-                <button id="open-cart-btn" class="cart-btn" style="margin-left:1rem; padding:0.6rem 1rem; border-radius:8px; font-size:1rem; background:#00B04F; color:#fff; border:none; cursor:pointer;">
+                <button id="open-cart-btn" class="cart-btn"
+                    style="margin-left:1rem; padding:0.6rem 1rem; border-radius:8px; font-size:1rem; background:#00B04F; color:#fff; border:none; cursor:pointer;">
                     🛒 <span id="cart-btn-text">List</span> <span id="cart-count">0</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
-    <main class="main-content">
-        <!-- TITLE SECTION -->
-        <section class="title-section">
-            <h1 class="main-title">Stock Available</h1>
-            <p class="last-updated">Last updated: <span id="last-updated-date">10/10/2025</span></p>
-        </section>
+    <!-- HERO AREA -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Stock Available</h1>
+        </div>
+    </section>
 
-        <!-- STATS SECTION -->
-        <section class="stats-section">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">📦</div>
-                    <div class="stat-number" id="total-products">72</div>
-                    <div class="stat-label">Products</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🌲</div>
-                    <div class="stat-number" id="wood-species-count">6</div>
-                    <div class="stat-label">Wood Species</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">📋</div>
-                    <div class="stat-number" id="certificates-count">6</div>
-                    <div class="stat-label">Certificates</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">⭐</div>
-                    <div class="stat-number" id="grades-count">8</div>
-                    <div class="stat-label">Grades</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">📊</div>
-                    <div class="stat-number" id="total-crates">1,261</div>
-                    <div class="stat-label">Crates</div>
-                </div>
+    <!-- STATISTICS -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon">📦</div>
+                <div class="stat-number" id="total-products">0</div>
+                <div class="stat-label">Products</div>
             </div>
-        </section>
+            <div class="stat-card">
+                <div class="stat-icon">🌲</div>
+                <div class="stat-number" id="raw-materials">0</div>
+                <div class="stat-label">Wood Species</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📋</div>
+                <div class="stat-number" id="certificates">0</div>
+                <div class="stat-label">Certificates</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-number" id="grades">0</div>
+                <div class="stat-label">Grades</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-number" id="total-crates">0</div>
+                <div class="stat-label">Crates</div>
+            </div>
+        </div>
+    </section>
 
-        <!-- FILTERS SECTION -->
-        <section class="filters-section">
+    <!-- FILTERS -->
+    <section class="filters-section">
+        <div class="filters-container">
             <div class="filters-header">
                 <h2 class="filters-title">Filters</h2>
-                <button id="clear-filters-btn" class="clear-filters-btn">Clear Filters</button>
+                <button id="clear-filters" class="clear-filters-btn">Clear Filters</button>
             </div>
-            <div class="filters-grid">
+            <div class="filters-row">
                 <div class="filter-group">
-                    <label for="wood-species-filter" class="filter-label">Wood Species</label>
-                    <select id="wood-species-filter" class="filter-select">
+                    <label for="wood-type-filter">Wood Species</label>
+                    <select id="wood-type-filter" class="filter-select">
                         <option value="">All</option>
-                        <option value="Combi">Combi</option>
-                        <option value="Combi E">Combi E</option>
-                        <option value="Euca">Euca</option>
-                        <option value="Pine">Pine</option>
-                        <option value="Twin">Twin</option>
-                        <option value="Twin E">Twin E</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="certificate-filter" class="filter-label">Certificate</label>
+                    <label for="certificate-filter">Certificate</label>
                     <select id="certificate-filter" class="filter-select">
                         <option value="">All</option>
-                        <option value="CE4 carb">CE4 carb</option>
-                        <option value="LVL">LVL</option>
-                        <option value="NC">NC</option>
-                        <option value="O&ES">O&ES</option>
-                        <option value="PS1">PS1</option>
-                        <option value="frameply">frameply</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="grade-filter" class="filter-label">Grade</label>
+                    <label for="grade-filter">Grade</label>
                     <select id="grade-filter" class="filter-select">
                         <option value="">All</option>
-                        <option value="B/B">B/B</option>
-                        <option value="BCX">BCX</option>
-                        <option value="C+/C">C+/C</option>
-                        <option value="C/C">C/C</option>
-                        <option value="CCX">CCX</option>
-                        <option value="CDX">CDX</option>
-                        <option value="falldown">falldown</option>
-                        <option value="shop grade">shop grade</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="thickness-filter" class="filter-label">Thickness</label>
+                    <label for="thickness-filter">Thickness</label>
                     <select id="thickness-filter" class="filter-select">
                         <option value="">All</option>
-                        <option value="6mm">6mm</option>
-                        <option value="9mm">9mm</option>
-                        <option value="10mm">10mm</option>
-                        <option value="12mm">12mm</option>
-                        <option value="15mm">15mm</option>
-                        <option value="17mm">17mm</option>
-                        <option value="18mm">18mm</option>
-                        <option value="20mm">20mm</option>
-                        <option value="21mm">21mm</option>
-                        <option value="22mm">22mm</option>
-                        <option value="24mm">24mm</option>
-                        <option value="27mm">27mm</option>
-                        <option value="30mm">30mm</option>
-                        <option value="31mm">31mm</option>
                     </select>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- PRODUCTS SECTION -->
-        <section class="products-section">
-            <div class="products-header">
-                <div class="products-count">
-                    <span id="filtered-count">72</span> products found
+    <!-- RESULTS -->
+    <section class="results-section">
+        <div class="results-container">
+            <div class="results-header">
+                <div class="results-count">
+                    <span id="products-count">0</span> products found
                 </div>
                 <div class="view-controls">
                     <button id="grid-view-btn" class="view-btn active">Grid</button>
                     <button id="list-view-btn" class="view-btn">List</button>
                 </div>
             </div>
-            <div id="products-container" class="products-grid">
-                <!-- Products will be loaded dynamically -->
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SEÇÃO DE AJUDA -->
-        <section class="help-section">
-            <div class="help-card">
-                <div class="help-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                        <path d="M12 17h.01"></path>
-                    </svg>
-                </div>
-                <div class="help-content">
-                    <h3 class="help-title">Need Help?</h3>
-                    <p class="help-description">
-                        Access our comprehensive user guide to learn how to navigate the system, use filters, 
-                        understand product specifications, and make the most of all available features.
-                    </p>
-                    <button class="help-download-btn" onclick="openUserGuide()">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7,10 12,15 17,10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Download User Guide (PDF)
-                    </button>
-                </div>
-            </div>
-        </section>
-    </main>
+    <!-- PRODUCTS -->
+    <section class="products-section">
+        <div id="products-container" class="products-container products-grid">
+            <!-- Products will be loaded here -->
+        </div>
+    </section>
 
     <!-- PRODUCT DETAILS MODAL -->
     <div id="product-modal" class="modal" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modal-title">Product Details</h2>
-                <button id="modal-close" class="modal-close">×</button>
+                <button id="modal-close" class="modal-close">&times;</button>
             </div>
             <div id="modal-body" class="modal-body">
                 <!-- Content will be loaded dynamically -->
@@ -224,7 +191,7 @@
     <div class="cart-modal-content">
             <div class="cart-modal-header">
                 <h3 class="cart-modal-title">Interest List</h3>
-                <button id="cart-modal-close" class="cart-modal-close">×</button>
+                <button id="cart-modal-close" class="cart-modal-close">&times;</button>
             </div>
             <div id="cart-items-list" class="cart-items-list">
                 <!-- List items will be loaded here -->
@@ -243,7 +210,7 @@
     <script src="logistics.js"></script>
     <script src="lang.js"></script>
     <script src="script_improved.js"></script>
-    <script src="stock-date-addon.min.js" defer=""></script>
-    <script src="user-guide-addon.js"></script>
+    <script src="stock-date-addon.min.js" defer></script>
 </body>
+
 </html>
