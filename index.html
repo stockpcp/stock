@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="inter-tight-font.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles_improved.css">
+    <link rel="stylesheet" href="user-guide-addon.css">
 </head>
 
 <body>
@@ -63,6 +64,16 @@
                 </div>
             </div>
             <div class="lang-switch">
+                <!-- BOTÃO DO GUIA DO USUÁRIO -->
+                <button id="user-guide-btn" class="user-guide-btn" title="User Guide" onclick="openUserGuide()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <path d="M12 17h.01"></path>
+                    </svg>
+                    <span>User Guide</span>
+                </button>
+                
                 <button class="lang-flag" data-lang="en" title="English" style="background:none; border:none; cursor:pointer; margin-right:0.5rem;">
                     <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/us.svg" alt="EN" style="width:47px; height:30px; border-radius:6px; box-shadow:0 1px 2px #0002; object-fit:cover; vertical-align:middle;">
                 </button>
@@ -173,6 +184,34 @@
         </div>
     </section>
 
+    <!-- SEÇÃO DE AJUDA -->
+    <section class="help-section">
+        <div class="help-card">
+            <div class="help-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <path d="M12 17h.01"></path>
+                </svg>
+            </div>
+            <div class="help-content">
+                <h3 class="help-title">Need Help?</h3>
+                <p class="help-description">
+                    Access our comprehensive user guide to learn how to navigate the system, use filters, 
+                    understand product specifications, and make the most of all available features.
+                </p>
+                <button class="help-download-btn" onclick="openUserGuide()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7,10 12,15 17,10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Download User Guide (PDF)
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- PRODUCT DETAILS MODAL -->
     <div id="product-modal" class="modal" style="display: none;">
         <div class="modal-content">
@@ -211,6 +250,7 @@
     <script src="lang.js"></script>
     <script src="script_improved.js"></script>
     <script src="stock-date-addon.min.js" defer></script>
+    <script src="user-guide-addon.js"></script>
 </body>
 
 </html>
