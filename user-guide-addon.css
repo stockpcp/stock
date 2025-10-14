@@ -47,7 +47,7 @@
     display: flex;
     align-items: flex-start;
     gap: 1.5rem;
-    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+    background: linear-gradient(135deg, ##f2f2f2 0%, #d7fade 100%);
     border: 1px solid #bbdefb;
     border-radius: 12px;
     padding: 2rem;
@@ -65,7 +65,7 @@
     flex-shrink: 0;
     width: 48px;
     height: 48px;
-    background: #2196f3;
+    background: #00B04F;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -81,7 +81,7 @@
 .help-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #1565c0;
+    color: #00B04F;
     margin: 0 0 1rem 0;
     font-family: inherit;
     line-height: 1.2;
@@ -100,7 +100,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: #2196f3;
+    background: #00B04F;
     color: white;
     border: none;
     border-radius: 8px;
@@ -114,9 +114,9 @@
 }
 
 .help-download-btn:hover {
-    background: #1976d2;
+    background: #00B04F;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 176, 79, 0.3);
 }
 
 .help-download-btn svg {
