@@ -46,9 +46,9 @@
 .help-card {
     display: flex;
     align-items: flex-start;
-    gap: 1.5rem;
+    gap: 1.3rem;
     background: linear-gradient(135deg, ##f2f2f2 0%, #d7fade 100%);
-    border: 1px solid #bbdefb;
+    border: 1px solid #00B04F;
     border-radius: 12px;
     padding: 2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
