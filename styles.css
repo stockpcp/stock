@@ -195,8 +195,8 @@ body {
 
 /* ÁREA DE RESUMO/ESTATÍSTICAS (5 Cartões) */
 .stats-section {
-    background: linear-gradient(135deg, #1E293B, #1E293B);
-    padding: 2rem 0 3rem 0;
+    background: linear-gradient(135deg, #ffffff, #00B04F);
+    padding: 2rem 0 2rem 0;
 }
 
 .stats-container {
