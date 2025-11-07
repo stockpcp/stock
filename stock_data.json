@@ -1098,7 +1098,7 @@
     "Size": "2400x1200",
     "Thickness": 12,
     "Ply": 5,
-    "Crates": 2,
+    "Crates": 3,
     "Price": 180,
     "WeightPerCrate": 1780,
     "VolumePerCrate": 2.592,
@@ -1117,34 +1117,6 @@
     "WeightPerCrate": 1850,
     "VolumePerCrate": 2.679,
     "SheetsPerCrate": 100,
-    "PayloadLimit": 28500
-  },
-  {
-    "Logs": "Euca",
-    "Certificate": "NC",
-    "Grade": "shop grade",
-    "Size": "2440x1220",
-    "Thickness": 27,
-    "Ply": 9,
-    "Crates": 1,
-    "Price": 180,
-    "WeightPerCrate": 1850,
-    "VolumePerCrate": 2.652,
-    "SheetsPerCrate": 33,
-    "PayloadLimit": 28500
-  },
-  {
-    "Logs": "Euca",
-    "Certificate": "NC",
-    "Grade": "shop grade",
-    "Size": "2440x1220",
-    "Thickness": 12,
-    "Ply": 5,
-    "Crates": 1,
-    "Price": 180,
-    "WeightPerCrate": 1850,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 75,
     "PayloadLimit": 28500
   }
 ]
