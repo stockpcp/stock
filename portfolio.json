@@ -1,0 +1,155 @@
+{
+  "section": {
+    "id": "portfolio",
+    "tag": "Certificações",
+    "title": "Portfólio de Produtos",
+    "subtitle": "4 Categorias Baseadas em Normas Internacionais",
+    "description": "Nossos compensados são classificados em 4 categorias de portfólio, cada uma com certificações e requisitos técnicos específicos. Esta classificação define os padrões de qualidade estrutural, resistência mecânica e certificações internacionais do produto."
+  },
+  "intro": {
+    "categories": ["NS - Não Estrutural", "SS - Especial (Frameply)", "ST - Estrutural", "NC - Não Conforme (Descartes de produção)"],
+    "note": "Todos os produtos (exceto NC) são fabricados com resina fenólica E1 de baixa emissão de formaldeído, testada pelo International Testing Center (ITC) com resultados de 0,00-0,01 ppm, bem abaixo do limite exigido de 0,05 ppm."
+  },
+  "products": [
+    {
+      "id": "ns",
+      "code": "NS",
+      "name": "Não Estrutural",
+      "fullName": "Non-Structural Plywood",
+      "icon": "📦",
+      "badge": "Versátil",
+      "description": "Painéis não estruturais versáteis, adequados para aplicações que não exigem resistência estrutural certificada. Fabricados com resina fenólica E1 de baixa emissão de formaldeído, atendem requisitos de qualidade para diversas aplicações não estruturais.",
+      "specifications": {
+        "classification": "Não Estrutural",
+        "resin": "Fenólica E1 (baixa emissão de formaldeído)",
+        "formaldehyde": "0,00-0,01 ppm (testado ITC)",
+        "limit": "< 0,05 ppm",
+        "glue": "Resistente à umidade (WBP - Weather and Boil Proof)"
+      },
+      "dimensions": {
+        "sizes": ["2500 x 1250 mm", "2440 x 1220 mm"],
+        "thicknesses": ["9mm", "12mm", "15mm", "18mm", "21mm", "24mm", "27mm", "30mm"]
+      },
+      "certifications": ["Resina E1 (baixa emissão de formaldeído)", "Teste ITC (International Testing Center)", "FSC® disponível (sob consulta)"],
+      "features": ["Não possui certificação estrutural", "Versatilidade de aplicações", "Resina resistente à umidade", "Emissão de formaldeído controlada", "Múltiplas espessuras disponíveis"]
+    },
+    {
+      "id": "ss",
+      "code": "SS",
+      "name": "Especial (Frameply)",
+      "fullName": "Special Plywood",
+      "icon": "⭐",
+      "badge": "Qualidade Superior",
+      "description": "Compensados especiais com requisitos técnicos específicos para aplicações que exigem maior controle de qualidade. Inclui o produto Frameply (18-22mm) com restrições rigorosas para vãos no miolo, e o compensado especial de 6mm (3 camadas, 100% eucalipto) com faces importadas de urograndis.",
+      "specifications": {
+        "classification": "Especial",
+        "resin": "Fenólica E1 (baixa emissão de formaldeído)",
+        "formaldehyde": "0,00-0,01 ppm (testado ITC)",
+        "limit": "< 0,05 ppm",
+        "glue": "Resistente à umidade (WBP)",
+        "quality": "Restrições rigorosas para vãos no miolo"
+      },
+      "products": [
+        {
+          "name": "Frameply (18-22mm)",
+          "dimensions": "2440 x 1220 mm",
+          "thicknesses": ["18mm", "20mm", "21mm", "22mm"],
+          "features": ["Restrições rigorosas para vãos no miolo", "Estrutura forte e estável", "Qualidade superior para armações", "Resistência mecânica elevada"]
+        },
+        {
+          "name": "Compensado Especial 6mm",
+          "dimensions": "2440 x 1220 mm",
+          "thickness": "6mm (3 camadas)",
+          "composition": "100% Eucalipto",
+          "features": ["Faces importadas de Urograndis", "Excelente aparência visual", "Superfície extremamente lisa", "Chapas perfeitamente retas (sem empenamento)", "Resistência excepcional para a espessura"]
+        }
+      ],
+      "certifications": ["Resina E1 (baixa emissão de formaldeído)", "Teste ITC (International Testing Center)", "Frameply (especificação técnica específica)", "FSC® disponível (sob consulta)"],
+      "features": ["Controle de qualidade rigoroso", "Restrições específicas de vãos no miolo", "Faces importadas (6mm)", "Resistência superior", "Estabilidade dimensional", "Superfície lisa e uniforme"]
+    },
+    {
+      "id": "st",
+      "code": "ST",
+      "name": "Estrutural",
+      "fullName": "Structural Plywood",
+      "icon": "🏗️",
+      "badge": "Certificado",
+      "description": "Compensados certificados para uso estrutural, atendendo rigorosas normas do mercado europeu e norte-americano. Garantem requisitos de resistência mecânica e durabilidade para aplicações que exigem desempenho estrutural certificado.",
+      "specifications": {
+        "classification": "Estrutural",
+        "resin": "Fenólica E1 (baixa emissão de formaldeído)",
+        "formaldehyde": "0,00-0,01 ppm (testado ITC)",
+        "limit": "< 0,05 ppm",
+        "glue": "Resistente à umidade (WBP)",
+        "standards": "Mercado europeu e norte-americano"
+      },
+      "requirements": ["Resistência à flexão certificada", "Resistência ao cisalhamento certificada", "Módulo de elasticidade certificado", "Durabilidade estrutural garantida", "Aderência entre camadas certificada", "Teor de umidade controlado"],
+      "dimensions": {
+        "sizes": ["2500 x 1250 mm", "2440 x 1220 mm"],
+        "thicknesses": ["9mm", "12mm", "15mm", "18mm", "21mm", "24mm", "27mm", "30mm"]
+      },
+      "certifications": ["Resina E1 (baixa emissão de formaldeído)", "Teste ITC (International Testing Center)", "Normas estruturais europeias (EN 636)", "Normas estruturais norte-americanas (PS1-19)", "CE (Conformité Européenne)", "CARB (California Air Resources Board)", "FSC® disponível (sob consulta)"],
+      "features": ["Certificação estrutural completa", "Atende normas internacionais rigorosas", "Resistência mecânica garantida", "Durabilidade comprovada", "Controle de qualidade máximo", "Rastreabilidade de produção"]
+    },
+    {
+      "id": "nc",
+      "code": "NC",
+      "name": "Não Conforme",
+      "fullName": "Descartes de Produção",
+      "icon": "⚠️",
+      "badge": "Sem Garantia Estrutural ou Estética",
+      "description": "Produtos que não atendem os requisitos do mercado externo devido a defeitos específicos de processo ou qualidade visual. São descartes de produção que podem ter origem de qualquer portfólio (NS, SS ou ST), mas apresentam não conformidades que impedem sua comercialização no mercado internacional.",
+      "warning": {
+        "title": "SEM GARANTIA ESTRUTURAL OU ESTÉTICA",
+        "message": "Produtos NC são vendidos como estão, sem garantias de desempenho estrutural ou visual."
+      },
+      "classifications": [
+        {
+          "name": "Fall-Down",
+          "description": "Defeitos mecânicos e visuais",
+          "defects": ["Cantos quebrados", "Enchimento com falhas nas bordas", "Marcas de prensagem", "Variações no esquadro", "Variações na espessura", "Superfície corrigida com massa e lixamento"],
+          "integrity": "Pode estar preservada (depende do defeito)",
+          "origin": "Qualquer portfólio (NS, SS, ST)"
+        },
+        {
+          "name": "Shop Grade",
+          "description": "Defeitos mecânicos, visuais E de colagem",
+          "defects": ["Todos os defeitos do Fall-down", "Bolhas internas (descolamento parcial)", "Problemas de aderência entre camadas"],
+          "integrity": "Comprometida",
+          "origin": "Qualquer portfólio (NS, SS, ST)",
+          "structural": "NÃO RECOMENDADO"
+        }
+      ],
+      "reasons": ["Defeitos visuais nas faces (fora da grade especificada)", "Defeitos mecânicos (cantos, bordas, esquadro)", "Problemas de colagem (bolhas, descolamento)", "Variações dimensionais (espessura, esquadro)", "Marcas de processo (prensagem, transporte)", "Combinação de múltiplos defeitos menores"],
+      "considerations": ["Tipo de defeito presente", "Impacto do defeito na sua aplicação", "Possibilidade de recorte/aproveitamento", "Necessidade de resistência estrutural", "Requisitos visuais do projeto", "Custo-benefício vs produto conforme"],
+      "categories": [
+        {
+          "icon": "🔥",
+          "name": "Oportunidade Incrível",
+          "description": "Defeitos mínimos, alto aproveitamento, desconto significativo"
+        },
+        {
+          "icon": "⭐",
+          "name": "Boa Opção Custo-Benefício",
+          "description": "Defeitos moderados, bom aproveitamento, desconto atrativo"
+        },
+        {
+          "icon": "⚠️",
+          "name": "Descarte Padrão",
+          "description": "Defeitos evidentes, aproveitamento limitado, preço reduzido"
+        }
+      ],
+      "certifications": [
+        "Sem certificações de desempenho",
+        "FSC® pode estar presente (se origem tinha)",
+        "Sem garantia estrutural ou estética"
+      ],
+      "features": ["Sem certificações de desempenho", "Pode ter FSC® (se origem tinha)", "Sem garantias de desempenho", "Vendido como está", "Preços reduzidos", "Disponibilidade variável", "Pode ter origem de qualquer portfólio"],
+      "learnMoreLink": {
+        "text": "ℹ️ Entenda as diferenças entre Falldown e Shop Grade",
+        "url": "nc-qualidades.html"
+      }
+    }
+  ]
+}
+

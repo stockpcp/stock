@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque Disponível - Repinho Compensados</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* Header */
+        .site-header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #2d5016;
+        }
+
+        .cta-button {
+            background: #2d5016;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #1f3810;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: white;
+            padding: 48px 24px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 35px;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Info Badge */
+        .info-badge {
+            background: #fffbf0;
+            border-left: 4px solid #ffc107;
+            padding: 16px 24px;
+            border-radius: 6px;
+            margin: 24px auto;
+            max-width: 1400px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .info-badge strong {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .info-badge p {
+            margin: 4px 0;
+            color: #666;
+        }
+
+        .info-badge p:first-child {
+            margin-top: 0;
+        }
+
+        .info-badge p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Filtros */
+        .filters-section {
+            background: white;
+            padding: 32px;
+            margin: 24px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .filters-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .filter-select {
+            height: 48px;
+            padding: 0 16px;
+            font-size: 17px;
+            border: 1px solid #2d5016;
+            border-radius: 4px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-select:hover {
+            background: #f0f0f0;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #4a7c2a;
+            background: #e8f5e9;
+        }
+
+        .filter-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+        }
+
+        .btn-clear-filters {
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-clear-filters:hover {
+            background: #b71c1c;
+        }
+
+        .results-count {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d5016;
+        }
+
+        .results-count-icon {
+            margin-right: 8px;
+        }
+
+        /* Tabela */
+        .table-section {
+            background: white;
+            padding: 24px;
+            margin: 24px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+        }
+
+        thead {
+            background: #2d5016;
+            color: white;
+        }
+
+        th {
+            padding: 16px 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        th.align-left {
+            text-align: left;
+        }
+
+        th.align-right {
+            text-align: right;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        td {
+            padding: 16px 12px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        td.align-left {
+            text-align: left;
+            padding-left: 16px;
+        }
+
+        td.align-right {
+            text-align: right;
+            padding-right: 16px;
+            white-space: nowrap;
+        }
+
+        /* Featured Products */
+        tr.featured {
+            position: relative;
+        }
+
+        tr.featured-opportunity {
+            background: #f0fdf4 !important;
+            border-left: 4px solid #16a34a;
+        }
+
+        tr.featured-best-value {
+            background: #f7fee7 !important;
+            border-left: 4px solid #84cc16;
+        }
+
+        tr.featured-special {
+            background: #ecfeff !important;
+            border-left: 4px solid #06b6d4;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-left: 8px;
+            white-space: nowrap;
+        }
+
+        .badge-opportunity {
+            background: #16a34a;
+            color: white;
+        }
+
+        .badge-best-value {
+            background: #84cc16;
+            color: white;
+        }
+
+        .badge-special {
+            background: #06b6d4;
+            color: white;
+        }
+
+        /* Portfolio Badges */
+        .portfolio-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .portfolio-ns {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .portfolio-ss {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .portfolio-st {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .portfolio-nc {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+
+        /* Botão Cotar */
+        .btn-quote {
+            padding: 8px 20px;
+            background: #2d5016;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-quote:hover {
+            background: #1f3810;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: #f8f9fa;
+            padding: 48px 0 24px;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 32px;
+        }
+
+        .footer-column h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .footer-link {
+            display: block;
+            color: #666666;
+            text-decoration: none;
+            font-size: 15px;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: #2d5016;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px 0;
+            border-top: 1px solid #e5e5e5;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #666666;
+            font-size: 15px;
+        }
+
+        /* Responsivo */
+        @media (max-width: 1024px) {
+            .filters-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cards-grid-info {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .table-section {
+                overflow-x: scroll;
+            }
+
+            table {
+                min-width: 1200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Repinho">
+            </a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="entenda-produtos.html">Entenda Nossos Produtos</a></li>
+                    <li><a href="voce-sabia.html">Você Sabia?</a></li>
+                </ul>
+            </nav>
+            <a href="estoque.html" class="cta-button">Ver Estoque</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Estoque Disponível</h1>
+        <p>Consulte preços, especificações técnicas e disponibilidade em tempo real. Utilize os filtros para encontrar o produto ideal para seu projeto.</p>
+    </section>
+
+    <!-- Info Badge -->
+    <div class="info-badge">
+        <p><strong>⚠️ INFORMAÇÕES IMPORTANTES SOBRE PREÇOS E VENDA:</strong></p>
+        <p>Todos os preços são EXW Guarapuava/PR em Reais (R$) por metro cúbico (m³), será acrescido os impostos vigentes no Brasil.</p>
+        <p>Vendemos por palete completo (consulte quantidade de chapas por palete em cada produto).</p>
+        <p>Frete não incluso, podemos auxiliar na contratação de transporte para sua região.</p>
+    </div>
+
+    <div class="container">
+        <!-- Filtros -->
+        <section class="filters-section">
+            <h2 class="filters-title">Filtros de Busca</h2>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label class="filter-label">
+                        Composição
+                    </label>
+                    <select id="filter-composition" class="filter-select">
+                        <option value="">Todas</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">
+                        Portfólio
+                    </label>
+                    <select id="filter-portfolio" class="filter-select">
+                        <option value="">Todos</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">
+                        Qualidade
+                    </label>
+                    <select id="filter-grade" class="filter-select">
+                        <option value="">Todas</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">
+                        Espessura
+                    </label>
+                    <select id="filter-thickness" class="filter-select">
+                        <option value="">Todas</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">
+                        Dimensão
+                    </label>
+                    <select id="filter-size" class="filter-select">
+                        <option value="">Todas</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">
+                        Destaque
+                    </label>
+                    <select id="filter-featured" class="filter-select">
+                        <option value="">Todos</option>
+                        <option value="opportunity">🔥 Oportunidade</option>
+                        <option value="best-value">💎 Custo-Benefício</option>
+                        <option value="special">💰 Oferta Especial</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button class="btn-clear-filters" onclick="clearFilters()">🗑️ Limpar Todos os Filtros</button>
+                <div class="results-count">
+                    <span class="results-count-icon">✅</span>
+                    <span id="results-count">0</span> produtos encontrados
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabela -->
+        <section class="table-section">
+            <table id="stock-table">
+                <thead>
+                    <tr>
+                        <th class="align-left">Composição</th>
+                        <th>Portfólio</th>
+                        <th>Certificação</th>
+                        <th>Qualidade</th>
+                        <th>Dimensão</th>
+                        <th>Espessura</th>
+                        <th>Camadas</th>
+                        <th>Paletes</th>
+                        <th class="align-right">Preço/m³</th>
+                        <th class="align-right">Preço/Chapa</th>
+                        <th>Destaque</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="stock-tbody">
+                    <!-- Dados serão inseridos via JavaScript -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Navegação</h3>
+                <a href="index.html" class="footer-link">Home</a>
+                <a href="entenda-produtos.html" class="footer-link">Entenda Nossos Produtos</a>
+                <a href="estoque.html" class="footer-link">Estoque Disponível</a>
+            </div>
+            <div class="footer-column">
+                <h3>Produtos</h3>
+                <a href="entenda-produtos.html#composicao" class="footer-link">Composição de Matéria-Prima</a>
+                <a href="entenda-produtos.html#portfolio" class="footer-link">Portfólio de Produtos</a>
+                <a href="entenda-produtos.html#qualidade" class="footer-link">Qualidade</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contato</h3>
+                <a href="tel:+554236298500" class="footer-link">📞 (42) 3629-8500</a>
+                <a href="mailto:comercial1@repinho.ind.br" class="footer-link">✉️ comercial1@repinho.ind.br</a>
+                <p class="footer-link">📍 Guarapuava, PR</p>
+            </div>
+            <div class="footer-column">
+                <h3>Institucional</h3>
+                <a href="https://repinho.ind.br" target="_blank" class="footer-link">Site Repinho ↗</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Repinho. Todos os direitos reservados. | <a href="#" style="color: #666666;">Fale conosco</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Configuração de destaques
+        const FEATURED_CONFIG = {
+            opportunity: {
+                label: 'Oportunidade',
+                icon: '🔥',
+                color: '#ff9800',
+                background: '#fff3e0',
+                class: 'featured-opportunity',
+                badgeClass: 'badge-opportunity'
+            },
+            'best-value': {
+                label: 'Custo-Benefício',
+                icon: '💎',
+                color: '#1976d2',
+                background: '#e3f2fd',
+                class: 'featured-best-value',
+                badgeClass: 'badge-best-value'
+            },
+            special: {
+                label: 'Oferta Especial',
+                icon: '💰',
+                color: '#9c27b0',
+                background: '#f3e5f5',
+                class: 'featured-special',
+                badgeClass: 'badge-special'
+            }
+        };
+
+        // Mapeamento de valores em português para inglês
+        const FEATURED_MAP = {
+            'Oportunidade': 'opportunity',
+            'Custo-Benefício': 'best-value',
+            'Oferta Especial': 'special',
+            // Manter compatibilidade com valores em inglês
+            'opportunity': 'opportunity',
+            'best-value': 'best-value',
+            'special': 'special'
+        };
+
+        // Dados do estoque
+        let stockData = [];
+        let filteredData = [];
+
+        // Carregar dados do JSON
+        async function loadStockData() {
+            try {
+                const response = await fetch('liststock_data.json');
+                stockData = await response.json();
+                filteredData = [...stockData];
+                populateFilters();
+                renderTable();
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+            }
+        }
+
+        // Popular filtros
+        function populateFilters() {
+            const compositions = [...new Set(stockData.map(p => p.Composition))].sort();
+            const portfolios = [...new Set(stockData.map(p => p.Portfolio))].sort();
+            const grades = [...new Set(stockData.map(p => p.Grade))].sort();
+            const thicknesses = [...new Set(stockData.map(p => p.Thickness))].sort((a, b) => a - b);
+            const sizes = [...new Set(stockData.map(p => p.Size))].sort();
+
+            populateSelect('filter-composition', compositions);
+            populateSelect('filter-portfolio', portfolios);
+            populateSelect('filter-grade', grades);
+            populateSelect('filter-thickness', thicknesses);
+            populateSelect('filter-size', sizes);
+        }
+
+        function populateSelect(id, options) {
+            const select = document.getElementById(id);
+            options.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option;
+                opt.textContent = option;
+                select.appendChild(opt);
+            });
+        }
+
+        // Renderizar tabela
+        function renderTable() {
+            const tbody = document.getElementById('stock-tbody');
+            tbody.innerHTML = '';
+
+            filteredData.forEach(product => {
+                const tr = document.createElement('tr');
+                
+                // Adicionar classe de destaque se houver
+                const featuredKey = FEATURED_MAP[product.Featured] || product.Featured;
+                if (featuredKey && FEATURED_CONFIG[featuredKey]) {
+                    tr.classList.add('featured', FEATURED_CONFIG[featuredKey].class);
+                }
+
+                // Composição
+                const compositionHtml = product.Composition;
+                
+                // Badge de destaque separado
+                let featuredHtml = '';
+                const featuredKey2 = FEATURED_MAP[product.Featured] || product.Featured;
+                if (featuredKey2 && FEATURED_CONFIG[featuredKey2]) {
+                    const config = FEATURED_CONFIG[featuredKey2];
+                    featuredHtml = `<span class="featured-badge ${config.badgeClass}">${config.icon} ${config.label}</span>`;
+                }
+
+                // Portfólio com badge colorido
+                const portfolioClass = `portfolio-${product.Portfolio.toLowerCase()}`;
+                const portfolioHtml = `<span class="portfolio-badge ${portfolioClass}">${product.Portfolio}</span>`;
+
+                // Calcular preço por chapa
+                const sizeparts = product.Size.split('x');
+                const width = parseFloat(sizeparts[0]) / 1000;
+                const height = parseFloat(sizeparts[1]) / 1000;
+                const thickness = parseFloat(product.Thickness) / 1000;
+                const pricePerSheet = product.PricePerM3 * width * height * thickness;
+
+                tr.innerHTML = `
+                    <td class="align-left">${compositionHtml}</td>
+                    <td>${portfolioHtml}</td>
+                    <td>${product.Certificate}</td>
+                    <td>${product.Grade}</td>
+                    <td>${product.Size}mm</td>
+                    <td>${product.Thickness}mm</td>
+                    <td>${product.Ply}</td>
+                    <td>${product.Crates}</td>
+                    <td class="align-right">R$ ${formatNumber(product.PricePerM3)}</td>
+                    <td class="align-right">R$ ${formatNumber(pricePerSheet)}</td>
+                    <td>${featuredHtml}</td>
+                    <td><button class="btn-quote" onclick="quoteProduct('${product.Certificate}', '${product.Grade}', '${product.Size}', ${product.Thickness}, '${product.Composition}', '${product.Portfolio}')">Cotar</button></td>
+                `;
+
+                tbody.appendChild(tr);
+            });
+
+            updateResultsCount();
+        }
+
+        // Aplicar filtros
+        function applyFilters() {
+            const composition = document.getElementById('filter-composition').value;
+            const portfolio = document.getElementById('filter-portfolio').value;
+            const grade = document.getElementById('filter-grade').value;
+            const thickness = document.getElementById('filter-thickness').value;
+            const size = document.getElementById('filter-size').value;
+            const featured = document.getElementById('filter-featured').value;
+
+            filteredData = stockData.filter(product => {
+                const productFeaturedKey = FEATURED_MAP[product.Featured] || product.Featured;
+                return (!composition || product.Composition === composition) &&
+                       (!portfolio || product.Portfolio === portfolio) &&
+                       (!grade || product.Grade === grade) &&
+                       (!thickness || product.Thickness == thickness) &&
+                       (!size || product.Size === size) &&
+                       (!featured || productFeaturedKey === featured);
+            });
+
+            renderTable();
+        }
+
+        // Limpar filtros
+        function clearFilters() {
+            document.getElementById('filter-composition').value = '';
+            document.getElementById('filter-portfolio').value = '';
+            document.getElementById('filter-grade').value = '';
+            document.getElementById('filter-thickness').value = '';
+            document.getElementById('filter-size').value = '';
+            document.getElementById('filter-featured').value = '';
+            filteredData = [...stockData];
+            renderTable();
+        }
+
+        // Atualizar contador de resultados
+        function updateResultsCount() {
+            document.getElementById('results-count').textContent = filteredData.length;
+        }
+
+        // Cotar produto
+        function quoteProduct(cert, grade, size, thickness, composition, portfolio) {
+            // Buscar dados completos do produto
+            const product = stockData.find(p => 
+                p.Certificate === cert && 
+                p.Grade === grade && 
+                p.Size === size && 
+                p.Thickness == thickness
+            );
+
+            // Criar mensagem personalizada
+            const message = `Olá! Gostaria de cotar o seguinte produto:
+
+📦 Produto: Compensado ${product ? product.Composition : composition}
+📏 Espessura: ${thickness}mm
+📐 Dimensões: ${size}mm
+🌲 Composição: ${product ? product.Composition : composition}
+🏷️ Portfólio: ${product ? product.Portfolio : portfolio}
+⭐ Qualidade: ${grade}
+🔖 Certificação: ${cert}
+
+Aguardo retorno!`;
+
+            // Abrir WhatsApp diretamente
+            const whatsappUrl = `https://wa.me/554236298520?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Utilitários
+        function capitalizeFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function formatNumber(num) {
+            if (num === null || num === undefined || isNaN(num)) return '0,00';
+            return Number(num).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        // Event listeners
+        document.getElementById('filter-composition').addEventListener('change', applyFilters);
+        document.getElementById('filter-portfolio').addEventListener('change', applyFilters);
+        document.getElementById('filter-grade').addEventListener('change', applyFilters);
+        document.getElementById('filter-thickness').addEventListener('change', applyFilters);
+        document.getElementById('filter-size').addEventListener('change', applyFilters);
+        document.getElementById('filter-featured').addEventListener('change', applyFilters);
+
+        // Inicializar
+        loadStockData();
+    </script>
+
+<!-- CSS do Modal -->
+<style>
+    /* Modal Overlay */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 9998;
+        animation: fadeIn 0.3s ease;
+    }
+
+    .modal-overlay.active {
+        display: block;
+    }
+
+    /* Modal Container */
+    .modal-container {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 700px;
+        max-height: 85vh;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        z-index: 9999;
+        overflow: hidden;
+        animation: slideUp 0.3s ease;
+    }
+
+    .modal-container.active {
+        display: block;
+    }
+
+    /* Modal Header */
+    .modal-header {
+        background: linear-gradient(135deg, #2d5016 0%, #3a6b1f 100%);
+        padding: 24px 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0;
+    }
+
+    .modal-close {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: #ffffff;
+        font-size: 28px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+        line-height: 1;
+        padding: 0;
+    }
+
+    .modal-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Modal Body */
+    .modal-body {
+        padding: 32px;
+        overflow-y: auto;
+        max-height: calc(85vh - 88px);
+    }
+
+    .modal-body p {
+        font-size: 15px;
+        line-height: 1.65;
+        color: #333333;
+        margin-bottom: 15px;
+        text-align: justify;
+    }
+
+    .modal-body strong {
+        color: #2d5016;
+        font-weight: 550;
+    }
+
+    .modal-emoji {
+        font-size: 20px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -45%);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+        .modal-container {
+            width: 95%;
+            max-height: 90vh;
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+        }
+
+        .modal-body {
+            padding: 24px;
+            max-height: calc(90vh - 76px);
+        }
+
+        .modal-body p {
+            font-size: 15px;
+        }
+    }
+</style>
+
+<!-- HTML do Modal -->
+<div class="modal-overlay" id="modalOverlay"></div>
+<div class="modal-container" id="modalVoceSabia">
+    <div class="modal-header">
+        <h2 class="modal-title">📚 Você Sabia? A Origem do Termo "Madeirite"</h2>
+        <button class="modal-close" id="modalClose">&times;</button>
+    </div>
+    <div class="modal-body">
+        <p>
+            Você já parou para pensar por que chamamos aquela chapa de madeira tão versátil e presente em qualquer obra de <strong>"madeirite"</strong>? <span class="modal-emoji">🤔</span> É um termo tão comum no nosso dia a dia da construção civil que parece ter nascido com o próprio material, mas a verdade é que por trás dele existe uma história fascinante de sucesso empresarial e um legado que moldou o vocabulário brasileiro!
+        </p>
+
+        <p>
+            Pois é, o nome <strong>"madeirite"</strong> não é o termo técnico correto do produto – que, aliás, é <strong>"compensado"</strong> – mas sim uma herança direta de uma das maiores e mais influentes empresas do setor madeireiro brasileiro: a <strong>Indústrias Madeirit S.A.</strong> Fundada em 1966, essa gigante, com sede em Barueri (SP) e uma importante unidade fabril em Guarapuava (PR), produziu chapas de compensado com tanta qualidade, em tal volume e com tamanha penetração no mercado que seu nome se tornou, para muitos, sinônimo do próprio material. Um verdadeiro fenômeno de mercado e de linguagem!
+        </p>
+
+        <p>
+            Esse processo, conhecido como <strong>"generificação de marca"</strong>, acontece quando uma marca se torna tão popular e dominante que passa a nomear toda uma categoria de produtos, independentemente do fabricante. Pense em <strong>"Bombril"</strong> para esponja de aço, <strong>"Xerox"</strong> para cópia de documentos, ou <strong>"Durex"</strong> para fita adesiva.
+        </p>
+
+        <p>
+            Mesmo após o encerramento das atividades da Indústrias Madeirit S.A. em 2009, seu legado vive em cada canteiro de obras e loja de materiais de construção do país. Incrível como uma marca pode moldar nosso vocabulário e permanecer viva na memória coletiva, não é? <span class="modal-emoji">✨</span>
+        </p>
+
+        <p style="margin-bottom: 0;">
+            Esta é uma homenagem à história da indústria brasileira e ao impacto cultural que grandes empresas deixam em nosso vocabulário cotidiano.</p>
+    </div>
+</div>
+
+<!-- JavaScript do Modal -->
+<script>
+    // Elementos do modal
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalVoceSabia = document.getElementById('modalVoceSabia');
+    const modalClose = document.getElementById('modalClose');
+    const voceSabiaLink = document.querySelector('a[href="voce-sabia.html"]');
+
+    // Função para abrir o modal
+    function openModal(e) {
+        e.preventDefault();
+        modalOverlay.classList.add('active');
+        modalVoceSabia.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Função para fechar o modal
+    function closeModal() {
+        modalOverlay.classList.remove('active');
+        modalVoceSabia.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Event listeners
+    if (voceSabiaLink) {
+        voceSabiaLink.addEventListener('click', openModal);
+    }
+    
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', closeModal);
+
+    // Fechar com tecla ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modalVoceSabia.classList.contains('active')) {
+            closeModal();
+        }
+    });
+</script>
+
+</body>
+</html>

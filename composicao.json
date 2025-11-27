@@ -1,0 +1,276 @@
+{
+  "section": {
+    "id": "composicao",
+    "tag": "Matéria-Prima",
+    "title": "Composição de Matéria-Prima",
+    "subtitle": "",
+    "description": "Nossos compensados são fabricados com diferentes combinações de pinus (softwood) e eucalipto (hardwood), resultando em produtos com características físicas distintas de densidade, peso e resistência."
+  },
+  "intro": {
+    "title": "6 Composições Diferentes de Pinus e Eucalipto",
+    "points": [
+      "Quanto mais eucalipto, maior a densidade",
+      "Quanto mais pinus, menor o peso",
+      "Faces podem ser de pinus ou eucalipto"
+    ],
+    "conclusion": "A escolha da composição adequada depende das especificações técnicas do seu projeto e suas necessidades assim como do portfólio/certificação do produto."
+  },
+  "categories": [
+    {
+      "id": "face-pinus",
+      "name": "Compensado de pinus",
+      "type": "",
+      "description": "Compensados com faces e contrafaces em pinus que conta com algumas características básicas: fibra longa, densidade menor, cor clara, usinagem facilitada, alta versatilidade.",
+      "subtitle": "3 composições disponíveis, variando a composição interna"
+    },
+    {
+      "id": "face-eucalipto",
+      "name": "Compensado de Eucalipto",
+      "type": "",
+      "description": "Compensados com faces e contrafaces em eucalipto Urograndis importado, apresentando fibras curtas, superfície lisa, cor rosada e maior densidade.",
+      "note": "DETALHE TÉCNICO: As lâminas das faces e contrafaces são importadas (Urograndis) e camadas internas são espécies nacionais (Dunnii e Grandis).",
+      "subtitle": ""
+    }
+  ],
+  "compositions": [
+    {
+      "id": "pine",
+      "category": "face-pinus",
+      "name": "PINE",
+      "fullName": "100% Pinus",
+      "icon": "🌲",
+      "badge": "Densidade Média-Baixa",
+      "description": "Compensado fabricado inteiramente com lâminas de pinus.",
+      "layers": [
+        { "type": "Pinus", "label": "face", "wood": "Softwood", "color": "#F4E4C1" },
+        { "type": "Pinus", "label": "miolo", "wood": "Softwood", "color": "#F4E4C1" },
+        { "type": "Pinus", "label": "miolo", "wood": "Softwood", "color": "#F4E4C1" },
+        { "type": "Pinus", "label": "miolo", "wood": "Softwood", "color": "#F4E4C1" },
+        { "type": "Pinus", "label": "contraface", "wood": "Softwood", "color": "#F4E4C1" }
+      ],
+      "density": {
+        "min": 495,
+        "max": 580,
+        "avg": 538,
+        "unit": "kg/m³",
+        "level": "Mínima",
+        "visual": "⚪⚪⚫⚫⚫"
+      },
+      "characteristics": {
+        "weight": "Leve",
+        "strength": "Versátil para construção civil, embalagens e projetos DIY.",
+        "machining": "Muito facilitada",
+        "woodType": "100% Softwood",
+        "origin": "Pinus"
+      },
+      "composition": {
+        "faces": "Pinus",
+        "core": "100% Pinus",
+        "backfaces": "Pinus"
+      }
+    },
+    {
+      "id": "combi",
+      "category": "face-pinus",
+      "name": "COMBI",
+      "fullName": "Faces Pinus + Miolo Alternado",
+      "icon": "🌲",
+      "badge": "Densidade Média",
+      "description": "Compensado com faces e contrafaces em pinus e camadas internas alternadas de eucalipto e pinus. A alternância de madeiras resulta em aumento da densidade, combinando características dos dois tipos de madeira.",
+      "layers": [
+        { "type": "Pinus", "label": "face", "wood": "Softwood", "color": "#F4E4C1" },
+        { "type": "Eucalipto", "label": "miolo", "wood": "Hardwood", "color": "#E8C4B8" },
+        { "type": "Pinus", "label": "miolo", "wood": "Softwood", "color": "#F4E4C1" },
+        { "type": "Eucalipto", "label": "miolo", "wood": "Hardwood", "color": "#E8C4B8" },
+        { "type": "Pinus", "label": "contraface", "wood": "Softwood", "color": "#F4E4C1" }
+      ],
+      "density": {
+        "min": 595,
+        "max": 615,
+        "avg": 605,
+        "unit": "kg/m³",
+        "level": "Média",
+        "visual": "⚪⚪⚪⚫⚫"
+      },
+      "characteristics": {
+        "weight": "Médio",
+        "strength": "Mesma aplicabilidade do pinus com incremento de resistência.",
+        "machining": "Facilitada",
+        "woodType": "Softwood (faces) + Hardwood/Softwood alternado (miolo)",
+        "origin": "Pinus + Eucalipto (Dunnii/Grandis)"
+      },
+      "composition": {
+        "faces": "Pinus",
+        "core": "Alternado (Eucalipto + Pinus)",
+        "backfaces": "Pinus"
+      }
+    },
+    {
+      "id": "twin",
+      "category": "face-pinus",
+      "name": "TWIN",
+      "fullName": "Faces Pinus + Miolo 100% Eucalipto",
+      "icon": "🌲",
+      "badge": "Densidade Alta",
+      "description": "Compensado com faces e contrafaces em pinus e todas as camadas internas em eucalipto.",
+      "layers": [
+        { "type": "Pinus", "label": "face", "wood": "Softwood", "color": "#F4E4C1" },
+        { "type": "Eucalipto", "label": "miolo", "wood": "Hardwood", "color": "#E8C4B8" },
+        { "type": "Eucalipto", "label": "miolo", "wood": "Hardwood", "color": "#E8C4B8" },
+        { "type": "Eucalipto", "label": "miolo", "wood": "Hardwood", "color": "#E8C4B8" },
+        { "type": "Pinus", "label": "contraface", "wood": "Softwood", "color": "#F4E4C1" }
+      ],
+      "density": {
+        "min": 650,
+        "max": 680,
+        "avg": 665,
+        "unit": "kg/m³",
+        "level": "Alta",
+        "visual": "⚪⚪⚪⚪⚫"
+      },
+      "characteristics": {
+        "weight": "Pesado",
+        "strength": "Incremento da resistência do material combi",
+        "machining": "Moderada (faces facilitadas, miolo mais denso)",
+        "woodType": "Softwood (faces) + 100% Hardwood (miolo)",
+        "origin": "Pinus + Eucalipto (Dunnii/Grandis)"
+      },
+      "composition": {
+        "faces": "Pinus",
+        "core": "100% Eucalipto (Dunnii/Grandis)",
+        "backfaces": "Pinus"
+      }
+    },
+    {
+      "id": "euca",
+      "category": "face-eucalipto",
+      "name": "EUCA",
+      "fullName": "100% Eucalipto",
+      "icon": "🌿",
+      "badge": "Densidade Máxima",
+      "description": "Compensado fabricado inteiramente com lâminas de eucalipto. Faces e contrafaces em eucalipto Urograndis e miolo em eucalipto (Dunnii e Grandis). Resulta em produto de densidade máxima e resistência mecânica superior.",
+      "layers": [
+        { "type": "Eucalipto", "label": "face", "wood": "Hardwood Importado (Urograndis)", "color": "#D4A5A5" },
+        { "type": "Eucalipto", "label": "miolo", "wood": "Hardwood (Dunnii/Grandis)", "color": "#E8C4B8" },
+        { "type": "Eucalipto", "label": "miolo", "wood": "Hardwood (Dunnii/Grandis)", "color": "#E8C4B8" },
+        { "type": "Eucalipto", "label": "miolo", "wood": "Hardwood (Dunnii/Grandis)", "color": "#E8C4B8" },
+        { "type": "Eucalipto", "label": "contraface", "wood": "Hardwood Importado (Urograndis)", "color": "#D4A5A5" }
+      ],
+      "density": {
+        "min": 665,
+        "max": 765,
+        "avg": 715,
+        "unit": "kg/m³",
+        "level": "Máxima",
+        "visual": "⚪⚪⚪⚪⚪"
+      },
+      "characteristics": {
+        "weight": "Muito pesado",
+        "strength": "A maior resistência entre as composições tem por finalidade atender o mercado de compensados especiais como o frameply muito usado em estruturas internas de móveis e chapas finas como o 6mm com 3 camadas.",
+        "machining": "Mais trabalhosa (madeira densa)",
+        "woodType": "100% Hardwood",
+        "origin": "Faces importadas (Urograndis) + Miolo (Dunnii/Grandis)"
+      },
+      "composition": {
+        "faces": "Eucalipto Urograndis importado",
+        "core": "100% Eucalipto (Dunnii/Grandis)",
+        "backfaces": "Eucalipto Urograndis importado"
+      }
+    },
+    {
+      "id": "combi-e",
+      "category": "face-eucalipto",
+      "name": "COMBI E",
+      "fullName": "Faces Eucalipto + Miolo Alternado",
+      "icon": "🌿",
+      "badge": "Densidade Média-Alta",
+      "description": "Compensado com faces e contrafaces em eucalipto e camadas internas alternadas de pinus e eucalipto. A alternância de madeiras resulta em densidade média-alta.",
+      "layers": [
+        { "type": "Eucalipto", "label": "face", "wood": "Hardwood Importado (Urograndis)", "color": "#D4A5A5" },
+        { "type": "Pinus", "label": "miolo", "wood": "Softwood", "color": "#F4E4C1" },
+        { "type": "Eucalipto", "label": "miolo", "wood": "Hardwood (Dunnii/Grandis)", "color": "#E8C4B8" },
+        { "type": "Pinus", "label": "miolo", "wood": "Softwood", "color": "#F4E4C1" },
+        { "type": "Eucalipto", "label": "contraface", "wood": "Hardwood Importado (Urograndis)", "color": "#D4A5A5" }
+      ],
+      "density": {
+        "min": 600,
+        "max": 660,
+        "avg": 630,
+        "unit": "kg/m³",
+        "level": "Média-Alta",
+        "visual": "⚪⚪⚪⚪⚫"
+      },
+      "characteristics": {
+        "weight": "Pesado",
+        "strength": "Flexibilização para reduzir seu peso sem perder a resistência da chapa.",
+        "machining": "Moderada",
+        "woodType": "Hardwood (faces) + Softwood/Hardwood alternado (miolo)",
+        "origin": "Faces importadas (Urograndis) + Miolo (Pinus + Dunnii/Grandis)"
+      },
+      "composition": {
+        "faces": "Eucalipto Urograndis importado",
+        "core": "Alternado (Pinus + Eucalipto Dunnii/Grandis)",
+        "backfaces": "Eucalipto Urograndis importado"
+      }
+    },
+    {
+      "id": "twin-e",
+      "category": "face-eucalipto",
+      "name": "TWIN E",
+      "fullName": "Faces Eucalipto + Miolo 100% Pinus",
+      "icon": "🌿",
+      "badge": "Densidade Média",
+      "description": "Compensado com faces e contrafaces em eucalipto e todas as camadas internas em pinus.",
+      "layers": [
+        { "type": "Eucalipto", "label": "face", "wood": "Hardwood Importado (Urograndis)", "color": "#D4A5A5" },
+        { "type": "Pinus", "label": "miolo", "wood": "Softwood", "color": "#F4E4C1" },
+        { "type": "Pinus", "label": "miolo", "wood": "Softwood", "color": "#F4E4C1" },
+        { "type": "Pinus", "label": "miolo", "wood": "Softwood", "color": "#F4E4C1" },
+        { "type": "Eucalipto", "label": "contraface", "wood": "Hardwood Importado (Urograndis)", "color": "#D4A5A5" }
+      ],
+      "density": {
+        "min": 565,
+        "max": 605,
+        "avg": 585,
+        "unit": "kg/m³",
+        "level": "Média",
+        "visual": "⚪⚪⚪⚫⚫"
+      },
+      "characteristics": {
+        "weight": "Médio",
+        "strength": "Boa",
+        "machining": "Facilitada (miolo leve)",
+        "woodType": "Hardwood (faces) + 100% Softwood (miolo)",
+        "origin": "Faces importadas (Urograndis) + Miolo (Pinus)"
+      },
+      "composition": {
+        "faces": "Eucalipto Urograndis importado",
+        "core": "100% Pinus",
+        "backfaces": "Eucalipto Urograndis importado"
+      }
+    }
+  ],
+  "faq": [
+    {
+      "question": "Qual a diferença entre Combi e Twin?",
+      "answer": "COMBI: Miolo alternado (uma camada de eucalipto, uma de pinus, etc.). TWIN: Miolo 100% de uma madeira (todas as camadas internas iguais). O mesmo vale para Combi E e Twin E, mas com faces de eucalipto."
+    },
+    {
+      "question": "Como escolher entre Face Pinus e Face Eucalipto?",
+      "answer": "A escolha depende do portfólio e grade do produto, não apenas da composição. Ambas as faces (pinus ou eucalipto) podem ter diferentes grades (A, B, C, D) e pertencer a diferentes portfólios (NS, SS, ST, NC). A composição define densidade e resistência, não qualidade visual."
+    },
+    {
+      "question": "Por que Twin E tem densidade menor que Twin?",
+      "answer": "Twin E: Faces eucalipto (densas) + Miolo 100% pinus (leve) = Densidade média. Twin: Faces pinus (leves) + Miolo 100% eucalipto (denso) = Densidade alta. O miolo tem mais volume que as faces, portanto influencia mais na densidade final."
+    },
+    {
+      "question": "Todas as composições estão disponíveis em todos os portfólios?",
+      "answer": "Não necessariamente. A disponibilidade de cada composição depende do portfólio (NS, SS, ST, NC), especificação técnica e estoque. Consulte a seção de Portfólio e o Estoque Disponível para ver quais combinações estão em estoque."
+    },
+    {
+      "question": "A densidade afeta a resistência estrutural?",
+      "answer": "Sim, geralmente maior densidade significa maior resistência mecânica. Porém, a classificação estrutural (ST) depende também de: tipo de cola (fenólica WBP), certificações (PS1-19, O&ES, Frameply) e testes de qualidade. A composição é apenas um dos fatores."
+    }
+  ]
+}
+
