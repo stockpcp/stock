@@ -580,7 +580,7 @@
     "Size": "2500x1250",
     "Thickness": 9,
     "Ply": 5,
-    "Crates": 5,
+    "Crates": 4,
     "Price": 200,
     "WeightPerCrate": 1660,
     "VolumePerCrate": 2.812,
