@@ -98,20 +98,6 @@
     "PayloadLimit": 28500
   },
   {
-    "Logs": "Combi",
-    "Certificate": "PS1",
-    "Grade": "CDX",
-    "Size": "2440x1220",
-    "Thickness": 18,
-    "Ply": 7,
-    "Crates": 17,
-    "Price": 285,
-    "WeightPerCrate": 1666,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
-  },
-  {
     "Logs": "Twin E",
     "Certificate": "CE4 CARB",
     "Grade": "C+/C",
@@ -459,20 +445,6 @@
     "WeightPerCrate": 1586,
     "VolumePerCrate": 2.679,
     "SheetsPerCrate": 60,
-    "PayloadLimit": 28500
-  },
-  {
-    "Logs": "Combi",
-    "Certificate": "PS1",
-    "Grade": "CDX",
-    "Size": "2440x1220",
-    "Thickness": 12,
-    "Ply": 5,
-    "Crates": 8,
-    "Price": 305,
-    "WeightPerCrate": 1708,
-    "VolumePerCrate": 2.679,
-    "SheetsPerCrate": 75,
     "PayloadLimit": 28500
   },
   {
