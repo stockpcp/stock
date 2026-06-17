@@ -28,20 +28,6 @@
     "PayloadLimit": 28500
   },
   {
-    "Logs": "pine",
-    "Certificate": "LVL",
-    "Grade": "BCX",
-    "Size": "2440x1220",
-    "Thickness": 31,
-    "Ply": 13,
-    "Crates": 16,
-    "Price": 335,
-    "WeightPerCrate": 1660,
-    "VolumePerCrate": 2.768,
-    "SheetsPerCrate": 30,
-    "PayloadLimit": 28500
-  },
-  {
     "Logs": "euca",
     "Certificate": "frame",
     "Grade": "C+/C",
@@ -57,16 +43,16 @@
   },
   {
     "Logs": "pine",
-    "Certificate": "CE2+ UKCA",
-    "Grade": "C+/C",
+    "Certificate": "LVL",
+    "Grade": "BCX",
     "Size": "2440x1220",
-    "Thickness": 24,
-    "Ply": 9,
-    "Crates": 11,
-    "Price": 325,
-    "WeightPerCrate": 1461,
-    "VolumePerCrate": 2.643,
-    "SheetsPerCrate": 37,
+    "Thickness": 31,
+    "Ply": 13,
+    "Crates": 16,
+    "Price": 335,
+    "WeightPerCrate": 1660,
+    "VolumePerCrate": 2.768,
+    "SheetsPerCrate": 30,
     "PayloadLimit": 28500
   },
   {
@@ -81,6 +67,20 @@
     "WeightPerCrate": 1470,
     "VolumePerCrate": 2.679,
     "SheetsPerCrate": 30,
+    "PayloadLimit": 28500
+  },
+  {
+    "Logs": "pine",
+    "Certificate": "CE2+ UKCA",
+    "Grade": "C+/C",
+    "Size": "2440x1220",
+    "Thickness": 24,
+    "Ply": 9,
+    "Crates": 11,
+    "Price": 325,
+    "WeightPerCrate": 1461,
+    "VolumePerCrate": 2.643,
+    "SheetsPerCrate": 37,
     "PayloadLimit": 28500
   },
   {
@@ -210,20 +210,6 @@
     "PayloadLimit": 28500
   },
   {
-    "Logs": "combi",
-    "Certificate": "CE4",
-    "Grade": "C+/C",
-    "Size": "2200x1100",
-    "Thickness": 18,
-    "Ply": 7,
-    "Crates": 5,
-    "Price": 300,
-    "WeightPerCrate": 1250,
-    "VolumePerCrate": 2.178,
-    "SheetsPerCrate": 50,
-    "PayloadLimit": 28500
-  },
-  {
     "Logs": "twin e",
     "Certificate": "CE4",
     "Grade": "C+/C",
@@ -249,6 +235,20 @@
     "WeightPerCrate": 1520,
     "VolumePerCrate": 2.685,
     "SheetsPerCrate": 41,
+    "PayloadLimit": 28500
+  },
+  {
+    "Logs": "combi",
+    "Certificate": "CE4",
+    "Grade": "C+/C",
+    "Size": "2200x1100",
+    "Thickness": 18,
+    "Ply": 7,
+    "Crates": 5,
+    "Price": 300,
+    "WeightPerCrate": 1250,
+    "VolumePerCrate": 2.178,
+    "SheetsPerCrate": 50,
     "PayloadLimit": 28500
   },
   {
