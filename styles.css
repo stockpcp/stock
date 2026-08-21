@@ -394,7 +394,7 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.05;color:var(--ink);
   padding-bottom:10px;border-bottom:1px solid rgba(27,33,28,.14)}
 .sku .dim span{font-family:var(--serif);color:var(--soft)}
-.sku .avail{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 10px;font-size:19px;
+.sku .avail{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 10px;font-size:15px;
   color:var(--body);margin-top:10px}
 /* nowrap nos dois: em card estreito o "m³" se soltava do numero e caia na linha seguinte */
 .sku .avail .c{color:var(--ink);white-space:nowrap}
@@ -422,7 +422,7 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 .grid.list .sku:hover{transform:none;box-shadow:0 16px 34px rgba(17,51,31,.1)}
 .grid.list .balloons{grid-template-columns:repeat(2,auto);margin-bottom:0}
 .grid.list .sku .dim{flex-wrap:nowrap;font-size:21px;padding-bottom:0;border-bottom:0}
-.grid.list .sku .avail{flex-wrap:nowrap;font-size:20px;margin-top:0}
+.grid.list .sku .avail{flex-wrap:nowrap;font-size:16px;margin-top:0}
 .grid.list .sku .avail .vol{font-size:15px}
 .grid.list .sku .price{font-size:22px;margin:0 0 0 auto;text-align:right}
 .grid.list .sku .price small{font-size:13.5px}
@@ -449,7 +449,7 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 #full .bl .k{font-size:9.5px}
 #full .bl .v{font-size:14.5px}
 #full .bl.logs .swatch{width:15px;height:22px}
-#full .sku .avail{font-size:20px}
+#full .sku .avail{font-size:16px}
 #full .sku .avail .vol{font-size:15px}
 #full .sku .price small{font-size:13.5px}
 
