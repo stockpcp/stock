@@ -1,0 +1,193 @@
+{
+  "_note": "Conteudo da janela de ajuda, nos 3 idiomas. Fonte unica: o app le daqui, nada de copy solta no HTML. Reescrito em 21/08 para a interface do Stock Finder — o guia anterior (UserGuide.pdf) descrevia o site antigo e trazia NC como certificado, que e erro de hierarquia (rpn-core 2 e 4): NC e PORTFOLIO, o certificado e NCP.",
+  "_keys": "title · intro · sections[{h,p,list[]}] · close",
+
+  "en": {
+    "title": "How to use the Stock Finder",
+    "intro": "This page shows what is standing in the Repinho warehouse right now, updated daily. You can answer two short questions to narrow it down, or skip straight to the full stock.",
+    "sections": [
+      {
+        "h": "1 · Language",
+        "p": "Switch between English, Spanish and Portuguese in the top right corner. The whole page — including this help window — follows your choice."
+      },
+      {
+        "h": "2 · Two steps, both optional",
+        "p": "Step 01 asks which product line you buy, step 02 asks the thickness and composition you need. Neither is required: Show me everything goes straight to the full warehouse, and you can filter later on the result screen."
+      },
+      {
+        "h": "3 · Step 01 — the four portfolios",
+        "p": "A portfolio is defined by how the panel is built, never by the certificate it carries. Every Repinho panel is E1 low-formaldehyde and WBP-bonded with phenolic resin — that part never varies.",
+        "list": [
+          "NS · Non-Structural — standard production, for applications that do not require certified structural resistance.",
+          "SS · Special — a non-standard step was required: selected faces, frameply core-gap control, or oil and sealed edges.",
+          "ST · Structural — mature timber and machine-graded veneers, certified for verified mechanical performance.",
+          "NC · Non-Conforming — downgraded from the certified lines, sold as-is without structural or aesthetic guarantee."
+        ]
+      },
+      {
+        "h": "4 · Step 02 — thickness and composition",
+        "p": "Pick one or more thicknesses and, if it makes a difference to you, the composition. Composition is how the panel is built up — faces and core — not a single wood species. More eucalyptus means higher density; more pine means a lighter panel.",
+        "list": [
+          "pine — pine faces, pine core",
+          "combi — pine faces, alternating core",
+          "twin — pine faces, full eucalyptus core",
+          "euca — eucalyptus faces, eucalyptus core",
+          "combi e — eucalyptus faces, alternating core",
+          "twin e — eucalyptus faces, full pine core"
+        ]
+      },
+      {
+        "h": "5 · Your result",
+        "p": "The last screen answers with everything that matches, sorted by FOB price. The readouts at the top show how many SKUs, how many crates and the total volume — all three react to the filters. Active filters appear as chips you can remove one by one, and Grid or List changes how the cards are laid out."
+      },
+      {
+        "h": "6 · What each card tells you",
+        "p": "The coloured badge is the portfolio, followed by certificate, visual grade and composition. Below them come the sheet size, thickness and number of plies, then how much is available and the price.",
+        "list": [
+          "Grade is visual quality — the defects allowed on face and back. It does not affect structural resistance.",
+          "Certificate is the standard the panel is certified to. NCP means no certification, which is the case for the NC portfolio.",
+          "Price is always US$ per cubic metre, FOB."
+        ]
+      },
+      {
+        "h": "7 · Full inventory",
+        "p": "Full inventory opens the complete warehouse over the page, with its own filters for portfolio, thickness, composition, certificate, grade and size. Close it and your result is still there, untouched."
+      },
+      {
+        "h": "8 · Interest list",
+        "p": "Add to list marks the items you want a quote on; the counter in the header keeps track. When you are done, send the list to our commercial team — the message is written for you, with the full code, crates and volume of every item you picked."
+      },
+      {
+        "h": "9 · Reading the numbers",
+        "p": "Volume is in cubic metres with three decimals, and crates are whole crates — a crate is not the same volume across products, so the two numbers together are what turn into a quote. The date next to the readouts is when the stock was last updated."
+      }
+    ],
+    "close": "Close"
+  },
+
+  "es": {
+    "title": "Cómo usar el Stock Finder",
+    "intro": "Esta página muestra lo que hay ahora mismo en el almacén de Repinho, actualizado a diario. Puede responder dos preguntas breves para acotar la búsqueda, o ir directo al inventario completo.",
+    "sections": [
+      {
+        "h": "1 · Idioma",
+        "p": "Cambie entre inglés, español y portugués en la esquina superior derecha. Toda la página —incluida esta ventana de ayuda— sigue su elección."
+      },
+      {
+        "h": "2 · Dos pasos, ambos opcionales",
+        "p": "El paso 01 pregunta qué línea de producto compra; el paso 02, el espesor y la composición que necesita. Ninguno es obligatorio: Muéstrame todo lleva directamente al almacén completo, y siempre puede filtrar después en la pantalla de resultado."
+      },
+      {
+        "h": "3 · Paso 01 — los cuatro portafolios",
+        "p": "El portafolio lo define cómo está construido el panel, nunca el certificado que lleva. Todo panel Repinho es de baja emisión E1 y encolado WBP con resina fenólica — eso no varía.",
+        "list": [
+          "NS · No Estructural — producción estándar, para aplicaciones que no exigen resistencia estructural certificada.",
+          "SS · Especial — exigió un procedimiento no estándar: selección de caras, control de gaps del frameply, o aceite y bordes sellados.",
+          "ST · Estructural — madera madura y láminas clasificadas mecánicamente, certificado para desempeño mecánico verificado.",
+          "NC · No Conforme — desclasificado de las líneas certificadas, se vende tal cual, sin garantía estructural ni estética."
+        ]
+      },
+      {
+        "h": "4 · Paso 02 — espesor y composición",
+        "p": "Elija uno o más espesores y, si le hace diferencia, la composición. La composición es cómo está armado el panel — caras y alma —, no una única especie de madera. Más eucalipto significa mayor densidad; más pino, un panel más liviano.",
+        "list": [
+          "pine — caras de pino, alma de pino",
+          "combi — caras de pino, alma alternada",
+          "twin — caras de pino, alma 100% eucalipto",
+          "euca — caras de eucalipto, alma de eucalipto",
+          "combi e — caras de eucalipto, alma alternada",
+          "twin e — caras de eucalipto, alma 100% pino"
+        ]
+      },
+      {
+        "h": "5 · Su resultado",
+        "p": "La última pantalla responde con todo lo que coincide, ordenado por precio FOB. Los indicadores de arriba muestran cuántos SKUs, cuántas cajas y el volumen total — los tres reaccionan a los filtros. Los filtros activos aparecen como fichas que puede quitar una a una, y Cuadrícula o Lista cambia la disposición de las tarjetas."
+      },
+      {
+        "h": "6 · Qué dice cada tarjeta",
+        "p": "La insignia de color es el portafolio, seguida del certificado, la calidad visual y la composición. Debajo vienen la medida de la chapa, el espesor y el número de láminas, y luego la disponibilidad y el precio.",
+        "list": [
+          "La calidad es visual — los defectos admitidos en cara y contracara. No afecta la resistencia estructural.",
+          "El certificado es la norma bajo la cual el panel está certificado. NCP significa sin certificación, que es el caso del portafolio NC.",
+          "El precio siempre es en US$ por metro cúbico, FOB."
+        ]
+      },
+      {
+        "h": "7 · Inventario completo",
+        "p": "Inventario completo abre todo el almacén sobre la página, con filtros propios de portafolio, espesor, composición, certificado, calidad y medida. Al cerrarlo, su resultado sigue intacto."
+      },
+      {
+        "h": "8 · Lista de interés",
+        "p": "Agregar a la lista marca los ítems sobre los que quiere cotización; el contador del encabezado los suma. Cuando termine, envíe la lista a nuestro equipo comercial — el mensaje se escribe solo, con el código completo, las cajas y el volumen de cada ítem elegido."
+      },
+      {
+        "h": "9 · Cómo leer los números",
+        "p": "El volumen va en metros cúbicos con tres decimales, y las cajas son cajas enteras — una caja no equivale al mismo volumen en todos los productos, así que los dos números juntos son los que se convierten en cotización. La fecha junto a los indicadores es la de la última actualización del stock."
+      }
+    ],
+    "close": "Cerrar"
+  },
+
+  "pt": {
+    "title": "Como usar o Stock Finder",
+    "intro": "Esta página mostra o que está no armazém da Repinho neste momento, atualizado diariamente. Você pode responder duas perguntas rápidas para estreitar a busca, ou ir direto ao estoque completo.",
+    "sections": [
+      {
+        "h": "1 · Idioma",
+        "p": "Alterne entre inglês, espanhol e português no canto superior direito. A página inteira — inclusive esta janela de ajuda — acompanha a sua escolha."
+      },
+      {
+        "h": "2 · Dois passos, os dois opcionais",
+        "p": "O passo 01 pergunta qual linha de produto você compra; o passo 02, a espessura e a composição de que precisa. Nenhum dos dois é obrigatório: Mostre tudo leva direto ao armazém completo, e você sempre pode filtrar depois, na tela de resultado."
+      },
+      {
+        "h": "3 · Passo 01 — os quatro portfólios",
+        "p": "O portfólio é definido por como o painel é construído, nunca pelo certificado que ele carrega. Todo painel Repinho é de baixa emissão E1 e colagem WBP com resina fenólica — isso não varia.",
+        "list": [
+          "NS · Não Estrutural — produção padrão, para aplicações que não exigem resistência estrutural certificada.",
+          "SS · Especial — exigiu um procedimento fora do padrão: seleção de capas, controle de gaps do frameply, ou óleo e bordas seladas.",
+          "ST · Estrutural — madeira madura e lâminas classificadas mecanicamente, certificado para desempenho mecânico verificado.",
+          "NC · Não Conforme — desclassificado das linhas certificadas, vendido no estado, sem garantia estrutural ou estética."
+        ]
+      },
+      {
+        "h": "4 · Passo 02 — espessura e composição",
+        "p": "Escolha uma ou mais espessuras e, se fizer diferença para você, a composição. Composição é como o painel é montado — capas e miolo —, não uma única espécie de madeira. Mais eucalipto significa mais densidade; mais pinus, um painel mais leve.",
+        "list": [
+          "pine — capas de pinus, miolo de pinus",
+          "combi — capas de pinus, miolo alternado",
+          "twin — capas de pinus, miolo 100% eucalipto",
+          "euca — capas de eucalipto, miolo de eucalipto",
+          "combi e — capas de eucalipto, miolo alternado",
+          "twin e — capas de eucalipto, miolo 100% pinus"
+        ]
+      },
+      {
+        "h": "5 · Seu resultado",
+        "p": "A última tela responde com tudo o que atende, ordenado por preço FOB. Os leitores no topo mostram quantos SKUs, quantas caixas e o volume total — os três reagem aos filtros. Os filtros ativos aparecem como fichas que você remove uma a uma, e Grade ou Lista muda a disposição dos cartões."
+      },
+      {
+        "h": "6 · O que cada cartão diz",
+        "p": "A tarja colorida é o portfólio, seguida do certificado, da qualidade visual e da composição. Abaixo vêm a medida da chapa, a espessura e o número de lâminas, e depois a disponibilidade e o preço.",
+        "list": [
+          "A qualidade é visual — os defeitos admitidos na capa e na contracapa. Não afeta a resistência estrutural.",
+          "O certificado é a norma sob a qual o painel é certificado. NCP significa sem certificação, que é o caso do portfólio NC.",
+          "O preço é sempre em US$ por metro cúbico, FOB."
+        ]
+      },
+      {
+        "h": "7 · Inventário completo",
+        "p": "Inventário completo abre o armazém inteiro por cima da página, com filtros próprios de portfólio, espessura, composição, certificado, qualidade e medida. Ao fechar, o seu resultado continua lá, intacto."
+      },
+      {
+        "h": "8 · Lista de interesse",
+        "p": "Adicionar à lista marca os itens sobre os quais você quer cotação; o contador no cabeçalho vai somando. Quando terminar, envie a lista ao nosso time comercial — a mensagem sai pronta, com o código completo, as caixas e o volume de cada item escolhido."
+      },
+      {
+        "h": "9 · Como ler os números",
+        "p": "O volume vem em metros cúbicos com três casas, e as caixas são caixas inteiras — uma caixa não equivale ao mesmo volume em todos os produtos, então os dois números juntos é que viram cotação. A data ao lado dos leitores é a da última atualização do estoque."
+      }
+    ],
+    "close": "Fechar"
+  }
+}

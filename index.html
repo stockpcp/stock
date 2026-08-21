@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repinho — Stock Finder</title>
+<meta name="description" content="Brazilian plywood, available inventory updated daily. Two steps between you and the volume standing in the Repinho warehouse.">
+<!-- Favicon: simbolo da marca (pacote do Fabricio, 21/08). O .ico cobre todos os navegadores;
+     o 96px fica nitido em tela de alta densidade; o apple-touch-icon serve o atalho do iOS. -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- Fontes SELF-HOSTED (21/08) — o site nao faz nenhuma requisicao a host externo.
+     Baixadas do Google Fonts, subsets latin + latin-ext. Ver assets/fonts/fonts.css. -->
+<link rel="preload" href="assets/fonts/public-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/instrument-serif-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Todo texto de UI e escrito pelo JS a partir do STR (app.js), nos 3 idiomas. Os nos com
+     `data-t` sao preenchidos por applyLang(); nao escrever copy solta aqui. -->
+
+<!-- ===== header fixo ===== -->
+<header id="hd">
+  <!-- regra de marca: nenhum texto ao lado do logo. Fonte 439x214 (handoff 18/08),
+       exibido a 98x69 — sobra densidade para tela retina. -->
+  <img src="assets/logo.png" alt="Repinho">
+  <div class="hd-r">
+    <span class="place">Guarapuava · BR</span>
+    <button id="helpBtn" aria-haspopup="dialog">?</button>
+    <div class="langsw" id="langsw"></div>
+    <div class="pill-list">
+      <span class="dot"></span>
+      <span class="lbl" data-t="interestList"></span>
+      <span class="n num" id="listCount">0</span>
+    </div>
+    <button class="bot solid hidden" id="mailBtn" data-t="sendEmail"></button>
+    <button class="bot glass hidden" id="waBtn" data-t="sendWhatsApp"></button>
+  </div>
+</header>
+
+<!-- ===== step rail ===== -->
+<nav id="rail"></nav>
+
+<!-- ===== scroll container ===== -->
+<main id="scroll">
+
+  <!-- ---------- 00 intro ---------- -->
+  <section class="sec" id="s0">
+    <div class="light"></div>
+    <div class="grainfield"></div>
+    <div class="plyedge"><i class="a"></i><i class="b"></i><i class="a"></i></div>
+    <div class="s0-in">
+      <div class="over"><span class="rule"></span><span data-t="heroOver"></span></div>
+      <h1 class="title">Stock<em>Finder</em></h1>
+      <p class="lead" data-t="heroLead"></p>
+      <div class="hero-row">
+        <button class="cta" data-goto="1" data-t="begin"></button>
+        <button class="cta ghost" id="skipToStock" data-t="showAll"></button>
+        <span class="cta-note num" id="heroCount"></span>
+      </div>
+    </div>
+    <div id="cue"><span data-t="scroll"></span><i></i></div>
+  </section>
+
+  <!-- ---------- 01 portfolio ---------- -->
+  <section class="sec" id="s1">
+    <div class="rules"></div>
+    <div class="p-head">
+      <div>
+        <div class="step-lbl" data-t="step01"></div>
+        <h2><span data-t="s1title1"></span><br><em data-t="s1title2"></em></h2>
+      </div>
+      <p class="p-body" data-t="s1body"></p>
+    </div>
+    <div class="cards" id="portfolioCards"></div>
+  </section>
+
+  <!-- ---------- 02 especificacao ---------- -->
+  <section class="sec split" id="s2">
+    <div class="side">
+      <div class="step-lbl" data-t="step02"></div>
+      <h2><span data-t="s2title1"></span><br><em data-t="s2title2"></em></h2>
+      <p class="body" data-t="s2body"></p>
+      <div class="kpi">
+        <div class="l" data-t="matchingNow"></div>
+        <div class="kpi-v"><span class="v num" id="matchNow">0</span> <span class="u" id="matchSub"></span></div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="controls">
+        <div>
+          <div class="crow-hd">
+            <span class="t" id="gaugeHd"></span>
+            <button class="clear" id="clearGauge" data-t="clear"></button>
+          </div>
+          <div class="chips" id="gaugeChips"></div>
+        </div>
+
+        <div>
+          <div class="crow-hd">
+            <span class="t"><span data-t="composition"></span> <i data-t="densityNote"></i></span>
+            <button class="clear" id="clearSpecies" data-t="any"></button>
+          </div>
+          <div class="species" id="speciesTiles"></div>
+        </div>
+
+        <div><button class="cta" data-goto="3" id="seeStock"></button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 03 resultado ---------- -->
+  <!-- Ultima tela do scroll. O inventario completo saiu daqui e virou overlay (#full),
+       aberto pelo botao "Full inventory" — handoff 18/08. -->
+  <section class="sec stock" id="s3">
+    <div class="stock-top">
+      <div class="stock-hd">
+        <div>
+          <div class="step-lbl" data-t="step03"></div>
+          <h2 id="stockTitle"></h2>
+          <p class="stock-sub" id="stockSub"></p>
+        </div>
+        <div class="reads">
+          <div class="read"><div class="l" data-t="matches"></div><div class="v num" id="rMatches">0</div></div>
+          <div class="read"><div class="l" data-t="crates"></div><div class="v num" id="rCrates">0</div></div>
+          <div class="read"><div class="l" data-t="volume"></div><div class="v num" id="rVolume">0</div></div>
+          <div class="read"><div class="l" data-t="updated"></div>
+            <div class="updated"><i></i><span id="rUpdated">—</span></div></div>
+          <div class="viewsw" data-scope="grid"></div>
+        </div>
+      </div>
+
+      <!-- chips do que esta filtrado: cada um se remove sozinho -->
+      <div class="chipbar" id="chipbar"></div>
+
+      <div class="filters" id="filters"></div>
+    </div>
+    <div class="grid-area">
+      <div class="grid" id="results"></div>
+      <div class="empty hidden" id="empty">
+        <h3 data-t="emptyTitle"></h3>
+        <p data-t="emptyBody"></p>
+        <button class="cta" id="emptyCta" data-t="emptyCta"></button>
+      </div>
+    </div>
+    <div class="foot-note" data-t="footNote"></div>
+  </section>
+
+</main>
+
+<!-- ===== inventario completo (overlay) ===== -->
+<div id="full" class="hidden">
+  <div class="full-top">
+    <div class="stock-hd">
+      <div>
+        <div class="step-lbl" data-t="fullOver"></div>
+        <h2 data-t="fullTitle"></h2>
+      </div>
+      <div class="reads">
+        <div class="read"><div class="l" data-t="showing"></div><div class="v num" id="fShowing">0</div></div>
+        <div class="read"><div class="l" data-t="crates"></div><div class="v num" id="fCrates">0</div></div>
+        <div class="read"><div class="l" data-t="volume"></div><div class="v num" id="fVolume">0</div></div>
+        <button class="bot solid" id="closeFull"><span class="arw">←</span><span data-t="backToResult"></span></button>
+      </div>
+    </div>
+    <div class="filters" id="fullFilters">
+      <button class="clear" id="clearFull" data-t="clearFilters"></button>
+      <div class="viewsw" data-scope="full"></div>
+    </div>
+  </div>
+  <div class="grid-area">
+    <div class="grid" id="fullResults"></div>
+  </div>
+</div>
+
+<!-- ===== ajuda (pop-up) ===== -->
+<!-- Substitui o UserGuide.pdf do site antigo, que abria numa aba e existia so em EN/ES.
+     O conteudo vem de content/guide-content.json e segue o idioma selecionado no header. -->
+<div id="guide" class="hidden" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+  <div class="guide-box">
+    <div class="guide-hd">
+      <h2 id="guideTitle"></h2>
+      <button class="guide-x" id="closeGuide" aria-label="close">×</button>
+    </div>
+    <div class="guide-body" id="guideBody"></div>
+    <div class="guide-ft">
+      <button class="cta" id="closeGuide2"></button>
+    </div>
+  </div>
+</div>
+
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

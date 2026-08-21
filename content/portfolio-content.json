@@ -1,0 +1,145 @@
+{
+  "_note": "Texto dos 4 cards de portfolio nos 3 idiomas — FONTE DE VERDADE do Stock Finder (o app.js le daqui, nao duplica). Origem: pacote 'cards magnet' (Repinho v4.0). Ajustes de 13/08/2026: cert do NS = 'CE4 · CARB' (o EN 13986 saiu, decisao do Fabricio); os campos 'num' (01-04), 'explore' e o cabecalho 'overline/title1/title2' NAO sao usados aqui. O 'desc' de topo (E1 + WBP + os quatro portfolios) esta reservado para a PROXIMA TELA.",
+  "_keys": "portfolio.{overline,title1,title2,desc,explore} + portfolio.cards.{ns,ss,st,nc}.{tag,cert,title1,title2,desc,uses}",
+  "_order": [
+    "ns",
+    "ss",
+    "st",
+    "nc"
+  ],
+  "en": {
+    "overline": "The four portfolios",
+    "title1": "Four panel families,",
+    "title2": "one standard.",
+    "desc": "Every Repinho panel is E1 low-formaldehyde, WBP-bonded with phenolic resin, and classified into one of four portfolios. What separates them is how the panel is built — and that decides the target application and the certifications it can carry.",
+    "explore": "Explore portfolio",
+    "cards": {
+      "ns": {
+        "num": "01",
+        "tag": "NS · Non-Structural",
+        "cert": "CE4 · CARB",
+        "title1": "Non-Structural",
+        "title2": "Plywood",
+        "desc": "Versatile panels for applications that do not require certified structural resistance — excellent cost-efficiency without compromising quality.",
+        "uses": "Packaging · cabinet carcasses · decorative · temporary structures"
+      },
+      "ss": {
+        "num": "02",
+        "tag": "SS · Special",
+        "cert": "FRAME · O&ES",
+        "title1": "Special",
+        "title2": "Plywood",
+        "desc": "Tight core-gap control, selected faces or sealed edges — the non-standard steps that demanding furniture and specialty packaging require.",
+        "uses": "Upholstered frames · specialty packaging · high-end finishing"
+      },
+      "st": {
+        "num": "03",
+        "tag": "ST · Structural",
+        "cert": "CE2+ · UKCA · PS1-19",
+        "title1": "Structural",
+        "title2": "Plywood",
+        "desc": "Certified for structural applications requiring verified mechanical resistance and compliance with international building codes.",
+        "uses": "Formwork · beams, slabs, columns · wood & steel frame"
+      },
+      "nc": {
+        "num": "04",
+        "tag": "NC · Non-Conforming",
+        "cert": "NCP · uncertified",
+        "title1": "Non-Conforming",
+        "title2": "Material",
+        "desc": "Secondary material downgraded from certified lines — sold as-is without structural or aesthetic guarantees. Opportunity pricing.",
+        "uses": "Low-cost secondary use · non-critical applications"
+      }
+    }
+  },
+  "es": {
+    "overline": "Los cuatro portafolios",
+    "title1": "Cuatro familias,",
+    "title2": "un estándar.",
+    "desc": "Cada panel Repinho es E1 de baja emisión de formaldehído, encolado WBP con resina fenólica, y clasificado en uno de cuatro portafolios. Lo que los separa es cómo se construye el panel — y eso define la aplicación y las certificaciones que puede llevar.",
+    "explore": "Explorar portafolio",
+    "cards": {
+      "ns": {
+        "num": "01",
+        "tag": "NS · No Estructural",
+        "cert": "CE4 · CARB",
+        "title1": "Contrachapado",
+        "title2": "No Estructural",
+        "desc": "Paneles versátiles para aplicaciones que no requieren resistencia estructural certificada — excelente costo-beneficio sin comprometer calidad.",
+        "uses": "Embalaje · estructuras de armarios · decorativo · estructuras temporales"
+      },
+      "ss": {
+        "num": "02",
+        "tag": "SS · Especial",
+        "cert": "FRAME · O&ES",
+        "title1": "Contrachapado",
+        "title2": "Especial",
+        "desc": "Control riguroso de juntas internas, caras seleccionadas o bordes sellados — los pasos fuera del estándar que exigen los muebles exigentes y el embalaje especial.",
+        "uses": "Estructuras tapizadas · embalaje especial · alta terminación"
+      },
+      "st": {
+        "num": "03",
+        "tag": "ST · Estructural",
+        "cert": "CE2+ · UKCA · PS1-19",
+        "title1": "Contrachapado",
+        "title2": "Estructural",
+        "desc": "Certificado para aplicaciones que requieren resistencia mecánica verificada y cumplimiento de códigos internacionales.",
+        "uses": "Encofrados · vigas, losas, columnas · wood & steel frame"
+      },
+      "nc": {
+        "num": "04",
+        "tag": "NC · No Conforme",
+        "cert": "NCP · sin certificación",
+        "title1": "Material",
+        "title2": "No Conforme",
+        "desc": "Material secundario degradado de líneas certificadas — vendido tal cual, sin garantías estructurales ni estéticas. Precio de oportunidad.",
+        "uses": "Uso secundario económico · aplicaciones no críticas"
+      }
+    }
+  },
+  "pt": {
+    "overline": "Os quatro portfólios",
+    "title1": "Quatro famílias,",
+    "title2": "um padrão.",
+    "desc": "Todo painel Repinho é E1 de baixa emissão de formaldeído, colado WBP com resina fenólica, e classificado em um dos quatro portfólios. O que os separa é como o painel é construído — e isso define a aplicação e as certificações que ele pode carregar.",
+    "explore": "Explorar portfólio",
+    "cards": {
+      "ns": {
+        "num": "01",
+        "tag": "NS · Não Estrutural",
+        "cert": "CE4 · CARB",
+        "title1": "Compensado",
+        "title2": "Não Estrutural",
+        "desc": "Painéis versáteis para aplicações que não exigem resistência estrutural certificada — excelente custo-benefício sem comprometer qualidade.",
+        "uses": "Embalagem · carcaças de armários · decorativo · estruturas temporárias"
+      },
+      "ss": {
+        "num": "02",
+        "tag": "SS · Especial",
+        "cert": "FRAME · O&ES",
+        "title1": "Compensado",
+        "title2": "Especial",
+        "desc": "Controle rigoroso de juntas internas, faces selecionadas ou bordas seladas — os passos fora do padrão que móveis exigentes e embalagens especiais pedem.",
+        "uses": "Carcaças de estofados · embalagem especial · alto acabamento"
+      },
+      "st": {
+        "num": "03",
+        "tag": "ST · Estrutural",
+        "cert": "CE2+ · UKCA · PS1-19",
+        "title1": "Compensado",
+        "title2": "Estrutural",
+        "desc": "Certificado para aplicações que exigem resistência mecânica verificada e conformidade com códigos internacionais.",
+        "uses": "Formas · vigas, lajes, colunas · wood & steel frame"
+      },
+      "nc": {
+        "num": "04",
+        "tag": "NC · Não Conforme",
+        "cert": "NCP · sem certificação",
+        "title1": "Material",
+        "title2": "Não Conforme",
+        "desc": "Material secundário desclassificado de linhas certificadas — vendido como está, sem garantias estruturais ou estéticas. Preço de oportunidade.",
+        "uses": "Uso secundário econômico · aplicações não-críticas"
+      }
+    }
+  }
+}

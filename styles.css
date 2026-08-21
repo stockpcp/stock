@@ -1,0 +1,541 @@
+/* Repinho Stock Finder — estilos.
+   Porte do handoff de design de 18/08 (Stock Finder.dc.html), que traz tudo em style inline;
+   aqui vira classe. Valores (cor, tamanho, raio, timing) sao os do handoff — nao arredondar.
+   Toda copy vem do i18n.js; este arquivo nao carrega texto.
+   Regra de marca: UM verde. #2E8B33 e reservado a selecao, status e indicador vivo. */
+
+/* ---------------------------------------------------------------- tokens */
+:root{
+  --ink:#11331F;             /* verde-tinta: texto forte e CTA */
+  --accent:#2E8B33;
+  --accent-d:#1E6B2A;
+  --muted:#5A655B;
+  --muted-2:#8A9188;
+  --muted-3:#7C8478;
+  --body:#4A554B;
+  --soft:#3A4A3C;
+  --ring:#B8CFB0;            /* verde claro do anel de selecao */
+  --paper:#FAF9F5;
+  --sand-0:#F3F0E9;
+  --sand-1:#EDE8DF;
+  --sand-2:#E9E4DA;
+  --sand-3:#E4DED2;
+  --sand-4:#E1DACD;
+  --sand-5:#DFD8CB;
+  --sand-6:#E6E1D6;
+  --line:rgba(27,33,28,.12);
+  --glass:rgba(255,255,255,.62);
+  --glass-b:rgba(255,255,255,.8);
+  --off-border:rgba(255,255,255,.78);
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Public Sans',Arial,Helvetica,sans-serif;
+  --display:'Playfair Display',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  /* calha de 72px a direita: e onde o step rail flutua, em todas as secoes */
+  --rail-gutter:72px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--sand-2);color:#1B211C;font-family:var(--sans);-webkit-font-smoothing:antialiased}
+body.locked{overflow:hidden}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit;padding:0}
+select{font-family:inherit}
+img{max-width:100%}
+a{color:var(--accent-d);text-decoration:none}
+a:hover{color:var(--accent)}
+.hidden{display:none !important}
+.num{font-variant-numeric:tabular-nums}
+
+@keyframes rpnPulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes rpnCue{0%,100%{transform:translate(-50%,0);opacity:.5}50%{transform:translate(-50%,7px);opacity:1}}
+
+#scroll::-webkit-scrollbar,#full::-webkit-scrollbar{width:10px}
+#scroll::-webkit-scrollbar-thumb,#full::-webkit-scrollbar-thumb{
+  background:rgba(27,33,28,.18);border-radius:99px;border:3px solid transparent;background-clip:content-box}
+
+/* ---------------------------------------------------------------- header */
+/* `pointer-events:none` no header e `auto` nos filhos: a faixa nao rouba clique do conteudo
+   que passa por baixo. O header nao tem fundo proprio — quem cobre e o .stock-top. */
+#hd{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;
+  justify-content:space-between;gap:14px;padding:20px clamp(20px,5vw,60px);pointer-events:none}
+#hd img{height:69px;width:98px;object-fit:contain;display:block;pointer-events:auto}
+.hd-r{display:flex;align-items:center;gap:10px;pointer-events:auto;flex-wrap:wrap;justify-content:flex-end}
+.place{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted-3);white-space:nowrap}
+
+.langsw{display:flex;gap:2px;background:rgba(17,51,31,.07);border-radius:999px;padding:3px}
+.langsw .lg{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+  padding:6px 11px;border-radius:999px;color:var(--muted);transition:background .3s ease,color .3s ease}
+.langsw .lg.on{background:var(--ink);color:var(--sand-0);box-shadow:0 2px 6px rgba(17,51,31,.18)}
+
+.pill-list{display:flex;align-items:center;gap:9px;background:var(--glass);backdrop-filter:blur(16px);
+  border:1px solid var(--glass-b);border-radius:999px;padding:7px 8px 7px 15px;
+  box-shadow:0 8px 24px rgba(17,51,31,.1)}
+.pill-list .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
+  animation:rpnPulse 2.4s ease-in-out infinite}
+.pill-list .lbl{font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.pill-list .n{min-width:22px;text-align:center;font-size:11.5px;font-weight:700;color:var(--ink);
+  background:rgba(46,139,51,.16);border-radius:999px;padding:3px 7px}
+
+.bot{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  border-radius:999px;padding:9px 16px;transition:transform .35s ease}
+.bot:hover{transform:translateY(-2px)}
+.bot.solid{background:var(--ink);color:var(--sand-0);box-shadow:0 8px 22px rgba(17,51,31,.2)}
+.bot.glass{background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--glass-b);color:var(--ink)}
+
+/* ---------------------------------------------------------------- step rail */
+#rail{position:fixed;right:clamp(14px,2.6vw,38px);top:50%;transform:translateY(-50%);
+  z-index:40;display:flex;flex-direction:column;gap:20px}
+#rail button{display:flex;align-items:center;gap:8px;opacity:.28;transition:opacity .5s ease}
+#rail button.on{opacity:1}
+#rail .n{font-size:9px;font-weight:600;letter-spacing:.1em;color:var(--ink);font-variant-numeric:tabular-nums}
+#rail .bar{height:1px;width:12px;background:var(--ink);transition:width .5s var(--ease)}
+#rail button.on .bar{width:28px}
+
+/* ---------------------------------------------------------------- secoes */
+/* `proximity`, nao `mandatory` (14/08). A secao 03 cresce com o catalogo e fica mais alta que
+   a viewport; com `mandatory` o navegador arrasta a rolagem para o proximo ponto de snap assim
+   que o dedo sai, e o cliente era jogado da grade para a secao seguinte no meio da lista. */
+#scroll{height:100vh;overflow-y:auto;scroll-snap-type:y proximity}
+.sec{scroll-snap-align:start;position:relative;overflow:hidden;min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center}
+
+/* ---------------------------------------------------------------- 00 intro */
+#s0{padding:118px calc(clamp(24px,7vw,120px) + var(--rail-gutter)) 84px clamp(24px,7vw,120px);
+  background:linear-gradient(180deg,var(--sand-1) 0%,var(--sand-2) 100%)}
+/* tres camadas de textura, todas CSS: o handoff nao usa fotografia em lugar nenhum */
+#s0 .light{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 85% at 72% 18%, rgba(255,255,255,.92) 0%, rgba(255,255,255,0) 58%),
+             radial-gradient(90% 70% at 8% 96%, rgba(156,143,123,.26) 0%, transparent 60%)}
+#s0 .grainfield{position:absolute;top:0;right:0;bottom:0;width:46%;opacity:.45;pointer-events:none;
+  background:repeating-linear-gradient(90deg, rgba(27,33,28,.16) 0 1px, transparent 1px 9px);
+  -webkit-mask-image:radial-gradient(60% 55% at 50% 45%, #000 0%, transparent 78%);
+  mask-image:radial-gradient(60% 55% at 50% 45%, #000 0%, transparent 78%)}
+/* borda de laminas: a leitura de canto de chapa, no rodape da tela */
+.plyedge{position:absolute;left:0;right:0;bottom:0;height:120px;opacity:.55;pointer-events:none}
+.plyedge i{display:block}
+.plyedge .a{height:7px;background:linear-gradient(90deg, rgba(17,51,31,.10), rgba(17,51,31,.02))}
+.plyedge .b{height:11px;background:repeating-linear-gradient(90deg, rgba(156,143,123,.5) 0 1px, transparent 1px 5px)}
+.s0-in{position:relative;z-index:1}
+.over{display:flex;align-items:center;gap:14px;font-size:10px;font-weight:600;
+  letter-spacing:.28em;text-transform:uppercase;color:#5F6A5F}
+.over .rule{width:34px;height:1px;background:var(--accent);display:block;flex:none}
+h1.title{font-family:var(--serif);font-weight:400;font-size:clamp(56px,10.5vw,164px);
+  line-height:.92;letter-spacing:-.02em;color:var(--ink);margin:22px 0 0}
+/* "Finder" menor que "Stock" (Fabricio, 14/08) — em `em`, entao acompanha o clamp do h1 */
+h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);line-height:1;margin-top:.06em}
+.lead{font-weight:300;font-size:17px;line-height:1.65;color:var(--body);max-width:520px;
+  text-wrap:pretty;margin:26px 0 0}
+.hero-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:38px}
+.cta{background:var(--ink);color:var(--sand-0);font-size:12px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;padding:15px 28px;border-radius:999px;
+  box-shadow:0 14px 34px rgba(17,51,31,.24);transition:transform .4s var(--ease)}
+.cta:hover{transform:translateY(-2px)}
+/* o segundo caminho da intro: pular o quiz e ver o patio inteiro (handoff 18/08) */
+.cta.ghost{background:none;color:var(--ink);border:1px solid rgba(17,51,31,.25);
+  padding:14px 24px;box-shadow:none;transition:background .35s ease}
+.cta.ghost:hover{background:rgba(255,255,255,.6);transform:none}
+.cta-note{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2)}
+#cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);text-align:center;
+  animation:rpnCue 2.6s ease-in-out infinite}
+#cue span{font-size:9px;letter-spacing:.24em;color:var(--muted-3)}
+#cue i{display:block;width:1px;height:26px;margin:8px auto 0;background:linear-gradient(var(--muted-3), transparent)}
+
+/* ---------------------------------------------------------------- 01 portfolio */
+#s1{padding:96px calc(clamp(24px,4vw,64px) + var(--rail-gutter)) 56px clamp(24px,4vw,64px);
+  background:linear-gradient(180deg,var(--sand-3) 0%,var(--sand-4) 100%)}
+#s1 .rules{position:absolute;inset:0;opacity:.4;pointer-events:none;
+  background:repeating-linear-gradient(0deg, rgba(27,33,28,.05) 0 1px, transparent 1px 46px)}
+.p-head{width:100%;max-width:1440px;margin-inline:auto;display:flex;flex-wrap:wrap;
+  gap:clamp(24px,4vw,64px);align-items:end;justify-content:space-between;margin-bottom:26px;
+  padding-bottom:22px;border-bottom:1px solid var(--line);position:relative;z-index:1}
+.step-lbl{font-size:10px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--accent)}
+/* o titulo entra no clamp tambem pela ALTURA: em tela baixa e larga ele encolhe e devolve
+   espaco para o card, em vez de empurrar o texto do card para fora do fold */
+.p-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,min(4.2vw,6.6vh),60px);
+  line-height:1.02;color:var(--ink);margin:10px 0 0}
+.p-head h2 em{font-style:italic}
+.p-body{font-weight:300;font-size:clamp(14px,1.05vw,16px);line-height:1.7;color:var(--muted);
+  max-width:520px;margin:0;text-wrap:pretty}
+/* max-width: sem isso o card, que e aspect-ratio 3/4, cresce com a largura da tela e empurra
+   o texto para fora da viewport */
+.cards{width:100%;max-width:1440px;margin-inline:auto;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;position:relative;z-index:1}
+
+.pcard{position:relative;display:flex;flex-direction:column;text-align:left;width:100%;padding:0;
+  /* o aspect-ratio manda, mas a altura nunca passa da viewport: em tela baixa o card achata
+     em vez de jogar o texto (ancorado embaixo) para fora do fold */
+  aspect-ratio:3/4;max-height:min(52vh,470px);border-radius:8px;overflow:hidden;background:#1f3a22;
+  box-shadow:0 12px 34px rgba(17,51,31,.14);
+  transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s cubic-bezier(.23,1,.32,1)}
+.pcard:hover{transform:translateY(-5px);box-shadow:0 26px 58px rgba(17,51,31,.22)}
+.pcard .pbg{position:absolute;inset:0;transition:transform .6s cubic-bezier(.23,1,.32,1)}
+.pcard:hover .pbg{transform:scale(1.05)}
+/* Fundo por portfolio: tres camadas (veu escuro + trama + gradiente da madeira). A trama muda
+   de angulo em cada linha — e o que da leitura de material diferente sem usar foto. */
+.pcard[data-p="NS"] .pbg{background:
+  linear-gradient(180deg, rgba(31,58,34,.2) 0%, rgba(31,58,34,.85) 70%, rgba(20,24,15,.95) 100%),
+  repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 4px),
+  linear-gradient(135deg, #c9a876 0%, #8c6c44 100%)}
+.pcard[data-p="SS"] .pbg{background:
+  linear-gradient(180deg, rgba(122,58,42,.15) 0%, rgba(60,25,18,.85) 70%, rgba(30,14,10,.95) 100%),
+  repeating-linear-gradient(95deg, rgba(255,255,255,.03) 0 2px, transparent 2px 6px),
+  linear-gradient(135deg, #b5614a 0%, #6a2f22 100%)}
+.pcard[data-p="ST"] .pbg{background:
+  linear-gradient(180deg, rgba(31,58,34,.15) 0%, rgba(15,28,16,.85) 70%, rgba(10,20,10,.95) 100%),
+  repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 60px),
+  repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 4px),
+  linear-gradient(135deg, #2d4a30 0%, #0f1c10 100%)}
+.pcard[data-p="NC"] .pbg{background:
+  linear-gradient(180deg, rgba(60,60,55,.2) 0%, rgba(40,40,36,.85) 70%, rgba(20,20,18,.95) 100%),
+  repeating-linear-gradient(45deg, rgba(0,0,0,.08) 0 4px, transparent 4px 10px),
+  linear-gradient(135deg, #8a8a7a 0%, #4a4a3e 100%)}
+.pcard .pring{position:absolute;inset:0;border-radius:8px;border:1.5px solid var(--ring);
+  pointer-events:none;z-index:3;opacity:0;transition:opacity .45s ease}
+.pcard.on .pring{opacity:1}
+/* topo e corpo em FLUXO (nao absolutos): com absolute o corpo subia por cima da tag quando a
+   altura do card e limitada pela viewport */
+.pcard .ptop{position:relative;z-index:2;padding:20px;display:flex;justify-content:space-between;
+  align-items:flex-start;gap:10px}
+.pcard .tag{font-family:var(--mono);font-size:clamp(9.5px,.8vw,12px);font-weight:600;letter-spacing:1.3px;
+  text-transform:uppercase;color:var(--paper);padding:7px 11px;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.24);border-radius:4px;backdrop-filter:blur(4px)}
+/* anel de selecao ocupa o lugar do numeral 01-04 do modelo: aqui o card e um SELETOR */
+.pcard .radio{width:19px;height:19px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;flex:none;border:1px solid rgba(255,255,255,.45);transition:border-color .45s ease}
+.pcard.on .radio{border-color:var(--ring)}
+.pcard .radio i{width:9px;height:9px;border-radius:50%;background:var(--ring);
+  transform:scale(0);transition:transform .45s var(--ease)}
+.pcard.on .radio i{transform:scale(1)}
+.pcard .pbot{position:relative;margin-top:auto;padding:0 24px 24px;z-index:2;color:var(--paper);display:block}
+.pcard .pmeta{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-family:var(--mono);font-size:clamp(9.5px,.8vw,12px);font-weight:500;letter-spacing:1.3px;
+  text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:11px;padding-bottom:11px;
+  border-bottom:1px solid rgba(255,255,255,.18)}
+.pcard .cnt{color:var(--ring)}
+.pcard .ptitle{display:block;font-family:var(--display);font-size:clamp(24px,2.1vw,36px);
+  font-weight:500;line-height:1.03;letter-spacing:-.6px;margin-bottom:9px}
+.pcard .ptitle em{font-style:italic;font-weight:400;color:var(--ring)}
+/* Descricao revelada no hover (e mantida no card selecionado). Recurso dos "cards magneticos":
+   fechado ela nao ocupa altura (max-height:0), entao o card nao muda de tamanho ao abrir —
+   o texto cresce para dentro do espaco que o aspect-ratio ja reservava. Limitada a 4 linhas
+   para nao empurrar os usos por cima da tag. */
+.pcard .pdesc{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;
+  font-size:clamp(12.5px,.95vw,14.5px);line-height:1.5;color:rgba(255,255,255,.8);
+  max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .4s,opacity .3s,margin-bottom .4s}
+.pcard:hover .pdesc,.pcard.on .pdesc{max-height:92px;opacity:1;margin-bottom:13px}
+.pcard .puses{display:block;font-family:var(--mono);font-size:clamp(9.5px,.78vw,11.5px);
+  letter-spacing:.4px;color:rgba(255,255,255,.6);line-height:1.55}
+
+/* ---------------------------------------------------------------- 02 especificacao */
+#s2{flex-direction:row;flex-wrap:wrap;gap:clamp(28px,4vw,72px);align-items:center;
+  padding:118px calc(clamp(24px,7vw,120px) + var(--rail-gutter)) 72px clamp(24px,7vw,120px);
+  background:radial-gradient(70% 60% at 78% 30%, rgba(255,255,255,.75), transparent 62%),
+             linear-gradient(180deg,var(--sand-4) 0%,var(--sand-5) 100%)}
+/* teto na coluna direita: sem ele o `flex:999` engolia toda a sobra sem ter o que fazer com
+   ela, e o texto da esquerda quebrava em 6 linhas enquanto sobrava vazio a direita (14/08) */
+#s2 .side{flex:1 1 250px;max-width:420px;position:relative;z-index:1}
+#s2 .side h2{font-family:var(--serif);font-weight:400;font-size:clamp(38px,4.4vw,62px);
+  line-height:1.02;color:var(--ink);margin:14px 0 18px}
+#s2 .side h2 em{font-style:italic}
+#s2 .side .body{font-weight:300;font-size:15px;line-height:1.7;color:var(--muted);margin:0}
+.kpi{margin-top:26px}
+.kpi .l{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-3)}
+.kpi-v{display:flex;align-items:baseline;gap:9px}
+.kpi .v{font-family:var(--serif);font-size:44px;color:var(--ink);line-height:1.1}
+.kpi .u{font-size:12px;color:var(--muted)}
+#s2 .main{flex:999 1 460px;max-width:1080px;position:relative;z-index:1}
+.controls{display:flex;flex-direction:column;gap:26px}
+.crow-hd{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;margin-bottom:11px}
+.crow-hd .t{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);min-width:0}
+.crow-hd .t i{font-style:normal;font-weight:400;text-transform:none;letter-spacing:.02em;color:var(--muted-2)}
+.clear{flex:none;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);
+  transition:color .3s ease}
+.clear:hover{color:var(--accent-d)}
+
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chip{position:relative;min-width:68px;padding:12px 13px;border-radius:11px;overflow:hidden;
+  text-align:center;backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.75);
+  box-shadow:0 6px 18px rgba(17,51,31,.06);background:rgba(255,255,255,.5);
+  font-size:clamp(14px,1vw,17px);font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink);
+  transition:transform .4s var(--ease),background .3s ease,color .3s ease}
+.chip:hover{transform:translateY(-3px)}
+.chip.on{background:var(--ink);color:var(--sand-0)}
+
+/* Base fixa no lugar de 1fr: era o 1fr que esticava cada tile ate preencher a linha, e o
+   retangulo esticado — nao o texto — ficava longo demais (13/08). */
+.species{display:flex;flex-wrap:wrap;gap:12px}
+.sp{position:relative;flex:0 1 160px;padding:14px;border-radius:12px;text-align:left;overflow:hidden;
+  backdrop-filter:blur(14px);box-shadow:0 6px 18px rgba(17,51,31,.06);
+  background:rgba(255,255,255,.5);border:1px solid var(--off-border);
+  transition:transform .4s var(--ease),border-color .3s ease}
+.sp:hover{transform:translateY(-3px)}
+.sp.on{border-color:var(--accent)}
+/* display:block obrigatorio — o swatch e um <span>, e sem isso ele fica inline, a altura e
+   ignorada e a amostra de cor mede 0x0. As listras sao o corte lateral das laminas. */
+.sp .swatch{display:block;height:24px;border-radius:4px;margin-bottom:10px;
+  background-image:repeating-linear-gradient(180deg, rgba(17,51,31,.4) 0 2px, rgba(255,255,255,.55) 2px 4px)}
+.sp .nm{display:block;font-size:15px;font-weight:600;color:var(--ink);line-height:1.2;text-transform:capitalize}
+.sp .de{display:block;margin-top:3px;font-size:12px;color:var(--body)}
+
+/* ---------------------------------------------------------------- 03 resultado */
+/* A secao cresce com o catalogo em vez de rolar por dentro (14/08): scroll aninhado dentro de
+   uma pagina que ja rola e armadilha de leitura. O padding-top mora no .stock-top, que precisa
+   dele para cobrir a faixa do header fixo enquanto esta grudado. */
+#s3{justify-content:flex-start;overflow:visible;
+  padding:0 calc(clamp(24px,7vw,120px) + var(--rail-gutter)) 0 clamp(24px,7vw,120px);
+  background:radial-gradient(80% 50% at 50% 0%, rgba(255,255,255,.8), transparent 60%),
+             linear-gradient(180deg,var(--sand-5) 0%,var(--sand-6) 46%)}
+/* Cabecalho + chips + filtros grudam no topo: era o scroll aninhado que os mantinha visiveis.
+   As margens negativas sangram o fundo ate as bordas — senao os cards aparecem nas laterais ao
+   passar por tras. O #hd (fixo, z-40) fica por cima; dai o padding-top de 100px. */
+.stock-top{position:sticky;top:0;z-index:5;
+  margin:0 calc((clamp(24px,7vw,120px) + var(--rail-gutter)) * -1) 0 calc(clamp(24px,7vw,120px) * -1);
+  padding:100px calc(clamp(24px,7vw,120px) + var(--rail-gutter)) 0 clamp(24px,7vw,120px);
+  background:linear-gradient(180deg,rgba(243,240,233,.96) 0%,rgba(243,240,233,.92) 82%,rgba(243,240,233,.74) 100%);
+  backdrop-filter:blur(12px)}
+.stock-hd{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end;justify-content:space-between;padding-bottom:16px}
+.stock-hd h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,3.6vw,52px);
+  line-height:1.02;color:var(--ink);margin:8px 0 0}
+.stock-sub{font-size:13px;color:var(--muted);margin:8px 0 0;max-width:62ch}
+.reads{display:flex;gap:30px;flex-wrap:wrap;align-items:flex-end}
+.read .l{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2)}
+.read .v{font-family:var(--serif);font-size:32px;color:var(--ink);line-height:1.15}
+/* A unidade do volume fica bem menor que o numero (32px -> 20px, Fabricio 20/08). O passo de
+   3px que ele pediu primeiro nao se via: 9% de diferenca soma zero ao lado do sobrescrito do m3. */
+.read .v .u{font-size:20px}
+.updated{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);
+  display:flex;align-items:center;gap:7px;padding-top:12px}
+.updated i{width:6px;height:6px;border-radius:50%;background:var(--accent);
+  animation:rpnPulse 2.4s ease-in-out infinite;display:block}
+.viewsw{display:flex;gap:2px;background:rgba(17,51,31,.06);border-radius:999px;padding:3px}
+.vw{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 15px;
+  border-radius:999px;color:var(--muted);transition:background .3s ease,color .3s ease}
+.vw.on{background:var(--sand-0);color:var(--ink);box-shadow:0 2px 6px rgba(17,51,31,.1)}
+
+/* chips do que esta filtrado — cada um se remove sozinho */
+.chipbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-bottom:14px}
+.fchip{display:flex;align-items:center;gap:8px;background:var(--ink);color:var(--sand-0);
+  border-radius:999px;padding:7px 9px 7px 14px;font-size:11px;font-weight:600;letter-spacing:.06em;
+  transition:background .3s ease}
+.fchip:hover{background:var(--accent-d)}
+.fchip .k{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.65}
+.fchip .x{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1}
+.nosel{font-size:11.5px;letter-spacing:.02em;color:var(--muted-2)}
+
+.filters{display:flex;flex-wrap:wrap;gap:9px;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.sel{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.6);backdrop-filter:blur(14px);
+  border:1px solid var(--off-border);border-radius:999px;padding:8px 14px;transition:border-color .3s ease}
+.sel.on{border-color:var(--accent)}
+.sel label{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2)}
+.sel select{border:0;background:transparent;font-size:12px;font-weight:600;color:var(--ink);
+  outline:none;cursor:pointer;max-width:150px}
+.openfull{margin-left:auto;display:flex;align-items:center;gap:9px;font-size:10.5px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:rgba(255,255,255,.7);
+  border:1px solid rgba(17,51,31,.22);border-radius:999px;padding:10px 18px;
+  transition:background .35s ease,color .35s ease,transform .35s ease}
+.openfull:hover{background:var(--ink);color:var(--sand-0);transform:translateY(-2px)}
+.openfull .n{opacity:.6}
+
+.grid-area{flex:1;padding:22px 4px 40px}
+/* min(310px,100%): sem isso o minimo de 310px estoura o container em telas estreitas e o card
+   passa por baixo do step rail */
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr))}
+.grid.list{grid-template-columns:1fr}
+.foot-note{border-top:1px solid var(--line);padding:14px 0 22px;font-size:11px;
+  color:var(--muted-3);line-height:1.6}
+.empty{padding:52px 0;max-width:520px}
+.empty h3{font-family:var(--serif);font-weight:400;font-size:34px;color:var(--ink);margin:0 0 10px}
+.empty p{font-size:14px;color:var(--muted);margin:0 0 20px}
+
+/* ---------------------------------------------------------------- card de SKU */
+.sku{position:relative;border-radius:18px;padding:20px 20px 20px 30px;overflow:hidden;
+  display:grid;grid-template-columns:minmax(0,1fr);align-items:stretch;
+  background:rgba(255,255,255,.68);border:1px solid var(--glass-b);
+  box-shadow:0 10px 32px rgba(17,51,31,.09);
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.sku:hover{transform:translateY(-5px);box-shadow:0 26px 56px rgba(17,51,31,.15)}
+/* a lombada de 6px carrega a cor do portfolio: identifica a linha antes de qualquer leitura.
+   NS e #83643e e nao #8c6c44 — sobre branco o original dava 4,47:1, abaixo do minimo AA. */
+.sku .edge{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--pf)}
+.sku[data-p="NS"]{--pf:#83643e}
+.sku[data-p="SS"]{--pf:#6a2f22}
+.sku[data-p="ST"]{--pf:#16281a}
+.sku[data-p="NC"]{--pf:#4a4a3e}
+.sku .ring{position:absolute;inset:0;border-radius:18px;border:1.5px solid var(--accent);
+  pointer-events:none;opacity:0;transition:opacity .5s ease}
+.sku.focus .ring{opacity:1}
+.sku.focus{box-shadow:0 26px 56px rgba(46,139,51,.22)}
+
+.balloons{display:grid;grid-template-columns:repeat(auto-fit,minmax(122px,1fr));gap:7px;margin-bottom:16px}
+.bl{display:flex;flex-direction:column;gap:2px;padding:8px 12px;border-radius:10px;
+  background:rgba(255,255,255,.72);border:1px solid rgba(27,33,28,.1)}
+.bl .k{font-family:var(--mono);font-size:8.5px;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted-2)}
+.bl .v{font-size:13.5px;font-weight:700;color:var(--ink);line-height:1}
+.bl .v.cert{color:var(--accent-d)}
+.bl.pf{background:var(--pf);border:0;color:var(--paper);box-shadow:0 5px 14px rgba(17,51,31,.16)}
+.bl.pf .k{color:inherit;opacity:.75}
+.bl.pf .v{color:inherit;letter-spacing:.02em}
+.bl.logs{flex-direction:row;align-items:center;gap:8px}
+.bl.logs .col{display:flex;flex-direction:column;gap:2px}
+.bl.logs .v{text-transform:capitalize}
+.bl.logs .swatch{width:14px;height:20px;border-radius:3px;flex:none;
+  background-image:repeating-linear-gradient(180deg, rgba(17,51,31,.38) 0 2px, rgba(255,255,255,.5) 2px 4px)}
+
+/* Hierarquia por PODER DE DISCRIMINACAO (13/08): a dimensao e 2440x1220 em 39 dos 45 SKUs —
+   quase nao separa nada; espessura e preco sao o que distingue um SKU do outro. Os tres
+   dividem a MESMA fonte. O filete separa a especificacao do bloco comercial. */
+.sku .dim{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 14px;white-space:nowrap;
+  font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.05;color:var(--ink);
+  padding-bottom:10px;border-bottom:1px solid rgba(27,33,28,.14)}
+.sku .dim span{font-family:var(--serif);color:var(--soft)}
+.sku .avail{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 10px;font-size:19px;
+  color:var(--body);margin-top:10px}
+/* nowrap nos dois: em card estreito o "m³" se soltava do numero e caia na linha seguinte */
+.sku .avail .c{color:var(--ink);white-space:nowrap}
+.sku .avail .vol{font-size:14px;color:var(--muted);white-space:nowrap}
+.sku .price{font-family:var(--serif);font-size:29px;color:var(--accent-d);margin:10px 0 22px;
+  text-align:left;white-space:nowrap}
+.sku .price small{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--muted)}
+.sku .sug{background:rgba(46,139,51,.09);border-left:2px solid var(--accent);border-radius:10px;
+  padding:12px 14px;margin-bottom:14px;width:100%;text-align:left;display:block;transition:background .35s ease}
+.sku .sug:hover{background:rgba(46,139,51,.17)}
+.sku .sug .l{display:block;font-size:9px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent)}
+.sku .sug .v{display:block;font-size:12px;color:var(--body);margin-top:3px}
+.sku .add{display:flex;justify-content:center;align-items:center;gap:8px;white-space:nowrap;
+  justify-self:start;border-radius:999px;padding:11px 18px;font-size:11px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(17,51,31,.2);
+  background:transparent;color:var(--ink);transition:background .35s ease,border-color .35s ease}
+.sku .add .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
+  transform:scale(0);transition:transform .4s var(--ease)}
+.sku .add.on{background:rgba(46,139,51,.12);border-color:rgba(46,139,51,.5);color:var(--accent-d)}
+.sku .add.on .dot{transform:scale(1)}
+
+/* vista em lista: mesmo markup, o CSS reconfigura o card em linha */
+.grid.list .sku{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;padding:14px 20px 14px 26px}
+.grid.list .sku:hover{transform:none;box-shadow:0 16px 34px rgba(17,51,31,.1)}
+.grid.list .balloons{grid-template-columns:repeat(2,auto);margin-bottom:0}
+.grid.list .sku .dim{flex-wrap:nowrap;font-size:21px;padding-bottom:0;border-bottom:0}
+.grid.list .sku .avail{flex-wrap:nowrap;font-size:20px;margin-top:0}
+.grid.list .sku .avail .vol{font-size:15px}
+.grid.list .sku .price{font-size:22px;margin:0 0 0 auto;text-align:right}
+.grid.list .sku .price small{font-size:13.5px}
+.grid.list .sku .sug{margin-bottom:0;flex-basis:100%}
+
+/* ---------------------------------------------------------------- inventario completo */
+/* Tela separada, nao a 5a secao do scroll (handoff 18/08): o cliente abre, olha o patio inteiro
+   e volta sem perder a resposta da tela 03. Fecha no Escape ou no botao. */
+#full{position:fixed;inset:0;z-index:60;overflow-y:auto;
+  background:linear-gradient(180deg,var(--sand-0) 0%,var(--sand-2) 100%);
+  padding:0 clamp(24px,6vw,96px)}
+.full-top{position:sticky;top:0;z-index:5;margin:0 calc(clamp(24px,6vw,96px) * -1);
+  padding:26px clamp(24px,6vw,96px) 0;
+  background:linear-gradient(180deg,rgba(243,240,233,.97) 0%,rgba(243,240,233,.93) 82%,rgba(243,240,233,.76) 100%);
+  backdrop-filter:blur(12px)}
+.full-top .stock-hd h2{font-size:clamp(30px,3.2vw,46px)}
+.full-top .viewsw{margin-left:auto}
+#closeFull{display:flex;align-items:center;gap:10px;box-shadow:0 10px 26px rgba(17,51,31,.2)}
+#closeFull .arw{font-size:13px;line-height:1}
+#full .grid-area{padding:22px 0 60px}
+/* baloes um degrau maiores aqui: a tela e mais larga e o card respira */
+#full .balloons{gap:8px}
+#full .bl{padding:9px 13px;border-radius:11px}
+#full .bl .k{font-size:9.5px}
+#full .bl .v{font-size:14.5px}
+#full .bl.logs .swatch{width:15px;height:22px}
+#full .sku .avail{font-size:20px}
+#full .sku .avail .vol{font-size:15px}
+#full .sku .price small{font-size:13.5px}
+
+/* ---------------------------------------------------------------- telas menores */
+/* Quase sem breakpoint de layout: as secoes usam clamp/auto-fit. Aqui so o que nao se resolve
+   sozinho — o card de portfolio empilhado e a vista em lista muito estreita. */
+@media (max-width:1200px){
+  /* empilhado, a secao passa de 100vh: precisa crescer e deixar rolar, senao o overflow:hidden
+     de .sec corta os cards de baixo e eles ficam inalcancaveis */
+  #s1{overflow:visible;padding-top:112px;padding-bottom:72px}
+  .pcard{max-height:none}
+}
+@media (max-width:1100px){
+  .grid.list .sku{gap:10px 16px}
+  .grid.list .balloons{grid-template-columns:repeat(auto-fit,minmax(122px,1fr));flex-basis:100%}
+  .grid.list .sku .price{margin-left:auto}
+}
+@media (max-width:720px){
+  :root{--rail-gutter:0px}
+  #rail{display:none}
+  #hd{padding:14px 20px;gap:8px}
+  #hd img{height:48px;width:68px}
+  .place{display:none}
+  h1.title{font-size:clamp(44px,15vw,86px)}
+  .lead{font-size:15px}
+  #s2{flex-direction:column;align-items:stretch}
+  .reads{gap:18px}
+  .stock-top{padding-top:86px}
+  .grid.list .sku .price{margin:0;text-align:left}
+}
+/* tela baixa: aperta as folgas do passo 02 para o conteudo continuar cabendo */
+@media (max-height:820px){
+  #s2{padding-top:100px;padding-bottom:48px}
+  .controls{gap:18px}
+  .kpi{margin-top:14px}
+  .kpi .v{font-size:34px}
+  .pcard .ptop{padding:18px}
+  .pcard .pbot{padding:0 20px 20px}
+  .pcard .pdesc{-webkit-line-clamp:2}
+  .pcard:hover .pdesc,.pcard.on .pdesc{max-height:46px;margin-bottom:10px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
+
+/* ---------------------------------------------------------------- ajuda (pop-up)
+   Substitui o UserGuide.pdf do site antigo. Fica acima do #full (z-index 60) porque pode
+   ser aberta de dentro dele. */
+#helpBtn{width:26px;height:26px;border-radius:50%;border:1px solid rgba(17,51,31,.25);
+  background:none;color:var(--ink);font-size:12px;font-weight:700;line-height:1;cursor:pointer;
+  display:grid;place-items:center;transition:background .2s,color .2s,transform .2s var(--ease)}
+#helpBtn:hover{background:var(--ink);color:var(--sand-0);transform:translateY(-1px)}
+
+#guide{position:fixed;inset:0;z-index:80;overflow-y:auto;
+  background:rgba(17,51,31,.42);backdrop-filter:blur(6px);
+  padding:clamp(16px,5vh,64px) clamp(16px,5vw,40px)}
+.guide-box{max-width:760px;margin:0 auto;background:var(--paper);border-radius:18px;
+  box-shadow:0 30px 80px rgba(17,51,31,.28);overflow:hidden}
+.guide-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;
+  padding:26px clamp(22px,4vw,38px) 18px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;background:var(--paper);z-index:2}
+.guide-hd h2{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3.4vw,38px);
+  line-height:1.05;color:var(--ink);margin:0}
+.guide-x{width:32px;height:32px;flex:0 0 32px;border-radius:50%;border:1px solid var(--line);
+  background:none;color:var(--ink);font-size:19px;line-height:1;cursor:pointer;
+  display:grid;place-items:center;transition:background .2s,color .2s}
+.guide-x:hover{background:var(--ink);color:var(--sand-0)}
+
+.guide-body{padding:22px clamp(22px,4vw,38px) 6px}
+.guide-body .g-intro{font-size:15.5px;line-height:1.62;color:var(--ink);margin:0 0 26px;
+  padding-bottom:22px;border-bottom:1px solid var(--line)}
+.g-sec{margin-bottom:24px}
+.g-sec h3{font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink);margin:0 0 8px}
+.g-sec p{font-size:14.5px;line-height:1.66;color:var(--t2);margin:0}
+.g-sec ul{margin:12px 0 0;padding:0;list-style:none;
+  border-left:2px solid var(--line);padding-left:16px}
+.g-sec li{font-size:13.5px;line-height:1.58;color:var(--t2);margin-bottom:7px}
+.g-sec li:last-child{margin-bottom:0}
+
+.guide-ft{padding:12px clamp(22px,4vw,38px) 28px;text-align:right}
+
+@media (max-width:560px){
+  .guide-box{border-radius:14px}
+  .guide-hd{padding:20px 20px 14px}
+  .guide-body{padding:18px 20px 4px}
+  .guide-ft{padding:10px 20px 22px;text-align:center}
+}
