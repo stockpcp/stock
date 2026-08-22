@@ -69,12 +69,51 @@ Promise.all([
     '  node dev-server.js\n\nDetalhe: ' + err + '</pre>');
 });
 
+/* O header e fixo e NAO tem fundo proprio: quem cobre a faixa dele na tela 03 e o padding
+   do topo da barra de filtros. Esse padding era 100px cravado contra um header que mede
+   109px no desktop e muda de altura quando os botoes de envio aparecem ou no telefone.
+   Medir e publicar em --hd-h faz os dois andarem juntos em qualquer tela. */
+let hdVW = 0, hdVH = 0;
+function syncHeaderHeight(force){
+  const hd = $('hd'); if(!hd) return;
+  // Sai cedo quando a janela nao mudou de tamanho. A comparacao e com innerWidth/innerHeight,
+  // que sao leitura de viewport e NAO forcam layout — por isso da para chamar isto a cada
+  // evento de rolagem sem custo. O getBoundingClientRect (esse sim forca) so roda quando
+  // a janela mudou de fato, ou quando alguem passa force=true.
+  if(!force && innerWidth === hdVW && innerHeight === hdVH) return;
+  hdVW = innerWidth; hdVH = innerHeight;
+  const h = Math.round(hd.getBoundingClientRect().height);
+  if(h > 0) document.documentElement.style.setProperty('--hd-h', h + 'px');
+}
+
 function build(){
   buildLangSwitch();
   buildRail();
   wire();
   applyLang();
   ensureRail();
+  syncHeaderHeight();
+  // Tres gatilhos, porque cada um cobre um buraco do outro:
+  //  - resize imediato: o caso comum;
+  //  - resize + 80ms: no salto entre telas alta e baixa a media query troca o tamanho do logo
+  //    DEPOIS do evento, e a medida imediata pegava o valor velho (medido: token em 109px com
+  //    o header ja em 64px, e 45px de faixa morta na barra de filtros);
+  //  - ResizeObserver: pega o que resize nao ve — a linha de botoes do header quebrando quando
+  //    a lista de interesse recebe o primeiro item.
+  //  - fonts.ready: a webfont troca a metrica do header depois do primeiro layout.
+  // O resize resolve o caso comum; o +80ms cobre a media query que troca o tamanho do logo
+  // depois do evento; o ResizeObserver pega o header crescendo sem a janela mudar (a linha de
+  // botoes quebra quando a lista de interesse recebe o primeiro item); fonts.ready cobre a
+  // troca de metrica quando a webfont chega. Se TUDO isso falhar, o railTick corrige na
+  // primeira rolagem — foi assim que este bug apareceu na medicao e nao quero depender de um
+  // unico gatilho de novo.
+  let hdTick = 0;
+  window.addEventListener('resize', () => {
+    syncHeaderHeight();
+    clearTimeout(hdTick); hdTick = setTimeout(() => syncHeaderHeight(true), 80);
+  }, { passive:true });
+  if(window.ResizeObserver) new ResizeObserver(() => syncHeaderHeight(true)).observe($('hd'));
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(() => syncHeaderHeight(true));
 }
 
 // ---------------------------------------------------------------- idioma
@@ -92,6 +131,9 @@ function buildLangSwitch(){
 // isso que nenhuma copy fica escrita no index.html, so os nos vazios com `data-t`.
 function applyLang(){
   const t = T();
+  // ficava "en" mesmo com a tela em PT/ES: leitor de tela le com a pronuncia errada e o
+  // navegador oferece traduzir uma pagina que ja esta no idioma do usuario
+  document.documentElement.lang = S.lang === 'pt' ? 'pt-BR' : S.lang;
   document.querySelectorAll('[data-t]').forEach(n => { n.textContent = t[n.dataset.t] || ''; });
   [...$('langsw').children].forEach((b, i) => b.classList.toggle('on', LANGS[i].key === S.lang));
   [...$('rail').children].forEach((b, i) => { b.title = t.rail[i]; });
@@ -149,6 +191,7 @@ function buildRail(){
 }
 function railTick(){
   const c = $('scroll'); if(!c) return;
+  syncHeaderHeight();   // rede de seguranca: nao depende do evento resize ter chegado
   const mid = c.scrollTop + c.clientHeight / 2;
   let step = 0;
   SECTIONS.forEach((id, i) => { const n = $(id); if(n && n.offsetTop <= mid) step = i; });
@@ -347,6 +390,9 @@ function mkSelect(label, value, options, onChange){
     if(String(o.v) === String(value)) op.selected = true;
     s.appendChild(op);
   });
+  // o <label> ao lado nao esta ligado ao campo (sem for/id), entao sem isto o leitor de
+  // tela anuncia so "lista, All" — sem dizer de que filtro se trata
+  s.setAttribute('aria-label', label);
   s.onchange = e => onChange(e.target.value);
   wrap.appendChild(s);
   return wrap;
@@ -376,10 +422,14 @@ function buildFilters(){
       v => { S.gauges = v ? [Number(v)] : []; renderGauges(); buildFilters(); renderAll(); })
   ].forEach(n => box.appendChild(n));
 
+  // O botao vai para a ancora FORA do rolamento (.filter-end). Dentro do #filters ele
+  // sairia da tela junto com os seletores no telefone e o cliente perderia o caminho
+  // para o armazem inteiro. Cai de volta no #filters se a ancora nao existir.
   const b = el('button', 'openfull',
     esc(t.fullInventory) + '<span class="n num">' + DATA.length + '</span>');
   b.onclick = () => openFull(true);
-  box.appendChild(b);
+  const end = $('filterEnd');
+  if(end){ end.innerHTML = ''; end.appendChild(b); } else { box.appendChild(b); }
 }
 // O overlay tem filtros proprios (estado S.full), independentes da selecao do quiz: ele existe
 // justamente para ver o armazem inteiro sem desmontar a resposta da tela 03.

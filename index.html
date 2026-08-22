@@ -116,27 +116,37 @@
   <!-- Ultima tela do scroll. O inventario completo saiu daqui e virou overlay (#full),
        aberto pelo botao "Full inventory" — handoff 18/08. -->
   <section class="sec stock" id="s3">
-    <div class="stock-top">
-      <div class="stock-hd">
-        <div>
-          <div class="step-lbl" data-t="step03"></div>
-          <h2 id="stockTitle"></h2>
-          <p class="stock-sub" id="stockSub"></p>
-        </div>
-        <div class="reads">
-          <div class="read"><div class="l" data-t="matches"></div><div class="v num" id="rMatches">0</div></div>
-          <div class="read"><div class="l" data-t="crates"></div><div class="v num" id="rCrates">0</div></div>
-          <div class="read"><div class="l" data-t="volume"></div><div class="v num" id="rVolume">0</div></div>
-          <div class="read"><div class="l" data-t="updated"></div>
-            <div class="updated"><i></i><span id="rUpdated">—</span></div></div>
-          <div class="viewsw" data-scope="grid"></div>
-        </div>
+    <!-- Titulo e leitores ROLAM com a pagina (22/08). Presos no topo, eles levavam a barra fixa
+         a 63% da tela no notebook e 85% no telefone, e o card de 327px nao cabia na sobra.
+         So a barra de controle abaixo fica grudada — e ela e o que se usa enquanto se olha card. -->
+    <div class="stock-hd">
+      <div>
+        <div class="step-lbl" data-t="step03"></div>
+        <h2 id="stockTitle"></h2>
+        <p class="stock-sub" id="stockSub"></p>
       </div>
+    </div>
 
+    <!-- barra de controle — o unico bloco que gruda no topo -->
+    <div class="stock-top">
+      <!-- Leitores PREGADOS (pedido do Fabricio, 22/08). Fora da barra eles saiam de vista
+           justo quando mudam — ao mexer num filtro. Voltam em corpo menor, uma linha so. -->
+      <div class="reads">
+        <div class="read"><div class="l" data-t="matches"></div><div class="v num" id="rMatches">0</div></div>
+        <div class="read"><div class="l" data-t="crates"></div><div class="v num" id="rCrates">0</div></div>
+        <div class="read"><div class="l" data-t="volume"></div><div class="v num" id="rVolume">0</div></div>
+        <div class="read"><div class="l" data-t="updated"></div>
+          <div class="updated"><i></i><span id="rUpdated">—</span></div></div>
+        <div class="viewsw" data-scope="grid"></div>
+      </div>
       <!-- chips do que esta filtrado: cada um se remove sozinho -->
       <div class="chipbar" id="chipbar"></div>
-
-      <div class="filters" id="filters"></div>
+      <!-- os 6 seletores rolam na horizontal e nunca quebram linha; o botao do inventario
+           completo fica fora do rolamento, ancorado a direita, para nao sumir da tela -->
+      <div class="filterbar">
+        <div class="filters" id="filters"></div>
+        <div class="filter-end" id="filterEnd"></div>
+      </div>
     </div>
     <div class="grid-area">
       <div class="grid" id="results"></div>
@@ -152,23 +162,31 @@
 </main>
 
 <!-- ===== inventario completo (overlay) ===== -->
-<div id="full" class="hidden">
+<div id="full" class="hidden" role="dialog" aria-modal="true" aria-labelledby="fullTitle">
+  <!-- Mesmo tratamento da tela 03 (22/08): titulo e leitores rolam. Presos, a barra do overlay
+       ficava com 532px de 812 no telefone (66%) e o card de 340px nao cabia na sobra. -->
+  <div class="stock-hd full-hd">
+    <div>
+      <div class="step-lbl" data-t="fullOver"></div>
+      <h2 id="fullTitle" data-t="fullTitle"></h2>
+    </div>
+  </div>
+  <!-- barra de controle: e o unico bloco grudado. O botao de VOLTAR mora aqui de proposito —
+       no telefone nao ha tecla Escape, entao ele nao pode rolar para fora da tela. -->
   <div class="full-top">
-    <div class="stock-hd">
-      <div>
-        <div class="step-lbl" data-t="fullOver"></div>
-        <h2 data-t="fullTitle"></h2>
+    <div class="reads">
+      <div class="read"><div class="l" data-t="showing"></div><div class="v num" id="fShowing">0</div></div>
+      <div class="read"><div class="l" data-t="crates"></div><div class="v num" id="fCrates">0</div></div>
+      <div class="read"><div class="l" data-t="volume"></div><div class="v num" id="fVolume">0</div></div>
+    </div>
+    <div class="filterbar">
+      <div class="filters" id="fullFilters">
+        <button class="clear" id="clearFull" data-t="clearFilters"></button>
       </div>
-      <div class="reads">
-        <div class="read"><div class="l" data-t="showing"></div><div class="v num" id="fShowing">0</div></div>
-        <div class="read"><div class="l" data-t="crates"></div><div class="v num" id="fCrates">0</div></div>
-        <div class="read"><div class="l" data-t="volume"></div><div class="v num" id="fVolume">0</div></div>
+      <div class="filter-end">
+        <div class="viewsw" data-scope="full"></div>
         <button class="bot solid" id="closeFull"><span class="arw">←</span><span data-t="backToResult"></span></button>
       </div>
-    </div>
-    <div class="filters" id="fullFilters">
-      <button class="clear" id="clearFull" data-t="clearFilters"></button>
-      <div class="viewsw" data-scope="full"></div>
     </div>
   </div>
   <div class="grid-area">

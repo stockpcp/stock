@@ -34,6 +34,10 @@
   --ease:cubic-bezier(.2,.8,.2,1);
   /* calha de 72px a direita: e onde o step rail flutua, em todas as secoes */
   --rail-gutter:72px;
+  /* altura REAL do header fixo — o app.js remede a cada resize e reescreve este token.
+     Antes era 100px cravado no .stock-top contra um header de 109px: o topo dos chips
+     passava por baixo da faixa. Numero aqui e so o valor de partida. */
+  --hd-h:110px;
 }
 
 *{box-sizing:border-box}
@@ -46,6 +50,12 @@ img{max-width:100%}
 a{color:var(--accent-d);text-decoration:none}
 a:hover{color:var(--accent)}
 .hidden{display:none !important}
+
+/* FOCO VISIVEL — o site nao tinha nenhum, e o reset zera o outline do navegador. Usa
+   :focus-visible, entao so aparece para quem navega por teclado; quem usa mouse nao ve
+   diferenca nenhuma. Cor do anel de selecao da marca. */
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.pcard:focus-visible,.sku:focus-visible{outline-offset:5px}
 .num{font-variant-numeric:tabular-nums}
 
 @keyframes rpnPulse{0%,100%{opacity:1}50%{opacity:.3}}
@@ -144,7 +154,9 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 #cue i{display:block;width:1px;height:26px;margin:8px auto 0;background:linear-gradient(var(--muted-3), transparent)}
 
 /* ---------------------------------------------------------------- 01 portfolio */
-#s1{padding:96px calc(clamp(24px,4vw,64px) + var(--rail-gutter)) 56px clamp(24px,4vw,64px);
+/* padding-top amarrado ao header: com 96px cravado, o <h2> do passo 01 comecava
+   13px por baixo da faixa fixa em telas de 1280-1366px (medido 22/08). */
+#s1{padding:calc(var(--hd-h) + 14px) calc(clamp(24px,4vw,64px) + var(--rail-gutter)) 56px clamp(24px,4vw,64px);
   background:linear-gradient(180deg,var(--sand-3) 0%,var(--sand-4) 100%)}
 #s1 .rules{position:absolute;inset:0;opacity:.4;pointer-events:none;
   background:repeating-linear-gradient(0deg, rgba(27,33,28,.05) 0 1px, transparent 1px 46px)}
@@ -292,11 +304,16 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 /* Cabecalho + chips + filtros grudam no topo: era o scroll aninhado que os mantinha visiveis.
    As margens negativas sangram o fundo ate as bordas — senao os cards aparecem nas laterais ao
    passar por tras. O #hd (fixo, z-40) fica por cima; dai o padding-top de 100px. */
+/* 22/08 — o titulo SAIU daqui. Ficou so a barra de controle (chips + filtros), que e o
+   que se opera enquanto se olha card. Medido antes: 416px de 660 (63%) no notebook e
+   688px de 812 (85%) no telefone, contra um card de 327px — nao cabia um card inteiro. */
 .stock-top{position:sticky;top:0;z-index:5;
   margin:0 calc((clamp(24px,7vw,120px) + var(--rail-gutter)) * -1) 0 calc(clamp(24px,7vw,120px) * -1);
-  padding:100px calc(clamp(24px,7vw,120px) + var(--rail-gutter)) 0 clamp(24px,7vw,120px);
+  padding:var(--hd-h) calc(clamp(24px,7vw,120px) + var(--rail-gutter)) 0 clamp(24px,7vw,120px);
   background:linear-gradient(180deg,rgba(243,240,233,.96) 0%,rgba(243,240,233,.92) 82%,rgba(243,240,233,.74) 100%);
   backdrop-filter:blur(12px)}
+/* o bloco de titulo do #s3 rola com a pagina, entao carrega ele mesmo a folga do header */
+#s3 > .stock-hd{padding-top:calc(var(--hd-h) + 18px)}
 .stock-hd{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end;justify-content:space-between;padding-bottom:16px}
 .stock-hd h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,3.6vw,52px);
   line-height:1.02;color:var(--ink);margin:8px 0 0}
@@ -328,6 +345,36 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 .nosel{font-size:11.5px;letter-spacing:.02em;color:var(--muted-2)}
 
 .filters{display:flex;flex-wrap:wrap;gap:9px;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--line)}
+/* Barra de filtros do #s3: UMA linha, sempre. Quebrando, ela ia a 2 linhas (94px) no
+   notebook e a 7 linhas (301px) no telefone — dentro de um bloco grudado no topo, cada
+   linha extra saia direto do espaco dos cards. Agora rola na horizontal e a altura e fixa.
+   O botao do inventario completo fica FORA do rolamento (.filter-end), senao ele sairia
+   da tela junto com os seletores e o cliente perderia o acesso ao armazem inteiro. */
+/* LEITORES DENTRO DA BARRA FIXA (22/08). Tirar o titulo do bloco grudado resolveu a altura,
+   mas levava junto a contagem — que e exatamente o que muda quando se mexe num filtro, e o
+   cliente ficava sem ver o resultado da propria acao. Voltam aqui em corpo menor (32 -> 20px,
+   unidade 20 -> 13px) e em UMA linha que rola na horizontal, para nao repetir a quebra de
+   linha que era metade do problema original. Custo medido: +40px na barra. */
+.stock-top .reads,.full-top .reads{gap:22px;flex-wrap:nowrap;overflow-x:auto;
+  overscroll-behavior-x:contain;padding-bottom:10px;scrollbar-width:none;-ms-overflow-style:none}
+.stock-top .reads::-webkit-scrollbar,.full-top .reads::-webkit-scrollbar{display:none}
+.stock-top .reads > *,.full-top .reads > *{flex:0 0 auto}
+.stock-top .read .v,.full-top .read .v{font-size:20px}
+.stock-top .read .v .u,.full-top .read .v .u{font-size:13px}
+.stock-top .updated,.full-top .updated{padding-top:5px}
+.stock-top .reads .viewsw{margin-left:auto}
+.filterbar{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+#s3 .filters{flex:1 1 auto;min-width:0;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;
+  padding-bottom:0;border-bottom:0;scrollbar-width:none;-ms-overflow-style:none}
+#s3 .filters::-webkit-scrollbar{display:none}
+#s3 .filters .sel{flex:0 0 auto}
+.filter-end{flex:0 0 auto;display:flex;align-items:center}
+.filter-end .openfull{margin-left:0}
+/* mesma regra para os chips do filtro ativo: com 6 ativos eles quebravam em 3 linhas */
+#s3 .chipbar{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;
+  scrollbar-width:none;-ms-overflow-style:none}
+#s3 .chipbar::-webkit-scrollbar{display:none}
+#s3 .chipbar > *{flex:0 0 auto}
 .sel{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.6);backdrop-filter:blur(14px);
   border:1px solid var(--off-border);border-radius:999px;padding:8px 14px;transition:border-color .3s ease}
 .sel.on{border-color:var(--accent)}
@@ -434,12 +481,20 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 #full{position:fixed;inset:0;z-index:60;overflow-y:auto;
   background:linear-gradient(180deg,var(--sand-0) 0%,var(--sand-2) 100%);
   padding:0 clamp(24px,6vw,96px)}
+/* 22/08 — o titulo saiu da barra grudada, igual a tela 03. Fica so o controle. */
+.full-hd{padding:26px 0 0}
 .full-top{position:sticky;top:0;z-index:5;margin:0 calc(clamp(24px,6vw,96px) * -1);
-  padding:26px clamp(24px,6vw,96px) 0;
+  padding:12px clamp(24px,6vw,96px) 0;
   background:linear-gradient(180deg,rgba(243,240,233,.97) 0%,rgba(243,240,233,.93) 82%,rgba(243,240,233,.76) 100%);
   backdrop-filter:blur(12px)}
-.full-top .stock-hd h2{font-size:clamp(30px,3.2vw,46px)}
-.full-top .viewsw{margin-left:auto}
+.full-hd h2{font-size:clamp(30px,3.2vw,46px)}
+/* mesmo rolamento horizontal da tela 03: os seletores nunca quebram linha, e o que precisa
+   estar sempre alcancavel (vista e VOLTAR) fica fora do rolamento */
+#full .filters{flex:1 1 auto;min-width:0;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;
+  padding-bottom:0;border-bottom:0;scrollbar-width:none;-ms-overflow-style:none}
+#full .filters::-webkit-scrollbar{display:none}
+#full .filters > *{flex:0 0 auto}
+#full .filter-end{gap:10px}
 #closeFull{display:flex;align-items:center;gap:10px;box-shadow:0 10px 26px rgba(17,51,31,.2)}
 #closeFull .arw{font-size:13px;line-height:1}
 #full .grid-area{padding:22px 0 60px}
@@ -459,7 +514,9 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 @media (max-width:1200px){
   /* empilhado, a secao passa de 100vh: precisa crescer e deixar rolar, senao o overflow:hidden
      de .sec corta os cards de baixo e eles ficam inalcancaveis */
-  #s1{overflow:visible;padding-top:112px;padding-bottom:72px}
+  /* padding-top amarrado ao header aqui tambem: os 112px cravados venciam o calc da regra
+     base e o titulo voltava a passar por baixo da faixa no telefone (medido y=112 / 117). */
+  #s1{overflow:visible;padding-top:calc(var(--hd-h) + 14px);padding-bottom:72px}
   .pcard{max-height:none}
 }
 @media (max-width:1100px){
@@ -477,12 +534,26 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   .lead{font-size:15px}
   #s2{flex-direction:column;align-items:stretch}
   .reads{gap:18px}
-  .stock-top{padding-top:86px}
+  /* alvos de toque: no telefone o seletor media 15px de altura e o switch de vista 25px.
+     44px e o piso de toque; o padding do .sel foi junto para o texto nao colar na borda. */
+  /* No telefone o .filter-end (vista + VOLTAR = 321px) nao cabe ao lado do rolamento de
+     filtros num container de 317px: o rolamento ficava com 0px e os 6 seletores sumiam da
+     tela. Aqui a barra quebra em duas linhas — filtros em cima, acoes embaixo. */
+  .filterbar{flex-wrap:wrap;gap:10px}
+  #s3 .filters,#full .filters{flex:1 1 100%}
+  .filter-end{flex:1 1 100%;justify-content:flex-end}
+  #closeFull{padding:12px 16px}
+  #s3 .sel{padding:2px 14px}
+  #s3 .sel select{min-height:40px}
+  .vw{padding:14px 16px}
+  .langsw .lg{padding:12px 12px}
+  .openfull{padding:14px 18px}
   .grid.list .sku .price{margin:0;text-align:left}
 }
 /* tela baixa: aperta as folgas do passo 02 para o conteudo continuar cabendo */
 @media (max-height:820px){
-  #s2{padding-top:100px;padding-bottom:48px}
+  /* era 100px cravado: o rotulo do passo 02 comecava sob o header de 109px */
+  #s2{padding-top:calc(var(--hd-h) + 8px);padding-bottom:48px}
   .controls{gap:18px}
   .kpi{margin-top:14px}
   .kpi .v{font-size:34px}
@@ -490,6 +561,28 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   .pcard .pbot{padding:0 20px 20px}
   .pcard .pdesc{-webkit-line-clamp:2}
   .pcard:hover .pdesc,.pcard.on .pdesc{max-height:46px;margin-bottom:10px}
+}
+
+/* TELA BAIXA — telefone deitado (375px) e telefone pequeno em pe (iPhone SE, 568px).
+   Ali o header de 109px sozinho ja e 29% da tela, e a barra de filtros somava 50%. O logo
+   encolhe e o app.js remede o --hd-h no resize, entao todos os paddings acompanham. */
+@media (max-height:600px){
+  #hd{padding:10px clamp(20px,5vw,60px)}
+  #hd img{height:44px;width:62px}
+  #s3 > .stock-hd{padding-top:calc(var(--hd-h) + 10px)}
+  /* Em tela baixa os leitores empilhados (rotulo em cima, numero embaixo) custavam 44px de
+     375 disponiveis. Aqui viram uma linha so, rotulo ao lado do numero: 44 -> 24px, sem
+     perder a informacao que o Fabricio pediu para manter a vista. */
+  .stock-top .read,.full-top .read{display:flex;align-items:baseline;gap:6px}
+  .stock-top .reads,.full-top .reads{gap:14px;padding-bottom:6px;align-items:center}
+  .stock-top .read .v,.full-top .read .v{font-size:15px}
+  .stock-top .read .v .u,.full-top .read .v .u{font-size:11px}
+  .stock-top .updated,.full-top .updated{padding-top:0}
+  .stock-hd{gap:14px;padding-bottom:10px}
+  .read .v{font-size:26px}
+  .read .v .u{font-size:16px}
+  .chipbar{padding-bottom:10px}
+  .filterbar{padding-bottom:10px}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -503,6 +596,9 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   background:none;color:var(--ink);font-size:12px;font-weight:700;line-height:1;cursor:pointer;
   display:grid;place-items:center;transition:background .2s,color .2s,transform .2s var(--ease)}
 #helpBtn:hover{background:var(--ink);color:var(--sand-0);transform:translateY(-1px)}
+/* no telefone o "?" media 26px — abaixo de qualquer piso de toque. Especificidade #hd #helpBtn
+   porque a regra base acima viria depois da media query e venceria pelo empate. */
+@media (max-width:720px){ #hd #helpBtn{width:40px;height:40px;font-size:15px} }
 
 #guide{position:fixed;inset:0;z-index:80;overflow-y:auto;
   background:rgba(17,51,31,.42);backdrop-filter:blur(6px);
