@@ -69,7 +69,9 @@ a:hover{color:var(--accent)}
 /* `pointer-events:none` no header e `auto` nos filhos: a faixa nao rouba clique do conteudo
    que passa por baixo. O header nao tem fundo proprio — quem cobre e o .stock-top. */
 #hd{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;
-  justify-content:space-between;gap:14px;padding:20px clamp(20px,5vw,60px);pointer-events:none}
+  justify-content:space-between;gap:14px;padding:20px clamp(20px,5vw,60px);pointer-events:none;
+  background:linear-gradient(180deg,rgba(243,240,233,.97) 0%,rgba(243,240,233,.93) 70%,rgba(243,240,233,.72) 100%);
+  backdrop-filter:blur(12px)}
 #hd img{height:69px;width:98px;object-fit:contain;display:block;pointer-events:auto}
 .hd-r{display:flex;align-items:center;gap:10px;pointer-events:auto;flex-wrap:wrap;justify-content:flex-end}
 .place{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
@@ -307,9 +309,9 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 /* 22/08 — o titulo SAIU daqui. Ficou so a barra de controle (chips + filtros), que e o
    que se opera enquanto se olha card. Medido antes: 416px de 660 (63%) no notebook e
    688px de 812 (85%) no telefone, contra um card de 327px — nao cabia um card inteiro. */
-.stock-top{position:sticky;top:0;z-index:5;
+.stock-top{position:sticky;top:var(--hd-h);z-index:5;
   margin:0 calc((clamp(24px,7vw,120px) + var(--rail-gutter)) * -1) 0 calc(clamp(24px,7vw,120px) * -1);
-  padding:var(--hd-h) calc(clamp(24px,7vw,120px) + var(--rail-gutter)) 0 clamp(24px,7vw,120px);
+  padding:14px calc(clamp(24px,7vw,120px) + var(--rail-gutter)) 0 clamp(24px,7vw,120px);
   background:linear-gradient(180deg,rgba(243,240,233,.96) 0%,rgba(243,240,233,.92) 82%,rgba(243,240,233,.74) 100%);
   backdrop-filter:blur(12px)}
 /* o bloco de titulo do #s3 rola com a pagina, entao carrega ele mesmo a folga do header */
@@ -334,7 +336,7 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 .vw.on{background:var(--sand-0);color:var(--ink);box-shadow:0 2px 6px rgba(17,51,31,.1)}
 
 /* chips do que esta filtrado — cada um se remove sozinho */
-.chipbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-bottom:14px}
+.chipbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-bottom:12px}
 .fchip{display:flex;align-items:center;gap:8px;background:var(--ink);color:var(--sand-0);
   border-radius:999px;padding:7px 9px 7px 14px;font-size:11px;font-weight:600;letter-spacing:.06em;
   transition:background .3s ease}
@@ -356,12 +358,12 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
    unidade 20 -> 13px) e em UMA linha que rola na horizontal, para nao repetir a quebra de
    linha que era metade do problema original. Custo medido: +40px na barra. */
 .stock-top .reads,.full-top .reads{gap:22px;flex-wrap:nowrap;overflow-x:auto;
-  overscroll-behavior-x:contain;padding-bottom:10px;scrollbar-width:none;-ms-overflow-style:none}
+  overscroll-behavior-x:contain;padding-bottom:14px;scrollbar-width:none;-ms-overflow-style:none}
 .stock-top .reads::-webkit-scrollbar,.full-top .reads::-webkit-scrollbar{display:none}
 .stock-top .reads > *,.full-top .reads > *{flex:0 0 auto}
-.stock-top .read .v,.full-top .read .v{font-size:20px}
-.stock-top .read .v .u,.full-top .read .v .u{font-size:13px}
-.stock-top .updated,.full-top .updated{padding-top:5px}
+.stock-top .read .v,.full-top .read .v{font-size:24px}
+.stock-top .read .v .u,.full-top .read .v .u{font-size:15px}
+.stock-top .updated,.full-top .updated{padding-top:7px}
 .stock-top .reads .viewsw{margin-left:auto}
 .filterbar{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--line)}
 #s3 .filters{flex:1 1 auto;min-width:0;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;
@@ -391,7 +393,7 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 .grid-area{flex:1;padding:22px 4px 40px}
 /* min(310px,100%): sem isso o minimo de 310px estoura o container em telas estreitas e o card
    passa por baixo do step rail */
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr))}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr))}
 .grid.list{grid-template-columns:1fr}
 .foot-note{border-top:1px solid var(--line);padding:14px 0 22px;font-size:11px;
   color:var(--muted-3);line-height:1.6}
@@ -400,7 +402,7 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 .empty p{font-size:14px;color:var(--muted);margin:0 0 20px}
 
 /* ---------------------------------------------------------------- card de SKU */
-.sku{position:relative;border-radius:18px;padding:20px 20px 20px 30px;overflow:hidden;
+.sku{position:relative;border-radius:18px;padding:14px 14px 14px 24px;overflow:hidden;
   display:grid;grid-template-columns:minmax(0,1fr);align-items:stretch;
   background:rgba(255,255,255,.68);border:1px solid var(--glass-b);
   box-shadow:0 10px 32px rgba(17,51,31,.09);
@@ -418,17 +420,17 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 .sku.focus .ring{opacity:1}
 .sku.focus{box-shadow:0 26px 56px rgba(46,139,51,.22)}
 
-.balloons{display:grid;grid-template-columns:repeat(auto-fit,minmax(122px,1fr));gap:7px;margin-bottom:16px}
-.bl{display:flex;flex-direction:column;gap:2px;padding:8px 12px;border-radius:10px;
+.balloons{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:6px;margin-bottom:9px}
+.bl{display:flex;flex-direction:column;gap:2px;padding:7px 9px;border-radius:10px;
   background:rgba(255,255,255,.72);border:1px solid rgba(27,33,28,.1)}
-.bl .k{font-family:var(--mono);font-size:8.5px;font-weight:500;letter-spacing:.16em;
+.bl .k{font-family:var(--mono);font-size:8px;font-weight:500;letter-spacing:.16em;
   text-transform:uppercase;color:var(--muted-2)}
-.bl .v{font-size:13.5px;font-weight:700;color:var(--ink);line-height:1}
+.bl .v{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1}
 .bl .v.cert{color:var(--accent-d)}
 .bl.pf{background:var(--pf);border:0;color:var(--paper);box-shadow:0 5px 14px rgba(17,51,31,.16)}
 .bl.pf .k{color:inherit;opacity:.75}
 .bl.pf .v{color:inherit;letter-spacing:.02em}
-.bl.logs{flex-direction:row;align-items:center;gap:8px}
+.bl.logs{flex-direction:row;align-items:center;gap:5px}
 .bl.logs .col{display:flex;flex-direction:column;gap:2px}
 .bl.logs .v{text-transform:capitalize}
 .bl.logs .swatch{width:14px;height:20px;border-radius:3px;flex:none;
@@ -438,17 +440,17 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
    quase nao separa nada; espessura e preco sao o que distingue um SKU do outro. Os tres
    dividem a MESMA fonte. O filete separa a especificacao do bloco comercial. */
 .sku .dim{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 14px;white-space:nowrap;
-  font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.05;color:var(--ink);
-  padding-bottom:10px;border-bottom:1px solid rgba(27,33,28,.14)}
+  font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.05;color:var(--ink);
+  padding-bottom:8px;border-bottom:1px solid rgba(27,33,28,.14)}
 .sku .dim span{font-family:var(--serif);color:var(--soft)}
 .sku .avail{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 10px;font-size:15px;
-  color:var(--body);margin-top:10px}
+  color:var(--body);margin-top:6px}
 /* nowrap nos dois: em card estreito o "m³" se soltava do numero e caia na linha seguinte */
 .sku .avail .c{color:var(--ink);white-space:nowrap}
 .sku .avail .vol{font-size:14px;color:var(--muted);white-space:nowrap}
-.sku .price{font-family:var(--serif);font-size:29px;color:var(--accent-d);margin:10px 0 22px;
+.sku .price{font-family:var(--serif);font-size:22px;color:var(--accent-d);margin:6px 0 10px;
   text-align:left;white-space:nowrap}
-.sku .price small{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--muted)}
+.sku .price small{font-family:var(--sans);font-size:12px;font-weight:500;color:var(--muted)}
 .sku .sug{background:rgba(46,139,51,.09);border-left:2px solid var(--accent);border-radius:10px;
   padding:12px 14px;margin-bottom:14px;width:100%;text-align:left;display:block;transition:background .35s ease}
 .sku .sug:hover{background:rgba(46,139,51,.17)}
@@ -456,7 +458,7 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   text-transform:uppercase;color:var(--accent)}
 .sku .sug .v{display:block;font-size:12px;color:var(--body);margin-top:3px}
 .sku .add{display:flex;justify-content:center;align-items:center;gap:8px;white-space:nowrap;
-  justify-self:start;border-radius:999px;padding:11px 18px;font-size:11px;font-weight:600;
+  justify-self:start;border-radius:999px;padding:8px 16px;font-size:11px;font-weight:600;
   letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(17,51,31,.2);
   background:transparent;color:var(--ink);transition:background .35s ease,border-color .35s ease}
 .sku .add .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
@@ -501,8 +503,8 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 /* baloes um degrau maiores aqui: a tela e mais larga e o card respira */
 #full .balloons{gap:8px}
 #full .bl{padding:9px 13px;border-radius:11px}
-#full .bl .k{font-size:9.5px}
-#full .bl .v{font-size:14.5px}
+#full .bl .k{font-size:8.5px}
+#full .bl .v{font-size:13px}
 #full .bl.logs .swatch{width:15px;height:22px}
 #full .sku .avail{font-size:16px}
 #full .sku .avail .vol{font-size:15px}
@@ -534,6 +536,20 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   .lead{font-size:15px}
   #s2{flex-direction:column;align-items:stretch}
   .reads{gap:18px}
+  /* 22px de respiro nao cabem em 375px. Os quatro leitores somam 261px, mas quatro
+     gaps de 22px empurravam UPDATED para 354px num limite visivel de 339 — a data
+     ficava cortada e so aparecia arrastando a faixa. Ela e a prova da promessa
+     "atualizado diariamente" do hero (§7f), entao nao pode depender de gesto
+     escondido. Com 12px os quatro cabem; o switch de vista fica meio a mostra,
+     que e o proprio aviso de que a faixa rola. Precisa da especificidade de
+     .stock-top .reads — .reads sozinho perde para a regra base. */
+  /* No telefone a faixa PARA de rolar e passa a quebrar. Com os totais em 24px (regra do
+     Fabricio: o agregado nunca le menor que a parcela) o conteudo pede 454px em EN e 542
+     em ES para 313 disponiveis. Rolando, a data saia cortada em 32px no ES e 67px no PT —
+     o EN passava por sorte, com 339 de 339 — e o switch GRID/LIST ficava fora da tela nos
+     tres. Quebrando, tudo aparece sem gesto escondido; custa ~49px de barra. */
+  .stock-top .reads,.full-top .reads{gap:12px;row-gap:10px;flex-wrap:wrap;overflow-x:visible}
+  .stock-top .reads .viewsw{margin-left:auto}
   /* alvos de toque: no telefone o seletor media 15px de altura e o switch de vista 25px.
      44px e o piso de toque; o padding do .sel foi junto para o texto nao colar na borda. */
   /* No telefone o .filter-end (vista + VOLTAR = 321px) nao cabe ao lado do rolamento de
