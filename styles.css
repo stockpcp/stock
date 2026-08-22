@@ -484,7 +484,12 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   background:linear-gradient(180deg,var(--sand-0) 0%,var(--sand-2) 100%);
   padding:0 clamp(24px,6vw,96px)}
 /* 22/08 — o titulo saiu da barra grudada, igual a tela 03. Fica so o controle. */
-.full-hd{padding:26px 0 0}
+/* padding-top APENAS, nunca o shorthand: o no e <div class="stock-hd full-hd"> e o
+   shorthand zerava o padding-bottom:16px do .stock-hd. Sem esses 16px a barra de
+   controle, que tem fundo opaco, pintava sobre a perna do "g" de "Everything" — os
+   titulos serifados usam line-height 1.02 e a tinta do glifo transborda ~5px da caixa
+   de linha por construcao. */
+.full-hd{padding-top:26px}
 .full-top{position:sticky;top:0;z-index:5;margin:0 calc(clamp(24px,6vw,96px) * -1);
   padding:12px clamp(24px,6vw,96px) 0;
   background:linear-gradient(180deg,rgba(243,240,233,.97) 0%,rgba(243,240,233,.93) 82%,rgba(243,240,233,.76) 100%);
