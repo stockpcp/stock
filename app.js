@@ -672,6 +672,10 @@ function openFull(open){
   $('full').classList.toggle('hidden', !open);
   document.body.classList.toggle('locked', open);
   if(open){ buildFullFilters(); renderFull(); $('full').scrollTop = 0; }
+  // A barra grudada troca de no ao abrir e ao fechar: .full-top la dentro, .stock-top aqui fora.
+  // Sem esta chamada o --bar-h fica com a altura da barra errada e o scroll-padding do #full
+  // nasce curto — foi assim que o defeito passou batido na tela 03.
+  syncBarHeight();
 }
 
 // Grid/List e um estado so para as duas telas — o cliente escolhe a vista uma vez.

@@ -551,7 +551,12 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 /* ---------------------------------------------------------------- inventario completo */
 /* Tela separada, nao a 5a secao do scroll (handoff 18/08): o cliente abre, olha o patio inteiro
    e volta sem perder a resposta da tela 03. Fecha no Escape ou no botao. */
+/* 24/08 - o mesmo defeito da tela 03 vivia aqui: a .full-top gruda no topo e cobre 114px, contra
+   uma linha de 51px. Sem scroll-padding declarado o navegador conta essa faixa como area util e
+   PageDown atravessa 2,2 linhas por tras dela. Aqui NAO entra o --hd-h: o overlay e fixed inset:0
+   e cobre o cabecalho do site. */
 #full{position:fixed;inset:0;z-index:60;overflow-y:auto;
+  scroll-padding-top:var(--bar-h);
   background:linear-gradient(180deg,var(--sand-0) 0%,var(--sand-2) 100%);
   padding:0 clamp(24px,6vw,96px)}
 /* 22/08 — o titulo saiu da barra grudada, igual a tela 03. Fica so o controle. */
