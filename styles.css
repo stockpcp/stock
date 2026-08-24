@@ -38,6 +38,7 @@
      Antes era 100px cravado no .stock-top contra um header de 109px: o topo dos chips
      passava por baixo da faixa. Numero aqui e so o valor de partida. */
   --hd-h:110px;
+  --bar-h:0px;   /* remedido pelo app.js; sem valor inicial o calc do scroll-padding fica invalido */
 }
 
 *{box-sizing:border-box}
@@ -110,9 +111,14 @@ a:hover{color:var(--accent)}
 /* `proximity`, nao `mandatory` (14/08). A secao 03 cresce com o catalogo e fica mais alta que
    a viewport; com `mandatory` o navegador arrasta a rolagem para o proximo ponto de snap assim
    que o dedo sai, e o cliente era jogado da grade para a secao seguinte no meio da lista. */
-#scroll{height:100vh;overflow-y:auto;scroll-snap-type:y proximity}
+#scroll{height:100vh;overflow-y:auto;scroll-snap-type:y proximity;
+  scroll-padding-top:calc(var(--hd-h) + var(--bar-h))}
 .sec{scroll-snap-align:start;position:relative;overflow:hidden;min-height:100vh;
   display:flex;flex-direction:column;justify-content:center}
+/* --bar-h e publicado pelo app.js: e a altura real do bloco grudado (.stock-top ou .full-top),
+   que muda quando os chips de filtro entram e saem. Com o scroll-padding declarado, PageDown,
+   barra de espaco, teclado e scrollIntoView param de contar a faixa coberta como area util -
+   era ela que "comia" uma fileira de card a cada avanco de pagina. */
 
 /* ---------------------------------------------------------------- 00 intro */
 #s0{padding:118px calc(clamp(24px,7vw,120px) + var(--rail-gutter)) 84px clamp(24px,7vw,120px);
@@ -296,6 +302,18 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   transition:transform .4s var(--ease),background .3s ease,color .3s ease}
 .chip:hover{transform:translateY(-3px)}
 .chip.on{background:var(--ink);color:var(--sand-0)}
+/* a contagem ao lado da medida: e ela que faz a faceta reagir de forma visivel */
+.chip .n{display:block;margin-top:3px;font-size:10px;font-weight:600;color:var(--muted-2);
+  letter-spacing:.06em}
+.chip.on .n{color:rgba(255,255,255,.66)}
+/* espessura sem nenhum SKU na selecao corrente. Fica na tela, apagada: sumir com ela mudaria
+   o comprimento da faixa a cada clique e o cliente perderia a referencia de onde estava. */
+.chip.zero{opacity:.34;box-shadow:none;cursor:not-allowed}
+.chip.zero:hover{transform:none}
+.sp .nm .n{font-weight:600;font-size:11px;color:var(--muted-2);margin-left:7px;
+  letter-spacing:.06em;text-transform:none}
+.sp.zero{opacity:.34;box-shadow:none;cursor:not-allowed}
+.sp.zero:hover{transform:none}
 
 /* Base fixa no lugar de 1fr: era o 1fr que esticava cada tile ate preencher a linha, e o
    retangulo esticado — nao o texto — ficava longo demais (13/08). */
@@ -317,7 +335,11 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 /* A secao cresce com o catalogo em vez de rolar por dentro (14/08): scroll aninhado dentro de
    uma pagina que ja rola e armadilha de leitura. O padding-top mora no .stock-top, que precisa
    dele para cobrir a faixa do header fixo enquanto esta grudado. */
-#s3{justify-content:flex-start;overflow:visible;
+/* 24/08 - a #s3 deixa de declarar ponto de encaixe. Ela mede 4.075px numa janela de 720:
+   pela propria especificacao, area de snap maior que a porta faz QUALQUER posicao valer como
+   encaixe, entao o `start` aqui nunca teve efeito util - so ambiguidade. Medido: seis posicoes
+   dentro da secao, deriva zero. O pulo NAO era o snap. */
+#s3{scroll-snap-align:none;justify-content:flex-start;overflow:visible;
   padding:0 calc(clamp(24px,7vw,120px) + var(--rail-gutter)) 0 clamp(24px,7vw,120px);
   background:radial-gradient(80% 50% at 50% 0%, rgba(255,255,255,.8), transparent 60%),
              linear-gradient(180deg,var(--sand-5) 0%,var(--sand-6) 46%)}
@@ -348,6 +370,13 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   display:flex;align-items:center;gap:7px;padding-top:12px}
 .updated i{width:6px;height:6px;border-radius:50%;background:var(--accent);
   animation:rpnPulse 2.4s ease-in-out infinite;display:block}
+/* Estoque parado: o ponto para de pulsar e vira ambar, e a nota diz ha quantos dias.
+   Ambar e nao vermelho de proposito - o dado continua verdadeiro, so nao e de hoje.
+   #9A6B00 sobre o fundo areia da 4,9:1, acima do minimo AA. */
+.updated.stale i{background:#9A6B00;animation:none}
+.stale-note{display:block;flex-basis:100%;font-size:9.5px;font-weight:600;letter-spacing:.06em;
+  text-transform:none;color:#7A5500;margin-top:3px}
+.updated{flex-wrap:wrap}
 .viewsw{display:flex;gap:2px;background:rgba(17,51,31,.06);border-radius:999px;padding:3px}
 .vw{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 15px;
   border-radius:999px;color:var(--muted);transition:background .3s ease,color .3s ease}
@@ -375,20 +404,28 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
    cliente ficava sem ver o resultado da propria acao. Voltam aqui em corpo menor (32 -> 20px,
    unidade 20 -> 13px) e em UMA linha que rola na horizontal, para nao repetir a quebra de
    linha que era metade do problema original. Custo medido: +40px na barra. */
-.stock-top .reads,.full-top .reads{gap:22px;flex-wrap:nowrap;overflow-x:auto;
+/* 24/08 - so o OVERLAY mantem leitores presos: ele nao tem bloco de titulo que role, entao
+   sem isto ficaria sem contagem nenhuma. Na tela 03 os leitores subiram para o .stock-hd e
+   estas regras deixaram de ter alvo - por isso o `.stock-top` saiu dos seletores. */
+.full-top .reads{gap:22px;flex-wrap:nowrap;overflow-x:auto;
   overscroll-behavior-x:contain;padding-bottom:14px;scrollbar-width:none;-ms-overflow-style:none}
-.stock-top .reads::-webkit-scrollbar,.full-top .reads::-webkit-scrollbar{display:none}
-.stock-top .reads > *,.full-top .reads > *{flex:0 0 auto}
-.stock-top .read .v,.full-top .read .v{font-size:24px}
-.stock-top .read .v .u,.full-top .read .v .u{font-size:15px}
-.stock-top .updated,.full-top .updated{padding-top:7px}
-.stock-top .reads .viewsw{margin-left:auto}
+.full-top .reads::-webkit-scrollbar{display:none}
+.full-top .reads > *{flex:0 0 auto}
+.full-top .read .v{font-size:24px}
+.full-top .read .v .u{font-size:15px}
+.full-top .updated{padding-top:7px}
+/* contador vivo da barra da tela 03 */
+.livecount{font-size:17px;color:var(--ink);white-space:nowrap;letter-spacing:.01em}
+.livecount .u{font-size:12px;color:var(--muted)}
+.livecount b{font-weight:600}
+.livecount i{font-style:normal;color:var(--muted-3);margin:0 7px}
 .filterbar{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--line)}
 #s3 .filters{flex:1 1 auto;min-width:0;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;
   padding-bottom:0;border-bottom:0;scrollbar-width:none;-ms-overflow-style:none}
 #s3 .filters::-webkit-scrollbar{display:none}
 #s3 .filters .sel{flex:0 0 auto}
-.filter-end{flex:0 0 auto;display:flex;align-items:center}
+.filter-end{flex:0 0 auto;display:flex;align-items:center;gap:14px}
+.filterbar > .livecount,.filterbar > .viewsw{flex:0 0 auto}
 .filter-end .openfull{margin-left:0}
 /* mesma regra para os chips do filtro ativo: com 6 ativos eles quebravam em 3 linhas */
 #s3 .chipbar{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;
@@ -484,16 +521,32 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 .sku .add.on{background:rgba(46,139,51,.12);border-color:rgba(46,139,51,.5);color:var(--accent-d)}
 .sku .add.on .dot{transform:scale(1)}
 
-/* vista em lista: mesmo markup, o CSS reconfigura o card em linha */
-.grid.list .sku{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;padding:14px 20px 14px 26px}
+/* Vista em lista - mesmo markup, o CSS reconfigura o card em UMA linha (24/08).
+   Antes: 117px de linha, 4 balcoes em grade 2x2 e `flex-wrap:wrap` deixando tudo cair para a
+   segunda fileira -> 3,58 itens por tela, PIOR que a grade. O que a engordava nao era a
+   informacao, era o arranjo. Agora os quatro balcoes vao numa fileira so, perdem a caixa
+   (fundo e borda) e ficam sendo o que sempre foram: rotulo microscopico sobre valor.
+   Nada de informacao sai da linha - o pedido era "sem acabar a visibilidade das informacoes". */
+.grid.list .sku{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;
+  padding:9px 18px 9px 22px;border-radius:14px}
 .grid.list .sku:hover{transform:none;box-shadow:0 16px 34px rgba(17,51,31,.1)}
-.grid.list .balloons{grid-template-columns:repeat(2,auto);margin-bottom:0}
-.grid.list .sku .dim{flex-wrap:nowrap;font-size:21px;padding-bottom:0;border-bottom:0}
-.grid.list .sku .avail{flex-wrap:nowrap;font-size:16px;margin-top:0}
-.grid.list .sku .avail .vol{font-size:15px}
-.grid.list .sku .price{font-size:22px;margin:0 0 0 auto;text-align:right}
-.grid.list .sku .price small{font-size:13.5px}
-.grid.list .sku .sug{margin-bottom:0;flex-basis:100%}
+.grid.list .sku .edge{width:5px}
+.grid.list .balloons{display:flex;align-items:center;gap:16px;margin-bottom:0;flex:0 0 auto}
+/* os balcoes viram texto puro: a caixa de vidro era decoracao que custava 16px de altura */
+.grid.list .bl{background:none;border:0;padding:0;gap:1px}
+.grid.list .bl .k{font-size:8px;letter-spacing:.14em}
+.grid.list .bl .v{font-size:12px}
+/* o portfolio continua sendo pastilha: e a identidade da linha, nao um dado a mais */
+.grid.list .bl.pf{padding:4px 9px;border-radius:7px;box-shadow:none}
+.grid.list .bl.logs .swatch{width:11px;height:15px}
+.grid.list .sku .dim{flex:0 0 auto;flex-wrap:nowrap;font-size:19px;line-height:1.1;
+  padding-bottom:0;border-bottom:0;gap:0 10px}
+.grid.list .sku .avail{flex:0 0 auto;flex-wrap:nowrap;font-size:15px;margin-top:0;margin-left:auto}
+.grid.list .sku .avail .vol{font-size:14px}
+.grid.list .sku .price{flex:0 0 auto;font-size:20px;margin:0;text-align:right;line-height:1.1}
+.grid.list .sku .price small{font-size:12px}
+.grid.list .sku .add{flex:0 0 auto;padding:7px 13px;font-size:10px}
+.grid.list .sku .sug{margin-bottom:0;flex-basis:100%;padding:9px 12px}
 
 /* ---------------------------------------------------------------- inventario completo */
 /* Tela separada, nao a 5a secao do scroll (handoff 18/08): o cliente abre, olha o patio inteiro
@@ -532,6 +585,20 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 #full .sku .avail{font-size:16px}
 #full .sku .avail .vol{font-size:15px}
 #full .sku .price small{font-size:13.5px}
+/* 24/08 - as oito regras acima engordam o card do overlay de proposito: ali ha mais largura
+   e a leitura e de catalogo. Mas elas vencem por especificidade (id + classe) tambem na vista
+   em LISTA, e a linha do overlay saia com 64px contra 51px da tela 03 - 650px de rolagem a
+   mais nos 50 SKUs, justamente na tela onde os 50 estao SEMPRE. Em lista, as duas telas
+   passam a ler igual; em grade, o overlay continua mais folgado. */
+#full .grid.list .balloons{gap:16px}
+#full .grid.list .bl{padding:0;border-radius:0}
+#full .grid.list .bl.pf{padding:4px 9px;border-radius:7px}
+#full .grid.list .bl .k{font-size:8px}
+#full .grid.list .bl .v{font-size:12px}
+#full .grid.list .bl.logs .swatch{width:11px;height:15px}
+#full .grid.list .sku .avail{font-size:15px}
+#full .grid.list .sku .avail .vol{font-size:14px}
+#full .grid.list .sku .price small{font-size:12px}
 
 /* ---------------------------------------------------------------- telas menores */
 /* Quase sem breakpoint de layout: as secoes usam clamp/auto-fit. Aqui so o que nao se resolve
@@ -545,9 +612,24 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   .pcard{max-height:none}
 }
 @media (max-width:1100px){
-  .grid.list .sku{gap:10px 16px}
-  .grid.list .balloons{grid-template-columns:repeat(auto-fit,minmax(122px,1fr));flex-basis:100%}
-  .grid.list .sku .price{margin-left:auto}
+  /* No telefone a linha unica nao cabe em 305px, entao ela quebra - mas em TRES faixas, nao
+     quatro: os quatro balcoes ocupam a primeira sem quebrar entre si, a especificacao e o
+     preco dividem a segunda e o disponivel some com o botao na terceira. */
+  .grid.list .sku{gap:7px 14px;padding:10px 14px 10px 18px}
+  .grid.list .balloons{flex-basis:100%;flex-wrap:nowrap;gap:10px;justify-content:space-between}
+  .grid.list .sku .dim{font-size:17px}
+  .grid.list .sku .avail{margin-left:0}
+  /* alvo de toque: o .add media 28px na lista e 30px na grade, abaixo do piso de 40px que
+     vale para todos os outros controles do telefone. Vale para as duas vistas. */
+  .sku .add{min-height:40px}
+  /* o contador vivo cabe ao lado do interruptor de vista em 13px; em 17px ele tomava a
+     largura toda e a barra de filtros ia a QUATRO faixas */
+  .livecount{font-size:13px}
+  .filterbar > .livecount{flex:0 1 auto;min-width:0}
+  /* O volume sai do contador no telefone: com ele a linha pede 253px e nao sobra lugar para
+     o interruptor de vista (129) em 313 - a barra ia a mais uma faixa. Nada se perde: o
+     volume cheio esta logo acima, em 32px, no bloco de titulo que rola. */
+  .lc-vol{display:none}
 }
 @media (max-width:720px){
   :root{--rail-gutter:0px}
@@ -587,7 +669,7 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   .vw{padding:14px 16px}
   .langsw .lg{padding:12px 12px}
   .openfull{padding:14px 18px}
-  .grid.list .sku .price{margin:0;text-align:left}
+  .grid.list .sku .price{margin-left:auto;text-align:right}
 }
 /* tela baixa: aperta as folgas do passo 02 para o conteudo continuar cabendo */
 @media (max-height:820px){

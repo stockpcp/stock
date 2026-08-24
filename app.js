@@ -2,8 +2,9 @@
    Porte 1:1 do handoff de design de 18/08 (design_handoff_stock_finder/Stock Finder.dc.html),
    dono do visual, da copy e do fluxo. O canvas roda num runtime proprietario; aqui e vanilla,
    mas estrutura, texto e interacao seguem o handoff.
-   Regra de dado: o site NAO deriva nada. Portfolio, m3, sku e id vem prontos do conversor
-   (xlsx_to_stockjson.html), que e o dono da regra da rpn-core §4.
+   Regra de dado: o site NAO deriva nada. Portfolio, m3, sku e id vem prontos do gerador
+   (gerar_stock.py, na pasta acima), que e o dono da regra da rpn-core §4. Ele substituiu o
+   conversor de navegador xlsx_to_stockjson.html, apagado em 24/08.
    Copy de UI: i18n.js (STR/LANGS), carregado antes deste arquivo. */
 
 'use strict';
@@ -13,7 +14,9 @@ const S = {
   lang:'en', portfolio:null, gauges:[], species:null,
   refine:{ Certificate:'', Grade:'', Size:'' },                                    // tela 03
   full:{ Portfolio:'', Thickness:'', Logs:'', Certificate:'', Grade:'', Size:'' }, // overlay
-  list:{}, focus:null, view:'grid', fullOpen:false, guideOpen:false, step:0
+  // 24/08 - a lista nasce escolhida. Com a linha magra ela mostra mais itens por tela que a
+  // grade e alinha preco em coluna, que e como se compara SKU. A grade continua a um clique.
+  list:{}, focus:null, view:'list', fullOpen:false, guideOpen:false, step:0
 };
 let DATA = [], META = {}, CONTENT = {}, GUIDE = {}, ORDER = ['ns','ss','st','nc'];
 
@@ -84,6 +87,16 @@ function syncHeaderHeight(force){
   hdVW = innerWidth; hdVH = innerHeight;
   const h = Math.round(hd.getBoundingClientRect().height);
   if(h > 0) document.documentElement.style.setProperty('--hd-h', h + 'px');
+  syncBarHeight();
+}
+// Altura real do bloco grudado, publicada em --bar-h para o scroll-padding do #scroll.
+// Ela muda quando os chips de filtro entram e saem, entao e remedida a cada renderAll - e
+// NAO a cada rolagem: getBoundingClientRect forca layout e isto rodaria 60x por segundo.
+function syncBarHeight(){
+  const n = S.fullOpen ? document.querySelector('.full-top') : document.querySelector('.stock-top');
+  if(!n) return;
+  const h = Math.round(n.getBoundingClientRect().height);
+  if(h > 0) document.documentElement.style.setProperty('--bar-h', h + 'px');
 }
 
 function build(){
@@ -273,6 +286,44 @@ const uniq = key => [...new Set(DATA.map(o => o[key]))]
   .sort((a,b) => typeof a === 'number' ? a - b : String(a).localeCompare(String(b)));
 const speciesList = () => uniq('Logs').sort((a,b) => spec(a).order - spec(b).order);
 
+// ---------------------------------------------------------------- facetas que reagem
+// Ate 24/08 os chips de espessura e os ladrilhos de composicao nasciam de um DISTINCT do
+// catalogo INTEIRO e ignoravam o portfolio escolhido no passo 01. Resultado medido: 52% das
+// combinacoes possiveis levavam a uma tela vazia - o cliente respondia duas perguntas para
+// receber "nada encontrado", que e a pior coisa que um localizador de estoque pode fazer.
+//
+// A regra e a da busca facetada: cada faceta conta contra TODAS as outras escolhas, menos
+// contra a PROPRIA. Contar contra a propria quebraria a espessura, que e multipla - com 18mm
+// marcado, todas as outras zerariam e o segundo clique ficaria impossivel.
+//
+// F opcional: quando vem, conta sobre o estado do overlay (S.full), que e independente do
+// quiz de proposito - o overlay existe para ver o armazem inteiro sem desmontar a resposta.
+function base(exceto, F){
+  const P = F ? F.Portfolio : S.portfolio;
+  const G = F ? (F.Thickness ? [Number(F.Thickness)] : []) : S.gauges;
+  const L = F ? F.Logs : S.species;
+  const R = F || S.refine;
+  return DATA.filter(it =>
+    (exceto === 'Portfolio'   || !P || it.Portfolio === P) &&
+    (exceto === 'Thickness'   || !G.length || G.indexOf(it.Thickness) !== -1) &&
+    (exceto === 'Logs'        || !L || it.Logs === L) &&
+    (exceto === 'Certificate' || !R.Certificate || it.Certificate === R.Certificate) &&
+    (exceto === 'Grade'       || !R.Grade || it.Grade === R.Grade) &&
+    (exceto === 'Size'        || !R.Size || String(it.Size) === String(R.Size))
+  );
+}
+// Trocar de portfolio no passo 01 pode deixar para tras um refino que so existia no anterior
+// (24mm nao existe em ST, por exemplo). Podar e o que impede o beco sem saida - e a poda fica
+// VISIVEL, porque o chip correspondente some da barra: nao e escolha apagada em silencio.
+function podaRefinos(){
+  const b = DATA.filter(o => !S.portfolio || o.Portfolio === S.portfolio);
+  S.gauges = S.gauges.filter(mm => b.some(o => o.Thickness === mm));
+  if(S.species && !b.some(o => o.Logs === S.species)) S.species = null;
+  ['Certificate','Grade','Size'].forEach(k => {
+    if(S.refine[k] && !b.some(o => String(o[k]) === String(S.refine[k]))) S.refine[k] = '';
+  });
+}
+
 // ---------------------------------------------------------------- tela 01
 function renderPortfolios(){
   const box = $('portfolioCards'); if(!box) return;
@@ -296,7 +347,8 @@ function renderPortfolios(){
     b.onclick = () => {
       const was = S.portfolio === id;
       S.portfolio = was ? null : id;
-      renderPortfolios(); buildFilters(); renderAll();
+      podaRefinos();
+      renderPortfolios(); renderGauges(); renderSpecies(); buildFilters(); renderAll();
       if(!was) setTimeout(() => goTo(2), 420);
     };
     box.appendChild(b);
@@ -306,30 +358,52 @@ function renderPortfolios(){
 // ---------------------------------------------------------------- tela 02
 function renderGauges(){
   const box = $('gaugeChips'); if(!box) return;
+  const b0 = base('Thickness');
+  const vivas = [...new Set(b0.map(o => o.Thickness))].sort((a,b) => a - b);
   const list = uniq('Thickness');
-  $('gaugeHd').textContent = list.length ? T().thicknessRange(list[0], list[list.length-1]) : T().thickness;
+  // a faixa anunciada e a que sobrou DE PE, nao a do catalogo inteiro
+  const faixa = vivas.length ? vivas : list;
+  $('gaugeHd').textContent = faixa.length ? T().thicknessRange(faixa[0], faixa[faixa.length-1]) : T().thickness;
   box.innerHTML = '';
   list.forEach(mm => {
     const on = S.gauges.indexOf(mm) !== -1;
-    const b = el('button', 'chip' + (on ? ' on' : ''), mm + 'mm');
+    const n = b0.filter(o => o.Thickness === mm).length;
+    const morto = n === 0 && !on;
+    // A espessura MORTA continua na tela, apagada: sumir com ela mudaria o comprimento da
+    // faixa a cada clique e o cliente perderia a referencia de onde estava.
+    const b = el('button', 'chip' + (on ? ' on' : '') + (morto ? ' zero' : ''),
+      mm + 'mm<span class="n">' + n + '</span>');
+    b.disabled = morto;
+    if(morto) b.setAttribute('aria-disabled', 'true');
     b.onclick = () => {
+      if(morto) return;
       const i = S.gauges.indexOf(mm);
       if(i === -1) S.gauges.push(mm); else S.gauges.splice(i, 1);
-      renderGauges(); buildFilters(); renderAll();
+      renderGauges(); renderSpecies(); buildFilters(); renderAll();
     };
     box.appendChild(b);
   });
 }
 function renderSpecies(){
   const box = $('speciesTiles'); if(!box) return;
+  const b0 = base('Logs');
   box.innerHTML = '';
   speciesList().forEach(c => {
     const m = spec(c), on = S.species === c;
-    const b = el('button', 'sp' + (on ? ' on' : ''));
+    const n = b0.filter(o => o.Logs === c).length;
+    const morto = n === 0 && !on;
+    const b = el('button', 'sp' + (on ? ' on' : '') + (morto ? ' zero' : ''));
     // a unidade acompanha o NUMERO (decisao 14/08); o cabecalho da faixa so nomeia a grandeza
     b.innerHTML = '<span class="swatch" style="background-color:' + m.tone + '"></span>' +
-      '<span class="nm">' + esc(c) + '</span><span class="de num">' + m.density + ' kg/m³</span>';
-    b.onclick = () => { S.species = on ? null : c; renderSpecies(); buildFilters(); renderAll(); };
+      '<span class="nm">' + esc(c) + '<span class="n">' + n + '</span></span>' +
+      '<span class="de num">' + m.density + ' kg/m³</span>';
+    b.disabled = morto;
+    if(morto) b.setAttribute('aria-disabled', 'true');
+    b.onclick = () => {
+      if(morto) return;
+      S.species = on ? null : c;
+      renderGauges(); renderSpecies(); buildFilters(); renderAll();
+    };
     box.appendChild(b);
   });
 }
@@ -376,8 +450,15 @@ function resetFilters(){
 }
 
 // ---------------------------------------------------------------- selects
-function optionsFor(key, upper){
-  return [{ v:'', t:T().all }].concat(uniq(key).map(v =>
+// So oferece o que ainda existe. Antes vinha do catalogo inteiro, entao o seletor listava
+// certificados e qualidades que a selecao corrente ja tinha eliminado - cada um deles um
+// caminho direto para a tela vazia. O valor JA escolhido nunca some, porque o base() ignora
+// a propria dimensao ao contar.
+function optionsFor(key, upper, F){
+  const rows = base(key, F);
+  const vs = [...new Set(rows.map(o => o[key]))]
+    .sort((a,b) => typeof a === 'number' ? a - b : String(a).localeCompare(String(b)));
+  return [{ v:'', t:T().all }].concat(vs.map(v =>
     ({ v:String(v), t: upper ? String(v).toUpperCase() : String(v) })));
 }
 function mkSelect(label, value, options, onChange){
@@ -403,14 +484,18 @@ function mkSelect(label, value, options, onChange){
    continuam multiplos); com 2+ marcados o select fica em "All" para nao mentir. */
 function buildFilters(){
   const box = $('filters'); if(!box) return;
-  const t = T(), gl = uniq('Thickness');
+  const t = T();
+  // as duas dimensoes que o quiz ja perguntou tambem so listam o que ainda existe
+  const vivasLogs = new Set(base('Logs').map(o => o.Logs));
+  const gl = [...new Set(base('Thickness').map(o => o.Thickness))].sort((a,b) => a - b);
   box.innerHTML = '';
   [
     mkSelect(t.fComposition, S.species || '',
-      [{ v:'', t:t.all }].concat(speciesList().map(c => ({ v:c, t:c }))),
-      v => { S.species = v || null; renderSpecies(); buildFilters(); renderAll(); }),
+      [{ v:'', t:t.all }].concat(speciesList().filter(c => vivasLogs.has(c)).map(c => ({ v:c, t:c }))),
+      v => { S.species = v || null; renderGauges(); renderSpecies(); buildFilters(); renderAll(); }),
     mkSelect(t.fPortfolio, S.portfolio || '', optionsFor('Portfolio', true),
-      v => { S.portfolio = v || null; renderPortfolios(); buildFilters(); renderAll(); }),
+      v => { S.portfolio = v || null; podaRefinos();
+             renderPortfolios(); renderGauges(); renderSpecies(); buildFilters(); renderAll(); }),
     mkSelect(t.fCertificate, S.refine.Certificate, optionsFor('Certificate', true),
       v => { S.refine.Certificate = v; buildFilters(); renderAll(); }),
     mkSelect(t.fQuality, S.refine.Grade, optionsFor('Grade', true),
@@ -419,7 +504,7 @@ function buildFilters(){
       v => { S.refine.Size = v; buildFilters(); renderAll(); }),
     mkSelect(t.fThickness, S.gauges.length === 1 ? String(S.gauges[0]) : '',
       [{ v:'', t:t.all }].concat(gl.map(mm => ({ v:String(mm), t:mm + 'mm' }))),
-      v => { S.gauges = v ? [Number(v)] : []; renderGauges(); buildFilters(); renderAll(); })
+      v => { S.gauges = v ? [Number(v)] : []; renderGauges(); renderSpecies(); buildFilters(); renderAll(); })
   ].forEach(n => box.appendChild(n));
 
   // O botao vai para a ancora FORA do rolamento (.filter-end). Dentro do #filters ele
@@ -438,13 +523,18 @@ function buildFullFilters(){
   const t = T();
   [...box.querySelectorAll('.sel')].forEach(n => n.remove());
   const before = box.firstChild;
+  // O F=S.full e obrigatorio: sem ele as opcoes do overlay sairiam do estado do QUIZ e o
+  // overlay deixaria de mostrar o armazem inteiro - que e a unica razao de ele existir.
+  const F = S.full;
+  const gl = [...new Set(base('Thickness', F).map(o => o.Thickness))].sort((a,b) => a - b);
+  const vivasLogs = new Set(base('Logs', F).map(o => o.Logs));
   [
-    ['Logs', t.fComposition, [{ v:'', t:t.all }].concat(speciesList().map(c => ({ v:c, t:c })))],
-    ['Portfolio', t.fPortfolio, optionsFor('Portfolio', true)],
-    ['Certificate', t.fCertificate, optionsFor('Certificate', true)],
-    ['Grade', t.fQuality, optionsFor('Grade', true)],
-    ['Size', t.fDimension, optionsFor('Size', false)],
-    ['Thickness', t.fThickness, [{ v:'', t:t.all }].concat(uniq('Thickness').map(mm => ({ v:String(mm), t:mm + 'mm' })))]
+    ['Logs', t.fComposition, [{ v:'', t:t.all }].concat(speciesList().filter(c => vivasLogs.has(c)).map(c => ({ v:c, t:c })))],
+    ['Portfolio', t.fPortfolio, optionsFor('Portfolio', true, F)],
+    ['Certificate', t.fCertificate, optionsFor('Certificate', true, F)],
+    ['Grade', t.fQuality, optionsFor('Grade', true, F)],
+    ['Size', t.fDimension, optionsFor('Size', false, F)],
+    ['Thickness', t.fThickness, [{ v:'', t:t.all }].concat(gl.map(mm => ({ v:String(mm), t:mm + 'mm' })))]
   ].forEach(([key, label, opts]) => {
     box.insertBefore(mkSelect(label, S.full[key], opts,
       v => { S.full[key] = v; buildFullFilters(); renderFull(); }), before);
@@ -504,6 +594,33 @@ function cardNode(it, withSug){
   return n;
 }
 
+// O site denuncia o proprio envelhecimento (24/08). O gerador aborta de proposito quando
+// nao ha linha do mes corrente no saldo_estoque - erra para o lado seguro. So que a tarefa
+// passa a falhar 5x/dia gravando no log, e o site fica congelado no ultimo dado bom sem
+// avisar ninguem. A comparacao e feita AQUI, no navegador, contra o relogio de quem esta
+// olhando: assim ela sobrevive a qualquer causa de parada - mes nao fechado, tarefa morta,
+// maquina desligada, push falhando, Pages fora do ar. Um campo gravado pelo gerador so
+// pegaria os casos em que o gerador ainda roda.
+// Limite: 3 dias. A publicacao e seg-sex, entao sexta -> segunda da 3 e nao acusa; feriado
+// na segunda da 4 e acusa - o que e verdade, nao falso positivo.
+const STALE_DIAS = 3;
+function staleDays(){
+  if(!META.updated_at) return null;
+  const p = String(META.updated_at).split('-');
+  if(p.length !== 3) return null;
+  const d = new Date(+p[0], +p[1] - 1, +p[2]);
+  if(isNaN(d)) return null;
+  const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+  return Math.floor((hoje - d) / 86400000);
+}
+function paintStale(){
+  const box = $('rUpdatedBox'), nota = $('rStale'); if(!box || !nota) return;
+  const dias = staleDays(), velho = dias !== null && dias > STALE_DIAS;
+  box.classList.toggle('stale', velho);
+  nota.classList.toggle('hidden', !velho);
+  if(velho) nota.textContent = T().staleNote(dias);
+}
+
 // ---------------------------------------------------------------- render
 function renderAll(){
   const t = T(), items = filtered(), chips = chipList();
@@ -519,6 +636,11 @@ function renderAll(){
   $('rCrates').textContent = crateSum(items);
   $('rVolume').innerHTML = volSum(items);
   $('rUpdated').textContent = META.updated_at || '—';
+  paintStale();
+  // contador vivo da barra grudada - o unico numero que precisa acompanhar o dedo no filtro
+  $('rLive').innerHTML = '<b>' + items.length + '</b> ' + esc(t.skus) +
+    '<i>/</i><b>' + crateSum(items) + '</b> ' + esc(t.cratesLower) +
+    '<span class="lc-vol"><i>/</i><b>' + volSum(items) + '</b></span>';
 
   renderChips(chips);
 
@@ -526,6 +648,8 @@ function renderAll(){
   items.forEach(it => grid.appendChild(cardNode(it, true)));
   grid.classList.toggle('list', S.view === 'list');
   $('empty').classList.toggle('hidden', !(DATA.length > 0 && items.length === 0));
+
+  syncBarHeight();   // os chips mudaram a altura da barra; o scroll-padding tem de acompanhar
 
   const nList = Object.keys(S.list).length;
   $('listCount').textContent = nList;

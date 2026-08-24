@@ -125,26 +125,38 @@
         <h2 id="stockTitle"></h2>
         <p class="stock-sub" id="stockSub"></p>
       </div>
-    </div>
-
-    <!-- barra de controle — o unico bloco que gruda no topo -->
-    <div class="stock-top">
-      <!-- Leitores PREGADOS (pedido do Fabricio, 22/08). Fora da barra eles saiam de vista
-           justo quando mudam — ao mexer num filtro. Voltam em corpo menor, uma linha so. -->
+      <!-- 24/08 - os leitores e a DATA voltaram para o bloco que rola. Presos na barra eles
+           custavam 80px de altura permanente, e altura de barra grudada e a causa medida do
+           "pula fileiras": header 109 + barra 142 = 251px ocultos numa janela de 720, contra
+           uma fileira de card de 270px. Aqui em cima leem no corpo cheio (32px) e a data
+           MUDOU DE LUGAR, nao sumiu - ela e a prova do "updated daily" do hero. Quem cobre a
+           contagem durante a filtragem e o #rLive, la na barra. -->
       <div class="reads">
         <div class="read"><div class="l" data-t="matches"></div><div class="v num" id="rMatches">0</div></div>
         <div class="read"><div class="l" data-t="crates"></div><div class="v num" id="rCrates">0</div></div>
         <div class="read"><div class="l" data-t="volume"></div><div class="v num" id="rVolume">0</div></div>
         <div class="read"><div class="l" data-t="updated"></div>
-          <div class="updated"><i></i><span id="rUpdated">—</span></div></div>
-        <div class="viewsw" data-scope="grid"></div>
+          <div class="updated" id="rUpdatedBox"><i></i><span id="rUpdated">—</span>
+            <b class="stale-note hidden" id="rStale"></b></div></div>
       </div>
+    </div>
+
+    <!-- barra de controle — o unico bloco que gruda no topo -->
+    <div class="stock-top">
       <!-- chips do que esta filtrado: cada um se remove sozinho -->
       <div class="chipbar" id="chipbar"></div>
-      <!-- os 6 seletores rolam na horizontal e nunca quebram linha; o botao do inventario
-           completo fica fora do rolamento, ancorado a direita, para nao sumir da tela -->
+      <!-- os 6 seletores rolam na horizontal e nunca quebram linha; o contador vivo, o
+           interruptor de vista e o botao do inventario completo ficam fora do rolamento,
+           ancorados a direita, para nao sumirem da tela -->
       <div class="filterbar">
         <div class="filters" id="filters"></div>
+        <!-- O contador vivo substitui os tres leitores dentro da barra: ele existe so para o
+             cliente ver o efeito do filtro que acabou de mexer. Le em 17px - acima das parcelas
+             que soma no card (caixas 15px, m3 14px), como manda a restricao 2.
+             Estes dois ficam FORA do #filterEnd: o buildFilters() zera o innerHTML dele a cada
+             remontagem de filtro e levaria os dois junto. -->
+        <span class="livecount num" id="rLive"></span>
+        <div class="viewsw" data-scope="grid"></div>
         <div class="filter-end" id="filterEnd"></div>
       </div>
     </div>
