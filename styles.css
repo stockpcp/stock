@@ -59,7 +59,7 @@ a:hover{color:var(--accent)}
 .num{font-variant-numeric:tabular-nums}
 
 @keyframes rpnPulse{0%,100%{opacity:1}50%{opacity:.3}}
-@keyframes rpnCue{0%,100%{transform:translate(-50%,0);opacity:.5}50%{transform:translate(-50%,7px);opacity:1}}
+@keyframes rpnCue{0%,100%{transform:translate(-50%,0);opacity:.55}50%{transform:translate(-50%,10px);opacity:1}}
 
 #scroll::-webkit-scrollbar,#full::-webkit-scrollbar{width:10px}
 #scroll::-webkit-scrollbar-thumb,#full::-webkit-scrollbar-thumb{
@@ -150,10 +150,28 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   padding:14px 24px;box-shadow:none;transition:background .35s ease}
 .cta.ghost:hover{background:rgba(255,255,255,.6);transform:none}
 .cta-note{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2)}
-#cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);text-align:center;
-  animation:rpnCue 2.6s ease-in-out infinite}
-#cue span{font-size:9px;letter-spacing:.24em;color:var(--muted-3)}
-#cue i{display:block;width:1px;height:26px;margin:8px auto 0;background:linear-gradient(var(--muted-3), transparent)}
+/* Indicador de rolagem. Em 24/08 o Fabricio pos colegas para testar e NENHUM soube o
+   que fazer na tela 00: o rotulo era 9px em --muted-3 (#7C8478) sobre areia clara, a
+   26px do rodape. Tres mudancas, nesta ordem de importancia:
+     1. o CHEVRON - eles nao leram a palavra; seta nao precisa ser lida (nem traduzida);
+     2. peso e contraste - 9px/--muted-3 -> 11px/600/--muted (#5A655B);
+     3. altura - sobe para clamp(30px,4.5vh,48px), longe da borda.
+   O verde fica so no traco e na seta: mesmo uso de acento do .over do hero. */
+#cue{position:absolute;bottom:clamp(30px,4.5vh,48px);left:50%;transform:translateX(-50%);
+  text-align:center;animation:rpnCue 2.2s ease-in-out infinite}
+#cue span{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--muted)}
+#cue i{display:block;position:relative;width:1px;height:26px;margin:10px auto 0;
+  background:linear-gradient(var(--accent), rgba(46,139,51,.18))}
+#cue i::after{content:'';position:absolute;left:50%;bottom:0;width:7px;height:7px;
+  border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);
+  transform:translateX(-50%) rotate(45deg)}
+/* Em notebook baixo (1366x660) o #s0 ja estoura a tela em 28px por conta propria, e o
+   indicador chegava a 4px de tinta dos botoes. A haste encolhe; o chevron continua
+   legivel e a folga volta para ~16px. */
+@media (max-height:700px){
+  #cue i{height:18px;margin:6px auto 0}
+}
 
 /* ---------------------------------------------------------------- 01 portfolio */
 /* padding-top amarrado ao header: com 96px cravado, o <h2> do passo 01 comecava
@@ -608,6 +626,9 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  /* o #cue e o unico laco infinito da pagina: com duracao .01ms ele piscaria.
+     Aqui ele para de vez, cheio, em vez de sumir junto com a animacao. */
+  #cue{animation:none !important;opacity:1}
 }
 
 /* ---------------------------------------------------------------- ajuda (pop-up)
