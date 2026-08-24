@@ -672,7 +672,9 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   #s3 .sel{padding:2px 14px}
   #s3 .sel select{min-height:40px}
   .vw{padding:14px 16px}
-  .langsw .lg{padding:12px 12px}
+  /* 24/08 - o padding de 12px deixava o botao em 37px medidos, tres abaixo do alvo de toque
+     minimo. E o unico controle que o cliente usa antes de qualquer outra coisa. */
+  .langsw .lg{padding:12px 12px;min-height:40px}
   .openfull{padding:14px 18px}
   .grid.list .sku .price{margin-left:auto;text-align:right}
 }
