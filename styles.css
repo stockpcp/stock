@@ -61,6 +61,11 @@ a:hover{color:var(--accent)}
 
 @keyframes rpnPulse{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes rpnCue{0%,100%{transform:translate(-50%,0);opacity:.55}50%{transform:translate(-50%,10px);opacity:1}}
+/* 🪤 25/08: os keyframes acima carregam `translate(-50%)` porque o #cue da tela 00 e centrado
+   por `left:50%`. Reaproveita-los no #cue1, que e um item flex de largura inteira, arrastava a
+   pista 158px para fora da tela pela esquerda (medido: left -134 numa tela de 375). Animacao
+   nao e so movimento — ela carrega o posicionamento de quem nasceu com ela. */
+@keyframes rpnCue1{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(10px);opacity:1}}
 
 #scroll::-webkit-scrollbar,#full::-webkit-scrollbar{width:10px}
 #scroll::-webkit-scrollbar-thumb,#full::-webkit-scrollbar-thumb{
@@ -165,19 +170,38 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
    O verde fica so no traco e na seta: mesmo uso de acento do .over do hero. */
 #cue{position:absolute;bottom:clamp(30px,4.5vh,48px);left:50%;transform:translateX(-50%);
   text-align:center;animation:rpnCue 2.2s ease-in-out infinite}
-#cue span{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+#cue span,#cue1 span{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
   color:var(--muted)}
-#cue i{display:block;position:relative;width:1px;height:26px;margin:10px auto 0;
+#cue i,#cue1 i{display:block;position:relative;width:1px;height:26px;margin:10px auto 0;
   background:linear-gradient(var(--accent), rgba(46,139,51,.18))}
-#cue i::after{content:'';position:absolute;left:50%;bottom:0;width:7px;height:7px;
+#cue i::after,#cue1 i::after{content:'';position:absolute;left:50%;bottom:0;width:7px;height:7px;
   border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);
   transform:translateX(-50%) rotate(45deg)}
 /* Em notebook baixo (1366x660) o #s0 ja estoura a tela em 28px por conta propria, e o
    indicador chegava a 4px de tinta dos botoes. A haste encolhe; o chevron continua
    legivel e a folga volta para ~16px. */
 @media (max-height:700px){
-  #cue i{height:18px;margin:6px auto 0}
+  #cue i,#cue1 i{height:18px;margin:6px auto 0}
 }
+
+/* 25/08 (item 7) - a pista de rolagem do passo 01. Mesma cara da tela 00 (o chevron e o que
+   as pessoas leram no teste da §7v; a palavra ninguem leu), mas posicao diferente pelo motivo
+   certo: na tela 00 a secao CABE na tela, entao la o indicador e `absolute` no rodape dela.
+   Aqui a secao e mais ALTA que a tela - um indicador ancorado no fim dela nasceria centenas de
+   pixels abaixo do campo de visao, que e exatamente o defeito que ele deveria denunciar. Com
+   `sticky` ele gruda no rodape da JANELA enquanto a secao passa, e se despede sozinho no fim.
+   Quem decide se ele aparece e o app.js (syncCue1): so ha pista quando ha mesmo card embaixo
+   da dobra. Em 1024, 1366 e 768 os quatro cards cabem e ele nem nasce. */
+#cue1{position:sticky;bottom:clamp(8px,1.8vh,16px);z-index:3;margin-top:12px;isolation:isolate;
+  text-align:center;pointer-events:none;animation:rpnCue1 2.2s ease-in-out infinite}
+#cue1[hidden]{display:none}
+/* A pista fica GRUDADA no rodape da janela, entao no telefone ela cai por cima de um card
+   escuro — e uma seta verde fina sobre madeira escura desaparece. O chao e uma faixa que apaga
+   o fundo da tela: `-100vw` nas laterais para atravessar o padding da secao e chegar as bordas.
+   A faixa e alta (40px) de proposito: um degrade curto vira remendo, um longo le-se como borda
+   de conteudo que continua — ou seja, DIZ a mesma coisa que a seta, por outro meio. */
+#cue1::before{content:'';position:absolute;inset:-40px -100vw -18px;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(225,218,205,0) 0%,var(--sand-4) 58%)}
 
 /* ---------------------------------------------------------------- 01 portfolio */
 /* padding-top amarrado ao header: com 96px cravado, o <h2> do passo 01 comecava
@@ -199,8 +223,20 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   max-width:520px;margin:0;text-wrap:pretty}
 /* max-width: sem isso o card, que e aspect-ratio 3/4, cresce com a largura da tela e empurra
    o texto para fora da viewport */
+/* 25/08 (item 7 da §8) - a coluna minima caiu de 230 para 200px, e isso e o conserto inteiro.
+   Em 1024 de largura o container do grid tem 860px: com minimo 230 cabiam 3 colunas, entao os
+   4 cards quebravam em DUAS fileiras (751px de grade) e a secao pedia 1240px numa tela de 768.
+   Resultado medido: os tres primeiros cards mostravam 172 de 366px (47% - cortados no meio do
+   texto, que mora ancorado embaixo) e o card NC mostrava ZERO pixel. Com minimo 200 cabem as 4
+   colunas numa fileira so, o aspect-ratio 3/4 encolhe o card junto (269px em vez de 366) e a
+   secao inteira passa a caber: 4 cards visiveis por inteiro, nenhum texto cortado.
+   Por que 200 e nao menos: em 900px de largura o card cai para 173 e o bloco de texto de baixo
+   TRANSBORDA o card (que tem overflow:hidden) - o corte volta, so que por dentro. 202px foi a
+   largura mais estreita medida em que o texto ainda coube. O auto-fit se limita sozinho: abaixo
+   de ~1008px de tela ele volta a 3 colunas em vez de espremer o card ate cortar.
+   Em 1920 nada muda - eram 4 cards de 347px antes e continuam 347px. */
 .cards{width:100%;max-width:1440px;margin-inline:auto;display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;position:relative;z-index:1}
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;position:relative;z-index:1}
 
 .pcard{position:relative;display:flex;flex-direction:column;text-align:left;width:100%;padding:0;
   /* o aspect-ratio manda, mas a altura nunca passa da viewport: em tela baixa o card achata
@@ -615,6 +651,24 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   #s1{overflow:visible;padding-top:calc(var(--hd-h) + 14px);padding-bottom:72px}
   .pcard{max-height:none}
 }
+/* 25/08 (item 7 da §8) - a faixa onde o card fica ESTREITO, e onde o aspect-ratio 3/4 deixa de
+   caber o proprio texto. Baixar a coluna minima para 200px (regra do .cards) poe as 4 colunas
+   numa fileira so em 1024, mas a 202px de largura o titulo do NC quebra em TRES linhas e o
+   bloco de texto passa a pedir 307px num card que o aspect-ratio fixa em 269 - com
+   overflow:hidden, o corte volta por dentro. Aqui a forma cede ao conteudo:
+   - `aspect-ratio:auto` deixa o card ter a altura que o texto pede (310px, e o grid iguala
+     todos os quatro por stretch, sem numero magico e sem depender do idioma);
+   - a descricao para de ser refem do hover. Ela vira sempre visivel, o que conserta um defeito
+     de tabelete: em 1024 quem toca a tela NAO TEM hover, entao esse texto era inalcancavel.
+     De quebra some o pulo de layout - o card mede 310 solto e 310 selecionado, nao 260 -> 307.
+   - o rodape da secao encolhe de 72 para 20px, os 32px que faltavam para os 4 cards + o titulo
+     caberem em 768 de altura. Medido: secao 768, cards 310/310 visiveis, nada cortado. */
+@media (max-width:1128px){
+  #s1{padding-bottom:20px}
+  #s1 .p-head{margin-bottom:18px}
+  #s1 .pcard{aspect-ratio:auto}
+  #s1 .pcard .pdesc{max-height:none;opacity:1;margin-bottom:13px}
+}
 @media (max-width:1100px){
   /* No telefone a linha unica nao cabe em 305px, entao ela quebra - mas em TRES faixas, nao
      quatro: os quatro balcoes ocupam a primeira sem quebrar entre si, a especificacao e o
@@ -710,9 +764,9 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms !important;transition-duration:.01ms !important}
-  /* o #cue e o unico laco infinito da pagina: com duracao .01ms ele piscaria.
-     Aqui ele para de vez, cheio, em vez de sumir junto com a animacao. */
-  #cue{animation:none !important;opacity:1}
+  /* os DOIS indicadores sao os unicos lacos infinitos da pagina: com duracao .01ms piscariam.
+     Aqui eles param de vez, cheios, em vez de sumir junto com a animacao. */
+  #cue,#cue1{animation:none !important;opacity:1}
 }
 
 /* ---------------------------------------------------------------- ajuda (pop-up)

@@ -156,6 +156,32 @@ function syncFilterHome(){
   syncBarHeight();
   syncFades();
 }
+/* 25/08 (item 7) - a pista de rolagem do passo 01 aparece SO quando ha o que rolar.
+   O passo 01 e a unica secao que pode ficar mais alta que a tela: sao quatro cards, e quantos
+   cabem numa fileira depende da largura. Medido em 25/08, com a grade ja corrigida (§7ab):
+   em 1366, 1024 e 768 os quatro cabem inteiros e nao ha nada a anunciar; em janela estreita
+   (~900) sao 3 colunas e o NC mostra 14px; no telefone e uma lista de quatro e a dobra cai
+   8px depois do primeiro card — a tela mostra UM e nao diz que existem outros tres.
+   Uma conta so responde os tres casos — ha card abaixo da dobra? — e a pista
+   se desliga sozinha quando a grade muda: mesmo principio do degrade do item 10. */
+function syncCue1(){
+  const cue = $('cue1'), sec = $('s1');
+  if(!cue || !sec) return;
+  const cards = sec.querySelectorAll('.pcard');
+  const ult = cards[cards.length - 1];
+  if(!ult){ cue.hidden = true; return; }
+  /* 🪤 medir a ALTURA DA SECAO aqui seria um laco: a propria pista aumenta a secao em 20px,
+     entao a secao passava a "estourar" por causa da pista e a pista se mantinha acesa sozinha —
+     em 1024 os quatro cards cabiam e ela aparecia mesmo assim. A pergunta certa nao e se a
+     secao cabe, e se sobrou CARD embaixo da dobra: mede-se o fim do ultimo card, que nada tem
+     a ver com a pista. 8px de folga para o arredondamento de altura fracionaria. */
+  /* 🪤 e `offsetTop` tambem nao serve: ele conta a partir do offsetParent, e o .cards e
+     `position:relative` — entao o ultimo card media 551 em vez de 945 e a pista se apagava
+     justamente na janela estreita, o caso que mais precisa dela. Medir os dois retangulos e
+     subtrair da o valor certo e nao depende de onde a rolagem esta: os dois se movem juntos. */
+  const fimDoUltimoCard = ult.getBoundingClientRect().bottom - sec.getBoundingClientRect().top;
+  cue.hidden = fimDoUltimoCard <= innerHeight - 8;
+}
 function openFilt(open){
   const sheet = $('filtSheet'); if(!sheet) return;
   S.filtOpen = !!open && innerWidth <= W_FOLHA;
@@ -220,6 +246,9 @@ function build(){
     // o corte da folha (W_FOLHA) tem de mudar a casa deles, senao a barra fica vazia ou a
     // folha fica orfa
     syncFilterHome();
+    // quantos cards cabem numa fileira muda com a largura, entao a pista do passo 01 tem de
+    // ser reavaliada a cada resize — inclusive girar o tablete, que troca 4 colunas por 2
+    syncCue1();
     clearTimeout(hdTick); hdTick = setTimeout(() => syncHeaderHeight(true), 80);
   }, { passive:true });
   if(window.ResizeObserver) new ResizeObserver(() => syncHeaderHeight(true)).observe($('hd'));
@@ -454,6 +483,9 @@ function renderPortfolios(){
     };
     box.appendChild(b);
   });
+  // a altura da secao so existe depois que os cards estao no DOM, e ela muda quando o idioma
+  // troca (titulo mais longo = card mais alto): a pista tem de ser reavaliada aqui, nao so no resize
+  syncCue1();
 }
 
 // ---------------------------------------------------------------- tela 02

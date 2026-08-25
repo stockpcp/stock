@@ -76,6 +76,13 @@
       <p class="p-body" data-t="s1body"></p>
     </div>
     <div class="cards" id="portfolioCards"></div>
+    <!-- 25/08 (item 7): a pista de rolagem do passo 01. Fica GRUDADA no rodape da tela
+         (position:sticky) enquanto a secao esta em vista, porque aqui a secao e mais alta
+         que a tela e um indicador ancorado no fim dela nasceria fora do campo de visao.
+         Nasce escondido: o app.js so o mostra quando ha mesmo card abaixo da dobra.
+         SEM a palavra, ao contrario do #cue da tela 00: aqui a pista cai por cima de um card,
+         e o teste da §7v ja tinha mostrado que ninguem le a palavra — quem funciona e a seta. -->
+    <div id="cue1" hidden><i></i></div>
   </section>
 
   <!-- ---------- 02 especificacao ---------- -->
