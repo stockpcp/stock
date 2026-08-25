@@ -149,6 +149,11 @@
            interruptor de vista e o botao do inventario completo ficam fora do rolamento,
            ancorados a direita, para nao sumirem da tela -->
       <div class="filterbar">
+        <!-- 25/08 (item 7) — SO no telefone. Ali os 6 seletores saem da barra grudada e viram
+             esta chave, que abre a folha #filtSheet. Acima de 720px ele fica display:none e a
+             barra segue exatamente como era. O numero entre parenteses e a contagem de filtro
+             ativo — o mesmo chipList() que pinta os chips. -->
+        <button class="filtbtn" id="filtBtn" aria-haspopup="dialog"></button>
         <div class="filters" id="filters"></div>
         <!-- O contador vivo substitui os tres leitores dentro da barra: ele existe so para o
              cliente ver o efeito do filtro que acabou de mexer. Le em 17px - acima das parcelas
@@ -156,7 +161,9 @@
              Estes dois ficam FORA do #filterEnd: o buildFilters() zera o innerHTML dele a cada
              remontagem de filtro e levaria os dois junto. -->
         <span class="livecount num" id="rLive"></span>
-        <div class="viewsw" data-scope="grid"></div>
+        <!-- o id existe porque no telefone ele MUDA DE LUGAR (vai para a folha) e um seletor
+             '#s3 .viewsw' deixaria de encontra-lo para trazer de volta -->
+        <div class="viewsw" id="viewGrid" data-scope="grid"></div>
         <div class="filter-end" id="filterEnd"></div>
       </div>
     </div>
@@ -203,6 +210,27 @@
   </div>
   <div class="grid-area">
     <div class="grid" id="fullResults"></div>
+  </div>
+</div>
+
+<!-- ===== folha de filtros do telefone (item 7, 25/08) ===== -->
+<!-- Ela mora AQUI FORA, no nivel do body, e nao dentro da .stock-top: aquele bloco tem
+     backdrop-filter, e um ancestral com backdrop-filter vira containing block — um
+     position:fixed la dentro se ancoraria nele, nao na janela, e a folha nao cobriria a tela.
+     O #filters e MOVIDO para o #filtSlot no telefone e devolvido a barra no desktop: um so
+     conjunto de seletores, nunca dois estados para manter em sincronia. -->
+<div id="filtSheet" class="hidden" role="dialog" aria-modal="true" aria-labelledby="filtSheetT">
+  <div class="fs-scrim" id="filtScrim"></div>
+  <div class="fs-box">
+    <div class="fs-hd">
+      <h3 id="filtSheetT"></h3>
+      <button class="guide-x" id="closeFilt" aria-label="close">×</button>
+    </div>
+    <div class="fs-body" id="filtSlot"></div>
+    <div class="fs-ft">
+      <button class="clear" id="fsClear"></button>
+      <button class="cta" id="fsDone"></button>
+    </div>
   </div>
 </div>
 

@@ -414,11 +414,10 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 .full-top .read .v{font-size:24px}
 .full-top .read .v .u{font-size:15px}
 .full-top .updated{padding-top:7px}
-/* contador vivo da barra da tela 03 */
+/* contador vivo da barra da tela 03 — so a contagem de SKU desde 25/08 (ver app.js) */
 .livecount{font-size:17px;color:var(--ink);white-space:nowrap;letter-spacing:.01em}
 .livecount .u{font-size:12px;color:var(--muted)}
 .livecount b{font-weight:600}
-.livecount i{font-style:normal;color:var(--muted-3);margin:0 7px}
 .filterbar{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--line)}
 #s3 .filters{flex:1 1 auto;min-width:0;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;
   padding-bottom:0;border-bottom:0;scrollbar-width:none;-ms-overflow-style:none}
@@ -631,10 +630,6 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
      largura toda e a barra de filtros ia a QUATRO faixas */
   .livecount{font-size:13px}
   .filterbar > .livecount{flex:0 1 auto;min-width:0}
-  /* O volume sai do contador no telefone: com ele a linha pede 253px e nao sobra lugar para
-     o interruptor de vista (129) em 313 - a barra ia a mais uma faixa. Nada se perde: o
-     volume cheio esta logo acima, em 32px, no bloco de titulo que rola. */
-  .lc-vol{display:none}
 }
 @media (max-width:720px){
   :root{--rail-gutter:0px}
@@ -766,3 +761,98 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
   .guide-body{padding:18px 20px 4px}
   .guide-ft{padding:10px 20px 22px;text-align:center}
 }
+
+/* ------------------------------------------------- item 7 (25/08): o telefone entra pela LISTA
+   Medido na §7y: em 375x667 o #hd fixo (120px) mais a barra grudada (209px) congelavam 329px —
+   49% da tela — e sobravam 2,2 linhas de produto. Dois cortes, nenhum deles no card:
+   (a) o header sai de cena ao rolar para baixo e volta ao rolar para cima;
+   (b) os 6 seletores saem da barra e viram uma chave que abre a folha abaixo.
+   Congelado cai para ~112px e a lista passa a ser o que a tela mostra.
+   ⚠️ 25/08 (item 10): os dois cortes DEIXARAM de ser o mesmo numero. (a) segue em 720px — a
+   faixa congelada so aperta no telefone. (b) subiu para 1024px, porque o problema dela e
+   largura: em 768 (tablet em pe) 78% dos seletores ficavam fora de vista, em 1024 eram 66%.
+   Quem le este bloco tem de olhar o media query de cada parte, nao presumir que sao iguais. */
+
+/* (a) o header que se recolhe — so no telefone, so na tela 03 (a condicao mora no app.js).
+   Quando ele sai, a barra grudada desce de --hd-h para o topo da janela, senao ficaria um vao
+   de 120px vazio acima dela. O scroll-padding acompanha pelo mesmo motivo: ele existe para
+   descontar a faixa coberta, e com o header fora nao ha faixa coberta a descontar. */
+@media (max-width:720px){
+  #hd{transition:transform .3s var(--ease)}
+  body.hd-off #hd{transform:translateY(-100%)}
+  body.hd-off .stock-top{top:0}
+  body.hd-off #scroll{scroll-padding-top:var(--bar-h)}
+}
+
+/* (b) a chave e a folha */
+.filtbtn{display:none}
+@media (max-width:1024px){
+  .filtbtn{display:flex;align-items:center;gap:8px;flex:0 0 auto;min-height:40px;
+    font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
+    background:rgba(255,255,255,.7);border:1px solid rgba(17,51,31,.22);border-radius:999px;
+    padding:10px 16px;transition:background .3s ease,color .3s ease}
+  /* com filtro ativo a chave fica solida: e o unico lugar onde o telefone diz que ha selecao,
+     porque o .chipbar sai da barra logo abaixo */
+  .filtbtn.on{background:var(--ink);color:var(--sand-0);border-color:var(--ink)}
+  .filtbtn .n{background:rgba(46,139,51,.18);border-radius:999px;padding:2px 7px;font-size:10px}
+  .filtbtn.on .n{background:rgba(255,255,255,.2)}
+
+  /* Os chips saem da barra do telefone. O que esta filtrado passa a ser dito pelo numero na
+     chave, e tirar filtro se faz na folha — onde o seletor mostra o valor. Ganha ~40px de
+     area congelada e mata de quebra a prosa do .nosel, que rolava de lado dentro do chipbar. */
+  #s3 .chipbar{display:none}
+
+  .filterbar{align-items:center}
+  /* O `.filter-end{flex:1 1 100%}` la de cima foi escrito quando os 6 seletores ainda dividiam
+     a barra: dar uma faixa inteira ao inventario completo era a unica forma de o rolamento nao
+     ficar com 0px. Com os seletores na folha essa faixa vira desperdicio — medido em 667x375
+     (telefone deitado): 564px reservados para um botao de 175. Aqui ele volta a ocupar o que
+     precisa e quebra sozinho so quando nao couber: em 375 quebra (347+gaps > 335), em 667 nao.
+     No #full os filtros CONTINUAM na barra, entao la a regra de 100% segue valendo. */
+  #s3 .filter-end{flex:0 1 auto;margin-left:auto}
+}
+
+/* A folha. Fica em z-70: acima do #hd (40) e do .stock-top (5), abaixo do #guide (80), que
+   pode ser aberto por cima de qualquer coisa. */
+#filtSheet{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;justify-content:flex-end}
+.fs-scrim{position:absolute;inset:0;background:rgba(17,51,31,.42);backdrop-filter:blur(6px)}
+.fs-box{position:relative;background:var(--paper);border-radius:20px 20px 0 0;
+  box-shadow:0 -24px 60px rgba(17,51,31,.3);max-height:86vh;display:flex;flex-direction:column}
+.fs-hd{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:20px 20px 14px;border-bottom:1px solid var(--line)}
+.fs-hd h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.05;color:var(--ink);margin:0}
+.fs-body{padding:16px 20px;overflow-y:auto;flex:1}
+.fs-ft{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:14px 20px calc(20px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+/* dentro da folha os seletores empilham e ocupam a linha inteira: aqui nao ha disputa de
+   largura nenhuma, que era o problema da barra */
+#filtSheet #filters{display:grid;grid-template-columns:1fr;gap:10px;
+  flex:none;overflow:visible;padding-bottom:0;border-bottom:0}
+#filtSheet .sel{width:100%;justify-content:space-between;padding:4px 16px;border-radius:14px}
+#filtSheet .sel select{min-height:44px;max-width:none;text-align:right;text-align-last:right}
+/* o interruptor de vista tambem mora aqui: e preferencia, mexe-se uma vez, e na barra custava
+   106px de largura numa faixa de 335 */
+#filtSheet .viewsw{width:100%;justify-content:center;margin-top:4px}
+#filtSheet .vw{flex:1;text-align:center;padding:14px 16px}
+/* trava dura: acima do corte a folha nao existe nem por acidente — o #filters mora na barra */
+@media (min-width:1025px){ #filtSheet{display:none !important} }
+
+/* ------------------------------------------------- item 10 (25/08): a faixa diz que rola
+   A barra de rolagem esta escondida de proposito (scrollbar-width:none, ::-webkit-scrollbar
+   display:none) porque o desenho nao tem cromo. O efeito colateral, medido em 25/08: em 1280
+   ficavam 43-53% dos seletores fora de vista e em 1440 uns 28%, sem NADA na tela dizendo isso —
+   o cliente lia a barra como se aqueles fossem todos os filtros que existem.
+   A pista e a propria borda: um degrade apaga o conteudo do lado em que ainda ha coisa. Feito
+   com mask-image e nao com um ::after porque a mascara se aplica na CAIXA do elemento e nao
+   rola junto com o conteudo — um pseudo-elemento dentro de um container que rola sairia de cena
+   no primeiro gesto. As classes entram pelo app.js (syncFade) e somem sozinhas quando nao ha
+   sobra: dentro da folha o #filters vira grade, scrollWidth == clientWidth, nenhuma das duas.
+   44px e a largura do degrade: cobre a metade de uma pilula, entao o que aparece cortado ainda
+   se le como "tem mais coisa aqui" e nao como um seletor mal desenhado. */
+.filters.fade-r{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent);
+  mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent)}
+.filters.fade-l{-webkit-mask-image:linear-gradient(90deg,transparent,#000 44px);
+  mask-image:linear-gradient(90deg,transparent,#000 44px)}
+.filters.fade-l.fade-r{
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 44px,#000 calc(100% - 44px),transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 44px,#000 calc(100% - 44px),transparent)}

@@ -14,9 +14,13 @@ const S = {
   lang:'en', portfolio:null, gauges:[], species:null,
   refine:{ Certificate:'', Grade:'', Size:'' },                                    // tela 03
   full:{ Portfolio:'', Thickness:'', Logs:'', Certificate:'', Grade:'', Size:'' }, // overlay
-  // 24/08 - a lista nasce escolhida. Com a linha magra ela mostra mais itens por tela que a
-  // grade e alinha preco em coluna, que e como se compara SKU. A grade continua a um clique.
-  list:{}, focus:null, view:'list', fullOpen:false, guideOpen:false, step:0
+  // 25/08 - a GRADE nasce escolhida (ruling do Fabricio). Em 24/08 era a lista, pelo argumento
+  // de densidade: linha magra mostra mais item por tela e alinha preco em coluna, que e como
+  // se compara SKU. A lista continua a um clique.
+  // ⚠️ O custo esta no telefone e foi medido: la as duas vistas dao UMA coluna (o card pede
+  // 240px de largura minima e sobram 305), entao a grade nao e outra disposicao - e o mesmo
+  // card 71% mais alto: 266px contra 155. Linhas de produto caem de 3,5 para 2,0.
+  list:{}, focus:null, view:'grid', fullOpen:false, guideOpen:false, filtOpen:false, step:0
 };
 let DATA = [], META = {}, CONTENT = {}, GUIDE = {}, ORDER = ['ns','ss','st','nc'];
 
@@ -99,6 +103,88 @@ function syncBarHeight(){
   if(h > 0) document.documentElement.style.setProperty('--bar-h', h + 'px');
 }
 
+/* ------------------------------------------------- item 7 (25/08): o telefone entra pela LISTA
+   Medido na §7y: em 375x667 o header fixo (120px) mais a barra grudada (209px) congelavam 49%
+   da tela e sobravam 2,2 linhas de produto — "a propaganda vira um tiro no pe". Dois cortes,
+   nenhum deles no card do produto. */
+
+/* (a) O header sai de cena ao rolar para BAIXO e volta ao rolar para CIMA — o gesto de voltar e
+   o mesmo de quem procura o cabecalho. So no telefone e so na tela 03: nas telas 00-02 o header
+   e parte da composicao, e o overlay nem paga a faixa dele (e fixed inset:0, ja cobre tudo).
+   O limiar de 8px existe para o tremor do dedo parado nao alternar o estado a cada quadro, e os
+   160px iniciais da secao ficam sempre com o header a mostra - senao ele pisca na entrada. */
+/* 25/08 (item 10) - DOIS limiares, e confundi-los seria bug. A FOLHA de filtros passa a valer
+   ate 1024px porque o problema dela e largura: em 768 (tablet em pe) 78% dos seletores ficavam
+   fora de vista, em 1024 eram 66%. O header que se recolhe continua so ate 720 porque o problema
+   dele e ALTURA, e altura so aperta no telefone: a faixa congelada era 49% da tela em 375x667
+   contra 26% em 1024x768. Mesma barra, defeitos diferentes, limiares diferentes. */
+const W_FOLHA = 1024, W_FONE = 720;
+
+let hdLastY = 0;
+function hideOnScroll(y){
+  const pode = innerWidth <= W_FONE && S.step === 3 && !S.fullOpen && !S.filtOpen;
+  // Sair da tela 03 devolve o header IMEDIATAMENTE, sem esperar o limiar: rolando devagar para
+  // cima ele ficaria escondido na tela 02, onde nao ha nada que justifique escondê-lo.
+  if(!pode){ document.body.classList.remove('hd-off'); hdLastY = y; return; }
+  const d = y - hdLastY;
+  if(Math.abs(d) < 8) return;
+  hdLastY = y;
+  const s3 = $('s3');
+  const dentro = y - (s3 ? s3.offsetTop : 0);
+  document.body.classList.toggle('hd-off', d > 0 && dentro > 160);
+}
+
+/* (b) Os 6 seletores saem da barra no telefone e passam a morar na folha, atras da chave
+   "Filtros (n)". O conjunto e UM so: o #filters MUDA DE LUGAR, nao e copiado — duas copias
+   seriam dois estados a manter em sincronia, e o buildFilters() so conhece um no.
+   O interruptor de vista vai junto: e preferencia, mexe-se uma vez, e na barra custava 106px
+   de largura numa faixa util de 335. */
+function syncFilterHome(){
+  const box = $('filters'), slot = $('filtSlot'), btn = $('filtBtn'),
+        vw = $('viewGrid'), fim = $('filterEnd'),
+        bar = document.querySelector('#s3 .filterbar');
+  if(!box || !slot || !btn || !bar) return;
+  if(innerWidth <= W_FOLHA){
+    if(box.parentNode !== slot) slot.appendChild(box);
+    if(vw && vw.parentNode !== slot) slot.appendChild(vw);
+  } else {
+    // volta para o lugar exato: os seletores logo depois da chave, a vista antes do inventario
+    if(box.parentNode !== bar) bar.insertBefore(box, btn.nextSibling);
+    if(vw && vw.parentNode !== bar) bar.insertBefore(vw, fim);
+    openFilt(false);
+  }
+  syncBarHeight();
+  syncFades();
+}
+function openFilt(open){
+  const sheet = $('filtSheet'); if(!sheet) return;
+  S.filtOpen = !!open && innerWidth <= W_FOLHA;
+  sheet.classList.toggle('hidden', !S.filtOpen);
+  document.body.classList.toggle('locked', S.filtOpen || S.fullOpen || S.guideOpen);
+  $('filtBtn').setAttribute('aria-expanded', S.filtOpen ? 'true' : 'false');
+  // com a folha aberta o header volta: ela cobre a tela, e sumir o cabecalho por baixo dela
+  // deixaria o cliente sem referencia nenhuma ao fechar
+  if(S.filtOpen) document.body.classList.remove('hd-off');
+}
+
+
+/* (c) item 10 (25/08): a faixa de seletores rola de lado e nao dizia isso a ninguem. A barra de
+   rolagem esta escondida de proposito (`scrollbar-width:none` — o desenho nao tem cromo), entao
+   a unica pista que sobra e a borda: um degrade apaga o conteudo do lado em que ainda ha coisa.
+   Medido em 25/08: acima da folha ficavam 43-53% dos seletores fora de vista em 1280 e 28% em
+   1440, sem nada na tela dizendo isso. Vale para os dois lugares onde a faixa existe — a tela 03
+   e o inventario completo (que nao tem folha e rola de lado ate no telefone).
+   A pista some sozinha quando nao ha o que rolar: dentro da folha o #filters vira grade e
+   scrollWidth == clientWidth, entao nenhuma das duas classes entra. */
+function syncFade(n){
+  if(!n) return;
+  const sobra = n.scrollWidth - n.clientWidth;
+  // 2px de folga: navegador arredonda largura fracionaria e sem isso o degrade piscava no fim
+  n.classList.toggle('fade-l', sobra > 2 && n.scrollLeft > 2);
+  n.classList.toggle('fade-r', sobra > 2 && n.scrollLeft < sobra - 2);
+}
+function syncFades(){ syncFade($('filters')); syncFade($('fullFilters')); }
+
 function build(){
   buildLangSwitch();
   buildRail();
@@ -106,6 +192,13 @@ function build(){
   applyLang();
   ensureRail();
   syncHeaderHeight();
+  syncFilterHome();
+  // A pista de rolagem (item 10) acompanha o dedo, entao ouve o scroll do proprio no. O listener
+  // fica no ELEMENTO, que e o mesmo objeto mesmo quando ele muda de pai — o #filters viaja entre
+  // a barra e a folha (item 7) e levaria o ouvinte junto.
+  ['filters','fullFilters'].forEach(id => {
+    const n = $(id); if(n) n.addEventListener('scroll', () => syncFade(n), { passive:true });
+  });
   // Tres gatilhos, porque cada um cobre um buraco do outro:
   //  - resize imediato: o caso comum;
   //  - resize + 80ms: no salto entre telas alta e baixa a media query troca o tamanho do logo
@@ -123,6 +216,10 @@ function build(){
   let hdTick = 0;
   window.addEventListener('resize', () => {
     syncHeaderHeight();
+    // o telefone e o desktop guardam os seletores em lugares diferentes (item 7): atravessar
+    // o corte da folha (W_FOLHA) tem de mudar a casa deles, senao a barra fica vazia ou a
+    // folha fica orfa
+    syncFilterHome();
     clearTimeout(hdTick); hdTick = setTimeout(() => syncHeaderHeight(true), 80);
   }, { passive:true });
   if(window.ResizeObserver) new ResizeObserver(() => syncHeaderHeight(true)).observe($('hd'));
@@ -184,7 +281,7 @@ function openGuide(open){
   $('guide').classList.toggle('hidden', !open);
   // a ajuda pode ser aberta POR CIMA do inventario completo — ao fechar, so destrava a rolagem
   // do fundo se o overlay tambem estiver fechado, senao a pagina passa a rolar atras dele
-  document.body.classList.toggle('locked', open || S.fullOpen);
+  document.body.classList.toggle('locked', open || S.fullOpen || S.filtOpen);
   if(open){ $('guide').scrollTop = 0; $('closeGuide').focus(); }
 }
 
@@ -212,6 +309,10 @@ function railTick(){
     S.step = step;
     [...$('rail').children].forEach((b, i) => b.classList.toggle('on', i === step));
   }
+  // item 7: o header do telefone acompanha o sentido da rolagem. Vai aqui, e nao num listener
+  // proprio, porque este ja e o unico ouvinte de scroll do container - dois listeners no mesmo
+  // evento seria duas leituras de scrollTop por quadro sem ganho nenhum.
+  hideOnScroll(c.scrollTop);
 }
 function ensureRail(){
   const c = $('scroll');
@@ -515,6 +616,7 @@ function buildFilters(){
   b.onclick = () => openFull(true);
   const end = $('filterEnd');
   if(end){ end.innerHTML = ''; end.appendChild(b); } else { box.appendChild(b); }
+  syncFade(box);
 }
 // O overlay tem filtros proprios (estado S.full), independentes da selecao do quiz: ele existe
 // justamente para ver o armazem inteiro sem desmontar a resposta da tela 03.
@@ -539,6 +641,7 @@ function buildFullFilters(){
     box.insertBefore(mkSelect(label, S.full[key], opts,
       v => { S.full[key] = v; buildFullFilters(); renderFull(); }), before);
   });
+  syncFade(box);
 }
 
 // ---------------------------------------------------------------- cards de SKU
@@ -637,10 +740,23 @@ function renderAll(){
   $('rVolume').innerHTML = volSum(items);
   $('rUpdated').textContent = META.updated_at || '—';
   paintStale();
-  // contador vivo da barra grudada - o unico numero que precisa acompanhar o dedo no filtro
-  $('rLive').innerHTML = '<b>' + items.length + '</b> ' + esc(t.skus) +
-    '<i>/</i><b>' + crateSum(items) + '</b> ' + esc(t.cratesLower) +
-    '<span class="lc-vol"><i>/</i><b>' + volSum(items) + '</b></span>';
+  // Contador vivo da barra grudada - o unico numero que precisa acompanhar o dedo no filtro.
+  // 25/08 - so a contagem de SKU (ruling do Fabricio). Ele carregava tambem caixas e m3, e o
+  // mesmo total ja estava logo acima, em 32px, no bloco que rola: dois blocos dizendo a mesma
+  // coisa. O custo nao era altura, era LARGURA - dos 618px rigidos da .filterbar o #rLive era
+  // 318, mais da metade, e o #filters (unico elastico) ficava sem lugar para os 6 seletores.
+  $('rLive').innerHTML = '<b>' + items.length + '</b> ' + esc(t.skus);
+
+  // Chave e folha de filtros do telefone (item 7). O numero e a MESMA contagem que pinta os
+  // chips - no telefone os chips saem da barra, entao esta chave e o unico lugar que diz que
+  // ha selecao ativa. O botao de fechar carrega o resultado: "Ver 42 SKUs".
+  $('filtBtn').innerHTML = esc(t.filtersBtn) +
+    (chips.length ? '<span class="n num">' + chips.length + '</span>' : '');
+  $('filtBtn').classList.toggle('on', chips.length > 0);
+  $('filtSheetT').textContent = t.filtersBtn;
+  $('fsClear').textContent = t.clearAll;
+  $('fsClear').classList.toggle('hidden', chips.length === 0);
+  $('fsDone').textContent = chips.length ? t.seeMine(items.length) : t.seeAll(items.length);
 
   renderChips(chips);
 
@@ -670,7 +786,10 @@ function renderFull(){
 function openFull(open){
   S.fullOpen = open;
   $('full').classList.toggle('hidden', !open);
-  document.body.classList.toggle('locked', open);
+  document.body.classList.toggle('locked', open || S.filtOpen);
+  // O overlay cobre o header. Voltar dele com o header recolhido deixaria o cliente sem o
+  // botao de idioma e sem a lista de interesse ate rolar para cima (item 7).
+  if(!open) document.body.classList.remove('hd-off');
   if(open){ buildFullFilters(); renderFull(); $('full').scrollTop = 0; }
   // A barra grudada troca de no ao abrir e ao fechar: .full-top la dentro, .stock-top aqui fora.
   // Sem esta chamada o --bar-h fica com a altura da barra errada e o scroll-padding do #full
@@ -720,6 +839,12 @@ function wire(){
     S.full = { Portfolio:'', Thickness:'', Logs:'', Certificate:'', Grade:'', Size:'' };
     buildFullFilters(); renderFull();
   };
+  // folha de filtros do telefone (item 7). O fundo escuro fecha, como no guia.
+  $('filtBtn').onclick   = () => openFilt(!S.filtOpen);
+  $('closeFilt').onclick = () => openFilt(false);
+  $('filtScrim').onclick = () => openFilt(false);
+  $('fsDone').onclick    = () => openFilt(false);
+  $('fsClear').onclick   = () => { resetFilters(); openFilt(false); };
   $('helpBtn').onclick   = () => openGuide(true);
   $('closeGuide').onclick = () => openGuide(false);
   $('closeGuide2').onclick = () => openGuide(false);
@@ -728,6 +853,7 @@ function wire(){
   document.addEventListener('keydown', e => {
     if(e.key !== 'Escape') return;
     if(S.guideOpen) openGuide(false);      // a ajuda esta por cima: fecha ela primeiro
+    else if(S.filtOpen) openFilt(false);   // depois a folha (z-70), depois o overlay
     else if(S.fullOpen) openFull(false);
   });
   // mailto: abre o cliente de e-mail do comprador ja preenchido. Sem servico terceiro.
