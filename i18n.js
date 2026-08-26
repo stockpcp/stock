@@ -17,7 +17,7 @@ const STR = {
     // 25/08 — o hero seguia a mesma logica do passo 01: "the line you buy" pressupunha compra
     // em quem talvez tenha chegado so para olhar. Uma string por idioma, e era a ultima
     // ocorrencia de verbo de compra na copy (o passo 01 e o 02 sairam mais cedo hoje).
-    heroLead:'Two steps between you and the volume standing in the warehouse. Tell us the line you are looking for and the thickness you need — the warehouse answers on the last screen. Skip both and see everything available right now.',
+    heroLead:'Two steps between you and the volume available in the warehouse. Tell us the line you are looking for and the thickness you need — the warehouse answers on the last screen. Skip both and see everything available right now.',
     begin:'Begin selection →', showAll:'Show me everything →', scroll:'Scroll',
     skus:'SKUs', crates:'Crates', cratesLower:'crates', noCrates:'No crates staged',
     step01:'Step 01 — Portfolio · optional',
@@ -41,7 +41,7 @@ const STR = {
     thicknessRange:(a,b) => 'Thickness · ' + a + 'mm to ' + b + 'mm',
     seeMine:n => 'See my ' + n + ' SKUs →', seeAll:n => 'See all ' + n + ' SKUs →',
     step03:'Step 03 — Your result · last screen',
-    stockTitleSel:'Your selection', stockTitleAll:'Everything standing in the warehouse',
+    stockTitleSel:'Your selection', stockTitleAll:'Everything available in the warehouse',
     stockSubSel:'These are the crates matching your answers. Remove a filter to widen it, or open the full inventory in its own screen.',
     stockSubAll:n => 'You have not narrowed anything, so this is the entire warehouse — ' + n + ' SKUs, sorted by FOB price.',
     matches:'Matches', volume:'Volume', updated:'Updated', grid:'Grid', list:'List',
