@@ -766,7 +766,9 @@ function renderAll(){
   $('seeStock').textContent = chips.length ? t.seeMine(items.length) : t.seeAll(DATA.length);
 
   $('stockTitle').textContent = chips.length ? t.stockTitleSel : t.stockTitleAll;
-  $('stockSub').textContent = chips.length ? t.stockSubSel : t.stockSubAll(DATA.length);
+  // 26/08 — a condicao do preco anda GRUDADA na legenda, nos dois casos (filtrado e completo):
+  // preco lido sem a sua condicao vira promessa, e a legenda e o que se le antes de olhar valor.
+  $('stockSub').textContent = (chips.length ? t.stockSubSel : t.stockSubAll(DATA.length)) + ' ' + t.priceCond;
   $('rMatches').textContent = items.length;
   $('rCrates').textContent = crateSum(items);
   $('rVolume').innerHTML = volSum(items);

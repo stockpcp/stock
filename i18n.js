@@ -44,6 +44,12 @@ const STR = {
     stockTitleSel:'Your selection', stockTitleAll:'Everything available in the warehouse',
     stockSubSel:'These are the crates matching your answers. Remove a filter to widen it, or open the full inventory in its own screen.',
     stockSubAll:n => 'You have not narrowed anything, so this is the entire warehouse — ' + n + ' SKUs, sorted by FOB price.',
+    // 26/08 - a condicao do preco. Mora numa chave SO e e usada em tres lugares (legenda da
+    // tela 03, cabecalho do inventario completo e a mensagem que o cliente envia): preco que
+    // circula sem a sua condicao vira promessa. A condicao e do PEDIDO, nao da linha - dos 42
+    // SKUs publicados so 4 fecham uma carga sozinhos e a mediana e 0,44 de carga, entao dizer
+    // 'minimo 3 cargas' contradiria a propria tela em 38 dos 42 cards.
+    priceCond:'Suggested prices are for one container load, which may combine SKUs — contact us for larger volumes.',
     matches:'Matches', volume:'Volume', updated:'Updated', grid:'Grid', list:'List',
     staleNote:d => 'no refresh for ' + d + ' days \u2014 ask us for live availability',
     clearAll:'Clear all',
@@ -62,9 +68,9 @@ const STR = {
     emptyTitle:'Nothing in the warehouse for that combination',
     emptyBody:'Remove one of the filters above — the nearest logical substitute is usually one thickness away.',
     emptyCta:'Clear the selection',
-    footNote:'Volumes reflect crates staged for export at Paranaguá and Itapoá. All panels are WBP phenolic, E1 emission class. Certification covers the thickness and sheet size shown. — End of the selection: the full inventory opens in its own screen.',
+    footNote:'Volumes reflect crates staged for export at Paranaguá and Itapoá. Certification covers the thickness and sheet size shown. — End of the selection: the full inventory opens in its own screen.',
     msgHead:'Repinho Stock Finder — interest list', msgNotify:'notify when available',
-    msgTail:'Please confirm availability and FOB pricing.'
+    msgTail:'Please confirm availability and FOB pricing. (Site prices are suggested for one container load and may combine SKUs.)'
   },
 
   es: {
@@ -88,6 +94,7 @@ const STR = {
     stockTitleSel:'Su selección', stockTitleAll:'Todo lo que hay en el almacén',
     stockSubSel:'Estas son las cajas que coinciden con sus respuestas. Quite un filtro para ampliar, o abra el inventario completo en su propia pantalla.',
     stockSubAll:n => 'No ha filtrado nada, así que este es el almacén completo — ' + n + ' SKUs, ordenados por precio FOB.',
+    priceCond:'Los precios sugeridos son para una carga de contenedor, que puede combinar SKUs — consúltenos para volúmenes mayores.',
     matches:'Coincidencias', volume:'Volumen', updated:'Actualizado', grid:'Cuadrícula', list:'Lista',
     staleNote:d => 'sin actualizar hace ' + d + ' días \u2014 consulte la disponibilidad real',
     clearAll:'Limpiar todo',
@@ -104,9 +111,9 @@ const STR = {
     emptyTitle:'No hay nada en el almacén para esa combinación',
     emptyBody:'Quite uno de los filtros de arriba — el sustituto más cercano suele estar a un espesor de distancia.',
     emptyCta:'Limpiar la selección',
-    footNote:'Los volúmenes corresponden a cajas listas para exportación en Paranaguá e Itapoá. Todos los paneles son WBP fenólicos, clase de emisión E1. La certificación cubre el espesor y la medida indicados. — Fin de la selección: el inventario completo abre en su propia pantalla.',
+    footNote:'Los volúmenes corresponden a cajas listas para exportación en Paranaguá e Itapoá. La certificación cubre el espesor y la medida indicados. — Fin de la selección: el inventario completo abre en su propia pantalla.',
     msgHead:'Repinho Stock Finder — lista de interés', msgNotify:'avisar cuando esté disponible',
-    msgTail:'Por favor confirmar disponibilidad y precio FOB.'
+    msgTail:'Por favor confirmar disponibilidad y precio FOB. (Los precios del sitio son sugeridos para una carga de contenedor y pueden combinar SKUs.)'
   },
 
   pt: {
@@ -130,6 +137,7 @@ const STR = {
     stockTitleSel:'Sua seleção', stockTitleAll:'Tudo o que está no armazém',
     stockSubSel:'Estas são as caixas que atendem às suas respostas. Remova um filtro para ampliar, ou abra o inventário completo em tela própria.',
     stockSubAll:n => 'Você não filtrou nada, então este é o armazém completo — ' + n + ' SKUs, ordenados por preço FOB.',
+    priceCond:'Os preços sugeridos são para uma carga de contêiner, podendo combinar SKUs — fale conosco para volumes maiores.',
     matches:'Correspondências', volume:'Volume', updated:'Atualizado', grid:'Grade', list:'Lista',
     staleNote:d => 'sem atualizar há ' + d + ' dias \u2014 confirme a disponibilidade real',
     clearAll:'Limpar tudo',
@@ -146,8 +154,8 @@ const STR = {
     emptyTitle:'Nada no armazém para essa combinação',
     emptyBody:'Remova um dos filtros acima — o substituto mais próximo costuma estar a uma espessura de distância.',
     emptyCta:'Limpar a seleção',
-    footNote:'Os volumes correspondem a caixas prontas para embarque em Paranaguá e Itapoá. Todos os painéis são WBP fenólicos, classe de emissão E1. A certificação cobre a espessura e a medida indicadas. — Fim da seleção: o inventário completo abre em tela própria.',
+    footNote:'Os volumes correspondem a caixas prontas para embarque em Paranaguá e Itapoá. A certificação cobre a espessura e a medida indicadas. — Fim da seleção: o inventário completo abre em tela própria.',
     msgHead:'Repinho Stock Finder — lista de interesse', msgNotify:'avisar quando disponível',
-    msgTail:'Por favor confirmar disponibilidade e preço FOB.'
+    msgTail:'Por favor confirmar disponibilidade e preço FOB. (Os preços do site são sugeridos para uma carga de contêiner e podem combinar SKUs.)'
   }
 };
