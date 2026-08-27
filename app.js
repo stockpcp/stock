@@ -70,10 +70,16 @@ Promise.all([
   if(Array.isArray(content._order)) ORDER = content._order;
   build();
 }).catch(err => {
-  document.body.insertAdjacentHTML('afterbegin',
-    '<pre style="position:fixed;z-index:99;inset:20px;background:#fff;padding:20px;font:13px/1.5 monospace;overflow:auto">' +
-    'Nao consegui carregar stock_data.json.\n\nAbra o site por HTTP (fetch nao funciona em file://):\n' +
-    '  node dev-server.js\n\nDetalhe: ' + err + '</pre>');
+  // 26/08 - o no e CONSTRUIDO, nao injetado. Era o unico innerHTML da pagina que
+  // concatenava algo sem passar por esc(): o texto do erro. textContent nao
+  // parseia marcacao, entao aqui nao existe superficie a escapar.
+  const p = document.createElement('pre');
+  p.style.cssText = 'position:fixed;z-index:99;inset:20px;background:#fff;' +
+    'padding:20px;font:13px/1.5 monospace;overflow:auto';
+  p.textContent = 'Nao consegui carregar stock_data.json.\n\n' +
+    'Abra o site por HTTP (fetch nao funciona em file://):\n  node dev-server.js\n\n' +
+    'Detalhe: ' + err;
+  document.body.insertBefore(p, document.body.firstChild);
 });
 
 /* O header e fixo e NAO tem fundo proprio: quem cobre a faixa dele na tela 03 e o padding
