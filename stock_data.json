@@ -162,6 +162,24 @@
   "id": "combi-st-ps1-cdx-2440x1220-18-7"
  },
  {
+  "Logs": "euca",
+  "Certificate": "CE4",
+  "Grade": "C+/C",
+  "Size": "2440x1220",
+  "Thickness": 21,
+  "Ply": 9,
+  "Crates": 8,
+  "Price": 330.0,
+  "WeightPerCrate": 1900,
+  "VolumePerCrate": 2.563,
+  "SheetsPerCrate": 43,
+  "PayloadLimit": 28500,
+  "Portfolio": "NS",
+  "m3": 20.504,
+  "sku": "euca|NS|CE4|C+/C|2440x1220|21-9",
+  "id": "euca-ns-ce4-c-c-2440x1220-21-9"
+ },
+ {
   "Logs": "pine",
   "Certificate": "CE4",
   "Grade": "C+/C",
