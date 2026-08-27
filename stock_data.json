@@ -360,6 +360,24 @@
   "id": "euca-ns-ce4-c-c-2440x1220-24-9"
  },
  {
+  "Logs": "pine",
+  "Certificate": "CE4",
+  "Grade": "C+/C",
+  "Size": "2440x1220",
+  "Thickness": 18,
+  "Ply": 7,
+  "Crates": 13,
+  "Price": 310.0,
+  "WeightPerCrate": 1453,
+  "VolumePerCrate": 2.679,
+  "SheetsPerCrate": 50,
+  "PayloadLimit": 28500,
+  "Portfolio": "NS",
+  "m3": 34.827,
+  "sku": "pine|NS|CE4|C+/C|2440x1220|18-7",
+  "id": "pine-ns-ce4-c-c-2440x1220-18-7"
+ },
+ {
   "Logs": "combi",
   "Certificate": "CE4",
   "Grade": "C+/C",
