@@ -188,7 +188,7 @@
   "Ply": 9,
   "Crates": 6,
   "Price": 320.0,
-  "WeightPerCrate": 1461,
+  "WeightPerCrate": 1474,
   "VolumePerCrate": 2.643,
   "SheetsPerCrate": 37,
   "PayloadLimit": 28500,
