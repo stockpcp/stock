@@ -333,11 +333,11 @@
   "Crates": 6,
   "Price": 300.0,
   "WeightPerCrate": 1426,
-  "VolumePerCrate": 2.813,
+  "VolumePerCrate": 2.688,
   "SheetsPerCrate": 43,
   "PayloadLimit": 28500,
   "Portfolio": "NS",
-  "m3": 16.878,
+  "m3": 16.128,
   "sku": "pine|NS|CE4|C+/C|2440x1220|21-7",
   "id": "pine-ns-ce4-c-c-2440x1220-21-7"
  },
