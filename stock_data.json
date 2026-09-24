@@ -108,24 +108,6 @@
   "id": "pine-ss-lvl-bcx-2440x1220-31-13"
  },
  {
-  "Logs": "pine",
-  "Certificate": "PS1",
-  "Grade": "CDX",
-  "Size": "2440x1220",
-  "Thickness": 15,
-  "Ply": 5,
-  "Crates": 6,
-  "Price": 325.0,
-  "WeightPerCrate": 1442,
-  "VolumePerCrate": 2.679,
-  "SheetsPerCrate": 60,
-  "PayloadLimit": 28500,
-  "Portfolio": "ST",
-  "m3": 16.074,
-  "sku": "pine|ST|PS1|CDX|2440x1220|15-5",
-  "id": "pine-st-ps1-cdx-2440x1220-15-5"
- },
- {
   "Logs": "combi",
   "Certificate": "CE4",
   "Grade": "C+/C",
@@ -142,24 +124,6 @@
   "m3": 8.037,
   "sku": "combi|NS|CE4|C+/C|2440x1220|9-3",
   "id": "combi-ns-ce4-c-c-2440x1220-9-3"
- },
- {
-  "Logs": "combi",
-  "Certificate": "PS1",
-  "Grade": "CDX",
-  "Size": "2440x1220",
-  "Thickness": 15,
-  "Ply": 5,
-  "Crates": 8,
-  "Price": 320.0,
-  "WeightPerCrate": 1604,
-  "VolumePerCrate": 2.679,
-  "SheetsPerCrate": 60,
-  "PayloadLimit": 28500,
-  "Portfolio": "ST",
-  "m3": 21.432,
-  "sku": "combi|ST|PS1|CDX|2440x1220|15-5",
-  "id": "combi-st-ps1-cdx-2440x1220-15-5"
  },
  {
   "Logs": "euca",
