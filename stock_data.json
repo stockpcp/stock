@@ -54,24 +54,6 @@
   "id": "euca-ss-frame-c-c-2440x1220-22-9"
  },
  {
-  "Logs": "combi",
-  "Certificate": "PS1",
-  "Grade": "CDX",
-  "Size": "2440x1220",
-  "Thickness": 12,
-  "Ply": 5,
-  "Crates": 16,
-  "Price": 345.0,
-  "WeightPerCrate": 1708,
-  "VolumePerCrate": 2.679,
-  "SheetsPerCrate": 75,
-  "PayloadLimit": 28500,
-  "Portfolio": "ST",
-  "m3": 42.864,
-  "sku": "combi|ST|PS1|CDX|2440x1220|12-5",
-  "id": "combi-st-ps1-cdx-2440x1220-12-5"
- },
- {
   "Logs": "pine",
   "Certificate": "CE4",
   "Grade": "C+/C",
@@ -180,24 +162,6 @@
   "id": "pine-st-ce2-ukca-c-c-2440x1220-24-9"
  },
  {
-  "Logs": "pine",
-  "Certificate": "PS1",
-  "Grade": "CDX",
-  "Size": "2440x1220",
-  "Thickness": 18,
-  "Ply": 7,
-  "Crates": 3,
-  "Price": 320.0,
-  "WeightPerCrate": 1473,
-  "VolumePerCrate": 2.679,
-  "SheetsPerCrate": 50,
-  "PayloadLimit": 28500,
-  "Portfolio": "ST",
-  "m3": 8.037,
-  "sku": "pine|ST|PS1|CDX|2440x1220|18-7",
-  "id": "pine-st-ps1-cdx-2440x1220-18-7"
- },
- {
   "Logs": "combi",
   "Certificate": "CE4",
   "Grade": "C+/C",
@@ -214,24 +178,6 @@
   "m3": 13.92,
   "sku": "combi|NS|CE4|C+/C|2500x1250|27-9",
   "id": "combi-ns-ce4-c-c-2500x1250-27-9"
- },
- {
-  "Logs": "combi",
-  "Certificate": "PS1",
-  "Grade": "CDX",
-  "Size": "2440x1220",
-  "Thickness": 18,
-  "Ply": 7,
-  "Crates": 8,
-  "Price": 315.0,
-  "WeightPerCrate": 1662,
-  "VolumePerCrate": 2.679,
-  "SheetsPerCrate": 50,
-  "PayloadLimit": 28500,
-  "Portfolio": "ST",
-  "m3": 21.432,
-  "sku": "combi|ST|PS1|CDX|2440x1220|18-7",
-  "id": "combi-st-ps1-cdx-2440x1220-18-7"
  },
  {
   "Logs": "pine",
