@@ -487,6 +487,7 @@ h1.title em{display:block;font-size:.66em;font-style:italic;color:var(--soft);li
 .grid.list{grid-template-columns:1fr}
 .foot-note{border-top:1px solid var(--line);padding:14px 0 22px;font-size:11px;
   color:var(--muted-3);line-height:1.6}
+.foot-copy{margin-top:-12px;padding:0 0 22px;font-size:11px;color:var(--muted-3)}
 .empty{padding:52px 0;max-width:520px}
 .empty h3{font-family:var(--serif);font-weight:400;font-size:34px;color:var(--ink);margin:0 0 10px}
 .empty p{font-size:14px;color:var(--muted);margin:0 0 20px}

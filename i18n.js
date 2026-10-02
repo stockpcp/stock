@@ -69,6 +69,7 @@ const STR = {
     emptyBody:'Remove one of the filters above — the nearest logical substitute is usually one thickness away.',
     emptyCta:'Clear the selection',
     footNote:'Volumes reflect crates staged for export at Paranaguá and Itapoá. Certification covers the thickness and sheet size shown. — End of the selection: the full inventory opens in its own screen.',
+    copyright:'© Repinho Compensados. All rights reserved.',
     msgHead:'Repinho Stock Finder — interest list', msgNotify:'notify when available',
     msgTail:'Please confirm availability and FOB pricing. (Site prices are suggested for one container load and may combine SKUs.)'
   },
@@ -112,6 +113,7 @@ const STR = {
     emptyBody:'Quite uno de los filtros de arriba — el sustituto más cercano suele estar a un espesor de distancia.',
     emptyCta:'Limpiar la selección',
     footNote:'Los volúmenes corresponden a cajas listas para exportación en Paranaguá e Itapoá. La certificación cubre el espesor y la medida indicados. — Fin de la selección: el inventario completo abre en su propia pantalla.',
+    copyright:'© Repinho Compensados. Todos los derechos reservados.',
     msgHead:'Repinho Stock Finder — lista de interés', msgNotify:'avisar cuando esté disponible',
     msgTail:'Por favor confirmar disponibilidad y precio FOB. (Los precios del sitio son sugeridos para una carga de contenedor y pueden combinar SKUs.)'
   },
@@ -155,6 +157,7 @@ const STR = {
     emptyBody:'Remova um dos filtros acima — o substituto mais próximo costuma estar a uma espessura de distância.',
     emptyCta:'Limpar a seleção',
     footNote:'Os volumes correspondem a caixas prontas para embarque em Paranaguá e Itapoá. A certificação cobre a espessura e a medida indicadas. — Fim da seleção: o inventário completo abre em tela própria.',
+    copyright:'© Repinho Compensados. Todos os direitos reservados.',
     msgHead:'Repinho Stock Finder — lista de interesse', msgNotify:'avisar quando disponível',
     msgTail:'Por favor confirmar disponibilidade e preço FOB. (Os preços do site são sugeridos para uma carga de contêiner e podem combinar SKUs.)'
   }
