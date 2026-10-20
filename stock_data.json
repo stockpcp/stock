@@ -18,24 +18,6 @@
   "id": "euca-ss-frame-c-c-2440x1220-6-3"
  },
  {
-  "Logs": "euca",
-  "Certificate": "frame",
-  "Grade": "C+/C",
-  "Size": "2440x1220",
-  "Thickness": 20,
-  "Ply": 9,
-  "Crates": 4,
-  "Price": 350.0,
-  "WeightPerCrate": 1900,
-  "VolumePerCrate": 2.679,
-  "SheetsPerCrate": 45,
-  "PayloadLimit": 28500,
-  "Portfolio": "SS",
-  "m3": 10.716,
-  "sku": "euca|SS|FRAME|C+/C|2440x1220|20-9",
-  "id": "euca-ss-frame-c-c-2440x1220-20-9"
- },
- {
   "Logs": "pine",
   "Certificate": "LVL",
   "Grade": "BCX",
@@ -52,6 +34,24 @@
   "m3": 33.216,
   "sku": "pine|SS|LVL|BCX|2440x1220|31-13",
   "id": "pine-ss-lvl-bcx-2440x1220-31-13"
+ },
+ {
+  "Logs": "euca",
+  "Certificate": "CE4",
+  "Grade": "C+/C",
+  "Size": "2440x1220",
+  "Thickness": 20,
+  "Ply": 9,
+  "Crates": 4,
+  "Price": 320.0,
+  "WeightPerCrate": 1900,
+  "VolumePerCrate": 2.679,
+  "SheetsPerCrate": 45,
+  "PayloadLimit": 28500,
+  "Portfolio": "NS",
+  "m3": 10.716,
+  "sku": "euca|NS|CE4|C+/C|2440x1220|20-9",
+  "id": "euca-ns-ce4-c-c-2440x1220-20-9"
  },
  {
   "Logs": "pine",
