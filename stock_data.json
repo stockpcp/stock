@@ -270,24 +270,6 @@
   "id": "combi-nc-ncp-falldown-2440x1220-21-7"
  },
  {
-  "Logs": "combi",
-  "Certificate": "ncp",
-  "Grade": "falldown",
-  "Size": "2440x1220",
-  "Thickness": 30,
-  "Ply": 11,
-  "Crates": 10,
-  "Price": 230.0,
-  "WeightPerCrate": 1740,
-  "VolumePerCrate": 2.679,
-  "SheetsPerCrate": 30,
-  "PayloadLimit": 28500,
-  "Portfolio": "NC",
-  "m3": 26.79,
-  "sku": "combi|NC|NCP|Falldown|2440x1220|30-11",
-  "id": "combi-nc-ncp-falldown-2440x1220-30-11"
- },
- {
   "Logs": "euca",
   "Certificate": "ncp",
   "Grade": "falldown",
@@ -322,24 +304,6 @@
   "m3": 5.358,
   "sku": "pine|NC|NCP|Falldown|2440x1220|18-5",
   "id": "pine-nc-ncp-falldown-2440x1220-18-5"
- },
- {
-  "Logs": "pine",
-  "Certificate": "ncp",
-  "Grade": "falldown",
-  "Size": "2440x1220",
-  "Thickness": 24,
-  "Ply": 9,
-  "Crates": 3,
-  "Price": 230.0,
-  "WeightPerCrate": 1467,
-  "VolumePerCrate": 2.643,
-  "SheetsPerCrate": 37,
-  "PayloadLimit": 28500,
-  "Portfolio": "NC",
-  "m3": 7.929,
-  "sku": "pine|NC|NCP|Falldown|2440x1220|24-9",
-  "id": "pine-nc-ncp-falldown-2440x1220-24-9"
  },
  {
   "Logs": "euca",
