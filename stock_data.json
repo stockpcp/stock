@@ -126,24 +126,6 @@
   "id": "pine-ns-ce4-c-c-2440x1220-27-9"
  },
  {
-  "Logs": "combi",
-  "Certificate": "CE4",
-  "Grade": "C+/C",
-  "Size": "2500x1250",
-  "Thickness": 27,
-  "Ply": 9,
-  "Crates": 5,
-  "Price": 310.0,
-  "WeightPerCrate": 1660,
-  "VolumePerCrate": 2.784,
-  "SheetsPerCrate": 33,
-  "PayloadLimit": 28500,
-  "Portfolio": "NS",
-  "m3": 13.92,
-  "sku": "combi|NS|CE4|C+/C|2500x1250|27-9",
-  "id": "combi-ns-ce4-c-c-2500x1250-27-9"
- },
- {
   "Logs": "pine",
   "Certificate": "CE4",
   "Grade": "C+/C",
@@ -160,24 +142,6 @@
   "m3": 13.215,
   "sku": "pine|NS|CE4|C+/C|2440x1220|24-9",
   "id": "pine-ns-ce4-c-c-2440x1220-24-9"
- },
- {
-  "Logs": "pine",
-  "Certificate": "CE2+ UKCA",
-  "Grade": "C+/C",
-  "Size": "2440x1220",
-  "Thickness": 15,
-  "Ply": 5,
-  "Crates": 2,
-  "Price": 310.0,
-  "WeightPerCrate": 1503,
-  "VolumePerCrate": 2.679,
-  "SheetsPerCrate": 60,
-  "PayloadLimit": 28500,
-  "Portfolio": "ST",
-  "m3": 5.358,
-  "sku": "pine|ST|CE2+ UKCA|C+/C|2440x1220|15-5",
-  "id": "pine-st-ce2-ukca-c-c-2440x1220-15-5"
  },
  {
   "Logs": "combi",
