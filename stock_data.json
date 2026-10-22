@@ -1,23 +1,5 @@
 [
  {
-  "Logs": "euca",
-  "Certificate": "frame",
-  "Grade": "C+/C",
-  "Size": "2440x1220",
-  "Thickness": 6,
-  "Ply": 3,
-  "Crates": 27,
-  "Price": 380.0,
-  "WeightPerCrate": 1720,
-  "VolumePerCrate": 2.679,
-  "SheetsPerCrate": 150,
-  "PayloadLimit": 28500,
-  "Portfolio": "SS",
-  "m3": 72.333,
-  "sku": "euca|SS|FRAME|C+/C|2440x1220|6-3",
-  "id": "euca-ss-frame-c-c-2440x1220-6-3"
- },
- {
   "Logs": "pine",
   "Certificate": "LVL",
   "Grade": "BCX",
