@@ -1,10 +1,10 @@
 {
   "updated_at": "2026-11-13",
-  "skus": 9,
-  "crates": 43,
-  "m3": 115.906,
+  "skus": 7,
+  "crates": 39,
+  "m3": 105.358,
   "by_portfolio": {
-    "NS": 3,
+    "NS": 1,
     "SS": 1,
     "ST": 0,
     "NC": 5
