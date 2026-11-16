@@ -36,6 +36,24 @@
   "id": "pine-ns-ce4-c-c-2440x1220-27-9"
  },
  {
+  "Logs": "combi",
+  "Certificate": "CE4",
+  "Grade": "C+/C",
+  "Size": "2500x1250",
+  "Thickness": 30,
+  "Ply": 11,
+  "Crates": 1,
+  "Price": 310.0,
+  "WeightPerCrate": 1691,
+  "VolumePerCrate": 2.812,
+  "SheetsPerCrate": 30,
+  "PayloadLimit": 28500,
+  "Portfolio": "NS",
+  "m3": 2.812,
+  "sku": "combi|NS|CE4|C+/C|2500x1250|30-11",
+  "id": "combi-ns-ce4-c-c-2500x1250-30-11"
+ },
+ {
   "Logs": "euca",
   "Certificate": "CE4",
   "Grade": "C+/C",
