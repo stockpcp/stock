@@ -1,6 +1,24 @@
 [
  {
   "Logs": "pine",
+  "Certificate": "CE4",
+  "Grade": "C+/C",
+  "Size": "2500x1250",
+  "Thickness": 9,
+  "Ply": 5,
+  "Crates": 1,
+  "Price": 345.0,
+  "WeightPerCrate": 1573,
+  "VolumePerCrate": 2.812,
+  "SheetsPerCrate": 100,
+  "PayloadLimit": 28500,
+  "Portfolio": "NS",
+  "m3": 2.812,
+  "sku": "pine|NS|CE4|C+/C|2500x1250|9-5",
+  "id": "pine-ns-ce4-c-c-2500x1250-9-5"
+ },
+ {
+  "Logs": "pine",
   "Certificate": "LVL",
   "Grade": "BCX",
   "Size": "2440x1220",
