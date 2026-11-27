@@ -36,24 +36,6 @@
   "id": "pine-ss-lvl-bcx-2440x1220-31-13"
  },
  {
-  "Logs": "combi",
-  "Certificate": "CE4",
-  "Grade": "C+/C",
-  "Size": "2500x1250",
-  "Thickness": 30,
-  "Ply": 11,
-  "Crates": 1,
-  "Price": 315.0,
-  "WeightPerCrate": 1691,
-  "VolumePerCrate": 2.812,
-  "SheetsPerCrate": 30,
-  "PayloadLimit": 28500,
-  "Portfolio": "NS",
-  "m3": 2.812,
-  "sku": "combi|NS|CE4|C+/C|2500x1250|30-11",
-  "id": "combi-ns-ce4-c-c-2500x1250-30-11"
- },
- {
   "Logs": "pine",
   "Certificate": "CE4",
   "Grade": "C+/C",
@@ -165,6 +147,24 @@
   "Logs": "euca",
   "Certificate": "ncp",
   "Grade": "shop grade",
+  "Size": "2400x1200",
+  "Thickness": 12,
+  "Ply": 5,
+  "Crates": 1,
+  "Price": 205.0,
+  "WeightPerCrate": 1800,
+  "VolumePerCrate": 2.592,
+  "SheetsPerCrate": 75,
+  "PayloadLimit": 28500,
+  "Portfolio": "NC",
+  "m3": 2.592,
+  "sku": "euca|NC|NCP|Shop Grade|2400x1200|12-5",
+  "id": "euca-nc-ncp-shop-grade-2400x1200-12-5"
+ },
+ {
+  "Logs": "euca",
+  "Certificate": "ncp",
+  "Grade": "shop grade",
   "Size": "2440x1220",
   "Thickness": 27,
   "Ply": 9,
@@ -214,5 +214,23 @@
   "m3": 2.679,
   "sku": "pine|NC|NCP|Shop Grade|2440x1220|18-7",
   "id": "pine-nc-ncp-shop-grade-2440x1220-18-7"
+ },
+ {
+  "Logs": "pine",
+  "Certificate": "ncp",
+  "Grade": "shop grade",
+  "Size": "2440x1220",
+  "Thickness": 20,
+  "Ply": 7,
+  "Crates": 1,
+  "Price": 205.0,
+  "WeightPerCrate": 1450,
+  "VolumePerCrate": 2.679,
+  "SheetsPerCrate": 45,
+  "PayloadLimit": 28500,
+  "Portfolio": "NC",
+  "m3": 2.679,
+  "sku": "pine|NC|NCP|Shop Grade|2440x1220|20-7",
+  "id": "pine-nc-ncp-shop-grade-2440x1220-20-7"
  }
 ]
